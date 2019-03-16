@@ -1,0 +1,1 @@
+osztok := proc () mylist := []; for i to 20 do mylist := [op(mylist), 0] end do; for i to 20 do j := 1; while nops(numtheory:-divisors(j)) <> i do j := j+1 end do; mylist := subsop(i = j, mylist) end do; return mylist end proc

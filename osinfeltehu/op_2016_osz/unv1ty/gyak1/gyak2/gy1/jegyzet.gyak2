@@ -1,0 +1,2 @@
+printf("Hello %i\n", getpid()); --> pid_szám lekérése
+getppid() "getparentpid" --> szülõ pid_száma, ez az érték 1-es, ha a gyerek szülõje korábban fejezõdött be, mint ahogy a szülõ pidszámát elkértük volna

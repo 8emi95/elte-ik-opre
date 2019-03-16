@@ -1,0 +1,180 @@
+void printNames(char *ptrNames, int bytes)
+{
+    int index = 0;
+    char cur[100];
+    int i;
+    int rnd=0;
+    for (i = 0; i < bytes; ++i)
+    {
+	rnd=rand() % 101;
+	if(rnd<90)
+	{
+		cur[index] = *ptrNames;
+		index++;
+        	if (*(ptrNames++) == '\0')
+        	{
+            		index = 0;
+            		printf("[Szulo] Aki megjelent a rendezvenyen: %s \n", cur);
+        	}
+	}
+        
+    }
+}
+
+int execute(int eventid, int fPipe, struct pollfd *poll_fds)
+{
+    struct Events myEvent = myEvents[eventid];
+    char strBuff[100];
+
+    pid_t childPid = fork();
+    if (childPid > 0)
+    {
+        write(fPipe, "Budapest", 9);
+        printf("[Szulo] Cel elkuldve\n");
+
+        pause();
+        printf("[Szulo] Gyerek megerkezett\n");
+
+        int i;
+        for (i = 0; i < myEvent.guestCount; ++i)
+        {
+            write(fPipe, myEvent.myGuests[i].name, strlen(myEvent.myGuests[i].name) + 1);
+        }
+        pause();
+
+        int result = poll(poll_fds, 1, 3000);
+        if (result > 0)
+        {
+            int bytes = read(fPipe, strBuff, sizeof(strBuff));
+            printf("[Szulo] Az esemeny befejezodott. Ertekeles: %s\n", strBuff);
+
+            char *buffPointer = strBuff;
+            buffPointer += strlen(strBuff) + 1;
+            bytes -= strlen(strBuff) + 1;
+
+            printNames(buffPointer, bytes);
+            while ((result = poll(poll_fds, 1, 3000)) > 0)
+            {
+                if (poll_fds[0].revents & POLLIN)
+                {
+                    int bytes = read(fPipe, strBuff, sizeof(strBuff));
+                    printNames(strBuff, bytes);
+                }
+                else
+		{
+			break;
+		}
+                    
+         }
+    }
+        else
+        {
+            printf("[Szulo] nincs hir a rendezvenyrol\n");
+            kill(childPid, SIGKILL);
+        }
+        wait();
+        printf("[Szulo] Folyamat vege\n");
+
+        return 0;
+    }
+
+    else
+    {
+        int child = poll(poll_fds, 1, 3000);
+        if (child > 0)
+        {
+            read(fPipe, strBuff, sizeof(strBuff));
+            sleep(2);
+            printf("[Gyerek] Megerkeztem ide: %s \n", strBuff);
+            kill(getppid(), SIGTERM);
+        }
+        else
+        {
+            perror("nincs uticel");
+        }
+
+        int guestCount = 0;
+        char guestList[10][10];
+        int cindex = 0;
+
+        while ((child = poll(poll_fds, 1, 3000)) > 0)
+        {
+            if (poll_fds[0].revents & POLLIN)
+            {
+                int bytes = read(fPipe, strBuff, sizeof(strBuff));
+
+                int i;
+		int c=1;
+                for (i = 0; i < bytes; i++)
+                {
+                    guestList[guestCount][cindex] = strBuff[i];
+		    cindex++;
+                    if (strBuff[i] == '\0')
+                    {
+                        guestCount++;
+                        cindex = 0;
+                        printf("[Gyerek] %d. resztvevo: %s \n",c, guestList[guestCount - 1]);
+			c++;
+                    }
+			
+                }
+            } else
+                break;
+
+        }
+
+        printf("[Gyerek] Megerkeztek a nevek.\n");
+
+        sleep(3);
+        printf("[Gyerek] Vege az esemenynek.\n");
+
+        char strRating[10];
+	int rnd=rand()%11;
+        sprintf(strRating, "%i/10", rnd);
+        write(fPipe, strRating, strlen(strRating) + 1);
+
+        int j;
+        for (j = 0; j < guestCount; ++j)
+        {
+            if (rand() % 101 >= 10)
+            {
+                write(fPipe, guestList[j], strlen(guestList[j]) + 1);
+            }
+        }
+
+        kill(getppid(), SIGTERM);
+        printf("[Gyerek] Vege\n");
+
+        return 0;
+    }
+}
+void playEvent()
+{
+	signal(SIGTERM, handler);
+
+    	int fPipe = mkfifo("pipe", 0600);
+    	if (fPipe < 0)
+    	{
+        	perror("error");
+        	exit(1);
+    	}
+    	fPipe = open("pipe", O_RDWR);
+
+    	struct pollfd poll_fds[2];
+    	poll_fds[0].fd = fPipe;
+    	poll_fds[0].events = POLLIN;
+
+    	int eventid = 0;
+    	int r = 1;
+    	do
+    	{
+        	r = execute(eventid, fPipe, poll_fds);
+        	if (r == 1)
+        	{
+            		eventid++;
+            		poll_fds[0].fd = fPipe;
+            		poll_fds[0].events = POLLIN;
+        	}
+    	} while (r == 1 && eventid < eventCount);
+    unlink("pipe");
+}

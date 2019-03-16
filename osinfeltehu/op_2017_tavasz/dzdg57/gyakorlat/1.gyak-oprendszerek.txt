@@ -1,0 +1,76 @@
+	elérhetõség:
+klettner@inf.elte.hu
+
+2 hetente másfél óra. 10.05-11.35
+jövõ héten (02.20-án) ez (azaz a 7-es csoport) kezd.
+
+A tárgy valójában a párhuzamos programozással foglalkozik
+
+os.inf.elte.hu
+
+
+
+Szerkesztõnek a vim javasolt, de bármit használhatunk
+
+top-pal nézhetjük meg, hogy mik futnak a szerveren
+megnyomunk egy u-t, s utána a felhasználónevünket. utána már csak sajátunkat látjuk
+q-val lehet kilépni
+
+
+
+VIM használata:
+vim proba.c
+
+insert módba be: i
+
+amikor befejeztük, esc(kilépés insert módból)
+
+ha akarjuk menteni, akkor két nagy Z
+
+ha nem akarunk menteni, akkor ESC után :qa!
+
+
+segédanyag hozzá:
+cwiki.math.bme.hu/view/Vim
+http://www.vim.org/
+http://vimdoc.sourceforge.net/
+
+
+vim-en belül :help -re feljön egy kis segítség...
+
+fájl tartalmát kiírja
+less proba.c
+
+
+
+
+
+printf() kiiratás
+szükség van hozzá az <stdio.h> include-olásához
+fordítás: gcc hello.c
+futtatás: ./a.out
+
+fordítás máshogy: gcc hello.c -o hello 
+(így van egy hello nevû fájl, amit ./hello-val futtathatunk)
+
+
+printf()-ben lehet használni:
+%d
+%i - egész
+%t - valós
+%c - karakter
+%s - string
+
+\n - új sor
+\" - "
+\' - '
+\0 - null karakter
+
+
+C-ben nincs:
+bool
+String
+osztályok
+for-ban változó deklarálás
+
+

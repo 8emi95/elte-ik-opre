@@ -1,0 +1,67 @@
+első a job szám (sajátom), msádoik a PID szám ami full egyedi a teljes rendszerben
+
+ps: létező aktív folyamatok
+kill <PID> - default jelzéssel állít meg
+kill <PID> -sigkill - legbrutálabb kill jelzés
+
+GYAK1
+
+----------fork.c-----------
+
+pid_t fork() másol egyet a folyamatomból (két forkból négy folyamat lesz)
+int getpid() folyamatszám
+
+minden folyamatnak van őse
+ha meghal a szülő folyamat, akkor 1 lesz a ppid (ha nem várja meg a gyereket)
+lehet a gyerek cucca előbb fog lefutni, mert az ütemező ugye bármit csinálhat
+fork másol minden cuccot a memóriában, szal kettéválik a két cucc
+
+a fork() visszaadja a létrehozott gyerek pidje
+a gyerekben a child változó értéke még 0!!!!
+így lehet a gyerekben mást csinálni
+
+waitpid(...) - megvárjuk az adott gyereket
+	params: childpid, intpointer, 0=tényleg megvárja, nem0: csak megnézi h befejeződött
+	
+----------exec.c-----------
+
+execv(...) felülírja a maradék programkódot! szal ami utána van, le se fut!
+	char * cmd="./write";
+    char * arg[]={"./write","Operating Systems","5",NULL}; 
+    execv(cmd,arg);
+	
+system(...) pedig visszatér!
+	system("./write 'Operating Systems' 5");
+	
+	
+HF: "mini shell"
+várja a parancsot, létrehoz egy gyerekfolyamatot, és azzal hajtatja végre
+beolvasni billzetről: fgets(...) és scanf(...)
+	az egyik beolvassa az entert is! hogy melyik, arra majd rá kell jönni :D
+	
+	
+-------------rand.c-----------
+ha esetleg forkolunk, akkor a fork után állítsunk seedet! (srand)
+haha, de így se jó, mert másodperc alapján seedelünk, és valszeg ugyanabban a mpben fog a két srand futni
+
+
+GYAK2
+
+--------signal.c----------
+
+ha nincs signal() a SIGTERMre, akkor default kill jelzésre megáll és nem történik semmit,
+csak ha lekezeljük
+
+ha azt akarok h SIGTERM kezelés után leálljunk, akkor visszaállítjuk a signalt defaultra,
+és küldök magamnak még egy ilyet a raise(SIGTERM) használatával
+
+ha rögtön küldünk jelzést a childből a parentnek, akkor ugyan lekezelődik,
+de még azelőtt kapja meg hogy a pause() elindulna szal a pause leblokkol
+
+ha fordítva (szülő jelez gyereknek), akkor is figyelni kell erre, hogy lehet előbb megjön
+a jel mint a pause elkezdődik
+
+egy while(valtozo!=0)-val be lehet várni a pause() helyett is a jelzést,
+ha a signalkezelőben a valtozot növeljük
+
+Handleren belül RÖVID, GYORS kódot írunk!!!!

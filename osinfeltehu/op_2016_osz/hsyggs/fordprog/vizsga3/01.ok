@@ -1,0 +1,8 @@
+int main()
+{
+  string s;
+  string z;
+  s = "alma";
+  z = s + s;
+  cout << length(z+s) / 3;
+}

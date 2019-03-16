@@ -1,0 +1,45 @@
+bead2 C jegyzet:
+
+-kérdéssor megalkotása. pipa
+-elmentjük (asszem fájlba) -- nemkell
+
+fork? város
+
+signal al készen áll a fogadásra.
+-pipe átküldi a fájlt a gyereknek.
+  random 20 entitás. kitölti a kérdõ ívet. randommal pipa
+	hogy tároljuk az eredményeket?  
+	struct v fájl? STRUCT
+
+
+struct = valaszok szamabol tudjuk hany adat jön.?
+
+
+-pipe visszaküld eredmény
+kérdezõ biztos (gyerek) leáll ()
+
+szülõ képernyõre kiírja.
+
+
+_______________________________
+signal: készen állunk. pipa
+mit jelenet  a varos
+finomitasok
+
+létrehozas:
+
+int MyPipeFiel[2];
+	char buffer[300];
+
+	int MyPipe = pipe(MyPipeFiel);
+	if (MyPipe < 0)
+	{
+		perror("pipe(MyPipeFiel) error!");
+		exit(-1);
+	}
+
+
+write(MyPipeFiel[1], argv[1], strlen(argv[1]) + 1);
+
+egy csõvel? closok nélkül?
+

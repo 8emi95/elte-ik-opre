@@ -1,0 +1,79 @@
+BEADANDÓ:
+
+...milyen módon nyitja meg a fájlt. Ezt kell ügyesen megválasztani, hogy sikeres legyen a felülírás
+
+a v, w mód mindig felülírja
+az append-nél sem mindegy, hogy mit csinál valaki
+
+seek-el rá lehet állni arra, hogy melyik bájttól akarjuk olvasni/írni az fájlt
+
+Szöveges fájl esetén úgy csak(??) úgy lehet megoldani a frissítést, hogy, csinálunk egy temporary másolatot, átírjuk és azt másoljuk vissza (ui. csak append-elni lehet a végén)
+
+
+char*-al elõállított kérdést/választ nem szerencsés használni, legyen inkább egy maximalizált érték
+
+Struktúra: Egy kérdés + 4 válasz, meg vannak adva maximalizált értékek (pl. 80 karakteres egy kérdés/válasz)
+
+seek/fseek (open/fopen)
+
+
+
+
+ZH:
+
+Az egyes részfeladatokban elõ lehet írva, hogy pl. csõvezetéket kell használni (máshogy (pl. üzenetsorral) megvalósított megoldások nem fogadhatók el)
+
+Általában az utolsó feladat szemaforos (védeni kell a kritikus szakaszokat)
+
+Késett beadandó esetén egy pont levonás van
+
+
+
+
+ÁLTALÁNOS:
+
+Csõvezetéket mindig a fork elõtt kell létrehozni (miért??)
+
+A pause-al az lehet a probléma, ha a gyerek elõbb küldi az üzenetet, minthogy a szülõ a pause-hoz ér, akkor gond van
+
+wait(NULL);  -  szülõ vár a gyerekek befejezõdésére
+
+a szignál fv kapcsolja össze a handlert azzal a jelzéssel, amit majd meg fog kapni. Ez legyen a kódban minél hamarabb (pl. az nem jó, ha a gyerek folyamat elején van, mivel a szülõ is küldhet szignált)
+
+A szignál beállítás öröklõdik (tehát a gyerek folyamatra is érvényes)
+
+sigterm, siguser1, siguser2  -  ezzel a 3 jelzéssel mindent meg lehet oldani (??)
+
+Gyakori hiba:
+Létrehozunk tömböt és feljegyezzük a gyerekek pidszámát (a szülõben)
+Ekkor a gyerekekben látszódik a két tömb, de nem lesznek benne az adatok (lehet persze osztott memóriát használni, azzal megoldható)
+
+Van csõvezetékes, szignálos, ... header
+
+ipcs parancs  -  milyen "szolgáltatások"(??) vannak "futóban"(??)
+ipcrm parancs  -  takarítás  (q kapcsoló: MessageQueue id-ját várja és kitörlni (??))
+
+
+
+
+ÜZENETSOR:
+
+Van posX-es és system5-ös (mindig a system5-ös a régebbi)
+Most a system5-ös kellemesebben használható mint az újabb
+struktúrat kell létrehozni. az elsõ mezõ kötött (long típusú)
+A long típusú mezõben lehet / kell elhelyezni, hogy kinek szóljon az üzenet
+Ha csõvezetéken menne oda vissza az üzenet, akkor figyelni kell rá, hogy ne olvassa ki egyik folyamat sem a saját üzenetét (beleír és rögtön ki is olvassa)
+Meg lehet oldani máshogy is, de az a könnyebb ha létrehozunk 2 csõvezetéket
+Ezt a system5-ös üzenetsorral ki lehet kerülni, mivel meg lehet adni hogy kinek szól az üzenet (tehát olyan, mintha n db csõvezeték lenne)
+Általában a pidszámot szokták megadni, de lehetne akár más is
+A 0-val azt adjuk meg, hogy mindegy hogy kinek szól az üzenet, mi kiolvassuk (??)
+
+Legeneráljuk a kulcsot, aztán azzal lehet létrehozni az üzenetsort (??)
+
+PosX-es üzenetsor:
+Hatékonyabb (nem pazarolja az erõforrásokat)
+Nem lehet címezni az üzeneteket (tehát ha 2-nél több fél van, akkor szinkronizálni (??) kell. Viszont 2-nél hatékonyabban használható (??))
+
+A zh-n valószínûleg célszerûbb a régebbit használni
+
+Csak akkor küld értesítése, ha üres volt a sor és beérkezik valamilyen adat. Ha már volt benne valami, akkor nem küld értesítést

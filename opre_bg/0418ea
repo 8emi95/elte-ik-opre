@@ -1,0 +1,6 @@
+ZHban valszeg benne lesz: IO eszközök háromféle elérése:
+ - megszakítás
+ - DMA
+ - IO portok
+
+ memórialeképzésű io: ha egy proci memcímre írok, az automatikusan kijut

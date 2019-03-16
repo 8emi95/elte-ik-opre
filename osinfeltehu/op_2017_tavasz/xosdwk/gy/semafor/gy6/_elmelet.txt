@@ -1,0 +1,488 @@
+http://www.tankonyvtar.hu/hu/tartalom/tamop412A/2010-0011_szamalap2/hu/tartalom/tamop412A/2010-0011_szamalap2/lecke6_lap1.scorml
+http://www.tankonyvtar.hu/hu/tartalom/tamop412A/2010-0011_szamalap2/hu/tartalom/tamop412A/2010-0011_szamalap2/lecke8_lap1.scorml
+
+http://www.tankonyvtar.hu/hu/tartalom/tamop412A/2010-0011_szamalap2/hu/tartalom/tamop412A/2010-0011_szamalap2/lecke8_lap3.scorml
+http://www.tankonyvtar.hu/hu/tartalom/tamop412A/2010-0011_szamalap2/hu/tartalom/tamop412A/2010-0011_szamalap2/lecke6_lap3.scorml
+http://www.tankonyvtar.hu/hu/tartalom/tamop412A/2010-0011_szamalap2/hu/tartalom/tamop412A/2010-0011_szamalap2/lecke6_lap4.scorml
+
+
+Szemaforok
+Egyfajta „kritikus szakasz védelem”. A szemafor tilosat mutat ha értéke 0. 
+Ha értéke >0 akkor az adott folyamat beléphet a kritikus területre.
+
+  #include <sys/types.h>
+  #include <sys/ipc.h>
+  #include <sys/sem.h>
+
+Számlálója többszintű, >=0, kernelben megvalósítva
+•	szemafor-halmaz: több szemafor együtt definiálva
+•	külön kell alapállapotba hozni (semctl)
+•	processz befejezése előtt saját hatásokat visssza lehet vonni (undo)
+
+Semget
+    int semget (key_t kulcs,  int halmazmméret,  int flag);
+	> 0: azonosító, -1: hiba
+	Létrehoz egy új szemafort/halmazt
+	halmazmméret: halmaz elemszáma, új létrehozásakor, pl. szerverben > 0, többi partnernél 0 is lehet
+
+Semctl
+    int semctl (int azonosító,  int halmelem,  int parancs,  union semun arg);
+	Különféle műveletek: lekérdezés, beállítás, megszüntetés: parancs = IPC_RMID (remove identifier)
+
+Semop
+    int semop (int azonosító,  struct sembuf semoparray[],  size_t arrsize);
+	Atomi szemafor-művelet egyszerre több szemaforon: csak akkor halad tovább, 
+	ha mindet egyszerre végre tudta hajtani.
+	Ha nincs IPC_NOWAIT a flag-ben (ld. sembuf), meg is várja, egyébként ha nem végezhető el a szemafor-művelet, akkor EAGAIN hibakóddal tér vissza.
+	Ha közben a szemafor megszűnik: ERMID hiba, ha közben signal jött: EINTR hiba, és a processz fut tovább. Ilyenkor tipikusan újra meg kell hívni.
+	Ahol:
+	struct sembuf {
+		ushort sem_num;     /* halmazbeli sorszám: 0 .. halmméret-1 */
+		short  sem_op;      /* művelet: >0 :V,  <0 :P, ==0 :vár, míg a szemafor 0 nem lesz */
+		short  sem_flg;     /* IPC_NOWAIT, SEM_UNDO */
+	};
+
+Ha SEM_UNDO is meg van adva, a műveletet akkumulálja a processz bármi okból bekövetkező halála utáni undo művelethez, amikor is a kernel visszavonja e processz akkumulált módosításait e szemaforon.
+
+
+
+
+
+
+Az állományok zárolása kapcsán már említettük, hogy a közös erőforrások hasz- 
+nálatánál különös gonddal kell eljárnunk. A megosztott memória kezelésére különö- 
+sen igaz ez, ezért meg kell ismerkednünk a szemaforok (semaphore) használatával. 
+Ha két vagy több folyamat közös erőforrást — például megosztott memóriát — 
+kezel, akkor komoly és nehezen felderíthető hibák eredhetnek abból, ha egyszerre 
+próbálnak meg valamilyen műveletet elvégezni. 
+Ha például az egyik folyamat módosítja a közös memória tartalmát, míg egy má- 
+sik olvassa, az olvasó folyamat hibás, félig elkészült adatszerkezeteket olvashat. Azt 
+mondjuk ilyenkor, hogy versenyhelyzet alakult ki a két folyamat közt a közös erő- 
+forrás kezelése közben. A versenyhelyzet nem azt jelenti tehát, hogy a két folyamat 
+verseng az erőforrás használatáért, hanem azt, hogy egyszerre használják az erőfor- 
+rást, annak az állapota a folyamatok közt fennálló versengéstől függ. Versenyhelyzet 
+esetén a közös erőforrás állapota, a folyamatok futásának végeredménye megjósol- 
+hatatlan, kiszámíthatatlan. 
+A versenyhelyzetet mindig el kell kerülnünk, gondoskodnunk kell arról, hogy a 
+folyamatok ne használhassák egyszerre az erőforrást. 
+Azt mondjuk, hogy a folyamatokban, azok futása közben vannak olyan szakaszok, 
+amelyekben közös erőforrásokat használnak. Ezeket a szakaszokat, a programnak 
+ezeket a részeit kritikus szakaszoknak nevezzük. A programozónak gondoskodnia 
+kell arról, hogy a közös erőforrást használó folyamatok közül mindig csak egy lehes- 
+sen kritikus szakaszban. Ezt úgy érhetjük el, ha a kritikus szakaszban lévő folyamat 
+— bármelyik is legyen az — megtiltja a másik folyamat számára, hogy a kritikus sza- 
+kaszba lépjen. Ezt nevezzük a kölcsönös kizárás elvének. Azért beszélünk kölcsönös 
+kizárásról, mert a kritikus szakaszban — és csak akkor — a folyamatok bármelyike 
+megtiltja a másiknak, hogy belépjen a kritikus szakaszba. 
+Azt gondolnánk, hogy a kölcsönös kizárás egyszerűen biztosítható egy közös vál- 
+tozó segítségével. Amikor a folyamat be kíván lépni a kritikus szakaszba, megvizs- 
+gálja a zárolásra használt közös változót, annak értékéből tudva meg, hogy a másik 
+folyamat kritikus szakaszban van-e. Ha nem, a közös változó segítségével megtiltja a 
+másik folyamatnak a kritikus szakaszba való belépést, majd elvégzi a közös erőforrás 
+kezelését. 
+Sajnos azonban egyszerű változó nem alkalmas a kölcsönös kizárás megvalósítá- 
+Sára. Könnyen megérthető, hogy a közös változóval megvalósított kölcsönös kizá- 
+rás esetében a közös erőforrás a közös változó, a kritikus szakasz a közös változó 
+kezelése és a versenyhelyzet ugyanúgy fennáll, csak most a zárolást végző változó 
+kezelése okoz gondot. 
+Igazi megoldást csak a szemaforok használata jelent. A szemaforok a kölcsönös 
+kizárás megvalósítására használt, versenyhelyzetmentes kezelésű változók, amelye- 
+ket a Linux biztosít számunkra. Ha a közös erőforrásokat használó folyamatokban a 
+kritikus szakaszokat a helyes módon használt szemaforral vagy szemaforokkal véd- 
+jük, soha nem alakul ki versenyhelyzet. Azt, hogy a Linux milyen programozási 
+trükkökkel biztosítja a szemaforok versenyhelyzetmentes kezelését, nem tárgyaljuk, 
+annál fontosabb azonban az, hogy miképpen használhatjuk azokat programunkban. 
+A szemaforok egész típusú különleges változók, amelyek értéke 0 és egy maximá- 
+lis érték közt változhat. Ha a szemafor értéke 0, az általa védett erőforrás foglalt, a 
+folyamat nem léphet be a kritikus szakaszba. Ha 0-nál nagyobb a szemafor értéke, 
+a folyamat beléphet a kritikus szakaszba, de előbb a szemafor értékét csökkentenie 
+kell. 
+
+A szemaforokon két műveletet értelmezünk: 
+Csökkentés 
+A folyamat, mielőtt belépne a kritikus szakaszba, ezt a műveletet hajtja 
+végre. A művelet kérésekor két eset lehetséges; 
+1. Ha a szemafor értéke nagyobb volt 0-nál, a szemafor értéke csökken, 
+ezzel a folyamat lefoglalta a közös erőforrást. A folyamat a szemafor 
+csökkentése után beléphet a kritikus szakaszba, végrehajthatja a soron 
+következő utasításait. 
+2. Ha a szemafor értéke 0, a folyamat blokkolt állapotba kerül. Nem foly- 
+tatódik a futása, a Linux gondoskodik arról, hogy várakozzék, amíg a 
+közös erőforrás fel nem szabadul, a szemafor értéke nem nő. 
+Növelés A folyamat, miután végrehajtotta a kritikus szakasz utasításait, ezt a mű- 
+veletet hajtja végre, ezzel a művelettel jelzi, hogy a szemaforral védett erőfor- 
+rásról lemond. 
+A növelés során a szemafor értéke nő. Ha lenne olyan folyamat, amely e miatt 
+a szemafor miatt került blokkolt állapotba, a Linux gondoskodik róla, hogy 
+hogy az felszabaduljon a blokkolt állapotból. Miután a folyamat felszabadul a 
+blokkolt állapotból, a szemafor általa kért csökkentése megtörténhet, a folya- 
+mat lefoglalhatja az erőforrást és beléphet kritikus szakaszába. 
+A következő néhány oldalon bemutatjuk, hogy a gyakorlatban miképpen hasz- 
+nálhatjuk a Linux által biztosított szemaforokat a közösen használt erőforrások ke- 
+zelésére, a GNU C programkönyvtár mely függvényei szükségesek a szemaforok 
+nyújtotta lehetőségek kihasználására. Ezen eszközök használatához a sys/types. h, 
+a sys/ipc . h és a sys/sem. h fejállományok betöltése szükséges lehet. 
+
+int semget (key_t kulcs, int darab, int kapcs) ; 
+	A függvény új szemaforkészlet létrehozására használható. Minden szemafor- 
+	készlet egy vagy több szemafort tartalmazhat. Igen fontos tudnunk, hogy a 
+	semget ( ) függvény segítségével létrehozott szemaforkészlet nem használható, 
+	amíg az alapérték beállítását el nem végezzük a semctl() függvény segítségé- 
+	vel. 
+	A függvény első paramétere a kulcs, amely lehetővé teszi, hogy a folyamatok 
+		által létrehozott szemaforkészletek ne keveredjenek össze. Az ftok() függ- 
+		vény alkalmas ennek az egyedi kulcsnak a létrehozására. Ha az első paraméter 
+		értéke IPC_PRIVATE, a függvény mindenképpen egy új szemaforkészletet hoz 
+		létre, de a rendszer nem garantálja, hogy más folyamatok nem használhatják 
+		ezt az új szemaforkészletet. 
+	A második paraméter azt határozza meg, hogy hány szemafor legyen a sze- 
+		maforkészletben. Ez a szám nem lehet nagyobb, mint az SEMSL, amely az egy 
+		szemaforkészletben elhelyezhető szemaforok számára nézve szab korlátot. 
+		A harmadik paraméterként átadott kapcsoló a következő állandókból állítható 
+		össze vagy művelet segítségével: 
+	IPC_CREAT Uj szemaforkészlet létrehozására ad utasítást ez a kapcsoló. Ha 
+		nincs bekapcsolva, a függvény már létező készlethez kísérel meg kapcso- 
+		lódni. 
+	IPC_EXCL Ha ez a kapcsoló is ba van kapcsolva, a függvény hibát ad, ha már 
+		létezik szemaforkészlet a hivatkozott kulccsal. 
+		A harmadik paraméterként átadott értékhez szintén a bitenkénti vagy műve- 
+		lettel kapcsolhatók a jogokat beállító állandók, amelyeket az állománykeze- 
+		lésnél is használhatunk (például S_IRUSR, S_IWUSR stb.). Ezek az állományke- 
+		zelésnél megismert formában szabályozzák a szemaforkészlethez való hozzá- 
+		férést. 
+		A függvény visszatérési értéke a szemaforkészlet azonosítószáma, ha a művelet 
+		sikeres volt, és -1, ha nem. Ekkor a függvény beállítja az errno értékét, ami a 
+		következők egyike lehet: 
+	EACCES A kulcsnak megfelelő szemaforkészlet létezik, de a folyamatnak nincs 
+		joga a szemaforkészlet használatához. 
+		A szemaforkészlethez kapcsolódó jogokat a semget ( ) harmadik paramé- 
+		terével állíthatjuk be, azok tulajdonosa, tulajdonoscsoportja és a hozzá 
+		kapcsolódó jogok az állományoknál megszokott módon értelmezhetők. 
+	EEXIST A kulcsnak megfelelő szemaforkészlet már létezik, a semget ( ) hívá- 
+		sakor azonban az IPC_CREAT és IPC_EXCL függvényekkel új szemafor- 
+		készlet létrehozását írtuk elő. 
+	ENDENT A kulcsnak megfelelő szemaforkészlet nem létezik és nem írtuk elő a 
+		létrehozását az IPC_CREAT kapcsolóval. 
+	EINVAL A második paraméterként megadott szemaforszám értéke érvényte- 
+		len vagy nagyobb, mint a kulcsnak megfelelő, már létező szemaforkész- 
+		letben található szemaforok száma. 
+	ENOMEM A művelet végrehajtásához nem állt rendelkezésre elegendő memó- 
+		ria. 
+	ENOSPC A rendszeren több szemafor már nem hozható létre, mert a szemafo- 
+		rok megengedett legnagyobb számát elértük. 
+
+
+int semctl(int semid, int semnum, int cmd, union semun) ; 
+	A függvény segítségével különleges műveleteket végezhetünk a szemaforkész- 
+	leten vagy annak egy tagján. Mindenképpen el kell végeznünk a szemafor- 
+	készlet alapbeállítását ezzel a függvénnyel, miután létrehoztuk azt a semget ( ) 
+	segítségével. 
+	A függvény negyedik paramétereként átadott paraméter típusa nem minden 
+		esetben van létrehozva a fejállományokban, ezért a GNU C könyvtár doku- 
+		mentációja szerint a következő sorokat kell elhelyeznünk a program elején a 
+		fejállományok betöltése után: 
+		#if defined(__GNU_LIBRARY) && !defined(_SEM_SEMUN_UNDEFINED)
+		/ * Már létre van hozva. */ 
+		#else 
+		/ * Magunknak kell létrehoznunk. */ 
+		union semun { 
+		int val ; 
+		struct semid_ds *buf ; 
+		unsigned short *array ; 
+		struct seminfo * __ buf ; 
+		#endif 
+	A függvény első paramétere a szemaforkészlet azonosítója, amelyen a külön- 
+		leges műveletet el akarjuk végezni. 
+		A függvény második paramétere a kezelni kívánt szemafor sorszáma a szema- 
+		forkészletben. A szemaforok számozása 0-tól kezdődik. 
+	A függvény harmadik paramétere egy állandó, amely az elvégezni kívánt mű- 
+		veletet adja meg. Itt — többek között — a következő műveleteket adhatjuk meg: 
+	IPC_RMID A szemaforkészlet azonnali megsemmisítése. Az eltávolítás után a 
+		rendszer feloldja azoknak a folyamatoknak a blokkolását, amelyek az 
+		adott szemaforkészletre várakoztak, és jelzi számukra, hogy a szemafor- 
+		készlet törölve lett. 
+		Ha a függvény hívása ezzel a paranccsal történik, a negyedik paraméter 
+		lehet NULL vagy elhagyható, a függvény három paraméterrel hívható. 
+	SETVAL A szemafor értékének beállítása a negyedik paraméterként megadott 
+		változó var mezőjének megfelelően. A művelet végrehajtása után a rend- 
+		szer szükség esetén feloldja a várakozó folyamatok blokkolt állapotát. 
+		Ezt az műveletet — a szemaforok értékének előírt értékre változtatását — 
+		általában csak a szemafor kezdeti beállításánál használjuk. A szemaforo- 
+		kon használat közben csak a csökkentés és növelés műveletét alkalmaz- 
+		zuk. 
+
+	A függvény visszatérési értéke sikeres végrehajtás esetén nem negatív, sikerte- 
+		len végrehajtás esetén pedig -1. Ekkor a függvény beállítja az errno értékét, 
+		ami a következők egyike lehet: 
+	EACCES A folyamatnak nincs joga az adott műveletet végrehajtani. 
+	EFAULT A negyedik paraméter értéke hibás. 
+	EIDRM A szemaforkészlet törölve lett. 
+	EINVAL Az első vagy a harmadik paraméter — a szemaforkészlet azonosítója 
+		vagy a parancs — értéke érvénytelen. 
+	EPERM A folyamatnak nincs joga eltávolítani a szemafort. 
+	ERANGE A szemafor új értékeként megadott érték érvénytelen. 
+		A szemafor értéke nem lehet 0-nál kisebb vagy a SEMVMX állandó értéké- 
+		nél nagyobb. 
+	
+int semop (int semid, struct sembuf *sops, unsigned nsops) ; 
+	A függvény segítségével használhatjuk a szemafort, azaz csökkenthetjük vagy 
+		növelhetjük az értékét. A semctl ( ) függvénnyel ellentétben — amellyel külön- 
+		leges műveleteket végezhetünk a szemaforkészleten — ez a függvény a normá- 
+		lis használatot teszi lehetővé. A versenyhelyzet kizárását az garantálja, hogy a 
+		semop ( ) hívásakor, ha szükséges, a rendszer blokkolja a folyamatot. 
+	A függvény első paramétere a szemaforkészletet azonosítja, amelynek elemén 
+		vagy elemein a műveletet el kívánjuk végezni. 
+	A függvény harmadik paramétere azt adja meg, hogy a szemaforkészlet hány 
+		elemén kívánunk műveletet végezni. Ha ennek a paraméternek az értéke 1, 
+		csak egy szemaforon végzünk műveletet, ha 2, akkor kettőn és így tovább. 
+		Fontos tudnunk, hogy ha több szemaforon végzünk műveletet, a rendszer 
+		minden szemaforon egyszerre végzi el az érték módosítását, de csak akkor, ha 
+		minden módosítás elvégezhetó. Ha csak egyetlen művelet is található, amely 
+		nem végezhető el — mert a szemafor értéke 0-nál kisebbé válna — a folyamat 
+		blokkolódik. 
+		A függvény harmadik paramétere egy mutató, amely egy tömböt jelöl ki a me- 
+		móriában. Ennek a tömbnek minden eleme egy szemaforműveletet tartalmaz. 
+		Ertelemszerűen annyi szemaforműveletet kell tartalmazni a második paramé- 
+		terrel jelölt tömbnek, ahány szemaforon műveletet kívánunk végezni. Igy a 
+		második paraméterrel jelölt tömb elemeinek számát a harmadik paraméter 
+		adja meg. 
+	A második paraméterrel jelölt tömb minden eleme sembuf struktúra, amely- 
+		nek szerkezete a következő: 
+A sembuf struktúra  
+	unsigned short sem _ num A szemafor sorszáma a szemaforkészletben
+	short sem _ op  A szemaforon elvégzendő művelet.
+	short sem_flg  A művelet módosítókapcsolója. 
+A struktúrában az első elem, a sem_num, annak a szemafornak a sorszámát 
+adja meg, amelyen a műveletet el akarjuk végezni. A szemaforok számozása 
+0-tól kezdődik. 
+A struktúra második eleme a szemaforon elvégzendő műveletet adja meg. A 
+műveletet alapvetően meghatározza ennek az értéknek az előjele, a követke- 
+zőképpen: 
+	1. Ha a második elem értéke nullánál nagyobb egész, az adott szemafor 
+		ezzel az értékkel növekszik. Ez a művelet soha nem okozza a folyamat 
+		blokkolását. 
+		Ezt a műveletet általában a kritikus szakasz végén használjuk, azt jelezzük 
+		vele, hogy a szemaforral védett közös erőforrás használatát befejeztük. 
+		Ha létezik olyan folyamat, amely a szemafor miatt blokkolt állapotban 
+		van, a művelet végrehajtása után a rendszer — ha lehetséges — feloldja a 
+		blokkolását. 
+	2. Ha a második elem értéke 0, a szemafor értéke nem változik. Ez a műve- 
+		let szükség esetén blokkolja a folyamat futását és csak akkor engedélyezi 
+		újra, ha a szemafor értéke 0 lesz. 
+		Ez a művelet a 0-ra várakozás, amelyet ritkán használunk, hiszen a sze- 
+		maforok 0 értéke általában az erőforrás foglalt állapotát jelzi.  
+	3. Ha a második elem értéke negatív, a rendszer megkísérli csökkenteni a 
+		szemafor értékét a második elem abszolút értékével. Ha a csökkentés 
+		miatt a szemafor értéke negatív lenne, a rendszer blokkolja a folyamat 
+		futását, amíg a szemafor nem növekszik akkorára, hogy ez a művelet 
+		elvégezhető legyen. (A blokkolást elkerülhetjük, ha a harmadik mezőben 
+		nem blokkoló jellegű műveletvégzést kérünk.) 
+		Ezt a műveletet általában a kritikus szakaszba való belépés előtt végezzük 
+		el, a szemaforral védett közös erőforrás használatának jelzésére. 
+
+A sembuf struktúra harmadik eleme a művelet végrehajtását befolyásolja. Itt 
+a következő állandókat és az azokból vagy művelettel képzett kifejezéseket 
+adhatjuk meg: 
+IPC_NOWAIT A szemaforművelet nem blokkolja a folyamat futását akkor sem, 
+	ha azt nem lehet elvégezni. Ilyen esetben a semop() hibával tér vissza és 
+	az errno értéke EAGAIN lesz. 
+SEM _ UNDO A művelet hatását a rendszer visszavonja, amikor a folyamat befe- 
+	jezi futását. 
+	
+A semop() visszatérési értéke 0, ha a művelet sikeresen végrehajtódott, és -1, 
+ha nem. Ekkor a függvény beállítja az errno értékét, ami a következők egyike 
+lehet: 
+- E2BIG A harmadik paraméterként átadott műveletek száma túl nagy. 
+- EACCES A folyamatnak nincs joga a műveletek valamelyikének végrehajtásához. 
+- EAGAIN A művelet nem hajtható végre és nem blokkoló jellegű végrehajtást 
+	kértünk. 
+- EFAULT A második paraméterként átadott cím nem megfelelő. 
+- EFBIG A második paraméterként kijelölt tömbben valamelyik művelethez hi- 
+	bás szemaforszám tartozik. Olyan szemaforra hivatkozunk, ami nem lé- 
+	tezik a szemaforkészletben. 
+- EIDRM A szemafor törölve lett. 
+- EINTR A művelet végrehajtása közben a folyamat jelzést kapott. 
+- EINVAL Az első paraméterként átadott szemafor azonosító érvénytelen, nem 
+	létező szemafort jelöl, vagy a harmadik paraméterként átadott művelet- 
+	szám érvénytelen. 
+- ENOMEM A művelet végrehajtásához nem állt rendelkezésre elegendő memó- 
+	ria. 
+- ERANGE Valamely szemaforművelet után a szemafor értéke a megengedett ér- 
+	téknél nagyobb volna. A szemafor értéke nem lehet nagyobb, mint a 
+	SEMVMX állandóban tárolt érték. 
+A függvények bemutatása után megemlítjük, hogy az ipcs program segítségével 
+a rendszeren található szemaforok kiírathatók, az ipcrm -s kapcsolójával pedig tö- 
+rölhetők. A programok használatához természetesen a megfelelő jogkörökkel ren- 
+delkeznünk kell. 
+
+
+56. példa. A következő példaprogram egy szemafor használatát mutatja be. A prog- 
+ram futó példányai egy képzeletbeli erőforrást használnak közösen, szemafor segít- 
+ségével kizárva a versenyhelyzetet. 
+A program az egyszerűség kedvéért a Parancssorban kapott kapcsoló alapján múkö- 
+dik. Ha a program nem kap kapcsolót, létrehoz egy új szemaforkészletet, elvégzi az 
+alapbeállítását és megkezdi az erőforrás használatát a megfelelő módon használva 
+a szemafort. Ha a program a -c kapcsolót kapja, a már létező szemaforhoz kap- 
+csolódik. Ilyen esetben nem kell elvégeznie a szemafor kezdeti beállítását, azonnal 
+megkezdheti a munkát. Ha a program a -r kapcsolót kapja, megkísérli törölni a 
+szemafort, majd utána azonnal kilép. 
+
+
+Szemaforok 
+243 
+A gyakorlatban használt programok természetesen nem kapcsolók szerint kezelik a 
+szemaforokat, a példaprogram csak az egyszerúség kedvéért használja ezt a módszert. 
+
+megosztott/ szemafor . c 
+#include <stdio.h> 
+#include <sys/s tat.h> 
+#include <sys/types.h> 
+#include <sys/ipc.h> 
+#include <sys/sem.h> 
+#include <stning.h> 
+#include <enrno.h> 
+ 
+void kiir( char *szoveg ) { 
+	print f ( szoveg ) ; 
+	fflush( stdout ) ; 
+}
+int _szemafor( char *prgnev ) { 
+	key_ t  kulcs; 
+	int szemafor; 
+	kulcs = ftok(pngnev, 1 ) ; 
+
+	if ( kulcs == -1 ) { 
+		fprintf(stderr, "A kulcs létrehozósa sikertelen") ; 
+		exit(l); 
+	}
+	szemafor =kulcs, 1, IPC_CREATIS_IRUSRIS_IWUSR) ; 
+	if(szemafor == -1)
+		fprintf( stderr, "semget ( ) : %s \n”, strerror(errno)); 
+		exit( 1 ) ; 
+	}
+	else{
+		printf("Szemafor: %d\n", szemafor);
+		fflush( stdout ) ; 
+	}
+	return( szemafor ) ; 
+}
+
+void int _szemafor_alapbeall(int szemafor) { 
+	union semun alapbeall; 
+	alapbeall.val = 1;
+	kiir("A szemafor alapbeäUitäsa");
+	
+	if(semctl( szemafor, 0, SET VAL, alpbeall)==-1){
+		fprintf( stderr, "semctl: "%s \n", strerror(errno)); 
+		exit( 1 ) ; 
+	}
+}
+
+void _szemafor_torot( int szemafor) 
+	if( semctl( szemafor, 0, IPC_RMID )== -1 ) { 
+		fprintf(stderr, "semctl: %s\n", strerror(errno) ) ; 
+		exit( 1 ) ; 
+	}
+}
+
+void zar( int szemafor ) { 
+	struct sembuf zar; 
+	zar.sem_ num=O; / * O-äs szemafor. 
+	zar.sem_op = -1; / * Csökkentés -1-el. */ 
+	if( semop( szemafor, &zar, 1 ) != 0) { 
+	fprintf( stderr, "semop: %s\n" strerror(errno)); 
+	exit (1); 
+}
+
+void nyit( int szemafor ) { 
+	struct sembuf nyit; 
+	nyit.sem_num = 0; / * 0-äs szemafor. */
+	nyit.sem_ op=+l; / * Növelés 1-el, . */
+	
+	if(semop(szemafor, &nyit, 1) != 0){
+		fprontf(stderr, "semop: %s\n", strerror(errno));
+		exit(1);
+	}
+}
+
+int main( int argc, char *argv [] ) {
+	s trerror (errno)) ; 
+	int n; 
+	int szemafor; 
+	szemafor = _szemafor(argv[0]);
+	
+	if(argc>l && strcmp (argv[l], "-r")==0{
+		_szemafor_torot( szemafor ) ; 
+		exit (0); 
+	}
+	
+	if(argc>l && strcmp (argv[l], "-c")==0)
+		kiir( "CsatLakozäs Létezö szemaforhoz. In" 
+	else 
+		szemafor_alpbeall(szemafor);
+	
+	for( n=0; n<4; ++n){ 
+		kiir( "Kritikus szakasz \n");
+		zap( szemafor ) ; 
+		kiir( "[0K] In" ) ; 
+		
+		/* A kritikus szakasz következik. */
+		sleep( 5 ) ; 
+		kiir( "Kritikus szakasz vége \n" );
+		nyit( szemafor ) ; 
+		kiir( "[0K] \n" ) ; 
+		
+		/* A kritikus szakaszon kivüLi müveletek. */
+		sleep( 2 ) ; 
+	}
+	exit (O) ; 
+}
+
+
+
+
+
+
+A 23—26. sorban található kiir() függvény egy üzenetet ír a szabványos kime- 
+netre, majd gondoskodik az fflush() hívásával, hogy az üzenet azonnal meg is 
+jelenjen. Erre azért van szükség, hogy az események egymásutániságát jól megfigyel- 
+hessük. 
+A 28—46. sorban található _ szemafor ( ) függvény előállítja a program által hasz- 
+nált szemaforkészlet azonosítószámát és szükség esetén létre is hozza a szemaforkész- 
+letet. A program először egy kulcsot állít elő az f tok ( ) függvény segítségével, majd 
+egy szemafort hoz létre a semget ( ) hívásával. Ha a szemaforkészlet már létezik, a 
+semget ( ) nem hoz létre újat, csak visszaadja a létező szemaforkészlet azonosítószá- 
+mát. 
+A 48—59. sorok közt található _ szemfor_alapbeall ( ) függvény a szemaforkész- 
+let alapbeállítását végzi, és 1-re állítja a szemaforkészletben található első szemafor 
+értékét. A függvény az 50. sorban elhelyezi a szemafor értékét az alapbeall változó 
+val mezöjében, majd az 54. sorban hívja a semctl ( ) függvényt a SETVAL paranccsal 
+utasítva a szemafor értékének beállítására. 
+A 61—68. sorokban található a _ szemafor_torol() függvény, amely megkísérli 
+törölni a szemafort. A függvény a 63. sorban hívja a semctl ( ) függvényt a I PC _ RMID 
+paranccsal. 
+A 70—78. és a 80—89. sorokban található zar (), illetve nyit ( ) függvények nagyon 
+hasonlítanak egymásra. A zar() megkísérli csökkenteni eggyel a szemafor értékét, 
+ezzel valósítva meg a képzeletbeli erőforrás lefoglalását, a nyit ( ) pedig a szemafor 
+növelésével szabadítja fel az erőforrást. 
+A függvények múködésének megértése után a program múködése már könnyen át- 
+látható. A 107—123. sorokban található ciklus szerint a program többször foglalja le 
+és szabadítja fel a szemafor segítségével az erőforrást. A 114. és 122. sorban található 
+sleep ( ) függvényhívás miatt a program néhány másodpercre megáll, hogy követhes- 
+sük a működését. Ha grafikus felületen több ablakban, több példányban indítjuk el 
+a példaprogramot — az elsőt paraméter nélkül, a többit pedig a -c kapcsolóval — 
+megfigyelhetó a szemafor működése. 
+
+A szemaforokról szóló rész végén meg kell említenünk, hogy a bemutatott pél- 
+dánál jóval bonyolultabb esetekben is használhatók. Előfordulhat, hogy a feladat 
+bonyolultsága miatt nem elegendő egy szemafor használata, több szemaforral kell 
+védenünk az erőforrást, amelyhez a különféle okokból történő hozzáférést a szema- 
+forok kombinációi szabályozzák. Eppen ez az oka annak, hogy a Linux nem csak 
+egyedi szemaforok kezelésére képes, hanem szemaforokból készített szemafortöm- 
+bök, szemaforkészletek egyidejű, versenyhelyzetmentes kezelését is lehetővé teszi. 
+Tudnunk kell azonban, hogy a szemaforok tömbjeivel megoldott feladatok meg- 
+lehetősen nehéz feladat elé állítják a programozót, akinek össze kell hangolnia a 
+szemaforok segítségével több folyamat munkáját. Nehéz feladat az egyszerre futó 
+folyamatok történéseit átlátni és komoly nehézséget okoz az is, hogy az esetleges 
+programhibák ritkán előforduló, nehezen tetten érhető rendellenességeket okoznak 
+a közös erőforrás kezelésében. Ilyen, nehezen tetten érhető hiba például a holtpont 

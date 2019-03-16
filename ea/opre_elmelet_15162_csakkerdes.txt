@@ -1,0 +1,68 @@
+-Mi az oper�ci�s rendszer kernel m�dja �s felhaszn�l�i m�dja k�zti k�l�nbs�g?
+-Milyen kommunik�ci�s t�pust ismer�nk a perif�ri�kkal?
+-Mi a "virtu�lis g�p" oper�ci�s rendszer strukt�ra l�nyege, honnan ered ez az elv?
+-Mi a CHS c�mz�s?
+-�rja le az SSTF �temez�s l�nyeg�t �s jellemz�it!
+-Mi az i-node t�bla?
+-Az oper�ci�s rendszerek folyamatainak milyen �llapotait, �llapot�tmeneteit ismerj�k?
+-A k�lcs�n�s kiz�r�s Peterson f�le megold�s�nak mi a l�nyege? (algoritmus)
+-Mi a szemafor?
+-Mi a k�l�nbs�g a szemafor �s a mutex k�z�tt?
+-Mit �rt�nk folyamatok �temez�s�n?
+-Mi a "sorsj�t�k �temez�s" l�nyege, hol haszn�lj�k?
+-Mit jelent a holtpont gr�fmodellje?
+-Ismertesse a bank�r algoritmust! L�nyege!
+-Mi a POSIX?
+-Mik a(z) (1., 2., 3., 4.) gener�ci�s oper�ci�s rendszerek jellemz�i?
+-Mi a RAID(1..5), mi a m�k�d�s�nek a l�nyege?
+-Mi a k�lcs�n�s kiz�r�s, mik a megval�s�t�s felt�telei?
+-Ismertesse a k�lcs�n�s kiz�r�s megval�s�t�s�t TSL utas�t�ssal!
+-Ismertesse a folytonos t�rkioszt�s(lemez) strat�gi�it, jellemz�it!
+-Mi a randev� strat�gia?
+-Mi a monitor?
+-Mi a mutex?
+-Mi a k�l�nbs�g a monitor �s a mutex k�z�tt?
+-Mi a soft real time rendszer?
+-Mit jelent a monitor "condition" t�pusa?
+-Mi az ar�nyos �temez�s l�nyege?
+-Milyen I/O eszk�zkateg�ri�kat ismer? Mi a kiv�tel?
+-Mi az MBR?
+-Mi a mem�riakezel� feladata?
+-Mit �rt�nk tev�keny v�rakoz�s alatt?
+-Mit �rt�nk folyamatok er�forr�s g�rb�ly�n, mire haszn�lhat�?
+-Mit �rt�nk virtu�lis mem�riakezel�sen, mi a l�nyege? Mi a lapoz�s?
+-Mi a szoftveres �s a hardveres megszak�t�s k�zti k�l�nbs�g? Van egy�ltal�n?
+-Mi az SSTF �temez�s l�nyege?
+-Mit nevez�nk f�jlrendszernek, mi k�ze van az FCFS �temez�shez?
+-Milyen perif�ria kommunik�ci�s m�dot ismer?
+-Mi az Ext2FS, van-e MBR-je?
+-Mi a TLB, mi a szerepe?
+-RAID-ek k�zti k�l�nbs�gek.
+-Honnan sz�rmazik, �s mi a l�nyege a virtu�lis g�pek(szerver) haszn�lat�nak?
+-Ismertesse a folytonos t�rkioszt�s(lemez) strat�gi�it!
+-Mi a szemafor, mikor nem haszn�lhat�?
+-Mi a Robin-Robin �temez�s l�nyege?
+-Milyen part�ci�nak nincs i-node t�bl�ja?
+-Mi a RAID0+1 illetve RAID1+0 lemezek k�zti k�l�nbs�g?
+-Honnan sz�rmazik az op.rendszer virtualiz�ci�, mik a jellemz�i, mi k�ze a virtu�lis mem�riakezel�shez?
+-Mit nevez�nk szegment�lt mem�riakezel�snek?
+-Mi a val�s idej� �temez�s l�nyege?
+-Milyen processzor v�delmi szinteket ismer, hol haszn�ljuk ezeket?
+-Ismertesse a "probl�ma figyelmen k�v�l hagy�sa" m�dszert! Hol alkalmazz�k?
+-Mi az MFT?
+-Mi a probl�ma a k�lcs�n�s kiz�r�s szigor� v�ltogat�sos megval�s�t�ssal?
+-Mit jelent az "interleave" fogalma?
+-Mit nevez�nk val�s idej� oper�ci�s rendszernek?
+-Milyen f�jlrendszer specifikus f�jlokat ismer? Hol tal�lhat�k �tal�ban?
+-Mik a program-folyamat-sz�l k�zti k�l�nbs�gek?
+-Mit nevez�nk f�jlrendszernek, mi k�ze van az FCFS �temez�shez?
+-I/O szoftver modellje, milyen eszk�zkateg�ri�kat ismer?
+-Mit nevez�nk kritikus tev�kenys�gnek?
+-Mire szolg�lnak a lapoz�si algoritmusok?
+-Mi a k�l�nbs�g folyamatok �s sz�lak k�z�tt? Van egy�ltal�n?
+-Ismertesse a lapt�bl�k szerep�t! Vam k�ze a TLB-hez?
+-Mi�rt hasznos a k�lcs�n�s kiz�r�s �zenetk�ld�ses megval�s�t�sa?
+-Mire haszn�lhat� a monitor?
+-Mire j� a "Dirty-bit", hol haszn�lj�k?
+-Mi a CHS-LBA c�mz�s k�zti k�l�nbs�g? Van egy�ltal�n?
+-Mi a Round-Robin c�mz�s l�nyege?

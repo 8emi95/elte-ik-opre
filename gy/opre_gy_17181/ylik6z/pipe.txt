@@ -1,0 +1,9 @@
+1. Névtelen cső: 
+- Írja be egyik folyamat a csőbe a parancs paramétereit, 
+megfelelő elválasztással, míg a másik folyamat olvassa ki azokat!
+
+- Írjunk 5 random számot, adjunk hozzá egyet és írjuk vissza 
+egy másik csőbe, azaz a növelt értékeket adjuk vissza a 
+másik szálnak.
+	int i = rand() % 10; write(fd[1], &i, sizeof(i)); 
+	//srand fv-el tenyleg mindig mas random szamot csinal

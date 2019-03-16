@@ -1,0 +1,6 @@
+megfigyelo1	Kiskoros	2	Fiatal	Febr 26 2015 10:58:00
+megfigyelo1	Budapest	4	Fiatal	Mar 26 2015 10:57:52
+megfigyelo2	Budapest	1	Felnott	Mar 26 2015 10:57:59
+megfigyelo1	Kiskoros	2	Fiatal	Mar 26 2015 10:58:00
+megfigyelo2	Kiskoros	11	Oreg	Mar 26 2015 11:36:02
+megfigyelo2	Kiskoros	11	Oreg	Apr 26 2015 11:36:02

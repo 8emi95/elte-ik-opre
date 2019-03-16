@@ -1,0 +1,62 @@
+fsewek (f, elmozdulás(byte), viszonyítási pont) -> nem 0 /hiba
+
+viszonyítási pont : SEEK_SET - fájl eleje / SEEK_CUR -> aktuális mutató / SEEK_END -> fájl vége
+
+///
+
+f = open(fnév, mód, [engedélyek]) -> -1: hiba / 0-hoz legközelebb esõ szám
+^<-int
+
+mód: O_RDONLY -> Olvasásra / O_WRONLY -> írásra / O_RDWR -> írás olvasás / o_APPEND -> hozzáfûz / O_TRUNC -> kinulázza az addigi tartalmat / O_CREATE -> ha nem létezik a fájl létrehozza, am hozzáfûz / O_EXCL -> Csak a create-el együtt itt látre kell hozni, h amár van -> hiba
+S_I[R/W/X][USR/GRP/OTH]
+
+S_IXUSR : futattási jog usernek
+S_IWOTH : írási jog mindenkinek
+
+close(f)
+
+
+///
+
+read (f, kezdõcím, olvasandó bájtok száma) -> olvasott bájtok száma / negatív ha hiba
+
+write (f, kezdõcím, írandó bájtok száma) -> kiírt bájtok száma / negatív, ha hiba
+
+Lseek(f, elmozdulás[byte], viszonyítási pont) -> file kezdetétõl számított pozíció/ hiba: -1
+
+//
+azon   szülõ azon
+PID      PPID
+sys/types.h
+pid_t
+
+rendszerhívás 
+fork() -> pid_t  -> Hiba: -1
+          /              \
+       szülõben          gyerekben
+       gyerek pid-je         0
+
+getpid() saját azonosító
+getppid() szülõ azonja
+
+sleep(sec)
+usleep(microsec)
+
+///
+hozzunk létre ugyan abból a szülõ folyamatból 2 gyereket
+szülõ: írja ki a 2 gyerek pid-jét
+gy1: írja ki a saját és a szülõje pid-jét (pid, ppid)
+gy2: írja ki a saját és a szülõje pid-jét (pid, ppid)
+
+//HF a gyerek véálik ketté nem a szülõ
+
+
+///
+
+wait (&status) -> gyerek pid / -1 ha nincs gyerek
+waitpid(PID, &Status, options) -> -1, nincs gyerek / 
+        -1    (int)    (int)
+
+options:WOCHANG - terminála
+	WUNTRACED - stopped
+	WCONTINUED - resumed

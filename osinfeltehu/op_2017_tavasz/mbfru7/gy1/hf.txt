@@ -1,0 +1,10 @@
+fork.c
+
+not_a common -> int* és malloccal foglaljuk le a helyét
+
+a gyerek folyamat megváltoztatja és a szülõben is 5 lesz.
+teszt!
+
+----
+
+csináljunk 2 gyereket

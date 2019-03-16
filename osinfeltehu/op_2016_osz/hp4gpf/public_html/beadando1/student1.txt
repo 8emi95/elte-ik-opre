@@ -1,0 +1,12 @@
+
+Name: Peter 
+Marks=3 
+
+Name: Mary 
+Marks=3 
+
+Name: Me 
+Marks=5 
+
+Name: Maya 
+Marks=4 

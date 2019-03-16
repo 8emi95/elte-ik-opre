@@ -1,0 +1,12 @@
+os.inf.elte.hu/~pzh5fq
+
+open close read write lseek
+
+fopen(text)		fopen(binary)
+fclose				fclose
+fgets					fread
+fputs					fwrite
+			fseek
+
+
+

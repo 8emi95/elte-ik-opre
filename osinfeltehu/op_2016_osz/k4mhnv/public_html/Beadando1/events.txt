@@ -1,0 +1,3 @@
+Tanc,1
+Borkostolas,2
+Eskuvo,3

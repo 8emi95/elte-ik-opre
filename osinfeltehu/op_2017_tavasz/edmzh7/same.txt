@@ -1,0 +1,3 @@
+Name    = ada
+Age     = 85
+Salary  = 925.00

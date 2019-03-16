@@ -1,0 +1,6 @@
+
+
+Ha "Implicit declaration of function '...'"-t kapunk
+	¤ Nincs includeolva a megfelelő header
+	¤ Header megtalálása a funckió neve alapján:
+		- man funkcio_neve

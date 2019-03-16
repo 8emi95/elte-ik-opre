@@ -1,0 +1,14 @@
+3. gyakorlat:
+
+Stringmûveletek c-ben: char tömb bináris mûveletei
+bináris fájlmûveletek: 
+
+Unió: közös memóriaterületû gyûjtemény
+	több szempontból mutatja meg a memóriaterület tartalmát
+
+gyak03:
+
+csõ/pipe: bináris fájl írása olvasása bájtsorozat
+
+
+ha számot akarsz kiírni így: %d vagy %i a printf -nél a százalék jellel lehet típus azonosítót megadni.

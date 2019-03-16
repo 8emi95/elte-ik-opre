@@ -1,0 +1,654 @@
+A kérdések után szereplõ válaszok csak rövid emlékeztetõül  és vázlatként
+szolgálnak, azokat ki kell egészíteni az elõadáson elhangzottakkal.
+További kötelezõ segédanyag a kérdések megválaszolásához:
+Almási Béla: Számítógép hálózatok oktatási segédlet
+Elérhetõ: www.tankonyvtar.hu (ezen belül -> keresés)
+(Ez utóbbi rövid összefoglalása: Almasi_alapfogalmak.txt)
+
+1. elõadás
+----------
+Hány réteget különböztet meg az ISO/OSI referencia modell? Sorolja fel õket.
+  7 
+Hány réteget különböztet meg a Tannenbaum-féle hibrid rétegmodell? Sorolja fel õket.
+  5
+Sorolja fel az ARPANET alapjául szolgáló 4 hálózatot. (23. old.)
+  University of California Los Angeles (UCLA)
+  Stanford Research Center (SRC)
+  University of California Santa Barbara (UCSB)
+  University of Utah
+Mi az "Open System Interconnection Reference Model" (ISO OSI), hogyan specifikáljuk az egyes rétegeket?
+  egy 7-rétegû standard, koncepcionális modell kommunikációs hálózatok belsõ funkcionalitásaihoz
+Mi a feladata és mik a fõbb funkcionalitásai az ISO/OSI modell fizikai rétegének?
+  feladata: bitek átvitele
+  - definiálja az eszköz és a fizikai átviteli közeg kapcsolatát
+  - protokollt határoz meg két közvetlenül fizikai kapcsolatban álló csomópont közötti kapcsolat felépítéséhez
+Mi a feladata és mik a fõbb funkcionalitásai az ISO/OSI modell adatkapcsolati rétegének?
+  feladata: keretek átvitele hibamentesen
+  - keretekre tördelés
+  - nyugták, duplikátumok kezelése
+  - folyamirányítás
+  - közeghozzáférés vezérlése
+Mi a feladata és mik a fõbb funkcionalitásai az ISO/OSI modell hálózati rétegének?
+  feladata: csomagok átvitele távoli hostok között
+  - csomagtovábbítás (csomag ütemezés, puffer kezelés)
+  - útvonal választás
+  - fragmentálás kezelése
+Mi a feladata az ISO/OSI modell ülés/munkamenet (session) rétegének?
+  feladata: hosztok közötti dialógusok kezelése
+  - kapcsolat menedzsment (felépítés, fenntartás, bontás)
+Mik a fõbb funkcionalitásai az ISO/OSI modell megjelenítési rétegének?
+  adatkonverzió különbözõ reprezentációk között
+  kódolások egyeztetése/illesztése (Ascii, Unicode)
+Mit jelent a hálózatok esetén az adatok burkolása? (45. old.)
+  az egyes rétegek fejéc/lábléc információkat illesztenek a kapott csomaghoz és úgy küldik tovább
+Mit jelent a legjobb szándék (best effort) elv a hálózati kommunikációban?
+  - ha egy csomag nem éri el a célt, akkor törlõdik
+  - az alkalmazás újraküldi ilyen esetekben
+Mit jelent a "Black-box" megközelítés a kapcsolatokra?
+  - Black Box -> Gateway vagy Router
+  - csomaginformációk nem kerülnek megõrzésre
+  - nincs folyamfelügyelet
+Mi az a PAN?
+  Magánhálózat, Personal Area Network (1 m)
+Mi az a WAN? 
+  Nagy kiterjedésû hálózat, Wide Area Network (100 km - 1000 km)
+Sorolja fel az internet 5 (elõadáson elhangzott) jellemzõjét.
+  rendszerfüggetlen; nincs közp. felügyelet; LAN-okból áll; globális; szolgáltatásai: WWW, email, ftp ...
+Definiálja a hálózati sávszélességet? 
+  kommunikációs erõforrás mérésére szolgáló mennyiség (bit/s)
+Definiálja a jel sávszélességet. (15. old.)
+  legnagyobb és legkisebb frekvenciák közötti különbség (Hz)
+Definiálja az átviteli késleltetést.
+  Az az idõtartam, amely egy csomag összes bitjének az átviteli csatornára tételéhez szükséges.
+  jelölése: d_T
+Definiálja a propagációs késést.
+  Az az idõtartam, amely a jelnek szükséges ahhoz, hogy a küldõtõl megérkezzen a címzetthez.
+  jelölése: d_prop
+Mi a hálózati hoszt?
+  Olyan eszköz, amely egy számítógépes hálózattal áll összeköttetésben, információt oszt meg, szolgáltatást
+  biztosít a többi csomópontnak.
+Mi az átviteli csatorna?
+  Az a közeg, amelyen a kommunikáció folyik a résztvevõ hosztok között, pl. koax kábel, levegõ stb. 
+Mi a fõ különbség a csomagkapcsolt és az áramkörkapcsolt hálózatok között? (16. old)
+Adjon egy valós példát adatok beburkolására (pl. az elõadáson látott Internet példa)! (48. old)
+Mit értünk Internet homokóra alatt? Miért nehéz az IPv6-ra való átállás? (49. old.)
+Jellemezze egy mondatban a tûzfalakat, proxykat és NAT dobozokat! (52. old.)
+A Hálózati réteg funkcióit milyen síkok (planes) mentén csoportosíthatjuk még? (50. old.)
+
+2. elõadás
+----------
+Ismertesse a fizikai rétegben a lehetséges átviteli közegek fajtáit.
+  vezetékes, vezeték nélküli (földi rádiós), mûholdas
+Mit mond ki a Nyquist tétel? (16. old.)
+  zaj mentes csatornán a maximális elérhetõ adatsebesség: Max_seb = 2*H*log2(V) 
+  ahol H:sávszélesség, V: átvitelhez használt szimbólumok száma
+Mit mond ki a Shannon tétel? (16. old.)
+  zajos csatornán a maximális adatsebesség: Max_seb = H*log2(1+S/N) (signal/noise)
+Soroljon fel 4 különbözõ vezetékes átviteli közeget.
+  mágneses adathordozók (kimentjük, majd elszállítjuk), sodort érpár, koax kábel, fénykábelek
+Mit nevezünk frekvenciának? Hogyan jelölik? Mi a mértékegysége?
+  elektromágneses hullám másodpercenkénti rezgésszáma, jele: f, Hertz vagy Hz (1/s)
+Mi a hullámhossz? 
+  két egymást követõ hullámcsúcs közötti távolság
+Soroljon fel 3 elektromágneses tartományt a frekvenciáik növekvõ sorrendjében. (21. old.)
+  rádió, mikrohullám, infravörös, látható fény, ultraibolya, röntgensugár, gamma sugarak 
+Milyen frekvencia tartomány átvitelére alkalmas a sodort érpár, a koax kábel, az optikai szál? (23. old.)
+  sodort: 10^4 - 10^6 Hz, koax: 10^5 - 10^8 Hz, optikai: 10^14 - 10^15 Hz,
+Soroljon fel 4 vezeték nélküli átviteli közeget.
+  rádiófrekvenciás átvitel, mikrohullámú átv., infravörös átv., látható fényhullámú (pl. lézer)
+Mi a szimbólumráta és az adatráta? Mi a mértékegységük?
+  másodpercenkénti szimbólumok (bitek) száma; Baud illetve b/s 
+Soroljon fel 3 óraszinkronizációs módszert.
+  1. explicit órajel, 2. kritikus idõpontok, 3. szimbólum kódok (önütemezõ jel)
+Mi az önütemezõ jel? Mire használható?
+  a szignál tartalmazza a szinkronizációhoz szükséges információt
+Mi a digitális kódok leírásának 3 fõ jellemzõje? (34. old.)
+  mi történik az intervallum elején, közepén, végén
+Ismertesse az RZ (Return to zero) kódolás szabályait. 
+  Minden bitidõ végén visszatér a jelszint alacsonyra, 1-es bit magasról vált le a bitidõ közepén,
+  0-ás bit alacsonyról indul és ott is marad (nincs váltás).
+Ismertesse az NRZ-L (Non-Return to zero) kódolás szabályait. (35. old.)
+  Nem tér vissza a jelszint alacsonyra a bitidõ végén. 1-es magas/0-ás alacsony jelszint.
+Ismertesse a Manchester kódolás szabályait. 
+  1-es bit: magasról alacsony jelszintre váltás, 0-ás bit: alacsonyról magasra váltás a bitidõ közepén
+Ismertesse az NRZI (Non-return to zero inverted)? Mi a fõ probléma ezzel a kódolással? (utánaolvasni)
+Ismertesse a digitális alapsávú átvitel struktúráját. (44. old. ábra)
+  a digitális jel közvetlenül árammá vagy feszültséggé alakul
+Ismertesse a digitális szélessávú átvitel struktúráját. (45. old. ábra)
+  a jel modulálásra kerül (amplitudó, frekvencia, fázis)
+Mi az amplitúdó moduláció?
+  egy sinus rezgés alapegyenlete: fv(t) = A*sin(2*Pi*f*t + fi) 
+  A: amplitudó, f: frekvencia, fi: fáziseltolás
+  az s(t) szignált a sinus görbe amlitudójaként kódoljuk: s(t)*sin(2*Pi*f*t + fi)
+Mi a frekvencia moduláció? 
+  az s(t) szignált a sinus görbe frekvenciájában kódoljuk: A*sin(2*Pi*s(t)*t + fi)
+Mi a fázis moduláció?
+  az s(t) szignált a sinus görbe fázisában kódoljuk:  A*sin(2*Pi*f*t + s(t))
+Mit nevezünk BER-nek és milyen tényezõktõl függ a BER? (53. old.)
+  Bit Error Rate (hibásan fogadott bitek aránya)
+  jelerõsség, zaj, átviteli sebesség, módszer
+
+3. elõadás
+----------
+Ismertesse a médium többszörös használatának 5 módszerét.
+  tér-, frekvencia-, idõ-, hullámhossz-, kód multiplexálás 
+Mi a CDMA? Ismertesse a mûködési algoritmusát.
+  Code Division Multiple Access
+  minden állomás egyfolytában sugározhat, a jelek összeadódnak, kulcs: a hasznos jel kiszûrése
+Mi a bipoláris kódolás? (61. old.)
+  A csatornán két jelet (feszültségszintet) különíthetünk el, s az egyszerûség kedvéért a (+1) és a (-1) 
+  szimbólumokkal jelöljük õket.
+Mi az a Walsh mátrix? Mire használható?
+  kölcsönösen ortogonális chip vektorok (töredéksorozatok) meghatározására
+Hogyan áll elõ a H(2^k)-nal jelölt Walsh mátrix?  (62. old.)
+------------------------------------------------------------------------------------
+a megelõzõ témák a Lecture_2 fóliáin is megtalálhatók, de a 3. elõadáson hangzottak el
+------------------------------------------------------------------------------------
+Melyek az adatkapcsolati réteg legfontosabb feladatai? (17. old.)
+  jól definiált szolgálati interfész biztosítása a hálózati rétegnek
+  átviteli hibák kezelése
+  adatforgalom szabályozása
+Az adatkapcsolati réteg milyen jól definiált interfészeket biztosít a hálózati réteg felé? (17. old.)
+  nyugtázatlan összeköttetés alapú szolgálat; (Ethernet)
+  nyugtázott összeköttetés nélküli szolgálat; (Wi-Fi) 
+  nyugtázott összeköttetés alapú szolgálat;   (Mûhold) (3 fázis: kapcsolat felépítés, forgalmazás, lebontás)
+Milyen módszereket ismer a keretezésre az adatkapcsolati rétegben?
+  karakterszámlálás (hátrány: könnyen kiesik a szinkronból)
+  bájtbeszúrás   (PPP ezt használja)
+  bitbeszúrás    (HDLC használja, tetszõleges számú bit lehet egy keretben, nem csak 8 többszöröse)
+  óra alapú keretezés (SONET)
+  kódolás sértés (olyan kódot küldünk, ami nem volna megengedett)
+Hogyan mûködik a karakterszámlálás?
+  a keretben levõ karakterek számának megadása a keret fejlécében
+Hogyan mûködik a karakterbeszúrás (bájt beszúrás)?
+  különleges bájtok a keret elejének és végének jelzésére + ESC bájt beszúrása a spec. bájtok elé
+Hogyan mûködik a bitbeszúrás?
+  minden keret egy speciális bitmintával (01111110) kezdõdik, 
+  majd plusz "0" bitek beszúrásával elérjük, hogy ez a bitminta máshol ne fordulhasson elõ.
+Hogyan mûködik az óra alapú keretezés (pl. SONET)? (25. old.)
+Mit tud mondani a bájt beszúrás és a bit beszúrás hatékonyságáról legrosszabb esetben? (23. old.)
+Definiálja a csoportos bithibát adott védelmi övezet (m) mellett! (28. old.)
+ elsõ és utolsó szimbólum hibás, és nem létezik ezen két szimbólummal határolt részsorozatban 
+ olyan m hosszú részsorozat, amelyet helyesen fogadtunk volna
+Mi az egyszerû bithiba definiciója?
+  az adategység egyik bitje 0-ról 1-re vagy 1-rõl 0-ra változik
+Definiálja egy tetszõleges S kódkönyv Hamming távolságát?
+  d(S) := min{d(x, y) | x,y in S}
+Mi az a Hamming korlát? (39. old.)
+Mi a kódráta és a kód távolság? Milyen a rátája és távolsága egy jó kódkönyvnek?
+  kódráta: log2|S|/n (milyen hatékony a kódolás), kód távolság: d(S)/n (hibakezelési képességek) 
+Milyen összefüggés ismeretes egy tetszõleges kódkönyv, a Hamming távolsága és hibajavitási képessége között?
+  d bithiba javításához legalább 2d+1 Hamming távolság szükséges
+Milyen összefüggés ismeretes egy tetszõleges kódkönyv, a Hamming távolsága és hibafelismerõ képessége között?
+  d bithiba felismeréséhez legalább d+1 Hamming távolság szükséges
+Mikor érdemes hibajelzõ kódot és mikor hibajavító kódot használni?
+  megbízható csatornán elég a hibajelzõ kód
+Hogyan mûködik a Hamming kód (több paritásos módszer)? (46. old.)
+Mi a redundancia szerepe a hibafelügyeletben? (33. old.)
+
+4. elõadás
+----------
+Mi a CRC? Mire használható?
+  Cyclic Redundancy Check, hibafelismerõ módszer
+Ismertesse a CRC-t használó algoritmus 4 lépését! (5. old.)
+Mikor nem ismeri fel a hibát a vevõ oldal? (8. old.)
+  Ha a hiba polinom a generátor polinom többszöröse.
+CRC esetén mit lehet mondani hibajelzõ képességérõl, ha a generátor polinom x+1 többszöröse? (8.old.)
+  minden páratlan számú hiba felismerhetõ vele
+Mutassa be röviden a korlátozás nélküli szimplex protokollt!
+  nincs adathiba vagy adatvesztés, végtelen puffer, nincs sorszám sem nyugta
+  a küldõ végtelen ciklusban küldi kifelé a kereteket folyamatosan
+Mutassa be röviden a szimplex megáll-és-vár protokollt!
+  nincs adathiba vagy adatvesztés, (idõ kell a vevõnek a feldolgozáshoz ezért) a küldõ egyesével, 
+  csak a sikeres nyugta után küldi a következõt 
+Mutassa be röviden a szimplex protokollt zajos csatorna esetén
+  idõ kell a vevõnek a feldolgozáshoz, a csatorna most már hibázhat, vagyis elveszhetnek keretek vagy nyugták;
+  ha nem jön nyugta -> újraküldés (mi van ha a nyugta veszett el? -> duplikátum)
+  Erre megoldás: a kereteket sorszámozzuk {0,1} -> Alternáló-bit protokoll
+Mutassa be röviden a csúszóablak protokollt! (23. old.)
+Mit neveznek adási ablaknak? 
+  a csúszóablak protokkolnál használt fogalom: az elküldhetõ keretek sorszámainak halmazát
+Mit neveznek vételi ablaknak?
+  a vevõ által elfogadható keretek sorszámainak halmazát
+Mi a visszalépés N-nel stratégia lényege?
+  A vevõ a hibás keret utáni összes keretet eldobja és nyugtát sem küld róluk (vételi ablak mérete 1); 
+  Az adó újraküldi az összes nyugtázatlan keretet, kezdve az elveszettel.
+Mi a szelektív ismétléses stratégia lényege?
+  A vevõ a hibás keretet eldobja, de az utána következõket puffereli (vételi ablak mérete > 1); 
+  Az adó csak a legrégebbi nyugtázatlan keretet küldi újra.
+Mely 3 dolgot biztosítja a PPP protokoll? (35. old.)
+  keretezési módszert, kapcsolatvezérlõ protokollt, módot a hálózati réteg opciók megbeszélésére
+A csatorna kiosztásra mik a legelterjedtebb módszerek?
+  statikus (TDM, FDM), 
+  dinamikus (verseny vagy ütközés alapú: ALOHA, CSMA, CSMA/CD, 
+             verseny- illetve ütközés-mentes: bittérkép, bináris visszaszámlálás, 
+             korlátozott versenyes: adaptív fa)
+Röviden mutassa be a frekvenciaosztásos nyalábolás módszerét!
+  a felhasználók különbözõ frekvencián adnak, az állomások nem zavarják egymást
+  elõnyös ha fix számú felhasználó van, nagy forgalmi igényekkel
+  nem hatékony löketszerû forgalom esetén
+Röviden mutassa be az idõosztásos nyalábolás módszerét!
+  a felhasználók különbözõ idõszeletekben adnak, nem zavarják egymást
+    nem hatékony löketszerû forgalom esetén
+A csatorna modellben mit nevezünk ütközésnek?
+  ha két keret egy idõben kerül átvitelre, az eredményül kapott jel értelmezhetetlenné válik
+Írja le a folytonos és a diszkrét idõmodell lényegét!
+  tetszõleges idõpontban/csak idõrés elején lehet elkezdeni a küldést
+  diszkrét esetén az idõrés lehet: 1. üres -> senki nem küld, 2. sikeres -> egyvalaki küld, 3. ütközéses
+Mit jelent a vivõjel érzékelési (Carrier Sensing) képesség?
+  az állomások vizsgálják-e a csatorna foglaltságát a küldés elõtt vagy nem
+Hogyan mûködik az egyszerû ALOHA protokoll?
+  bármikor megkezdhetõ a küldés, ütközés esetén véletlen ideig várakozás, majd újraküldés;
+  a fogadó nyugtázza a kereteket
+Mit jelent a keretidõ az ALOHA protokoll esetén?
+  egy fix hosszúságú keret átviteléhez szükséges idõt
+Mennyi az Aloha protokoll esetén az áteresztõképesség (átvitel) a terhelés függvényében?
+  S = G*e^(-2G)
+  S: azt jelöli, hogy egy keretidõ alatt átlagosan hány keret jut át sikeresen; 
+  G: azt jelöli, hogy egy keretidõ alatt átlagosan hány keretet küldenek az állomások összesen
+Mit nevezünk sebezhetõségi idõnek?
+  Az az idõtartam, amely alatt ha másik keret is elküldésre kerül, akkor az aktuális keret sérül.
+
+5. elõadás
+----------
+Hogyan mûködik a réselt ALOHA protokoll?
+  diszkrét idõmodellt használ, csak idõrés elején lehet küldeni, 
+  ütközés esetén véletlen ideig vár, majd újraküldés
+Mennyi a réselt Aloha protokoll esetén az áteresztõképesség a terhelés függvényében?
+  S = G*e^(-G)
+Hogyan mûködik az 1-perzisztens CSMA protokoll? 
+  (Carrier Sense Multiple Access: vivõjel érzékeléses többszörös hozzáférés)
+  folytonos idõmodellt használ
+  folytonosan figyeli a csatornát; ha nem szabad, addig vár, amíg fel nem szabadul
+  ha szabad, 1 valószínûséggel küld (-> mohó) 
+  ütközés esetén véletlen ideig vár
+Hogyan mûködik a nem-perzisztens CSMA protokoll?
+  folytonos idõmodellt használ
+  belehallgat a csatornába; ha szabad, küld
+  ha nem szabad, véletlen ideig vár (nem figyeli folytonosan -> nem perzisztens)
+  ütközés esetén véletlen ideig vár
+Hogyan mûködik a p-perzisztens CSMA protokoll?
+  diszkrét idõmodellt használ
+  belehallgat a csatornába; ha foglalt, addig figyeli, amíg szabad lesz
+  ha szabad, akkor p valószínûséggel küld, 1-p valószínûséggel vár a következõ idõrésig
+  ütközés esetén véletlen ideig vár
+Hogyan mûködik a CSMA/CD protokoll? (CD -> Collision Detection: ütközés érzékelés)
+  Minden állomás küldés közben is figyeli a csatornát, ha ütközést tapasztal azonnal
+  megszakítja az adást (nem adja le a teljes keretet), véletlen ideig vár, majd újraküld.
+  Nincs szükség nyugtára, mert az állomások észlelik az ütközést.
+Mik a bináris exponenciális hátralék algoritmus lépései? (16. old)
+  elsõ ütközés után 0 vagy 1 idõrésnyi (keretidõnyi) várakozás
+  n-edik ütközés után -> véletlen [0 .. 2^n - 1] idõrésnyi várakozás (max 1023 idõrésnyi)
+  16. próbálkozás után hibajelzés
+Miért van szükség a minimális keretméretre? (18. old.)
+  a maximális késleltetés és a CSMA/CD algoritmus összefüggése miatt 
+  az adónak még a keret elküldésének vége elõtt észlelnie kell az esetleges ütközést, 
+  ebbõl tudja, hogy a keretet újból el kell küldenie (itt nincs nyugta)
+Mutassa be a minimális keretméretre vonatkozó általános képletet. (21. old.)
+  d = l/v (l: távolság, v: jel terjedési sebesség, d: max. propagációs késés)
+  T(keretgenerálás) = D/H = 2*d  (D: Min_keretméret, H: sávszélesség)
+  a fentiekbõl adódik -> D = 2*d*H = 2*H*l/v
+Hogyan mûködik az alapvetõ bittérkép eljárás? (25. old.)
+  i-edik állomás az i-edik versengési idõrésben jelzi küldési szándékát adatszórással
+  a versengési idõszak végére minden állomás ismeri a küldõket 
+  a küldés a sorszámok szerinti sorrendben történik
+Hogyan mûködik a bináris visszaszámlálás protokoll?
+  Minden állomás bitenként küldi a bináris címét a versengési periódusban.
+  Ha 0-át küld és 1-et hall (van nála nagyobb azonosítójú, aki küldene), feladja.
+  Mok és Ward módosítása: ciklikusan permutáljuk az állomások címeit
+Mi a korlátozott versenyes protokollok célja?
+  Célja: ötvözni a versenyhelyzetes és ütközésmentes protokollok jó tulajdonságait.
+  Kis terhelés esetén a versenyhelyzetes protokollok a jobbak, mert úgyis kevés ütközés van.
+  Nagy terhelés esetén megtérül az ütközésmentes protokolloknál a csatorna megszerzésére fordított idõ.
+Hogyan mûködik az adaptív fabejárási protokoll? (29. old.)
+Mi a repeater, és mire használják?
+  Analóg eszköz, mely két kábelszegmenshez csatlakozik. Felerõsíti a jelet és továbbítja. (fizikai réteg)
+Mi az elosztó (Hub) és mire használják?
+  több bemenettel rendelkezik; a beérkezõ keretet minden vonalon továbbítja; ha két keret egyszerre 
+  érkezik, ütközni fognak; általában nem erõsíti a jelet (fizikai réteg)
+Mi a bridge (híd), és mire használják?
+  Az adatkapcsolati rétegben mûködõ eszköz, amely LAN-ok összekapcsolását végzi.
+  A bejövõ keretet csak a megfelelõ LAN-hoz továbbítja (forgalomirányítás az adatkapcsolati rétegben).
+  A portok külön ütközési tartományt képeznek és különbözõ sebességû hálózatokhoz csatlakozhatnak.
+  Pufferelést, csomagfeldolgozást végez, továbbító táblázatot (forwarding table) tart karban.
+Mi a "backward learning" (Címek tanulása) lényege? (39. old.)
+  A hidak használják ezt a módszert a keretek továbbításához használt táblázatuk feltöltésére.
+  Ha egy keret érkezik hozzájuk, megnézik a forráscímet (feladót) és "megtanulják", hogy az melyik
+  porton érhetõ el (ahonnan a keret jött), és ezt bejegyzik a táblázatukba.
+Ismertesse a feszítõfa algoritmus lépéseit (42. old.)
+
+6. elõadás
+----------
+Mi a forgalomirányító algoritmusok definiciója? 
+  a hálózati réteg szoftverének azon része, amely eldönti, hogy melyik 
+  kimenõ útvonalon továbbítsuk a csomagot
+Mi a statikus (nem adaptív) forgalomirányító algoritmusok fõ jellemzõje? 
+  offline meghatározás a routerek indulásakor, nem veszi figyelembe a hálózat és a 
+  forgalom változásait
+Mi az adaptív forgalomirányító algoritmusok fõ jellemzõje? 
+  a topológia és a forgalom is befolyásolja a döntést
+Mit mond ki az optimalitási elv (forgalomirányítás esetén)?
+  ha J router az I router-tõl K router felé vezetõ optimális útvonalonhelyezkedik el, akkor a J-tõl 
+  a K-ig vezetõ optimális útvonal ugyanerre esik.
+Mi a távolságvektor (distance vector) alapú forgalomirányítás lényege? (8.old.)
+  Minden router-nek egy táblázatot kell karbantartania, amelyben minden célhoz szerepel a legrövidebb 
+  ismert távolság (cost), és annak a vonalnak az azonosítója (next hop, vagyis a közvetlen szomszéd), 
+  amelyiken keresztül a célhoz el lehet jutni.
+  A táblázatokat a szomszédoktól rendszeresen kapott információk alapján frissítik.
+Magyarázza el a végtelenig számolás problémáját.
+  Ha egy állomás (A) meghibásodik a közvetlen szomszédja (B) észleli, hogy a költség
+  végtelen lett, mert nem érkezik A-tól csomag. B-nek egy szomszédja (C), amelyik korábban
+  B-n keresztül érte el A-t, elküldi A elérési költségét. B azt fogja hinni, hogy  C-n keresztül
+  A elérhetõ, és a C-tõl kapott költséget megnöveli B-C költséggel, majd ezt küldi vissza C-nek.
+  Ezután mindketten folyamatosan azt fogják hinni, hogy a másikon keresztül A elérhetõ, és minden
+  lépésben B-C költséggel növelik A elérési költségét a táblázatukban.
+Mik a kapcsolatállapot (link-state) alapú forgalomirányítás megvalósításának lépései? (19. old.)
+  1. Szomszédok felkutatása, és hálózati címeik meghatározása.
+  2. Megmérni a késleltetést vagy költséget minden szomszédhoz.
+  3. Egy csomag összeállítása a megismert információkból.
+  4. Csomag elküldése az összes többi router-nek (elárasztás).
+  5. Kiszámítani a legrövidebb utat az összes többi router-hez. (pl. Dijkstra)
+Hasonlítsa össze a távolságvektor alapú és a kapcsolatállapot alapú forgalomirányítást.
+  Az elsõ esetében a routerek minden más routerre vonatkozó általuk ismert költséget
+  elküldenek, de csak a közvetlen szomszédaiknak, a második esetében csak a szomszédokra
+  vonatkozó ismert költségeket küldik el mindenkinek.
+Mi a hierarchikus forgalomirányítás lényege? (40. old.)
+  A routereket tartományokra osztjuk. A saját tartományát az összes router ismeri,
+  de a többi belsõ szerkezetérõl nincs tudomása. Nagy hálózatok esetén többszintû hierarchia.
+Mit nevezünk adatszórásnak vagy broadcasting-nak?
+  Egy csomag mindenhová történõ egyidejû elküldése.
+Sorolja fel az adatszórás megvalósítási lehetõségeit.
+  1. külön csomag küldése mindenhová (minden csomagnak egy címzettje van)
+  2. elárasztás (egyetlen csomag küldése, amiben speciális célcím van)
+Mi a többcélú forgalomirányítás lényege?
+  A csomagban van egy lista a rendeltetési helyekrõl, a routerek eldöntik, hogy mely 
+  vonalon milyen célcímeket hagy benne a csomag másolatában.
+Mi a visszairányú továbbítás (reverse path forwarding) lényege?
+  Megnézi, hogy onnan jött-e a csomag, ahova õ küldené? Ha nem eldobja (ekkor valószínûleg egy duplikátum).
+Mit nevezünk többesküldésnek vagy multicasting-nak?
+  Egy csomag meghatározott csoporthoz történõ egyidejû elküldése.
+Mire szolgál a DF bit az IPv4 fejlécében? (49. old.)
+  Don't fragment. Ne darabold jelzés a routereknek.
+Mire szolgál a MF bit az IPv4 fejlécében?
+  More Fragments. Lesznek még további darabok jelzés (a bit értéke ekkor 1).
+Mire szolgál az azonosító (azonosítás) az IPv4 fejlécében? 
+  Ha egy csomagot darabolni kellett, akkor minden részében ugyanaz lesz az azonosító.
+Mire szolgál a darabeltolás (fragment offset) az IPv4 fejlécében?
+  az aktuális darab helyét mutatja (8 bájtos egységekben) az eredeti csomagon belül.
+Mire szolgál a szolgálat típusa mezõ az IPv4 fejlécében?
+  szolgálati osztályt jelöl
+Mire szolgál az élettartam (TTL) mezõ az IPv4 fejlécében?
+  Minden ugrásnál csökkentik. A routereknek kötelezõ legalább 1-et levonni belõle.
+  Ha 0 lesz, eldobják a csomagot. (Hogy semmi képp ne bolyongjon túl sokáig a hálózatban.)
+Mi az IPv4 cím és hogyan ábrázoljuk? (53. old.)
+  4 bájton ábrázolják, pontokkal elválasztott decimális rendszerben írják a számokat (0-255).
+Milyen IP cím osztályokat ismer? Jelemezze ezeket! (52. old.)
+  A (8/24 bit -> hálózat/hoszt azonosítására), B (16/16), C (24/8), 
+  D (többesküldéses cím), E (jövõbeni felhasználásra)
+Milyen speciális IPv4 címek léteznek? (53. old.)
+  Net ID|csupa 0: az adott hálózat azonosítására szolgáló cím (forgalomirányítási táblázatokban)
+  Net ID|csupa 1: a címzett hálózatra broadcast (forrás cím nem lehet)
+  csupa 1: adatszórás (broadcast) az aktuális helyi hálózaton (forrás cím nem lehet)
+  csupa 0: Ez a host (csak startup alatt használható, célcím nem lehet)
+  csupa 0|host ID: Hoszt ezen a hálózaton (csak startup alatt, célcím nem lehet)
+  127.*.*.* -> visszacsatolás (ha olyan szolgáltatásokat nyújt egy szerver, amit önmaga is elér)
+               az ilyen cím a hálózaton nem jelenhet meg (spec: 127.0.0.1 -> localhost)
+Mi az alhálózati maszk és mire szolgál? (57. old.)
+  segítségével elkülöníthetõ a hálózati azonosító és az állomás azonosító
+  az IP cím hálózati részével megegyezõ hosszúsággal 1-est, utána 0-kat tartalmaz.
+
+7. elõadás
+----------
+Mi az a NAT doboz és mire szolgál?
+  (Network Address Translation - hálózati címfordítás)
+  Hálózati címfordítást végez. A vállalaton belüli globálisan nem egyedi IP címeket
+  egyedi IP címre fordítja.
+Mi az az MTU és mire szolgál?
+  Maximum Transmission Unit; a maximális használható csomagméret egy hálózatban
+Hogyan mûködik az MTU felderítés?
+  egyre kisebb csomagokat küldünk DF bittel, amíg egy meg nem érkezik
+Hogyan és hol történik az fragmentált/darabolt IP csomagok helyreállítása?
+  a végponton történik a hossz és eltolás (offset) ismeretében
+Mi az IPv6 cím és hogyan ábrázoljuk?
+  16 bájtos címeket 8 darab, egyenként 4-4 hexadecimális számjegybõl álló csoportként írjuk le.
+Mi a localhost IPv6 esetén?
+  ::1
+Soroljon fel két olyan lehetõséget (az EA-on látott 4-bõl), melyet az IPv6 támogat, 
+de az IPv4 esetén nem találkoztunk vele? (19. old.)
+Mi gátolja az IPv6-ra való átállást? (20-21. old.)
+  A teljes internet frissítésére szükség lenne;
+  az IPv4 nem routolja az IPv6 forgalmat
+Hogyan oldható meg az IPv6 csomagok átvitele IPv4 hálózat felett?
+  IPv6 csomagokat becsomagoljuk
+Mi az AS (Autonóm rendszer)?
+  Hálózatok forgalomirányítási adminisztrációs egysége, amelyben egy közös forgalomirányítási 
+  stratégia (routing protocol) érvényesül.
+Miért van szükségünk AS-ekre? (26. old.)
+  Egyszerûbb az útvonalak számítása
+  Nagyobb rugalmasság, nagyobb függetlenség
+Mi azonosít egy AS-t? (27. old.)
+  AS számok (ASN); jelenleg kb. 40000 AS van.
+Milyen routing megoldást/protokollt alkalmaz a BGP?
+  path vector (útvonalvektor) protokollt
+Hogyan mûködik az útvonalvektor protokoll? (38. old.)
+  a távolságvektor protokoll kiterjesztése
+  a teljes útvonalat meghirdeti (nem csak a következõ ugrást)
+Mit értünk az alatt, hogy minden AS saját útválasztási politikát alkalmazhat?
+  Az AS-en belüli protokoll független a többi AS-tõl.
+Sorolja fel az IGP, iBGP és eBGP szerepét? (41. old.)
+  IGP:  útválasztás egy AS-en belül belsõ célállomáshoz
+  iBGP: útválasztás egy AS-en belül külsõ célállomáshoz
+  eBGP: routing információk cseréje autonóm rendszerek között
+Mikor mondjuk két AS-rõl, hogy azok össze vannak kötve?
+  ha van közöttük a BGP routereiket összekötõ vonal
+Adjon meg 3 példát forgalomirányítási korlátozásra AS-ek közötti routing esetén.
+  Kereskedelmi forgalom ne menjen keresztül oktatási hálózaton.
+  IBM forgalma ne menjen át a Microsoft-on.
+  Albánián csak végszükség esetén haladjunk át.
+Mit nevez a BGP csonka hálózatnak?
+  azon hálózatok, amelyeknek csak egyetlen összeköttetésük van a BGP gráffal
+  ezek csak egy útválasztón keresztül küldhetik a forgalmat
+Mit nevez a BGP többszörösen bekötött hálózatnak?
+  Amelyeket használhatna az átmenõ forgalom, de ezek ezt megtagadják.
+  Nem hajlandóak átengedni a forgalmat tetszõleges AS felé (nics velük szerzõdés).
+Mit nevez a BGP tranzit hálózatnak? 
+  Amelyek némi megkötéssel, általában fizetség ellenében készek kezelni harmadik fél csomagjait.
+Mire szolgál az ICMP protokoll? (43. old.)
+  Az IP csomagok továbbítása során elõforduló problémák (váratlan eseményekhibák) jelzésére, 
+  jelzõüzenetek küldésére.
+Mi lehet a hatása egy ICMP forráslefojtás csomagnak?
+  Az ezt megkapó állomásnak a forgalmazását lassítania kell.
+Mire szolgál az ARP és hogyan mûködik? (46. old.)
+  Hálózati címbõl fizikai cím meghatározása.
+  1. Adatszóró csomag kiküldése az alhálózatra (Ethernetre) "Ki-é a 192.60.34.12-es IP-cím?"
+  2. Minden egyes hoszt ellenõrzi, hogy övé-e a kérdéses IP-cím.
+  3. Ha egyezik az IP cím a hoszt saját IP-jével, akkor a saját Ethernet címével válaszol.
+Mire szolgál a RARP és hogyan mûködik?
+  fizikai címbõl hálózati cím meghatározása; általában egy hoszt elindulásakor használják;
+  a RARP szerver táblázata statikus, a rendszergazda tartja karban manuálisan
+  1. Adatszóró csomag kiküldése az alhálózatra saját ethernet címmel: tudja valaki az IP címem?
+  2. A RARP szerver válaszol.
+Mi az a DHCP és hogyan mûködik?
+  Lehetõvé teszi a dinamikus IP cimkiosztást. 
+  A kliensek a DHCP esetén egy (megújítható) idõszakra kapják az IP címet.
+  A kiszolgáló másik LAN-on is lehet; DHCP közvetítõ van LAN-onként
+Milyen lehetõségeket támogat a DHCP? (52. old.)
+  IP címek kiosztása MAC cím alapján vagy dinamikusan.
+  További hálózati paraméterek kiosztása (hálózati maszk, névkiszolgáló, domain név stb.)
+Mi DHCP esetén a cím bérlés?
+  A DHCP szerver a klienseknek az IP-címeket bizonyos bérleti idõtartamra adja "bérbe".
+Mire szolgál és hogyan mûködik a VPN (virtuális magánhálózat)?
+  fizikailag távol lévõ hosztok egy közös logikai egységet alkotnak
+  a virtuális linkeket alagutak segítségével valósítjuk meg (csomagok beágyazása)
+  a csomagokat titkosítva küldjük
+
+8. elõadás
+----------
+Mik az UDP protokoll fõbb jellemzõi? (7. old.)
+  egyszerû, kapcsolat nélküli átvitel
+  port számok teszik lehetõvé a demultiplexálást
+  nem detektálja az elveszett, duplikátum és hibás sorrendû csomagokat
+Mik a TCP protokoll fõbb jellemzõi? (9. old.)
+  megbízható, sorrend helyes, kétirányú bájt folyamok
+  port számok -> demultiplexálás, kapcsolat alapú, folyam vezérlés, torlódás vezérlés, fair viselkedés
+Adja meg a 3 legfontosabb TCP flag jelentését (10. old.)
+  SYN, ACK, FIN
+Hogyan történik egy TCP kapcsolat felépítése? Mik a lépései?
+  1. SYN szegmens elküldése, SYN bit: 1-es. (connect hívás)
+  2. A fogadó nyugtázza és õ is küld egy SYN szegmenst, SYN bit és ACK bit 1-es. (accept)
+  3. A küldõ nyugtázza a megkapott SYN szegmenst. (elsõ send hívás)
+Hogyan történik egy TCP kapcsolat lezárása?
+  két félig-lezárással; mindkét oldal kezdeményezheti a lezárást 
+  félig-lezárás: a küldõ küld egy FIN szegmenst (FIN bit 1-es), jelezve, hogy nem fog több adatot küldeni
+Mit nevezünk folyamvezérlésnek? (16. old.)
+  A folyamvezérlés azt szabályozza, hogy a küldõ milyen ütemezéssel küldheti az adatokat.
+  Túl sok csomag túlterhelné a fogadót. A megoldás: csúszóablak 
+Mi a fogadó által felajánlott (meghirdetett) ablakméret (adv_wnd)?
+  A fogadó ezzel a mérettel jelzi, hogy mennyi adatot tud pufferelni, vagyis ez 
+  a csúszóablak protokollnál megismert fogadási ablak mérete.
+  A tényleges ablakméretet (wnd) több paraméter határozza meg (lásd késõbb).
+Mit jelent, ha a fogadó adv_wnd=0-át küld?
+  A fogadó puffere tele van, átmenetileg nem tud több adatot fogadni (gyors adó).
+Mit mondhatunk a TCP átvitelérõl az ablak és az RTT függvényében? (19. old.)
+  Az átvitel arányos a wnd/RTT-vel. Nagy ablakméret, vagy kis RTT esetén gyorsul az átvitel.
+Mi a kumulált nyugta? (20. old.)
+  egy n sorszámú nyugta minden k < n sorszámú csomagot nyugtáz 
+Mi a TCP Nagle algoritmus mûködési alapelve? (23. old.)
+  1. Ha wnd >= MSS és adat >=MSS -> egy teljes csomag elküldése
+  2. Különben ha van nem nyugtázott adat -> puffereljünk
+  3. Különben (vagyis nyugták megjöttek, de kevés adat van) -> küldjünk egy részcsomagot
+  Következmény: lassú hálózaton várakoztatjuk a kis méretû adatokat.
+Mit mondhatunk TCP esetén a hibadetektálásról? (24. old.)
+  hibamentes átvitelt biztosít 
+  (csomaghibát, sorrendhibát, elveszett vagy duplikált csomagot is detektálja)
+Mit jelent az RTO, és hol használják? 
+  Ez szabályozza az idõközt a küldés és és egy duplikátum újraküldése
+  között, ha egy nyugta kimarad. (Retransmission Timeout) 
+Hogyan történik az RTT becslés az eredeti TCP esetén?
+  RTT becslése mozgóáltaggal: new_rtt = a*(old_rtt) + (1-a)*(new_sample)
+Mi a TCP Karn algoritmusa? A kapcsolódó problémát is ismertesse! (27. old.)
+  Hogyan becsüljük meg az RTT-t. Megmérjük a küldés és a válasz között eltelt idõt.
+  A probléma: a válasz félreértelmezhetõ újraküldés esetén.
+  Karn: dobjuk el azokat a mintákat, amelyek egy csomag újraküldésébõl származnak.
+Vázolja a TCP Incast problémát! (28. old.)
+Mit nevezünk torlódásnak TCP esetén?
+  a hálózat terhelése nagyobb, mint a kapacitása 
+  túlcsordulnak a pufferek (routereké), csomagok vesznek el a hálózatban
+Ábrázolja az átvitelt a terhelés függvényében.
+Ábrázolja a késleltetést a terhelés függvényében.
+Mi a könyök (knee) és mi a szírt (cliff)?
+  könyök az a pont, ami után az átvitel szinte alig emelkedik, a késleltetés viszont gyorsan nõ
+  szírt az a pont, ami után az átvitel -> 0, a késleltetés -> végtelen
+
+************** eddig jutott az elõadó a 8. elõadáson ***************
+
+9. elõadás  (a 8-9 elõadás egy pdf-ben van)
+----------
+Mi az a torlódási ablak? Mire szolgál? 
+  Az az ablakméret (cwnd), ami a nyugták illetve csomagvesztések hatására nõ/csökken.
+  Ha nyugta jött -> nincs torlódás (nõ). Ha elveszett egy csomag -> torlódás lehet (csökken).
+  A ténylegesen elküldhetõ adatok mennyiségét, vagyis a csúszóablak protokollnál megismert
+  küldési ablak méretet e két ablak minimuma adja: wnd = Min{adv_wnd, Cwnd}.
+  adv_wnd -> a fogadóra tekintettel; Cwnd -> a torlódás miatt 
+Mi az a "slow start" TCP esetén?
+  A küldõnek nem szabad a fogadó által felajánlott ablakméretet (adv_wnd) azonnal elfogadnia
+  (a hálózatot nem szabad azonnal agyon terhelnie), inkább fokozatosan növeli a terhelést.
+  Kezdetben cwnd = 1 szegmens, majd nyugtázott csomagonként növeli egy szegmenssel (MSS) a 
+  torlódási ablak méretét, egész addig, amíg el nem ér egy határt (ssthresh) vagy 
+  csomagvesztés nem történik.
+Mi az AIMD TCP Tahoe esetén?
+  Additive Increase Multiplicative Decrease (additív növelés, multiplikatív csökkentés)
+  Az elküldhetõ csomagok számát (valójában cwnd-t) additív módon növeljük ha még nem értük el 
+  a hálózat kapacitását, és multiplikatív módon csökkentjük, ha már elértük.
+  Ezt a stratégiát a slow start után, a torlódás elkerülési fázisban alkalmazza a TCP.
+Mi a gyors újraküldés TCP RENO esetén?
+  Ha csak egy csomag veszik el, akkor NEM várjuk meg a timeoutot (RTO) hanem újraküldjük 
+  a csomagot és folytatjuk a küldést. Az egy csomag elveszését a háromszoros nyugtaduplikátum jelzi.
+  Ezt még a TCP Tahoe is ugyanígy csinálja.
+Mit jelenthet az ha három nyugta-duplikátum érkezik egymás után? 
+  Hogy valószínûleg elveszett egy csomag (lehet, hogy csak késik), de az utána következõk megérkeztek, 
+  hiszen emiatt jönnek ugyanolyan sorszámú nyugták duplikátumai.
+  Ha az utána következõk is elvesztek volna, akkor semmilyen nyugta nem érkezne, hanem timeout lenne.
+Mi a gyors helyreállítás TCP Reno esetén? 
+  A gyors újraküldés után felezzük cwnd-t (ez a Multiplikatív Decrease), azaz nem állítjuk 
+  vissza 1-re (elkerüljük a lassú indulást). A TCP Tahoe ilyen esetben a lassú indulás fázisba lépne.
+  Ha az RTO lejár akkor cwnd=1 lesz (lassú indulás) Tahoe és Reno esetén is.
+Mivel több a TCP NewReno? Mi a problémája az alkalmazott megoldásnak?
+  Minden duplikált ACK egy újabb csomag elküldését (nem újraküldést) váltja ki.
+  Probléma: ha egy csomag >3-mal eltér a sorrendjétõl, az felesleges gyors helyreállítást és
+  ezzel felesleges újraküldést okoz.
+Mi a probléma nagy késleltetés-sávszélesség szorzatú hálózatok esetén? (51. old.)
+  Sok a szállítás alatt lévõ adatmennyiség. A slow start és additív increase lassan konvergál.
+Mely TCP variánsok használatosak napjainkban?
+  TCP NewReno, TCP Vegas, Compound TCP, TCP BIC, TCP CUBIC stb.
+Hogyan mûködik a Compound TCP?
+  Reno alapú, két torlódási ablak, egy késleltetés alapú (dwnd) és egy vesztés alapú (cwnd).
+  Ha nõ az RTT, dwnd csökken, ha csökken az RTT, dwnd nõ. wnd = Min{cwnd+dwnd, adv_wnd} 
+  Hátrány: folyamatos RTT becslést igényel.
+Hogyan mûködik a CUBIC TCP?
+  Fejlettebb cwnd beállítási stratégiát használ (mint a TCP BIC). 
+  AIMD helyett egy harmadfokú egyenlet határozza meg cwnd-t.
+Mik a TCP problémái kis folyamok esetén?
+  Nincs lehetõség felgyorsulni a kevés adat miatt. Szinte végig a slow start fázisban marad.
+Mik a TCP problémái vezetéknélküli hálózatok esetén?
+  Itt a csomagvesztés gyakrabb, és nem jelent torlódást, ahogy a TCP hiszi.
+Mi a DoS támadás? Miért probléma ez TCP esetén?
+  DoS támadás: sok SYN csomag küldése a szervernek. 
+  A TCP erõforrásokat foglal a SYN csomagoknak -> összeomlik a szerver.
+
+10. elõadás
+-----------
+Mit nevezünk munkamenetnek az ISO/OSI referencia modellben?
+  egymással összefüggõ hálózati interakciók sorozata
+Mit tud a DNS tartománynevek (körzetnevek) rendszerérõl?
+  Egy fa gráffal reprezentálható, amelyben minden csúcshoz (körzethez) egy cimkét rendelünk.
+  A gyökér nulla hossszúságú (null) cimkével van jelölve.
+  Bármely csúcs egyértelmûen reprezentálható a csúcstól a gyökérig vezetõ cimkesorozattal.
+Mik azok a TLD-k? Adjon meg 4 példát.
+  Top Level Domain, legfelsõ szintû körzet
+  pl. .com, .org, vagy országok domainjei pl. .hu
+Mik azok a DNS erõforrás rekordok? Mit tárolnak (1-2 példa)?
+  Minden körzethez (csomóponthoz) tartozhat egy erõforrás rekord halmaz.
+  Az erõforrás rekord egy adatötösbõl áll:
+  ->  (Körzetnév, élettartam [TTL], osztály [IN internet esetén], típus, érték)
+  A körzetnév az a körzet, amelyhez a rekord tartozik.
+Mit tud a (DNS) zónákról?
+  A zóna a névtér egy összefüggõ része.
+  Az (információ)elosztás alapjai a zónák lesznek. (A DNS elosztott adatbázis.)
+  Minden zóna rendelkezik egy (vagy több) névszerverrel.
+A névfeloldásnál mit neveznek iteratív lekérdezésnek? Mik a jellemzõi?
+  Ha a névszerver azt adja meg, hogy kitõl kapható meg a válasz (részeredmény).
+A névfeloldásnál mit neveznek rekurzív lekérdezésnek? Mik a jellemzõi?
+  Ha a névszerver végzi el a teljes névfeloldást (több lépésben) és a végeredményt adja vissza.
+Írja le a lokális névszerverek legfõbb jellemzõit!
+  ISP üzemelteti, kliens kommunikál vele, DHCP-n keresztül konfigurálódik fel.
+Mit jelent DNS esetén a cache? Mire jó?
+  A kérések/válaszok megõrzése a jövõbeli kérdések azonnali megválaszolására.
+Ismertesse egy HTML oldal lekérésének 5 lépését!
+  Névfeloldás (DNS), TCP kapcsolat kiépítése, request, response, TCP close
+Mit nevezünk statikus weboldalnak?
+  tartalma csak manuális módosítással változik
+Mit nevezünk dinamikus weboldalnak?
+  a weboldal valamilyen kód végrehajtása által keletkezik (javascript, PHP)
+Mi az a PLT? Mit mérünk vele?
+  Page Load Time: a kattintás és az oldal betöltõdése között eltelt idõ.
+Mik azok a párhuzamos és perzisztens kapcsolatok?
+  A böngészõ több HTTP instanciát futtat párhuzamosan. (több TCP kapcsolat nyitása)
+  Egy TCP kapcsolat használata többszörös HTTP kérésre. (nem zárja le a kérés után)
+Hogyan mûködik a cache "HTTP esetén"?
+  A weblap lokális másolata használható, ha nem módosult.
+Mire jó egy HTTP proxy? Hogyan mûködik?
+  A vállalat egyetlen, nagy cache-el rendelkezõ ponton keresztül engedi a web elérését.
+Mi a CDN? Milyen problémát old meg? Hogyan valósítja ezt meg?
+  Tartalom megosztó hálózat vagy tartalom szállító hálózat. (Content Delivery Network) 
+  felmerülõ problémák: torlódások, koncentrált terhelés, rossz felhasználói élmény
+  megoldás: a népszerû tartalmakat helyezzük el a kliensekhez közel.
+Mik a p2p hálózatok legfontosabb jellemzõi?
+  nincs szerver, önszervezõdõ, skálázási problémák merülnek fel
+Mi a szerepe egy peer-nek egy p2p hálózatban?
+ Feltöltés a többieknek, letöltés saját magának.
+Mik egy torrent letöltésének lépései (4 lépés)? (42. old.)
+Mit nevezünk choke peer-nek?
+  olyan peer, aki korlátozza a letöltést más peerek részére, (vagyis nem ad elegendõ adatot)
+Mi az a seed peer?
+  olyan peer, aki rendelkezik a letöltendõ fájl összes darabjával

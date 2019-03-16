@@ -1,0 +1,8 @@
+#ifndef VALUE_H_INCLUDED
+#define VALUE_H_INCLUDED
+
+
+
+
+
+#endif // VALUE_H_INCLUDED

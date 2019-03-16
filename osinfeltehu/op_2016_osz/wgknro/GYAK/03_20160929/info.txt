@@ -1,0 +1,30 @@
+file.c
+ feladat: fájlmásolás
+
+main utáni elsõ sor: ellenõrzés, argumentumok számának ellenõrzése
+
+fájlmegnyitás: open()
+open(fájl neve, milyen típusú fájlt nyissunk meg)
+int típusba tesszük
+
+Bináris vs szöveges fájlolvasás:
+szöveges: sorvége jelek vannak
+bináris esetén byte-t olvasunk be
+
+ha egy mûvelet nem sikerült, akkor a visszadott érték -1 vagy nullpointer
+a rendszer 
+perror: ebbe kerül a hibakód
+
+while ciklus: beolvassa a karaktereket
+utána egy mutató van megadva a read() 2. paraméterében (nincs referenciaparaméter átadás C-ben, így a változóknak a címét adják át)
+
+read visszaadja, hogy hány byte-t sikerült beolvasni, amikor a végére értünk ott már 0 lesz, ezért álll le a ciklus
+
+write()<> sizeof():
+write: visszaadja, hogy hány byte-t sikerült beolvasni, ha ez nem egyezik meg a size-zal akkor hiba
+
+feladat:
+struktúra fájlba írása
+
+HF: char* foglalást kimutatni
+ 

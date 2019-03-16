@@ -1,0 +1,9 @@
+
+Name: Maya 
+Marks=3 
+
+Name: ProgTech 
+Marks=3 
+
+Name: Modelling 
+Marks=5 

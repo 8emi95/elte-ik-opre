@@ -1,0 +1,24 @@
+Animal?
+3
+Dog
+Cat
+Mouse
+2017-05-02 12:28:32
+Sajt?
+2
+Trappista
+Mozarella
+2017-05-02 12:31:20
+Color?
+4
+Red
+Yellow
+Green
+Blue
+2017-05-02 12:31:36
+Ital?
+3
+Cola
+Fanta
+Sprite
+2017-05-02 12:34:21

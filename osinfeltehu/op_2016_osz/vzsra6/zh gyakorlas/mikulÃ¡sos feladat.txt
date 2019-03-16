@@ -1,0 +1,357 @@
+/*Telapu lassan beletörõdik, hogy mostantól tenyleg õ a Mikulas, így a manókkal es a renszarvasokkal együtt keszül a Karacsonyra. Sorban erkeznek hozza a gyerekek ajandekkerõ levelei. Mindenki csak egyet kívanhat! A manók a levelek alapjan a kereseket egy fajlban taroljak, amely tartalmazza a beerkezes datumat, a gyerek nevet, a varost, azon belüli pontos címet es a kert ajandekot. A manók iden csak babat, autót, labdat, kirakót, színezõt es könyvet visznek ajandekba!
+
+Keszítsünk C programot, amellyel lehessen levelet írni Telapunak (billentyûzeten keresztül adjuk meg az adatokat), majd az adatok taroljuk fajlba. Ne felejtsük el, hogy mindenki csak egyet kerhet! Az utolsó keres maradjon ervenyes! Lehessen listazni a manók fajljat, szûrhessük varosra, ajandekra. Adjuk meg a listazasok vegen az összesíteseket is, azt hogy hany keres erkezett.*/
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+void add_gift();
+void list(char*, char);
+void filter(char);
+void remove_previous(char*);
+
+int valid_gift(char*);
+int has_already_wished(char*, FILE*);
+
+
+int main() {
+	
+	char cmd[20];
+	char c;
+	
+	do {
+		printf("> ");
+		strcpy(cmd, "\n");
+		scanf("%[^\n]%*c", &cmd);
+		
+		if(!strcmp("ls", cmd)) {
+			list("ls all", 'x');
+		} else if(!strcmp("ls -v", cmd)) {
+			filter('v');
+		}  else if(!strcmp("ls -a", cmd)) {
+			filter('a');
+		} else if(!strcmp("add", cmd)) {
+			add_gift();
+		} else if(!strcmp("help", cmd)) {
+			printf("%s\n","add\t	Uj ajandek kerese.");
+			printf("%s\n","ls\t	Osszes keres listazasa.");
+			printf("%s\n","ls -a\t	Keresek listajanak szurese ajandekra.");
+			printf("%s\n","ls -v\t	Keresek listajanak szurese varosra.");
+		} else if(!strcmp("exit", cmd)) {
+			printf("%s\n","Kilepes...");
+		} else {
+			printf("%s\n","Ismeretlen parancs. Irja be a 'help' parancsot a parancsok listazasara.");
+			if ('\n' == cmd[0]) {
+				// printf("%s\n","****************************");
+				char ch;
+				while ((ch = getchar()) != '\n' && ch != EOF);
+			}
+		}
+		
+		//printf("%s\n",&cmd);
+	} while (strcmp("exit", cmd));
+	
+	return 0;
+}
+
+void add_gift() {
+	FILE *file;
+	char name[50] = " ";
+	char town[50] = " ";
+	char address[100] = " ";
+	char gift[10] = " ";
+	int already_wished = 0;
+	
+	
+	file = fopen("OP_GIFTS", "r+");
+	if(fopen("OP_GIFTS", "r+") == NULL) {
+		//printf("%s\n","File does not exist, creating file.");
+		file = fopen("OP_GIFTS", "w+");
+	} else {
+		//printf("%s\n","File opened for appending.");
+		file = fopen("OP_GIFTS", "a+");
+	}
+	if(file == NULL) {
+		perror("Hiba a file megnyitasa közben\n");
+		exit(1);
+	}
+	
+	printf("Kerem a nevet!\n> ");
+	scanf("%[^\n]%*c", &name);
+	// printf("%s\n", name);
+	if(name[0] == ' ') {
+		printf("%s\n","****************************");
+		strcpy(name, " ");
+		char ch;
+		while ((ch = getchar()) != '\n' && ch != EOF);
+	}
+	
+	already_wished = has_already_wished(name, file);
+	
+	if(already_wished == 1) {
+		printf("%s\n", "Te mar kivantal egyet, a korabbi kivansagod felulirjuk. Ird be, hogy 'cancel', ha megsem szeretnel ujat kivanni!");
+	}
+	
+	printf("Kerem a varost!\n> ");
+	scanf("%[^\n]%*c", &town);
+	if(town[0] == ' ') {
+		strcpy(town, " ");
+		char ch;
+		while ((ch = getchar()) != '\n' && ch != EOF);
+	}
+	
+	if(!strcmp(town, "cancel")) {
+		printf("Folyamat megszakitva!\n");
+		fclose(file);
+		return;
+	}
+	
+	
+	printf("Kerem a cimet!\n> ");
+	scanf("%[^\n]%*c", &address);
+	if(address[0] == ' ') {
+		strcpy(address, " ");
+		char ch;
+		while ((ch = getchar()) != '\n' && ch != EOF);
+	}
+	
+	int valid = -1;
+	do {
+		printf("Melyik ajandekot kered (csak egyet valaszthatsz!)?\n(baba/auto/labda/kirako/szinezo/konyv)\n> ");
+		strcpy(gift, "\n");
+		scanf("%[^\n]%*c", &gift);
+		if(valid_gift(gift)) {
+			//printf("%s\n","Valid gift.");
+			valid = 0;
+		} else {
+			printf("%s\n","Ilyen ajandekot nem lehet valasztani!");
+			if ('\n' == gift[0]) {
+				// printf("%s\n","****************************");
+				char ch;
+				while ((ch = getchar()) != '\n' && ch != EOF);
+			}
+		}
+	} while(valid == -1);
+	
+	time_t current_time;
+	char* c_time_string;
+	current_time = time(NULL);
+	c_time_string = ctime(&current_time);
+	c_time_string[strlen(c_time_string)-1] = 0;
+	
+	/*printf("%s;", c_time_string);
+	printf("%s;", name);
+	printf("%s;", town);
+	printf("%s;", address);
+	printf("%s\n", gift);*/
+	
+	
+	fprintf(file, "%s;", c_time_string);
+	fprintf(file, "%s;", name);
+	fprintf(file, "%s;", town);
+	fprintf(file, "%s;", address);
+	fprintf(file, "%s\n", gift);
+	
+	fclose(file);
+	
+	printf("%s\n", "Keres hozzaadva.");
+	
+	if(already_wished == 1) {
+		remove_previous(name);
+		printf("Korabbi keres torolve.\n");
+	}
+}
+
+void remove_previous(char* name) {
+	FILE* file;
+	FILE* tmp;
+	
+	file = fopen("OP_GIFTS", "r");
+	if(file == NULL) {
+		printf("Error opening file...\n");
+	}
+	
+	tmp = fopen("OP_TMP", "w");
+	if(tmp == NULL) {
+		printf("Error opening file...\n");
+	}
+	
+	int counter = 0;
+	size_t read;
+	char *line = NULL;
+	size_t len = 0;
+	
+	while ((read = getline(&line, &len, file)) != -1) {
+        if(!(strstr(line, name) == NULL)) {
+			if(counter == 0) {
+				counter += 1;
+			} else {
+				fprintf(tmp, "%s", line);
+			}
+		} else {
+			fprintf(tmp, "%s", line);
+		}
+	}
+	fclose(file);
+	fclose(tmp);
+	remove("OP_GIFTS");
+	rename("OP_TMP", "OP_GIFTS");
+}
+
+int has_already_wished(char* name, FILE* file) {
+	size_t read;
+	char *line = NULL;
+	size_t len = 0;
+	
+	while ((read = getline(&line, &len, file)) != -1) {
+		char **ap;
+		char *argv[5];
+		
+		for(ap = argv; (*ap = strsep(&line, ";")) != NULL;){
+			if(**ap != '\0') {
+				if(++ap >= &argv[5]) {
+					break;
+				}
+			}
+		}
+		if(!strcmp(argv[1], name)) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void list(char* filter, char mode) {
+	FILE *file;
+	size_t read;
+	char *line = NULL;
+	size_t len = 0;
+	int db = 0;
+	
+	file = fopen("OP_GIFTS", "r");
+	
+	if(file == NULL) {
+		printf("%s\n", "Meg nem voltak ajandek keresek.");
+		return;
+	}
+	
+	
+	while ((read = getline(&line, &len, file)) != -1) {
+        if(!strcmp(filter,"ls all")) {
+			printf("%s", line);
+			db += 1;
+		} else {
+			char **ap;
+			char *argv[5];
+			char tmp[strlen(line)];
+			strcpy(tmp, line);
+			
+			for(ap = argv; (*ap = strsep(&line, ";")) != NULL;){
+				if(**ap != '\0') {
+					if(++ap >= &argv[5]) {
+						break;
+					}
+				}
+			}
+			
+			if(mode == 'v') {
+				if(!strcmp(filter, argv[2])) {
+					printf("%s", tmp);
+					db += 1;
+				}
+			}
+			
+			if(mode == 'a') {
+				// printf("%s\n", "****************************************");
+				// printf("%s\n", argv[4]);
+				// printf("%s\n", "****************************************");
+				argv[4][strlen(argv[4])-1] = 0;
+				if(!strcmp(filter, argv[4])) {
+					printf("%s", tmp);
+					db += 1;
+				}
+			}
+		}
+    }
+	
+	if(db == 0) {
+		printf("%s\n", "Nem erkezett be a feltetelnek megfelelo keres.");
+	} else {
+		printf("%s", "Beerkezett keresek szama: ");
+		printf("%i\n", db);
+	}
+}
+
+void filter(char mode) {
+	char filter[50];
+	
+	printf("%s", "Adja meg a szuresi feltetelt (varos nevet)!\n> ");
+	
+	if(mode == 'v') {
+		scanf("%[^\n]%*c", &filter);
+		list(filter, 'v');
+	}
+	
+	if(mode == 'a') {
+		int valid = -1;
+				
+		do {
+			strcpy(filter, "\n");
+			printf("Melyik ajandekra szurjunk?\n(baba/auto/labda/kirako/szinezo/konyv)\n> ");
+			scanf("%[^\n]%*c", &filter);
+			//printf("%s", "asdasd");
+			//SEEGMENTATION FAULT
+			if(valid_gift(filter)) {
+				//printf("%s\n","Valid gift.");
+				valid = 0;
+			} else {
+				printf("%s\n","Ilyen ajandekra nem lehet szurni!");	
+			if ('\n' == filter[0]) {
+				// printf("%s\n","****************************");
+				char ch;
+				while ((ch = getchar()) != '\n' && ch != EOF);
+			}
+			}
+		} while(valid == -1);
+		list(filter, 'a');
+	}
+}
+
+
+int valid_gift(char* gift) {
+	//printf("%s\n",gift);
+	if(!strcmp(gift, "baba")) {
+		return 1;
+	}
+	
+	if(!strcmp(gift, "auto")) {
+		return 1;
+	}
+	
+	if(!strcmp(gift, "labda")) {
+		return 1;
+	}
+	
+	if(!strcmp(gift, "kirako")) {
+		return 1;
+	}
+	
+	if(!strcmp(gift, "szinezo")) {
+		return 1;
+	}
+	
+	if(!strcmp(gift, "konyv")) {
+		return 1;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+

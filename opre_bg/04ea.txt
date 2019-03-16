@@ -1,0 +1,4 @@
+Az MBR rekord fájlrendszertõl független
+
+HDD cache: ha olvasni kell 1 szektort, akkor beolvassa a körülötte lévõket is, mert igazából egyre megy
+SCAN módszernél a középsõ sávok elérése a legjobb, ezért ált. oda keürl a fájlrendszers

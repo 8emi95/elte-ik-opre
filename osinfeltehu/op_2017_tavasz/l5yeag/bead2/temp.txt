@@ -1,0 +1,4 @@
+Mi az elet ertelme?	Nincs	Sor	42	May  8 2017	22:51:13
+Kerdes	Egy	Ketto	May  8 2017	22:51:13
+Szereted a focit?	Igen	Nemm	Nem tudom	May  8 2017	22:51:13
+Kene meg valamit kerdezni	Ja	Lehet	Szerintem	is	May  8 2017	23:47:57

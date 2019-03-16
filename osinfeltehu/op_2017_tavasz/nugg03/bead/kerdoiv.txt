@@ -1,0 +1,11 @@
+1. Kérdés:
+Mennyivel kéne növelni a személyzet bérét?
+1. Válasz: 5000
+2. Válasz: 10000
+
+2. Kérdés:
+Hogyan fejlesszük a labdarúgást?
+1. Válasz: Stadionokkal
+2. Válasz: Szakképzett személyzettel
+3. Válasz: Erős akadémiával
+

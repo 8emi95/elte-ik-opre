@@ -1,0 +1,20 @@
+%i egész, %s szöveg
+gcc file.c
+-wall - összes warning
+a.out létrejön
+./a.out param1 param2
+
+atoi
+ciklusban nem lehet definiálni változót
+
+printf
+char* str2=(char*)malloc(80*sizeof(char));
+
+strcpy
+strcat
+strlen
+strcmp - FALSE HA AZONOS!!!
+
+HF:
+két szót váró fgv, ha valamelyik alma, lecseréli körtére
+úgy teszteljük, h az elsõ legyen alma

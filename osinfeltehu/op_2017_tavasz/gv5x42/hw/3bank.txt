@@ -1,0 +1,5 @@
+name;chen;xing;chen;null;Tue May 16 14:10:52 2017
+;nationnality;China;Kina;zhong guo;ccc;Tue May 16 14:13:49 2017
+;food;dumplings;noodles;chicken;pork;Tue May 16 14:14:37 2017
+;color;red;yellow;blue;pink;Tue May 16 14:14:53 2017
+;

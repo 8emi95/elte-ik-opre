@@ -1,0 +1,3 @@
+in parent process read in command, create a child process and inside the child 
+try to execute the content of the command
+The task is the read in new commands 

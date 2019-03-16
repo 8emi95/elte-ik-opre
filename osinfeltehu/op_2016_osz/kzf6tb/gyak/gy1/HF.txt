@@ -1,0 +1,3 @@
+/*HF: minishell:
+	parancs beolvasása, fork-ban exec-cel lefuttatni
+*/

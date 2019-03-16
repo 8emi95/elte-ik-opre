@@ -1,0 +1,6 @@
+1
+Milyen szinu volt IV.Henrik feher lovanak a szine?
+1-Feher
+2-Piros
+3-Kek
+4-Zold

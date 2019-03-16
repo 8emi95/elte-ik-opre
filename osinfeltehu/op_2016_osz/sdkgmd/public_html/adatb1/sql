@@ -1,0 +1,52 @@
+-- NÉZETEK
+-- Nézetnél rekurzió nem engedélyezett.
+
+-- Melyik cikket szállítják a legtöbb projekthez?
+
+create or replace view cikk_proj_db
+as 
+select cikk.ckod, cnev, count(distinct pkod) darab
+from cikk, szallit
+where cikk.ckod = szallit.ckod
+group by cikk.ckod, cnev;
+
+
+select ckod, cnev
+from cikk_proj_db
+where darab = (select max(darab) from cikk_proj_db);
+
+select * from cikk_proj_db;
+
+
+-- Hierarchikus lekérdezés
+
+select lpad(' ', (LEVEL-1) * 4) || dnev, fonoke
+from dolgozo2
+--where level < 3
+start with foglalkozas = 'PRESIDENT'
+connect by prior dkod = fonoke;
+order siblings by dnev;
+
+
+
+-- Constraint
+
+create table emp1 as select * from nikovits.emp;
+create table dept1 as select * from nikovits.dept;
+
+alter table emp1 add constraint emp1_empno_pk primary key (empno);
+alter table dept1 add constraint dept1_deptno_pk primary key (deptno);
+
+alter table emp1 add constraint empl_deptno_fk foreign key (deptno) references dept1(deptno);
+
+alter table emp1 add (mgr1 number(4));
+alter table emp1 add (mgr2 number(4) constraint emp1_mgr2_fk references emp1(empno));
+describe emp1;
+
+
+alter table emp1 modify (sal constraint emp1_sal_nn not null);
+alter table emp1 drop constraint emp1_sal_nn;
+
+
+update emp1 set sal = null where ename = 'MILLLER';
+

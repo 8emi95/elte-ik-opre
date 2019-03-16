@@ -1,0 +1,20 @@
+megfigyelo_neve, telepules_nev, nyuszi_db, nyuszi_kor, megfigyelesi_ido
+
+nyuszi_kor: gyerek, felnott, oreg
+ido: automatikus
+telepules: user input
+nev: user input
+
+
+
+createData
+modifyData
+deleteData
+showData
+listAllData
+filterByName
+filterByPlace
+listAllDataByPlaceGroupByDate
+
+
+1. 2. 4. kesz

@@ -1,0 +1,7 @@
+http://ntibi.web.elte.hu/elte/2010-2011-2/opr/osztmem_szemafor.pdf
+
+file:///C:/Users/x230/Elte/oprendszerek/2010-0011_szamalap2/oldalterkep.html
+
+
+!!!
+Test/szignálok/sig_kuld_kap.c 

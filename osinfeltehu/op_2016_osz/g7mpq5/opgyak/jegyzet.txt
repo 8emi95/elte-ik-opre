@@ -1,0 +1,46 @@
+teveFa18
+
+09.22:
+gcc arg.c
+gcc arg.c -o arg.exe
+gcc arg.c -o arg.exe -Wall // osszes warningot kiirja
+gcc -lrt sigaction_value.c // valos ideju modulhoz kell a kapcsolo
+gcc -pthread pos_szemafor.c
+//gcc -lpthread pos_szemafor.c
+
+mindig legyen olvaso, s iro veg a csonel
+
+melyik konyv?
+
+10.20
+signal.c
+sigprocmask.c
+
+10.27
+sigaction.c
+setitimer.c
+ctime fv
+sigaction_value.c
+gcc -lrt sigaction_value.c // valos ideju modulhoz kell a kapcsolo
+
+hf: mutato altal mutatot adat atkuldese
+
+
+11.10
+pipe.c, csovek nem hasznalt veget illik lezarni, 1-es iro veg, 0-s olvaso veg
+csovezetek var az adatra, ha olvasni akarunk, ez alkalmas szinkronizalasra
+
+signal, handlertben valtozo, biztos var
+nevcso.c, poll_cso.c
+
+11.17
+gy5: uzenet.c, uzenetsor nem lett torolve, megnezyni: ipcs, torlese: ipcrm -q {msqid}, ha fogado 0-t add barmi johet, mindenki uzenetet eltudom olvasni
+
+feladat: valasz kuldese, kuldes, fogadas , int n, a szam miatt, hogy hova kuldjon, fogadjin, s kuldunk childal, s parentel is
+
+mq_uzenet.c, mq_unlink
+
+12.01
+gy5: osztmem.c, nekunk kell kordinalni, csak akkor lehessen olvasni belole, mikor a masik mar bele irt, shmctl - ezzel kirtorolni, ipcrm -m
+gy6: szemafor.c, kell inicializalo resz 
+pos_szemafor.c, egybol inicializaljuk letrahozaskor, pek_vasar.c

@@ -1,0 +1,2 @@
+getpid(): pidszámot adja vissza
+fork(): létre hoz egy gyerek folyamatot (futáskor gyerek példány és fõ példány is fut)

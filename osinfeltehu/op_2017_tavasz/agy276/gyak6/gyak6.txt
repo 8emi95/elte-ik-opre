@@ -1,0 +1,83 @@
+2017.05.08. Gyakorlat 6
+
+(Évfolyam ZH általában csövezetékes üzenetsoros)
+
+PIPES
+	¤ Két folyamat között fájlokkal úgy kommunikálhatunk, hogy nem kell nekünk foglalkozni a fájlkezléssel.
+	¤ FIFO fájl jön létre, csak az adatok be és kihelyezésére kell figyelnünk
+	¤ Csőnek két vége van, egyik vége csak írásra, másik vége csak olvasásra való, két fájlazonosító a két végre
+
+	¤ pipe(int pipefd[2]) --> Létrehoz egy csövet és a fájlazonosítót elhelyezi a 'pipefd' tömbbe 
+		- [0] : Olvasásra van
+		- [1] : Írásra van
+		- Értéke 0, ha sikeres | -1, ha nem sikeres
+		- Itt NÉVTELEN csövet hoztunk létre, a rendszer kezeli --> Mindig a közös kódban kell megnyitni
+		- A cső végeit külön-külön kell lezárni szálanként, folyamatonként. Akkor tekintünk egy csőt lezártnak ha minden folyamatban lezártuk.
+        - Az olvasási vég ([0]) csak akkor ad EOF-ot, ha minden folyamat lezárt lett ÉS mindent kiolvastunk belőle
+        - Struktúra is átadható csőben --> write(pipefd[1], array, sizeof(array)); --> Csőbe beleírunk egy struct tömbböt
+        - Ha nem használjuk az olvasási vagy írási végét, akkor azonnal lekell azt zárni, nem szabad a folyamat végéig várni (mint általában)
+        - Ha minden folyamathoz(gyerekhez) létrehozunk egy külön csövet, majd annak az olvasási végét azonnal lezárjuk minden egyéb folyamatban, úgy elkerülhetjük hogy véletlen
+se maradjon nyitva és okozzon gondot.
+
+    ¤ Nevesített cső --> 
+        - mkfifo(fájl_név, engedélyek) --> fájl azonosítót ad vissza. pl.: int fid = mkfifo("fifo", S_IRUSR|S_IRUSR); ||int fd=open("fifo", O_WRONLY);
+        - unlink(fájl_név) --> Megpróbálja törölni, ha ez nem sikerül, nekünk kell lezárnunk.
+        - Csak abban a folyamatban nyitom meg, ahol használni akarom.
+        - Az ilyen cső csak akkor nyitható meg, ha mind a két végét megnyitjuk
+        - Ha nem zárom le pl az írási véget, akkor bárhol megnyithatom az olvasási véget és kiolvashatom az adatokat
+        - Ha nincs megnyiva írásra, de van benne adat, nem tudjuk megnyitni olvasásra, amíg nem nyitom meg újra, tehát az adat nem vész el, csak 'unlink'-nél
+        - EOF --> utolsó adat is kilett olvasva
+        - 4c1.c 4c2.c --> példa csövekkel való kommunikálásra
+
+    ¤ POLL <poll.h>
+        -  struktúra -> pollfd: fd - fájlazonosító
+                                events - figyelt esemény (típus short)  --> POLLIN
+                                revents - bekövetkezett események (típusa short) --> POLLOUT
+        - poll(figyelendők_tömbje, figyelendők_száma, időtúllépés érték) --> pollfd struktúrák az elemei
+            - Csöveket tudunk figyelni vele
+            - Időtúllépés millisecond
+            - Lehetséges értékei:
+                > Pozitív érték -> a tömbben hányadik fájlban következett be a figyelt esemény
+                > Ha nullával tért vissza, letelt az idő
+                > Ha negatív számmal, valami hiba történt (általában signal)
+        - ppoll(figyelendők_tömbje, figyelendők_száma, időtúllépés, szignálmaszk)
+            > időtúllépés: timespec típusú
+            > szignálmaszk: mely szignálok legyenek blokkolva a várakozás ideje alatt --> átmeneti maszkolás --> általában azért jó hogy más esemény ne zavarjon bele
+            > mintaporgram: ppollcso.c --> 33.-34. sorokat kikomentezni, 31.-32.-őt kommentezni, egyik esetbe szignál, másik esetbe cső viszi tovább, illetve 31-34-ig kikommentezve, az 
+időtúllépés fog fellépni.
+
+    ¤ SELECT <sys/select.h>
+        - fd_set típus  
+            > FD_ZERO(készlet) --> készlet törlése/kiürítése
+            > FD_SET(fájlazonosító, készlet) --> hozzáadja a megadott fájlazonosítót a készlethez
+            > FD_CLEAR(fájlazonosító, készlet) --> eltávolítja a fájlazonosítót a készletből
+            > FD_ISSET --> megvizsgálja hogy a fájlazonosítót tartlamazza e a készlet
+        - select(ndfs, readfs, writefs, exceptfs, időtúllépés)
+            > readfs, writefs, exceptfs --> Fájlleírók
+                - read : lehessen olvasni valamelyikből
+                - write : lehessen írni valamelyikbe
+                - except : nem érdekel minket
+            > ami nem kell, az NULL
+            > időtúllépés : timeval típusú
+            > visszatérési értéke : ha időtúllépés nulla -> folyamatosan blokkolva | Negatív hiba esetén | Pozitív ha valamelyik figyelt fájlnál következik be a figyelt esemény 
+            > ndfs : az átadott fájlleíró készletekben található legnagyobb szám + 1
+
+    ¤ ÜZENET SOROK <sys/ipc.h>
+        - ftok(fájl_elérési_út, projekt_azonosító) --> Generál egy IPC kulcsot számunkra, ami key_t típusú(8bit), vagy negatív ha hibás
+            > fájl_elérési_út : arg[0], '/temp', stb... (fontos a per jel)
+            > projekt_azonosító :             
+        - msgget(kulcs, jogosultságok) --> Ez hozza létre magát az üzenetsort
+            > kulcs helyére vagy egy 'ftok' által generált kulcsot teszünk VAGY IPC_PRIVATE, ami autómatikusan generál nekünk egy kulcsot létrehozáskor
+                - IPC_PRIVATE esetén csak az adott programon belül látják
+                - ftok esetén tetszőleges programok tudnak kommunikálni
+            > jogosultság: ugyanazok mint a fájlnál, de hozzá kell kapcsolnunk egy vagy-al IPC_CREATE-et --> ' | IPC_CREATE '
+            > visszatérési értéke azonosító ha sikeres, negatív ha hiba
+        - msgsend(üzenetsor_azonosító, címét_az_üzenetstruktúrának, méretét_az_üzenetnek, flag) --> Elküldi a megadott üzenetazonosítójúba az üzenetet
+            > flag : vagy 0 vagy IPC_NOWAIT(ezzel tobánnlép, de hibával)
+            > long : kategória száma
+            > maga az üzenet (szabvány szerint characterekből áll)
+        - msgrcv(üzenet_azonosító, mutató_az_üzenetstruktúrára, fogadó_puffermérete, üzenet_kategória, flag)
+            > Ha a puffer mérete kisebb mint a küldő üzenet mérete, hibát generál
+            > kategória használható arra is, hogy más-más típusú adatokat küldhessünk
+        - msgetl(üz_azon, IPC_RMID, NULL) --> üzenetsor törlése. 0 ha sikeres, -1 ha nem sikeres
+            > uzenet.c mintafájl

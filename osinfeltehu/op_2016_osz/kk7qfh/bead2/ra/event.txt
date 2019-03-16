@@ -1,0 +1,5 @@
+1 Mozi
+2 Szinhaz
+4 Tura
+5 Utazas
+6 Furdo

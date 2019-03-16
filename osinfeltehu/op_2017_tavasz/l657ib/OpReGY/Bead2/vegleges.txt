@@ -1,0 +1,4 @@
+1	On szereti a focit?	2	Igen	Nem	Mon May 15 13:11:12 2017
+2	Milyen gyakran szokott focimeccsre járni?	3	Gyakran	Ritkán	Soha	Mon May 15 13:11:32 2017
+3	Szokott focimeccset �nézni?	2	Igen	Nem	Mon May 15 13:12:00 2017
+4	Kikkel jár ki (vagy menne ki leginkább) a meccsekre?	4	Család	Barátok	Párom	Szurkolói csoport	Mon May 15 13:12:49 2017

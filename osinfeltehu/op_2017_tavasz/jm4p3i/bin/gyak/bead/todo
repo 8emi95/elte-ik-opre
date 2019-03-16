@@ -1,0 +1,13 @@
+struct question {
+	int id;
+	int option_num; // 2-4
+	char** options;
+}
+
+char* listQuestions();
+question newQuestion();
+question modifyQuestion();
+void editQuestionText(question a);
+void editQuestionOptions(question a);
+void removeQuestion(int id);
+void finalize);

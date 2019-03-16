@@ -1,0 +1,5 @@
+fseek(f, elmozdulás byte, viszonyítási pont) -> Hiba nem 0
+
+SEEK_SET
+SEEK_CUR
+SEEK_END

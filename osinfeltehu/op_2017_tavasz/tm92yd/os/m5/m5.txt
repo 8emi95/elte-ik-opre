@@ -1,0 +1,49 @@
+csővek
+
+-fifo fájl jön létre
+-két vége van
+-névtelen cső:
+    pipe(int pipefd[2]);
+    [0] olvassára van
+    [1] írásra
+    0 siker -1 sikertelen
+    közöskódban írom meg, mminden száll megkapja
+    cső végeit külön le kell zárni
+    ha nem használjuk a cső egyik végét akkor zárjuk le egyből
+
+mkfile(filename, engedélyek); fileazonosító
+inlink(filename);   
+
+<poll.h>
+pollfd: fd: fileazonosító
+POLLIN  events: figyelt esemény
+POLLOUT revents: bekövetkezett
+
+poll(figyelendők tömbje, figyelendők száma, időtúllépés)
+ppoll(figyelendők tömbje, figyelendők száma, időtúllépés, signal maszk)
+
+<sys/select.h>
+fd_set
+FD_ZERO(keszlet)
+  _SET(fileazonosító, keszlet)
+  _CLEAR(-||-)
+  _ISSER(-||-)
+
+select(ndfs, readfs, writefs, execptfs, időtúllépés)
+
+üzenetsorok
+<sys/ipc.h>
+ftok(path, projeckt_id) -> ipc kulcs key_t
+    argv[0], 
+    "/tmp", 
+
+msgget(kulcs, jogosultságok) létrehozza az üzenetsort
+    IPC_PRIVARTE
+        || IPC_CREATE
+msgsnd(uzenetsor_azon, &uzenetstruktura, meret, flag)
+flag: 0, IPC_NOWAIT
+    long
+    uzenet
+
+msgrcv(azon, &uzenet, pufferméret, uzenet kategoria, flag)
+msgctl(uzenetsor_azon, IPC_RMID, NULL)

@@ -1,0 +1,69 @@
+uzenetek: 
+0 minden uzenet
+
+ipcs - lista
+ipcrm -q "msgid" - törlés
+ipcmk -Q  - új üzenetsor
+
+<mqueue.h>
+mq_open(név, mód)  :  mqd_t, -1 ha hiba
+        (név, mód, engedélyek, &attributomok)
+        "\temp"
+    mód: O_RDONLY
+         O_WRONLY
+         O_RDWR
+         O_CREAT
+         O_EXECL
+         O_NONBLOCK
+
+    attributomok: mq_maxmsg
+                  mq_msgsize
+
+mq_send(üzenet leiro, &uzenet, merete, &prior)
+mq_recive(üzenet leiro, &uzenet, merete, &prior)
+mq_close(leiro)
+mq_unlock(leiro)
+mq_notify(leiro, &signal event)
+
+osztott memória:
+<sys/shm.h>
+shmget(kulcs, meret, flagek)  :   shmid
+    -S_IRUSR
+    -IPC_CREAT
+    -IPC_EXCL
+
+getpagessize()
+shmat(shmid, null, 0)   :  shmaddr
+shmdt(shmaddr)
+
+<sys/sem.h>
+semget(kulcs, szemaforok száma, flags)  :  semid
+        semval
+semop(semid, &müveletek tömbje, müveletek száma)
+                sembuf
+sembuf{
+    int sem_num,
+    short sem_flag,   - IPC_NOWAIT, SEM_UNDO, 0
+    sem_op   -  >0, ==0,  
+};
+
+semctl(sem_id, szemafor parancs, érték)
+    prancs: SET_VAL
+    
+<semaphore.h>
+sem_init : név nélküli
+sem_open(név, mód)   :  semaddr
+        (név, mód, engedélyek, kezdőérték)
+        "/temp"
+                O_CREATE
+                O_EXCL
+                0
+sem_post(semaddr) +1
+sem_wait(semaddr) -1
+
+sem_trywait(semaddr)
+sem_timewait(semaddr, timesec)
+
+sem_unlink()
+
+lpthread

@@ -1,0 +1,6 @@
+NTFS, FAT részleteit nem muszáj tudni, csak a szerep érdekes, meg általános felépítés
+
+Kooperatív már nincs
+Környváltásos már csak telóban, mert ha egy sima appod van, akkor az nem csinálhat semmit, ha nincs elõtérben (csak ha speckó back processt indít vagy ilyesmi)
+
+webes környezetben valósidejûség: SIGNAL R

@@ -1,0 +1,102 @@
+kell gyártani h beolvasssa az utat
+egym uthoz kik az utasok, azt átköldjük csövezetéken, generál randoms számokat , visszaküldi a szülüknek csövezetéken
+egyik irány csövezeték )nevestett , neevstetken)
+másik irány 1 uzenet
+
+csõevzeték
+legalább 1 ro,l legalább 1 olvaso
+
+több folyamt is használhat, irhat, olvashat, ezt a  jelzéssel nekünk kell koordnálni
+pl 1 folysamt tud olvasni és irni, akkkor saját magát olvashatja
+
+
+
+post hivás után read!
+
+
+
+  {		    	// child process
+	       sleep(3);	// sleeping a few seconds, not necessary
+             //  close(pipefd[1]);  //Usually we close the unused write end
+			   
+	       printf("Gyerek elkezdi olvasni a csobol az adatokat!\n");
+               read(pipefd[0],sz,sizeof(sz)); // reading max 100 chars
+               printf("Gyerek olvasta uzenet: %s",sz);
+			    write(pipefd[1], "Hajra Fradi!",13);		
+			
+			printf("\n");
+               close(pipefd[0]); // finally we close the used read end
+           
+		   } 
+           else 
+           {    // szulo process 
+               printf("Szulo indul!\n");
+          //     close(pipefd[0]); //Usually we close unused read end
+               write(pipefd[1], "Hajra Fradi!",13);
+			 pause();  
+			   read(pipefd[0],sz,sizeof(sz)); 
+            //
+			printf("A valasz:%s\n",sz);   
+			   close(pipefd[1]); // Closing write descriptor 
+               printf("Szulo beirta az adatokat a csobe!\n");
+               fflush(NULL); 	// flushes all write buffers (not necessary)
+               wait();		// waiting for child process (not necessary)
+				// try it without wait()
+	       printf("Szulo befejezte!");	
+	   }
+
+
+egy megoldás!
+hiba: pause nélkül saját magát olvassaki a szülö, mert a processz öt fujtathatja 
+
+signal:
+signal(SIGTERM, handler);
+mi van ha pause elõtt adja át a vezérlést? rosszat kill-el le handleros megoldas
+
+köv.
+véletlen szám generálása, másik fél ne tudja meg h hány adat jön át
+(ha az iro fél lezárja  a csövezetékét, akkor nem fog már több adatot küldani)
+
+szöveggel nem mukodott, szammal igen
+char 100 miatt, egybe tette
+
+ZH probléme szokott lenni elso sor a gyerekben iro vég nincs lezárva pl
+ekkor a read feleslegesen várja az adatot, és ott megáll 
+read akkor fog rajta továbbmenni ha már nem lesz több adat ami bejön
+olyan gyerek is örökölhet amihez ne
+
+akkor keröljon futasi allapotba ha az adatszerkezetebe valami kerul
+gyak 5 uzenetsor
+
+2 fele gyakorlat
+1: minden uz azon szam
+long mytpe
+meg lehet hatarozni ki meéyik szamra figyel.
+
+letrehozas
+kulcs.kell hozza, mssget
+
+struktura , cim, size, 
+itt is vár ha rossz ra figyelsz(me, 5osre hanem 6osra)
+0 bárki , bármit küld, elcsipem!
+
+tobb folyamat esetén a folyamat pid számát égetjük bele mint szám
+
+mq uzenet , modernebb
+
+nincs cim, szval figyelni kell a szinkronizaciora .
+meg lehet szabni méret
+egy folyamat (csak 1 !!) jelzést kap, akkor fog fordulni az olvasassal, nem varkozik
+jelzest kezel sigaction handler sorok
+
+utána levo par sor  notify milyen jelzest szeretnek kapni
+csak akkor kapjuk meg ha ures=> jon adat
+ha ujadat jon regire, nem fog uzenete kapni
+nincs leiratkozasi folyamat
+
+parent while sor magyarazat:
+
+3 parameteres hadnler
+beleeget
+megvizsgal
+ha uzenetsoron keresztul erkezett a jelzes csak akkor olvasom

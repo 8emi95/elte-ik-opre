@@ -1,0 +1,23 @@
+V "GNAT Lib v2016"
+P ZX
+
+RN
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U hasrepetition%b	hasrepetition.adb	44f82ef0 NE OO SU GE
+
+U hasrepetition%s	hasrepetition.ads	d80bde70 BN EE NE OO GE
+
+D hasrepetition.ads	20161014064822 d80bde70 hasrepetition%s
+D hasrepetition.adb	20161014070212 9cf3f080 hasrepetition%b
+D system.ads		20160516092930 2da59038 system%s
+X 1 hasrepetition.ads
+2+10 Elem 4r46
+3E10 Index 4r27 2|5r35 6r35
+4A10 Vector(2+10)<3E10> 6r31 2|1r31
+6v10*HasRepetition 6>25 2|1b10 12t4
+6*25 T{4A10} 2|1b25 4r12 5r26 5r46 6r28 6r33
+X 2 hasrepetition.adb
+5e21 i 6r30 6r46
+

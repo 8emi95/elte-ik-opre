@@ -1,0 +1,49 @@
+gy1:
+
+waitpid(pid, &status, 0) - bevárja a processt
+
+gy2 - signal:
+
+signal(signal, handler) - handler paraméter: int signumber
+pause() - vár signalig
+kill(pid, signal) - signalt küld
+
+gy3 - cső:
+
+pipe(int pipefd[2]) - létrehoz névtelent, 0 a read-end, 1 a write
+int fid=mkfifo("fifo.ftc", S_IRUSR|S_IWUSR ); - létrehoz nevesítettet
+fd=open("fifo.ftc",O_RDONLY/O_WRONLY); - csatlakozás nevesítettre
+read, write, close, unlink (ha mindenki bezárta!!)
+
+gy5 - üzenet, osztott memória
+
+struct uzenet, aminek az eleje egy long
+int msgqid = msgget(ftok(argv[0], 1), 0600 | IPC_CREAT); - létrehoz
+int status = msgsnd( uzenetsor, &uz, sizeof... , 0 ); - küld
+int status = msgrcv(uzenetsor, &uz, 1024, 5, 0 ); - fogad, 5: üzenettípus
+végén. msgctl( uzenetsor, IPC_RMID, NULL );  - töröl
+
+int oszt_mem_id=shmget(ftok(argv[0], 1),500,IPC_CREAT|S_IRUSR|S_IWUSR); - létrehoz, 500 a méret
+pointer = shmat(oszt_mem_id,NULL,0); - csatlakozás
+shmdt(pointer);	 - elengedés
+miután mindenki elengedte, jöhet a törlés: shmctl(oszt_mem_id,IPC_RMID,NULL);
+
+gy6 - szemafor:
+
+sem_t *semid=sem_open(nev,O_CREAT,S_IRUSR|S_IWUSR,szemafor_ertek );
+sem_wait(semid);
+sem_post(semid);
+sem_unlink(nev);
+
+
+
+
+
+
+execv(parancs, argtömb) - lecseréli a processt
+system(parancs) - nem cseréli le, rögtön visszatér
+
+file lock - gy1/fcntl.c
+signal block - gy2/sigprocmask.c
+timer - gy2/setitimer.c
+poll pipe - gy3/poll.c

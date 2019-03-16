@@ -1,0 +1,26 @@
+2005-05-31  Roland Illig  <roland.illig@gmx.de>
+
+	* c.syntax: Added missing punctuation characters.
+
+	* diff.syntax: Lines starting with a <tab> character are
+	displayed like lines starting with a <space>. This is for the
+	cvs diff -T option.
+
+	* makefile.syntax: Highlight $$ (a literal $) in
+	brightcyan. This way $${var} is not highlighted as if it were a
+	Makefile variables. Also added useful comments before the contexts.
+
+2005-05-24  Roland Illig  <roland.illig@gmx.de>
+
+	* python.syntax: Added chunk from Savannah bug #7872. This
+	changes the color for """long strings""" from brown to green and
+	adds embedded highlighting for escape sequences.
+	* Syntax: Added a comment introducing the file format, based on
+	the current implementation in edit/syntax.c. Changed the
+	first-line regular expressions of sh, perl, python and ruby to
+	also match @SH@, @PERL@, @PYTHON@ and @RUBY@.
+
+2005-05-24  Roland Illig  <roland.illig@gmx.de>
+
+	* Syntax: Extended the patterns for #! interpreters to match
+	almost everything that looks like the interpreter.

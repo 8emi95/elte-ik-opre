@@ -1,0 +1,13 @@
+0. fájlkezelés
+1. folyamatok (fork, exec)
+
+fork a szülõben >0-t ad vissza, ha sikeres, a gyerekben 0-t
+
+exec a paraméter folyamatra cseréli a folyamatot
+
+signalok:
+- unixben viszonylag kevés van (~32)
+- sigusr1, sigusr2 szabadon felhasználhatók
+
+idõigényeket támogató rendszer a valós idejû oprendszer
+valós idejû jelzés- sigrt

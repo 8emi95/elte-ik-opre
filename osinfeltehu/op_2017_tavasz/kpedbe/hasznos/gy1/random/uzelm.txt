@@ -1,0 +1,63 @@
+// 5. gyakorlat. Üzenetküldés (msg, mq), osztott memória
+/*
+kulcsgenerálás: 
+	key_t k = ftok("path [fájlnév]", [verzió/id szám: 1|2|3]) //	szám, kulcsütközés esetén -1-el jön vissza
+			programot alkotó bináris állomány nevét adni (argv [0] )
+
+Üzenetsor
+	- http://www.tankonyvtar.hu/hu/tartalom/tamop412A/2010-0011_szamalap2/hu/tartalom/tamop412A/2010-0011_szamalap2/lecke11_lap3.scorml
+
+1. uzenet.c:  System V üzenetcsalád
+	- int id msgget(kulcs, jog), kulcsot ftok generálja, vagy egy sima szám. Nem megfelelõ kulcs esetén -1-et ad vissza msgget!!!! kulcs=ftok(argv[0],1);
+	Üzenet küldés: msgsnd( id, &uz,strlen ( uz.mtext ) + 1, 0 ); // 0==IPC_NOWAIT
+	Üzenet fogadás: msgrcv( id, &uz, 1024, 5, 0 ); //5 == üzenet osztályazonosító
+	Üzenetsor vezérlés: msgctl( id, IPC_RMID, NULL ); // törlés
+	Az üzenet egy struktúra, az elsõ mezõje egy long, üzenet osztályazonosító, a struktúra maradék része bármi lehet, jellemzõen szöveg.
+
+
+2. mq_uzenet.c: POSIX üzenetcsalád
+	Bár már a SystemV család örökségeként használható msg üzenetcsalád is Posix szabvány,
+	az mq_ üzenetsort tartják igazi Posix üzenetes rendszerhívásnak! Talán csak 1 lényeges különbség van, a mq_notify hívás, 
+	aminek a segítségével egy folyamat értesítést kérhet ha üzenet érkezik a sorba, 
+	illetve a sor azonosítója a select, poll paramétere is lehet!!! 
+	Jelzést kap az a folyamat, aki meghívja a mq_notify függvényt. 
+	Egy sorra csak 1 feliratkozás lehet!
+	#include <mqueue.h>
+	mqd_t id=mq_open(név, O_CREAT|O_RDWR, 0600,&attr); // attr.mq_maxmsg és attr.mq_msgsize értékeknek a rendszerértéknél kisebbnek kell lenni. (/proc/sys/fs/mqueue/ -ben vannak a rendszer maxok)
+	Fordítás: -lrt opcióval
+
+
+Osztott memória
+	- http://www.tankonyvtar.hu/hu/tartalom/tamop412A/2010-0011_szamalap2/hu/tartalom/tamop412A/2010-0011_szamalap2/lecke11_lap1.scorml
+
+3. osztmem.c: Osztott memória
+	- bájtsorozat
+	- Létrehozása:
+		int oszt_mem_id = shmget(kulcs, 500, IPC_CREAT|S_IRUSR|S_IWUSR); 
+		//kulcs ftok-os, 500 bájt hosszú, IPC_CREATE|[jogosultság vagy szám: 777]
+	- Kapcsolódás:
+		char* s = shmat(oszt_mem_id,NULL,0); // NULL a rendszer választ memóriát
+		A harmadik paraméter, flag legjellemzõbb értéke: SHM_RDONLY, egyébként olvasásra, írásra kapcsolódik.
+		az s-be írok bele, mérete a foglalt terület, bájt és karakterek játéka :)
+		sprintf()-el írok bele.
+	- Lekapcsolás: 
+		shmdt(oszt_mem_id);
+	- Törlés: 
+		shmctl(oszt_mem_id,IPC_RMID,NULL);	 
+*/
+
+	
+#include <unistd.h> 	// alarm, pause, fork, getpid, exec, fcntl, sleep
+#include <sys/types.h>	// wait, getpid
+#include <sys/wait.h>	// wait
+#include <stdlib.h> 	// system, rand(), srand()
+#include <fcntl.h> 		// fcntl, open
+#include <sys/stat.h> 	// open
+#include <signal.h> 	// signal, kill, sigaction, sigemptyset, sigprocmask,
+#include <string.h> 	// strsignal – jelzés leírása
+#include <sys/time.h> 	// setitimer
+#include <stdio.h>
+
+main(){
+	
+}

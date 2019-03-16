@@ -1,0 +1,7 @@
+A szavazás eredménye:
+0. párt: 0 szavazat
+1. párt: 1 szavazat
+2. párt: 2 szavazat
+3. párt: 0 szavazat
+4. párt: 1 szavazat
+5. párt: 1 szavazat

@@ -1,0 +1,7 @@
+1,Tanc,
+2,Bal,
+3,Mulatas,
+4,Eskuvo,
+4,Kalapalas,
+.
+5,Koszorucska,

@@ -1,0 +1,23 @@
+module Root where
+
+import System.Environment
+
+main = getArgs >>= showArgs
+
+showArgs args = if length args > 0 then readFile fileName >>= putStrLn (show args !! 0 ) else putStrLn("Nincs parameter")
+
+{-
+Root = getLine >>= is_root
+is_root str
+   | discriminant < 0 = putStrLn "Nincs "
+   | discriminant == 0 = putStrLn "egy gyok: "
+   | discriminant > 0 = putStrLn ("ket gyok: " ++ show
+    elso ++ " " ++ show masodik)   
+   where
+       (a,b,c) = read str :: (Double,Double,Double)
+       elso = (-b) + sqrt discriminant / (2*a)
+       masodik = (-b) - sqrt discriminant / (2*a)
+       discriminant = b*b - 4*a*c
+-}
+
+

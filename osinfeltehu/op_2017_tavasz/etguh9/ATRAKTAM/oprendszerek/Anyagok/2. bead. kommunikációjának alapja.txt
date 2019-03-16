@@ -1,0 +1,36 @@
+IDÕBELI LEFOLYÁS SZERINT:
+
+- A fork elõtt blokkolom a SIGUSR1 szignált, ami azt jelenti, hogy ha kiváltódna, akkor még vár (de nem veszik el!).
+
+- SZÜLÕ: Vár erre a SIGUSR1 szignálra.
+
+- GYEREK: Elküldi SIGUSR1-et a szülõnek. Most ugye ez lehet hogy azelõtt történik, hogy a szülõbe belépett volna a vezérlés volna, de lehet hogy utána, a blokkolásnak köszönhetõen teljesen mindegy.
+
+- SZÜLÕ: Miután megkapta a SIGUSR1-et, teleírja a csövet és szól a gyereknek, hogy olvashatja (SIGUSR1-et küld neki).
+
+- GYEREK: A szülõnek való szingálküldés után vár egy SIGUSR1 szingálra (ugyanúgy mint korábban a szülõ).
+Ha megkapta a szingált, kiolvassa a csõ tartalmát, feldolgozza (random kérdésmegválaszolás), majd az eredményt betolja a csõbe. Ezután szól a szülõnek, hogy jöhet (SIGUSR1 küldése).
+
+- SZÜLÕ: Eközben megint azt csinálta, hogy várt a SIGUSR1-re. Ha megkapta, akkor kiírja a felmérés eredményét.
+
+
+
+SIMÁN SZEKVENCIÁLISAN:
+
+A fork elõtt blokkolom a SIGUSR1 szignált, ami azt jelenti, hogy ha kiváltódna, akkor még vár (de nem veszik el!).
+
+Fork után:
+
+- SZÜLÕ:
+Vár SIGUSR1-re.
+Teleírja a csövet.
+SIGUSR1-et küld a gyereknek.
+Vár SIGUSR1-re.
+Kkiírja a felmérés eredményét.
+
+- GYEREK:
+SIGUSR1-et küld a szülõnek.
+Vár SIGUSR1-re.
+Kiolvassa a csõ tartalmát.
+Beírja a feldolgozott adatokat a csõbe.
+SIGUSR1-et küld a szülõnek.

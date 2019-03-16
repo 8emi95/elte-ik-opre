@@ -1,0 +1,44 @@
+fseek(f, elmozdulás byte, viszonyítási pont) -> Hiba nem 0
+
+                            SEEK_SET
+                            SEEK_CUR
+                            SEEK_END
+http://www.cplusplus.com/reference/cstdio/fseek/
+
+<fcntl.h>
+
+int f = open(fájlnév, mód)
+f = open(fn, mód, engedélyek)-> -1 hiba
+Mód:    O_RDONLY
+vagy    O_WRONLY
+        O_RDWR
+        O_APPEND
+        O_TRUNC
+        O_CREATE ->engedélyek
+        O_EXCL, O_CREATE Létre kell hozni
+
+Engedélyek: S_I[R vagy W vagy X][USR vagy GRP vagy OTH]
+pl: S_IWOTH;
+
+close(f)
+
+read(f, kezdőcim, olvasandó byteok száma) -> Hiba negativ
+write(,         , irandó)
+lseek(f, elmozdulás byte, viszpont)
+
+Párhuzamos folyamatok
+<sys/types.h>
+pid_t
+rendszerhívások
+        fork() -> chlid PID  //-> gyerek folyamat létrehozása
+                PID, PPID -> értékek térnek el
+                child PID = szülő, gyerek = 0;
+        getpid()        //-> a folyamat azonosítója
+        getppid()       //-> a szülő folyamat azonosítója
+        sleep(mp)
+        usleep(microsec)
+
+        wart(&status) -> -1 Hiba
+                int
+        waitpid(pid, &status, options) -> Hiba
+                -1(összes)      int

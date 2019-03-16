@@ -1,0 +1,16 @@
+{
+    "remotePath": "/home/op/HBX28H/zhfelk",
+    "host": "oprendszerek.inf.elte.hu",
+    "username": "HBX28H",
+    "password": "",
+    "port": 22,
+    "protocol": "sftp",
+    "uploadOnSave": true,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": "/Users/barna/.ssh/id_rsa",
+    "ignore": [
+        "\\.vscode",
+        "\\.git"
+    ]
+}

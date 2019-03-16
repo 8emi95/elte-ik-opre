@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="OS_BEAD_1.5" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/OS_BEAD_1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/OS_BEAD_1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="DATABASE/EVENTS.TXT" />
+		<Unit filename="DATABASE/GUESTS.txt" />
+		<Unit filename="FUNCTIONS/EVENT_FUNCTIONS.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="FUNCTIONS/EVENT_FUNCTIONS.h" />
+		<Unit filename="FUNCTIONS/FILE_FUNCTIONS.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="FUNCTIONS/FILE_FUNCTIONS.h" />
+		<Unit filename="FUNCTIONS/GUEST_FUNCTIONS.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="FUNCTIONS/GUEST_FUNCTIONS.h" />
+		<Unit filename="FUNCTIONS/RENDER_FUNCTIONS.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="FUNCTIONS/RENDER_FUNCTIONS.h" />
+		<Unit filename="FUNCTIONS/SYSTEM_FUNCTIONS.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="FUNCTIONS/SYSTEM_FUNCTIONS.h" />
+		<Unit filename="GLOBAL_VARS.h" />
+		<Unit filename="INCLUDES.h" />
+		<Unit filename="KING_OF_STANDS.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="MAKROS/KEYWORD_MAKROS.h" />
+		<Unit filename="MAKROS/MAKROS.h" />
+		<Unit filename="MAKROS/TYPE_MACROS.h" />
+		<Unit filename="MAKROS/VALUE_MAKROS.h" />
+		<Unit filename="STRUCT/EVENT_STRUCT.h" />
+		<Unit filename="STRUCT/GUEST_STRUCT.h" />
+		<Unit filename="TEMPLATES/EXIT_PAGE_FILE.TXT" />
+		<Unit filename="TEMPLATES/FOOTER.TXT" />
+		<Unit filename="TEMPLATES/HEADER.TXT" />
+		<Unit filename="TEMPLATES/INFO_PAGE_FILE.TXT" />
+		<Unit filename="TEMPLATES/SUCCESFUL_EVENT_CREATE.TXT" />
+		<Unit filename="TEMPLATES/SUCCESFUL_GUEST_CREATE.TXT" />
+		<Unit filename="TEMPLATES/SUCCESSFUL_EVENT_MODIFICATION.TXT" />
+		<Unit filename="TEMPLATES/SUCCESSFUL_GUEST_MODIFICATION.TXT" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,5 @@
+a szemaforok nem busy-waiting technikát használnak hanem alvás-ébredés technikát így nem foglal prociidőt a folyamatos lekérdezgetés
+
+szemaforok, monitorko feltétele: közös memória
+
+runqueue: magoknál állnak sorban a feladatok, igyekszik balanszban tartani

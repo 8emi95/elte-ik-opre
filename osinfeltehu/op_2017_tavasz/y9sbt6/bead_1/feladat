@@ -1,0 +1,53 @@
+A Magyar Labdajátékok Szervezete (MLSZ) nemzeti konzultációt hirdet a labdajátékok felvirágoztatására!
+Első lépésként meg kell alkotni azt a kérdéssort és hozzá kérdésenként azt a minimum kettő,
+maximum 4 választási lehetőséget amelyet majd a labdajátékok jobbítása iránt felelősséget érzők kitölthetnek.
+A készítendő program adjon lehetőséget a kérdéssor megalkotására. Tudjunk új kérdést felvenni, kérdést módosítani és kérdést törölni.
+Módosításhoz, törléshez kínálja fel választásra a kérdést és válaszait a program!
+Tudjunk emellett természetesen kérdéseket és válaszaikat listázni!
+A kérdésekhez tároljuk automatikusan annak felvételi dátumát (év,hó,nap,óra,perc,másodperc). 
+Végezetül a program adjon lehetőséget a kérdések véglegesítésére, azaz annak meghatározására,
+hogy mely kérdések szerepeljenek a végső konzultációs kérdőíven!
+
+Készítsünk C programot, amellyel a leírt tevékenység elvégezhető. Az adatokat fájlban tároljuk.
+
+
+Pontokba szedve:
+
+1, Módosítás:
+    Tudjunk új kérdést felvenni, kérdést módosítani és kérdést törölni.
+    Módosításhoz, törléshez kínálja fel választásra a kérdést és válaszait a program!
+
+2, Listázás:
+    Tudjunk emellett természetesen kérdéseket és válaszaikat listázni!
+    A kérdésekhez tároljuk automatikusan annak felvételi dátumát (év,hó,nap,óra,perc,másodperc).
+
+3, Összeállítás:
+    Végezetül a program adjon lehetőséget a kérdések véglegesítésére, azaz annak meghatározására,
+    hogy mely kérdések szerepeljenek a végső konzultációs kérdőíven!
+
+
+Menü:
+    1 Felvétel
+    2 Módosítás
+    3 Törlés
+    4 Listázás
+    5 Kérdéssor összeállítása
+    6 Kérdéssor listázása
+    7 Mentés
+    q Kilépés
+
+- A menü kap egy lista pointert, amelyet átad ez egyes menüfunkciókat ellátó függvényeknek
+- A menü fő tevékenysége egy ciklus, amely addig iterál, amíg ki nem lépünk a programból.
+  Minden iterációban beolvassuk egy char típusú változóba a választott menüpont számát
+  és az annak megfelelő tevékenységet hajtjuk végre.
+  Ha a kilépést választottuk, akkor meghívjuk az exit(0)-át.
+
+Adatok tárolása:
+- Az adatok a questions.bin bináris fájlban kerülnek tárolásra.
+- A fájl a kérdés lista question struktúráit tartalmazza.
+- Minden mentéskor létrehozzuk a fájlt vagy felülírjuk az addigi tartalmát és csak az adott felhasználó írhatja, olvashatja.
+- Betöltéskor egy question_list típusú listát építünk fel kérdésenként beolvasva a fájlból.
+  Ha nem található fájl, akkor létrehozunk egy újat egy üres listát elmentve.
+
+    
+

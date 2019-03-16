@@ -1,0 +1,17 @@
+int compare (char* str1, char* str2)
+{   #ket karakter lancot hasonlit ossze str1 == str2 nem hasznalhato
+  while(str1!=0 || str2 !=0)
+  {
+    if(str1 != str2)
+    {
+      return 1;
+    }
+    else
+    {
+      str1++;
+      str2++;
+    }
+    
+  }
+  return 0;
+}

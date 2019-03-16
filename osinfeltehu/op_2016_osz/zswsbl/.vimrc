@@ -1,0 +1,2 @@
+set cindent
+se nu

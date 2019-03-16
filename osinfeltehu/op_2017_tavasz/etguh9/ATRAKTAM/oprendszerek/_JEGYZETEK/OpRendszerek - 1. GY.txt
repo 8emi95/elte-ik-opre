@@ -1,0 +1,73 @@
+C kiterjesztesésû fájlokkal kell dolgozni
+
+A fordító gcc vagy g++ és a kiterjesztésbõl tudja hogy C a kód
+
+(right)ctrl + k + x
+escape: q!
+
+Megnyitás: joe string.c
+
+
+
+printf("Number of command line arguments are: %i\n",argc);  -  % után jön a típusmegjelölõ karakter, az i pedig azt jelenti hogy integer
+
+%i  -  egész (integer)
+%s  -  szöveg
+
+
+Elõre kell deklarálni a ciklusváltozót:
+int i;
+...
+for (i=0;i<argc;i++)
+
+
+int main(int argc,char ** argv)
+
+argc  -  parancssori argumentumok száma
+argv  -  parancssori argumentumok (karakter tömböket tartalmazó tömb (és ugye tömb == mutató))
+
+
+
+
+Forditás:
+gcc arg.c  ->  lesz a.out nevû fájl
+
+Futtatás: ./a.out alma fa 1 (alma fa 1  -  argumentumok)
+Ekkor 4 argumentum lesz, a "nulladik" a program azonosítója
+dollar0, dollar10, ... a paraméterek
+
+
+
+Karaktertömb típusú stringet átalakít számmá
+
+
+/'  -  kiír egy '-t
+
+
+str2=(char*)malloc(80*sizeof(char));  -  malloc fv segítségével lehet lefoglalni memóriaterületet (meg kell adni hogy hány bájtban [egyébként: sizeof(char) = 1, de más típusnál már valszeg más lesz])
+a malloc fv visszaad egy void* típusú mutatót  ->  emiatt typecast-oljuk char*-ra
+
+
+str2[2]=0;  -  be kell fejezni a string-et
+str2[1]='S';  -  írhattunk volna ASCII kódot is???
+
+
+string.h-ban vannak karakterfv-ek:
+strcpy(mutato, "szöveg")  -  bemásolja a "szöveg"-et a mutato-ba
+
+
+Alapvetõ hiba stringek összehasonlításánál:
+* str1 == str2  -  memóriacímeket hasonlít össze
+* strcmp(str1,str2)  -  nullát ad vissza ha azonos a kettõ -> hamis ha igaz :)  (ui.: kivonogatja egymásból a karaktereket(??))
+
+
+
+while (*str++!=0) helyett lehet:
+while (*str!=0){
+  l++;
+  str++;
+}
+
+
+
+HF: saját fv. írása ami kap egy karaktertömböt és az elejérõl lehagyja a space-eket

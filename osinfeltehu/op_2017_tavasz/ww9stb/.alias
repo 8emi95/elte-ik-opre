@@ -1,0 +1,18 @@
+
+ccr() {
+    if [ $# -lt 1 ]; then
+        echo "Usage: ccr file.c"
+    else
+	clear
+        cc -Wall $1
+	echo -n "Run? [Yn]"
+	read REPLY
+	if ! [[ $REPLY =~ ^[Nn]$ ]]
+        then
+	    clear
+            echo ./a.out ${@:2}
+            ./a.out ${@:2}
+        fi
+    fi
+}
+

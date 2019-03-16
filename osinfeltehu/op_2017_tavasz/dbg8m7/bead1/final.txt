@@ -1,0 +1,6 @@
+Kerdes: q2?
+1. valasz: a1 a1
+2. valasz: a2 a2
+3. valasz: a3 a3
+4. valasz: a4 a4
+

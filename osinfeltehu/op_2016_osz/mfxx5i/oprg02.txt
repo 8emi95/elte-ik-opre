@@ -1,0 +1,17 @@
+A kulcsszó
+
+A szignálok
+	A Windows világba ezt leginkább eseményeknek hívják
+	Pl. CTRL+Z az egy stop szignál
+		CTRL+V sigterm szignál
+	
+	szignál egyetlen adatot küld, a szignálszámot
+	
+	ugyanolyan szignálokat blokkolja és elrejti a rendszer (signal.c -> else ág)
+		ha zajlik épp a feldolgozása egy szignálnak, ugyanolyan szignál kidobásra kerül
+		32-től 64-ig terjedő signálok realtime signálok
+
+	HF: szignál overview dokumentum tanulmányozása (man signal)
+	HF: próbálni ki a valueset exakt próbáját (adni normál értéket, csak egész számot vagy mutatót lehet átadni, kommentben láthatók a lehetőségek)
+	    lépésenként megnézegetni, cserélgetni ezeket
+	    signal mellé tudunk passzolni, és passz mellé egy egész számot lehet

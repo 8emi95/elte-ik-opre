@@ -1,0 +1,93 @@
+2018.02.15
+01. Opre GY
+
+Bende Imre
+beiraai@gmail.com
+11:05-
+
+******************************************************
+
+2018.02.22
+02. Opre GY
+
+http://ermi46.web.elte.hu/oprendszer/gyak1.c
+
+******************************************************
+
+2018.03.01
+03. Opre GY
+
+. önmaga
+.. parent dir
+
+******************************************************
+
+2018.03.08
+04. Opre GY
+
+http://ermi46.web.elte.hu/oprendszer/gyak4/
+
+******************************************************
+
+2018.03.22
+05. Opre GY
+
+http://ermi46.web.elte.hu/oprendszer/gyak5/
+http://ermi46.web.elte.hu/oprendszer/gyak6/
+
+******************************************************
+
+2018.04.05
+06. Opre GY
+
+http://ermi46.web.elte.hu/oprendszer/gyak7/
+
+******************************************************
+
+2018.04.12
+07. Opre GY
+
+http://ermi46.web.elte.hu/oprendszer/gyak8/
+
+******************************************************
+
+2018.04.19
+08. Opre GY
+
+http://ermi46.web.elte.hu/oprendszer/gyak9/
+
+******************************************************
+
+2018.04.26
+09. Opre GY
+
+// absent
+idk maybe http://ermi46.web.elte.hu/oprendszer/zh.c
+
+******************************************************
+
+2018.05.03
+10. Opre GY
+
+utas, autó
+msg queue
+cső
+nemtom
+
+// thanks u1m1n7 ala Bakos Zsolt aki mögöttem ült pont :DDDD
+szülő - központ
+két gyerek - sofőr, autó
+konzolba címet
+ezt az utas elküldi csővezetéken a központnak
+kp kiolvassa, konzolra kiírja hogy feldolg.
+kp üzenetet küld autónak
+autó kiírja az üzenet tartalmát (üzenet: utas proc_id [pid])
+
+// xvbvwh számgrafhoz is lolol köszipuszi
+
+******************************************************
+
+2018.05.17
+11. Opre GY
+
+// lehet h nem lesz megtartva, ha igen akk sem hiányzás

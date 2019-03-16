@@ -1,0 +1,23 @@
+1.Why problems are happening?
+a.I do not know
+b.I know
+c.None
+d.Both
+
+2.DO you know?
+a.I do not know
+b.I know
+c.None
+d.Both
+
+3.Why you dont know?
+a.I do not know
+b.I know
+c.None
+d.Both
+
+4.BUt why?
+a.I do not know
+b.I know
+c.None
+d.Both

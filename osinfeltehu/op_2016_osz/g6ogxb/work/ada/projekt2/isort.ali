@@ -1,0 +1,33 @@
+V "GNAT Lib v2016"
+P ZX
+
+RN
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U isort%b		isort.adb		3460e9d1 NE OO PK IL
+
+U isort%s		isort.ads		e523992d EE NE OO PK IL
+
+D isort.ads		20160930070250 e523992d isort%s
+D isort.adb		20160930072950 d14370fc isort%b
+D system.ads		20160516092930 2da59038 system%s
+X 1 isort.ads
+1K9*isort 9l5 9e10 2|1b14 30l5 30t10
+2I14*elem<integer> 4r48 6r37 2|3r37 4r14
+3I14*index<integer> 4r29 7r42 2|11r21 19r46 20r13
+4A14*tomb(2I14)<3I14> 7r29 8r36 2|10r35 19r32
+6U19*swap 6=25 6=27 2|3b19 8l13 8t17 15s13
+6i25 a{2I14} 2|3b25 4r22 6m9
+6i27 b{2I14} 2|3b27 6r14 7m9
+7V18*max_hely{3I14} 7>27 2|14s19 19b18 28l13 28t21
+7a27 T{4A14} 2|19b29 20r22 22r18 23r16 23r24
+8U19*rendez 8=26 2|10b19 17l13 17t19
+8a26 t{4A14} 2|10b26 13r26 14r29 14r31 15m19 15r19 15m25 15r25
+X 2 isort.adb
+4i9 Tmp{1|2I14} 7r14
+11i17 Mh{1|3I14} 14m13 15r27
+13i13 I<integer> 14r40 15r21
+20i9 Mh{1|3I14} 23r18 24m17 27r16
+22i13 I<integer> 23r26 24r23
+

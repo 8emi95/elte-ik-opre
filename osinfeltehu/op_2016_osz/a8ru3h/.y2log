@@ -1,0 +1,42 @@
+2016-10-06 18:03:57 <1> os(3945) [liby2] genericfrontend.cc(main):617 Launched YaST2 component 'y2base' 'menu' 'ncurses'
+2016-10-06 18:03:57 <1> os(3945) [ui-component] YUIComponentCreator.cc(createInternal):124 Creating UI component for ""
+2016-10-06 18:03:57 <1> os(3945) [liby2] genericfrontend.cc(main):806 YAST_IS_RUNNING is yes
+2016-10-06 18:03:57 <1> os(3945) [Ruby] yast/wfm.rb:186 Call client /usr/share/YaST2/clients/menu.rb
+2016-10-06 18:03:57 <1> os(3945) [ui] YSettings.cc(setProgDir):60 Set progDir to "/usr/share/YaST2"
+2016-10-06 18:03:57 <1> os(3945) [ui] YSettings.cc(setProgDir):61 progDir is now locked.
+2016-10-06 18:03:57 <1> os(3945) [ui] YSettings.cc(setLocaleDir):146 Set localeDir to "/usr/share/YaST2/locale"
+2016-10-06 18:03:57 <1> os(3945) [ui] YSettings.cc(setLocaleDir):147 localeDir is now locked.
+2016-10-06 18:03:57 <1> os(3945) [ui] YPath.cc(YPath):49 Given filename: libyui-ncurses.so.7
+2016-10-06 18:03:57 <1> os(3945) [ui] YSettings.cc(progDir):73 progDir: "/usr/share/YaST2"
+2016-10-06 18:03:57 <1> os(3945) [ui] YPath.cc(YPath):65 Preferring subdir: /usr/share/YaST2
+2016-10-06 18:03:57 <1> os(3945) [ui] YPath.cc(YPath):66 Subdir given with filename: 
+2016-10-06 18:03:57 <1> os(3945) [ui] YPath.cc(YPath):67 Looking for: libyui-ncurses.so.7
+2016-10-06 18:03:57 <1> os(3945) [ui] YPath.cc(lsDir):138 Looking in /usr/lib64/yui
+2016-10-06 18:03:57 <1> os(3945) [ui] YPath.cc(YPath):118 Found libyui-ncurses.so.7 in /usr/lib64/yui
+2016-10-06 18:03:57 <1> os(3945) [ui] YUI.cc(YUI):76 This is libyui 3.2.3
+2016-10-06 18:03:57 <1> os(3945) [ui] YUI.cc(YUI):77 Creating UI with threads
+2016-10-06 18:03:57 <1> os(3945) [ncurses] YNCursesUI.cc(YNCursesUI):63 Start YNCursesUI
+2016-10-06 18:03:57 <1> os(3945) [ncurses] YNCursesUI.cc(YNCursesUI):71 getenv LANG: en_US.UTF-8 encoding: UTF-8
+2016-10-06 18:03:57 <1> os(3945) [ncurses] YNCursesUI.cc(YNCursesUI):77 setenv LC_CTYPE: en_US.UTF-8 encoding: UTF-8
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(init):188 Launch NCurses...(ui-ncurses-2.47.4)
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(init):193 TERM=xterm
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(init):206 isatty(stdin)yes
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(init):214 mytty: /dev/pts/30
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(RedirectToLog):565 isatty(stderr)yes
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(RedirectToLog):574 isatty(stdout)yes
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(init):284 have color = 1
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(init):309 screen size 40 x 130
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCstyle.cc(NCstyle):315 Init xterm using color => 4 styles in xterm
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(SetTitle):476 Draw title called
+2016-10-06 18:03:57 <1> os(3945) [ncurses] NCurses.cc(init):321 NCurses ready
+2016-10-06 18:03:57 <2> os(3945) [ui-shortcuts] YShortcutManager.cc(checkShortcuts):85 Not enough widgets with valid shortcut characters - no check
+2016-10-06 18:03:59 <1> os(3945) [ui] YPushButton.cc(setRole):170 Guessing function key F1 for YPushButton "Help" at 0x7f5fd0004f80 from button role YHelpButton
+2016-10-06 18:03:59 <3> os(3945) [libycp] clients/menu.rb:212 Unknown option `defaultButton in PushButton widget
+2016-10-06 18:03:59 <1> os(3945) [ui] YPushButton.cc(setRole):170 Guessing function key F9 for YPushButton "Quit" at 0x7f5fd0005740 from button role YCancelButton
+2016-10-06 18:03:59 <1> os(3945) [ui] YPushButton.cc(setRole):170 Guessing function key F10 for YPushButton "OK" at 0x7f5fd0056750 from button role YOKButton
+2016-10-06 18:04:07 <1> os(3945) [ncurses] YNCursesUI.cc(~YNCursesUI):113 Stop YNCursesUI
+2016-10-06 18:04:07 <1> os(3945) [ncurses] NCurses.cc(~NCurses):145 Shutdown NCurses...
+2016-10-06 18:04:07 <1> os(3945) [ncurses] NCurses.cc(~NCurses):164 NCurses down
+2016-10-06 18:04:07 <1> os(3945) [liby2] genericfrontend.cc(main):820 Finished YaST2 component 'y2base'
+2016-10-06 18:04:07 <1> os(3945) [liby2] genericfrontend.cc(main):825 Exiting with client return value 'nil'
+2016-10-06 18:04:07 <1> os(3945) [Y2Ruby] binary/YRuby.cc(~YRuby):107 Shutting down ruby interpreter.

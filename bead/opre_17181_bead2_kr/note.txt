@@ -1,0 +1,8 @@
+﻿nem tudtam még befefejezni úgy, hogy helyesen működjön, de elküldöm akkor azt, ami jelenleg van
+(Bocsi, csak kitartóan próbáltam kijavítani... arra jutottam, hogy kurva C)
+ffuuuj.c
+entries.txt
+írogattam kommenteket a start_trip() nevű függvénybe, az a lényeges
+meg az a 2 struct
+azok mindenhová kellenek
+illetve a handler

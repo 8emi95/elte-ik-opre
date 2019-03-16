@@ -1,0 +1,11 @@
+
+|                                       |
+|  A felhasznalonak lehetosege van uj   |
+|  latogatot felvenni az adatbazisba,   |
+|    anannak barmely adatat torolni,    |
+|   illetve barmely latogatot torolni   |
+|            a listarol.                |
+|  A program uj rendezveny hozzaadasat  |
+|    is biztositja, illetve ezek is     |
+|    torolhetok vagy barmely adatuk     |
+|            modosithato.               |

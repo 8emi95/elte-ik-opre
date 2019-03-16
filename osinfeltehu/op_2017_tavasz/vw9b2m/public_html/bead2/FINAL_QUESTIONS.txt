@@ -1,0 +1,30 @@
+Keves idom van?
+Igen
+Nem
+Nemigen
+2017-04-09 18:18:37
+Kezd hideg lenni?
+Igen
+Nem
+Nemigen
+2017-04-09 19:25:14
+Milyen gyumolcsot kersz?
+Alma
+Korte
+Szolo
+2017-04-09 18:17:49
+Sok kerdes kell meg?
+Igen
+Nem
+Nemtudom
+2017-05-14 12:01:50
+Milyen sok kerdes kell meg?
+Legalabb egy
+Legalabb ketto
+Legalabb harom
+2017-05-14 12:02:43
+Random ez a kerdes?
+Igen
+Nem
+Nem elegge
+2017-04-09 20:35:42

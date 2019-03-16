@@ -1,0 +1,117 @@
+bináris fájlkezelés
+
+kell a beadandóban (a beadandnó kb. fájlkezelésrõl szól)
+
+a C++-os open fv itt is használható(??)
+(...f.open()...)
+DE:: Nekünk az alacsonyabb szintû bináris fájlkezelésre van szükségünk
+
+
+Bináris fájlkezelés lényege:
+
+Adott ponttól kezdõdõ bájtsorozattal dolgozunk:
+Pl.: kiírunk 90 bájtot innentõl, vagy beolvasunk 90-et ide
+
+Miért jó ez?  ->  nem kell adatkonverziókkal foglalkozni (mint magasabb szinten)
+Mikor jó ez?  ->  Ha egy struktúrát akarok kimenteni (mert azt csak úgy simán nem lehet kimenteni, konvertálni kell (kivéve bin. fájlkezelésnél))
+
+sizeof-al meg lehet állapítani a struktúra hosszát
+
+
+Kommunikációnál is ezt használjuk (?), bitenként küldünk adatokat (?)
+
+
+
+file.c:
+
+RD_ONLY helyett szám is lehet, mert: ez igazából egy ilyen bitmaszk, amiben akkor van "bebillentve" egy bit, ha akarjuk a neki megfelelõ funkciót hasznáálni (pl.: ha írni is akarok, akkor az annak megfelelõ bitet is be kell állítani)
+
+g=open(argv[2],O_WRONLY|O_CREAT|O_TRUNC,S_IRUSR|S_IWUSR);
+O_WRONLY  -  csak írni akarom
+O_CREAT  -  ha még nem volt, csinálja meg
+O_TRUNC  -  ha már létezett, dobja el ("kezdje újra")
+S_IRUSR|S_IWUSR  -  USR - user, R - Read-jog, W - Write.jog 
+Itt is áll, hogy számot is írhatok: 600 jelenti ugyanezt (user ír, olvas, senki más nem csinálhat msemmit)
+(| a bitenkénti vagyolást jelenti)
+
+
+read(f,&c,sizeof(c))
+- honnan olvasok (melyik fájlból)
+- hova (c ben nincs referenciatípus -> ez a c változó memóriacíme)
+- a memóriacím mérete
+
+write(g,&c,sizeof(c))
+- hova írok (melyik fájlba)
+- honann
+- a memóriacím mérete
+
+A read és a write is fv-ek
+A read a sikeresen beolvasott bájtok számát adja meg (lehet pl.: 90 bájtot akarok beolvasni, de csak 40 van benne -> ez gond, tudnunk kell)
+
+a c-ben nincs boolean típus (hamis=0, igaz=<minden más>)
+
+write(g,&c,sizeof(c))!=sizeof(c)  -  akkor van probléma, ha nem sikerült annyit kiírniamekkora a kiiratott adat mérete
+
+
+  struct Structure s;  -  deklarálás
+
+
+s.array = "valami";  -  ez egy jellegzetes hiba, nem lehet így értéket adni
+
+
+karaktertömböket stringcopy-zni kell
+
+
+a binaris fajlok sima szövegszerkesztõbwen nem olvashatok (beadandonal ezt is ellenorzi HBV, ha megnyitható, rossz)
+
+fajlba íráskor nem tanacsos dinamikus memoriat allokalni
+
+
+
+
+
+Új processz létrehozása kódból (duplikáljuk, klónozzuk a programunkat)  ->  "akár 180 példányban is futtathatjuk a programunkat"
+
+Amikor létrejön a gyerek, onnantól kezdve vûáltogatva "mennek" a gyerekkel (idõszeletek vannak, az ütemezõ váltogat közöttük)
+A szülõ dolgozik, létrehozza a gyereket, onnantól kezdve pedig váltakozva mûködnek
+
+Új munkaterületet kap a gyerek, bemásolódik oda minden,a szülõben a fork elõtt létezõ változó, onnantól viszont két szeparált program fut
+
+
+getpid  -  az aktuális processz-nek a process-id-ját adja vissza
+
+[
+ps aux | grep hbv (??)
+ps ux
+
+van egy adott pid érték, annál több folyamatot nem lehet létrehozni a programban
+]
+
+A pidszám kiosztása nem növekvõ sorrendben történik
+az ütemezõ az elsõ szabad pid-et osztja ki
+ez sokszor a következõ, de nem feltétlenül (pl. zh-n sokan futtatnak -> ...)
+
+Amikor a szülõ befejezõdik, visszaadja az oprendszernek a "lehetõséget"  ->  az visszaadja a promptot
+De: a gyerekek még futnak
+
+
+Jellemzõ hiba: for ciklusban írjuk a fork()-ot  ->  ekkor elbaszott nagy számú dolgot csinálok :)
+Megoldás: csak akkor forkolok, ha a szülõben vagyok
+Honnan tudom? -> megjegyzem a szülõ pidszámát és csak akkor forkolok, ha a folyamat pidszáma megegyezik azzal
+
+A fork() visszaadja a gyerekfolyamat pidszámát
+DE: a gyerekben ez null(a) lesz, mivel csak az másolódik át, ami a fork elõtt volt
+Emiatt: Ha megjegyzem egy változóban, akkor vizsgálhatom hogy nulla-e. Ha igen -> gyerekben vagyok, ha nem -> szülõben
+
+
+Ha egy szülõ megszûnik a gyerekek megszunése elõtt, akkor zombi folyamatok jönnek létre
+Az ilyen folyamatokra a rendszer az init folyamat pidszamat fogja szolgaltatni (ami mindig egy)
+ezt a waitpid(child,&status,0);  segitsegevel lehet <????>
+
+
+Szülõ pidjének lekérdezése: getppid()
+
+
+
+Kisfeladat:
+Pontosan 2 gyereke legyen egy folyamatnak (a két fork nem jó, mert lesz 2 gyerek, meg az egyiknek a gyereke)

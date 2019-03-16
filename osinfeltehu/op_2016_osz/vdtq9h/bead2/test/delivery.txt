@@ -1,0 +1,3 @@
+Janika,Varos,Cim,auto,2015.11.28. 11:39:32
+Pistike,Varos,Cim2,kirako,2015.11.28. 11:40:09
+Norika,Varos2,Cim3,kirako,2015.11.28. 11:40:51

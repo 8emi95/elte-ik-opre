@@ -1,0 +1,768 @@
+2.pdf
+-----
+
+Neumann-elv: memória, CPU+ALU, I/O (+Háttértár) (+Buszok)
+
+Utasításcsoportok:
+	- adatmozgató (regiszter-mem)
+	- ugró (abs-rel)
+	- IO
+	- interrupt
+
+Intel 80386: 4 védelmi szint, 2-t használ: kernel (protected), felhasználói
+Kernel: interrupt, IO, bizonyos memóriakezelés
+Megszakítások maszkolhatóak, kivéve NMI
+
+Felépítési szintek:
+	- logikai áramkörök
+	- CPU, mikroprogram, mikroarchitektúra
+	- hardver elemek gépi kódja
+	- OS
+	- rendszeralkalmazások
+		- alacsonyszintű gépi kódú progi, meghajtók
+		- magasabb szintű programok
+	- alkalmazások
+
+OS: olyan program, amely egyszerű UI-t nyújt, eltakarva a szgép (rendszer) 
+	- kiterjesztett, virtuális gép
+	- erőforrás manager: pl nyomtatási sor kezelő, memória-kiosztás
+
+- kommunikáció a perifériákkal:
+	- IO kapuk, memórialeképzésű IO
+	- lekérdezéses - polling (szinkron)
+	- megszakítás - interrupt (aszinkron hívások, eventek)
+	- DMA - Direct Memory Access
+
+Gépi kód < felh. programkönyvtárak (API) < script (Bash, PS)
+
+POSIX = Portable Operating System Interface for Unix
+	egy minimális rendszerhívás készlet, szabvány (API)
+	ANSI C-vel azonos fgvkönyvtár
+	fájl-könyvtár, folyamatkezelés, szignálok, csövek, időzítők, szemaforok, sync/async IO, szálkezelés, standard C fgvkönyvtár
+Néhány API még:
+	- Open VMS
+	- OS/400
+	- System V; BSD
+	- Win32 API, Windows Mobile API
+	- MAC OS API
+	- Palm OS
+Beágyazott API: Java, .NET
+
+A hardver fogalmába beleértjük a Firmware-t is: a gyártó által a hardverbe épített szoftver, pl HDD-ben a valódi cilinderek elérést a firmware vezérli, meg pl BIOS
+Middleware: OS feletti réteg, pl JVM (Java Virtual Machine)
+
+3. gen-ben megjelent a MULTICS - Multiplexed Information and Computing System
+	(AT&T Bell Labs, General Electric)
+Bell Labs + Ken Thompson - Multics lecsupaszítás -> UNIX, két irány:
+	- Berkeley University - Berkeley Software Distribution, Unix BSD
+	- AT&T Bell Labs - System V Unix
+
+MINIX: MINI Unix, nyílt forráskódú (Tannenbaum)
+Módosítása: LINUs uniX -> LINUX (Linus Torvalds)
+(LAMP: Linux-Apache-Mysql-PHP)
+
+Rendszerhívás: szolgáltatás rendszer-felh.prg közt
+	- folyamatkezelő
+	- fájlkezelő
+
+Processz: végrehajtás alatt lévő program
+	- saját címtartomány
+	- processz táblázat: cím, regiszter, munkafájl adatok
+	- felfüggesztés: memória térkép, táblázat mentése
+	- kommunikáció: szignálok
+
+OS STRUKTÚRÁK
+
+Monolitikus
+	A rendszerkönyvtár egyetlen rendszer, nincs információelrejtés
+	De léteznek modulok, modulcsoportos tervezés - csak az előre tervezett belépsi pontok hívhatók
+	Rendszerhívás -> felügyelt mód (paraméterek regiszterekben)
+	Két szintű támogatás: főprogram -> kernel eljárások -> segédeljárások
+
+Rétegelt szerkezet
+	Eredetileg Dijkstra tervezte, a Multicsban tovább általánosították (gyűrűs szerkezet). Unixban:
+
+	| user |                        | user |                     | user |
+	_____________________________________________________________________
+                Shell, programértelmező, rendszerkönyvtárak
+    ---------------------------------------------------------------------
+                          Rendszerhívási felület
+    ---------------------------------------------------------------------
+                                   KERNEL
+
+       Terminálkezelő            Fájlkezelő                 CPU ütemező
+       I/O                       Blokkos I/O                Virtuális tár
+       Terminál meghajtók        Lemez és szalag         Lapcsere kezelő
+                                   meghajtók
+    ---------------------------------------------------------------------
+                           Hardvercsatlakozási felület
+    ---------------------------------------------------------------------
+       | készülék kezelő |  | készülék kezelő |   | készülék kezelő |
+    _____________________________________________________________________
+
+Virtuális gépek
+	Ötlet az IBM-től, először VM/370 rendszeren
+	A virtuális gép monitor a hardvert pontosan másolja, ezt tetszőleges példányban sokszorozza
+	A CMS több példányban ráül a rendszerre (Conversational Monitor System), és afelett vannak a virtuális VM/370esek
+	Ma pl MS Virtual Server, Virtual PC
+	Exokernel: virtuális gép számára az erőforrások biztosítása
+	Más rendszerű virtuális gépek: JVM, .NET
+
+Kliens-szerver modell
+	Felh.prg: kliens program, kiszolgáló program: szerver program
+	Ezek mind felh. módban futnak, egyre kevesebb funkció a kernelben
+	A kernel a kapocs a kliens és a szerver közt
+
+
+OS elvárások:
+	- hatékonyság (erőforrások hatékony kihasználása, továbbítása)
+	- megbízhatóság (3-4 kilences rendelkezésre állás)
+	- hibatűrés - redundáns rendszerek
+	- biztonság
+	- kompatibilitás - két rendszer közti adatcsere, szabványok
+	- alacsony energiafelhasználás
+	- rugalmasság, skálázhatóság
+	- kezelhetőség - üzemeltetői és user szinten is
+
+
+
+3.pdf
+-----
+
+Háttértár típusok:
+	- mágneses: mágnesszalag, merevlemez, floppy
+	- optikai: CD, DVD, Bluray
+	- félvezető: USB, memkari, SSD
+
+Mágnesszalag: lineáris
+	9 bites keret -> rekordok -> record gap -> file gap
+	Elején könyvtárszerkezet
+
+Mágneslemez:
+	track, sector (-> track sector (block), 512B), cluster (fs által választott, vmennyi block, 1...128)
+	egymás alatti sávok: cilinder - logikailag folytonos blokksorozat, a fizikai működést a firmware eltakarja
+CHS (Cilinder-Head-Sector) címzés: ...
+	floppyn
+LBA (Logical Block Addressing)
+	LBA = ( c * Nh * Ns ) + ( h * Ns ) + ( s - 1 )
+A sávok (cilinderek) 0-tól, a fejek is, a szektorok viszont 1-től!!!
+
+Optikai: 8 v 12 cm
+	CD - Compact Disc, DVD - Digital Versatile Disc
+	650 - 17 GB közt
+	1x = 150 KB/s
+0-1 biteket a fényvisszaverődési idő alapján (pit-land sorozat)
+íráskor a felület mágnesességét, a fény törésmutatóját változtatja meg -> fény más sebességgel terjed
+
+Eszközmeghajtó: az a prg ami a közvetlen kommunikációt végzi a hardverrel (kernel része)
+Lemezeknél DMA, interrupt ha kész a művelet
+
+FORMÁZÁS
+alacsonyszintű: szektorok kialakítása, jellemzően 512B
+	- szektorfej: C, H, S
+	- adatblokk
+	- lábléc: hibajavító blokk
+magasszintű: Quick/normal format (normal bad sectorokat keres)
+logikai: partíciók kialakítása (max 4 logikai rész) + fájlrendszer
+	- primary: oprendszert innen
+	- extended: több logical lehet benne
+	- swap
+
+MBR: Master Boot Record - 0. sector
+	- rendszerindító kód (bootloader)
+	- max 4 partíció adatai (4*16 B) (2 TB mérethatár)
+	- záró 2 bájt
+
+Boot:
+	- BIOS betölti a lemez MBR programját adott címre
+	- az MBR megnézi melyik az aktív elsődleges partíció
+	- annak a boot szektorát (1.) betölti a memóriába
+	- ez már oprendszerfüggő betöltőprogram - fájlokat betölt, majd start
+
+Blokkok sorszámainak meghatározása
+	pl 4 fej, egy sáv 7 szektor
+	a blokkok nem feltétlen szomszédosak a lemez forgási sebessége miatt:
+	1:2 interleave, párosával "szomszédosak"
+
+Művelethez szükséges kernel paraméterek:
+	- R / W?
+	- a blokk kezdőcíme (C, H, S)
+	- DMA memcím
+	- hány bájt?
+
+FCFS - First Come First Service ütemezés:
+	nincs kiéheztetés
+	nem törődik a fej helyzetével
+	kicsi a sávszél, átlagos kiszolg idő kis szórással
+	javítás: ha mozgás nélkül elérhető más kért blokk is, azt is szolgáljuk ki (pick up)
+SSTF - Shortest Seek Time First
+	leghamarabb elérhetőt először - fejmozgás alapján
+	kis kiszolg idő, szórás nagy (kiéheztetés), nagy sávszél
+SCAN - pásztázó
+	fej állandóan mozog, és az útba eső kéréseket kiszolgálja
+	visszafordul ha vége vagy nincs az irányban több kérés
+	rosszkor jövő kérés kiszolgálása csak oda-vissza mozgás után
+	kiszolg idő közepes, szórás nagy (középső sávok szórása kicsi)
+Circular SCAN
+	írás-olvasás csak az egyik irányba történik
+	gyorsabb fejmozgás, nagyobb sávszél
+	kicsi szórás
+
+Memória puffer: olvasáskor ütemező tölti, user folyamat üríti, íráskor fordítva
+Disc cache: előre dolgozik az ütemező, a kért adatok környékét betölti oda
+még gyorsítás:
+	- együtt legyenek az összetartozó adatok (töredezettségmentesítés)
+	- sávszél a lemez közepén a legnagyobb, és a leggyorsabb elérésű
+	- adattömörítés
+
+SCSI: Small Computer System Interface
+	szgép <->periféria adatcserére szabványegyüttes
+	újabb: SAS (Serial Attached SCSI)
+
+Redundancia:
+	- OS:
+		- dinamikus kötet: egy logikai meghajtó több lemezen keresztül (méret összeadódik)
+		- tükrözés: két lemezre helyez egy meghajtót (mérete a min)
+	- hardware: RAID - Redundant Array of Inexpensive Disks
+	  oprendszer egy logikai egységnek látja
+
+RAID 0 - több lemez összefűzése, gyorsabb IO, nem redundáns
+RAID 1 - tükrözés, jelentős hibatűrés, drága
+RAID 1+0, 0+1
+RAID 2 - hibajavító bitek (ECC - Error Correction Code), pl 4 diszkhez elég 3 javító diszk
+RAID 3 - egy plusz paritásdiszk
+RAID 4 - RAID 0 + paritásdiszkek
+RAID 5 - a paritásadatok és az adatok is el vannak osztva, CPU intenzív!
+	1 lemez kieshet, 2 már para
+	n >= 3 lemez kell, és n-1 lemez méretű a logikai meghajtó
+RAID 6 - RAID 5 paritásblokk mellé hibajavító kód is kerül
+	még intenzívebb CPU igény
+	2 lemez is kieshet
+	n-2 méretű a logikai meghajtó
+
+Fájl: adatok egy logikai csoportja, névvel és egyéb paraméterekkel, információtárolás egysége
+	fájlnév: oprendszer függvénye
+	méret, tulaj, last mod, hidden, sys, jogok
+	valódi fájl, hard link, soft link
+Könyvtár: fájlok (könyvtárak) logikai csoportosítása
+Fájlrendszer: a fizikai lemezen a fájlok és könyvtárak elhelyezés rendszere
+
+Könyvtár: valójában spec bejegyzésű állomány, tartalma a fájlok nevét tartalmazó rekordok listája.
+	- katalógus nélküli rendszer: szalagos egységen
+	- egyszintű, kétszintű
+	- többszintű - fa
+
+A partíció elején a szupeblokk van, leírja a rendszer jellemzőit
+Aztán a helynyilvántartás
+Aztán könyvtárszerkezet
+
+Elhelyezési stratégiák:
+	- folytonos tárkiosztás:
+		- first fit
+		- best fit
+		- worst fit
+	- láncolt elhelyezkedés
+		nincs veszteség
+		n. blokk olvasása lassú lesz
+		szabad-foglalt szektorokta File Allocation Table (FAT) kell
+		ez nagy lehet, memóriában kell lennie fájl műveleteknél
+	- indextáblás elhelyezés
+		katalógusban a fájlhoz tartozó inode cím, ebből elérhető a fájl
+
+Naplózott fájlrendszer: LFS (Log-structured FS), JFS (Journaled)
+műveleteket logolja, h ha inkonzisztens állapotba kerül a fájlrendszer pl sérülés, áramszünet miatt, akkor visszaállítható legyen
+Másik partíción célszerű
+
+FAT
+foglalási térkép: a fat táblának annyi eleme van, ahány cluster a lemezen
+Láncolt elhelyezés: a katalógusban a fájladatok mellett csak az első fájl cluster van; a FAT cluster azonosító mutatja a kövi cluster címét, FFF vége
+32 bájt a bejegyzés méret
+sys, hidden, archive, readonly, könyvtár attribútumok
+last mod is tárolva van
+FAT12, FAT16, FAT32(28) , hány bit a cluster leíró
+
+UNIX
+Indextáblás
+inode katalógus
+inode: 15 rekesz, első 12 fájl clusterekre mutat, ha ez kevés..
+
+NTFS New TEchnology File System
+255 karakteres fájlnév
+Kifinomult biztonsági beállítások
+Titkosítot fájlrendszer, naplózás
+POSIX támogatás
+Tömörített fájl, mappa
+kvóta
+Klasztereket tart nyilván, szektort nem
+NTFS partíció MFT-vel kezdődik (Master File Table)
+	16 attribútum egy fájl bejegyzés
+	minden attribútum max 1 KB. ha ez nem elég akkor egy attribútum mutat a folytatásra
+	
+
+
+
+4.pdf
+-----
+
+1 proc + 1 mem + 1 io eszköz = 1 feladatvégrehajtás
+
+Környezetváltásos: csak az előtérben lévő alk fut
+Kooperatív: az aktuális processz bizonyos időközönként v időkritikus műveletnél önként lemond a CPUról
+Preemptív: a kernel elveszi-visszaadja a vezérlést
+Real-time
+
+folyamat létrehozás okai:
+	- rendszer init
+	- rendszerhívás (fork, execve)
+	- felhasználói kérés
+	- kötegelt feladatok
+befejezés okai:
+	- önkéntes:
+		- szabályos kilépés (exit, return...)
+		- kilépés hiba miatt, amit a program felfedez
+	- önkéntelen:
+		- illegális utasítás, végzetes hiba
+		- másik processz, esetleg az user kilövi
+
+állapot: futó, futásra kész, blokkolt (alvó, megállított - Kill -STOP PID, zombi - gyerek bef, de a szülő nem hív waitot, akkor gyerek bentmarad a processztáblában)
+Az aktív folyamat váltásához el kell menteni mindent: utasításszámláló, regiszterek, memóriaállapot, nyitott fájl infó, stb
+
+PCB - Process Control Block:
+	tömbszerű, PID indexekkel
+	azonosító, név, tulaj, csoport
+	memória, regiszter adatok, sb.
+
+Szál: egy folyamaton belül különálló utasítás sor (lightweight process)
+Csak utasításszámlálója, verem és regiszterjei sajátok
+
+IPC - Inter Process Communication
+	- kritikus műveleteknél több process ne keresztezze egymást
+	- sorrend figyelembe vétele
+	- infócsere egymás közt
+
+Kölcsönös kizárás feltételei:
+	- nincs két folyamat egyszerre a kritikus szekcióban
+	- nincs sebesség, CPU paraméter függőség
+	- egyetlen kritikus szekción kívüli folyamat sem blokkolhat másik folyamatot
+	- egy folyamat sem vár örökké
+
+Kölcsönös kizárás megvalósítások
+	- megszakítás tiltása (nem jó mert így az user folyamatok kezébe kerülni a megszakítások tiltása)
+	- osztott zárolás változó használata: 0 senki, 1 valaki a kritikusban van (nem jó mert lehet épp az 1re állítás előtt veszik el tőle a vezérlést)
+	- szigorú váltogatás - nem jó, mert ha a 0. folyamat elvégzi gyorsan a kritikus és a nemkritikus szekciót is, és az 1. folyamat a nemkritikusban van még, akkor a 0. feladat várni fog az 1.-re
+
+		while(1) {
+			while(kovetkezo != 0);
+			kritikus_szekcio();
+			kovetkezo = 1;
+			nem_kritikus_szekcio();
+		}
+
+		while(1) {
+			while (kovetkezo != 1);
+			kritikus_szekcio();
+			kovetkezo = 0;
+			nem_kritikus_szekcio();
+		}
+
+		----------
+		Peterson javítása (így már jó):
+
+		#define N 2
+		int kov;
+		int akarja[N];
+		while (1) {
+			belepes(proc);
+			kritikus_szekcio();
+			kilepes(proc);
+			nem_kritikus_szekcio();
+		}
+
+		void belepes(int proc) {
+			int masik;
+			masik = 1 - proc;
+			akarja[proc] = 1;
+			kov = proc;
+			while (kov == proc && akarja[masik]);
+		}
+
+		void kilepes(int proc) {
+			akarja[proc] = 0;
+		}
+
+	- TSL (Test and Set Lock) utasítás gépi kódban (atomi művelet)
+
+Ezek aktív várakozások. Inkább blokkoljunk, ha várni kell: sleep-wakeup...
+
+Gyártó-fogyasztó problémára pl: pék-pékség-vásárló
+
+	#define N 100
+	int polc = 0;
+
+	void pék() {
+		int kenyér;
+		while (1) {
+			kenyér = új_kenyér();
+			if (polc == N) alvás();
+			polcra(kenyér);
+			polc++;
+			if (polc == 1) ébresztő(vásárló);
+		}
+	}
+
+	void vásárló() {
+		int kenyér;
+		while (1) {
+			if (polc == 0) alvás();
+			kenyér = kenyeret();
+			polc--;
+			if (polc == N-1) ébresztő(pék);
+			megesszük(kenyér);
+		}
+	}
+
+	// ha az if(polc==0) után lefut egy komplett kenyérsütés, para van
+
+Szemafor (Dijkstra):
+	egész változó
+	ha 0, tilos; ha >0, szabad
+	tilos jelzés előtt elalszik
+	belépéskor csökkenti, kilépéskor növeli
+	szemafor vizsgálat, művelet atomi! -> rendszerhívás
+
+	typedef int szemafor;
+	szemafor mehet = 1;
+	szemafor helyek = N, kenyerek = 0;
+
+	void pék() {
+		int kenyér;
+		while (1) {
+			kenyér = pék_süt();
+			down(&helyek);
+			down(&mehet);
+			kenyér_polcra(kenyér);
+			up(&mehet);
+			up(&kenyerek);
+		}
+	}
+
+	void vásárló() {
+		int kenyér;
+		while (1) {
+			down(&kenyerek);
+			down(&mehet);
+			kenyér = kenyeret();
+			up(&mehet);
+			up(&helyek);
+			megeszem(kenyér);
+		}
+	}
+
+
+
+
+5.pdf
+-----
+
+Monitorok - szemaforra épülő magasabb nyelvi konstrukció
+~ osztály: eljrások, adatszerkezetek vannak benne
+	+ állapotváltozók (condition) - wait, signal
+egy időben csak egy folyamat lehet aktív benne
+Ha a CPUknak önálló memóriájuk van, nem jó
+
+	monitor Pék_Vásárló {
+		condition vanhely, vankenyér;
+		int darab;
+		void polcra(kenyér elem) {
+			if (darab == N) wait(vanhely);
+			polcra(elem);
+			darab++;
+			if (darab == 1) signal(vankenyér);
+		}
+		kenyér elvesz() {
+			if (darab == 0) wait(vankenyér);
+			kenyér elem = kenyér_polcról();
+			darab--;
+			if (darab == N-1) signal(vanhely);
+			return elem;
+		}
+	}
+
+Üzenetküldés - üzenetkosarak passzolgatása egymásnak
+receive blokkol, amíg nincs üzi
+
+	#define N 100
+
+	void pék() {
+		int kenyér;
+		message m;
+		while (1) {
+			kenyér = kenyérsütés;
+			receive(vásárló, m);
+			m = üzenet_készítés(kenyér);
+			send(vásárló, m);
+		}
+	}
+
+	void vásárló() {
+		int kenyér;
+		message m;
+		for (int i = 0; i<N; ++i) {
+			send(pék, m);
+		}
+		while (1) {
+			receive(pék, m);
+			kenyér = kicsomagol(m);
+			send(pék, m);
+			megeszem(kenyér);
+		}
+	}
+
+Klasszikus IPC probléma az étkező filozófusok esete:
+5 filo - 5 tányér, köztük 5 villa
+evéshez 2 vlla kell, mindenki a tányér melletiekre pályázik
+a filozófusok esznek és gondolkodnak
+
+	#define N 5
+	szemafor villa[] = {1, 1, 1, 1, 1};
+	szemafor max = 4;
+
+	void filozófus(int i) {
+		while (1) {
+			gondolkodom();
+			down(max);
+			down(villa[i]);
+			down(villa[(i+1)%N]);
+			eszem();
+			up(villa[i]);
+			up(villa[(i+1)%N]);
+			up(max);
+		}
+	}
+
+Folyamatváltás mikor
+	- tuti:
+		- befejeződik egy folyamat
+		- blokkolódik
+	- általában:
+		- új folyamat
+		- IO megszakítás (ami erre várt, az futhat tovább)
+		- időzítő megszakítás (megszakítható és NMI)
+
+Kötegelt rendszereknél szempont az áteresztőképesség, CPU kihasználtság
+	- FCFS - First Come First Served
+		nem megszakítható
+		megy, amíg nem végez vagy blokkolódik
+		ha blokkolódik, megy a sor végére
+		pártatlan, egyszerű, de IO igényes feladatok lassan végeznek
+	- SJB - Shortest Job First
+		nem megszakítható
+		előre kell ismerni a futási időket
+		akkor jó, ha kezdetben mindenki elérhető
+	- legrövidebb maradék futási idejű következzen
+		megszakítható, minden új belépéskor vizsgálat
+
+Interaktív rendszereknél szempont a válaszidő, a felh. igények
+	- Round Robin - körben járó ütemezés
+		körbe megy, mindenkinek adott időszelet, a végén vagy blokkolás esetén jön a következő folyamat
+		pártatlan, egyszerű
+		kérdés: mekkora az időszelet? kicsi -> sok CPU a kapcsolgatásra, nagy -> interaktív usereknek lassúnak tűnhet pl a billkezelés
+	- prioritásos ütemezés
+		fontosság: Unixban 0-49 NM prioritás, 50-127 user prioritás
+		a legmagasabb futhat, de minden 100. szeletnél ki kell igazítani a prioritásokat, kül. éhenhalás lesz (jellemzően a magas kerül alacsonyra, aztán vissza)
+		prioritási osztályok vannak, egy osztályon belül Round Robin
+	- többszörös sorok
+		prioritásos + RR, de
+		legmagasabb szinten minden folyamat 1 időszeletet kap
+		a következő 2-t, mjd 4-et, 8,...
+		ha elhasználta a legmagasabb szintű az idejét, eggyel lejjebb kerül
+	- legrövidebb folyamat előbb
+		hátralévő idő megbecslése súlyozott átlaggal
+	- garantált ütemezés
+		minden aktív folyamat arányosan kap időt
+		nyilván kell tartani, h egy folyamat mennyit kapott már, a szegények előbbre kerülnek
+	- sorsjáték ütemezés
+		véletlenszerű, hogy ki kapja az ütemezést, de arányos CPU idő
+	- arányos ütemezés
+		garantált, de a felhasználókat is figyelembe vesszük
+
+Realtime rendszereknél a határidők betartása, az adatvesztés elkerülése
+	Hard Real Time - nem módosítható határidők
+	Soft Real Time (toleráns), a kismértékű mulasztás tolerálható
+	ütemezhető, ha egységnyi időre eső N esemény CPU válaszidő összege <=1
+
+Szálütemezés: lehet felh szinten, a kernel nem tud róluk, alkalmazásfüggő
+Kernelszinten is lehet, h melyik folyamat melyik szála fusson, de ez lassú
+
+O(1) ütemezés: Molnár Ingó - processz számtól független futási idő
+procinkénti futási sor: runqueue
+	minden futási sor 140 elemű láncolt lista, minden elem egy dupla mutató
+	prior szintenként egy aktív és egy lejárt tömbmutató
+	aktívon végigmegy, ha egy folyamat ideje lejárt, átkerül a lejártba
+	ha kiürül az aktív, csere
+
+CFS - Completely Fair Scheduler
+	O(1) továbbfejlesztése
+	hasonlít a garantált ütemezésre
+	CPU idők nyilvántartása egy fa struktúrában: balra kisebb, jobbra nagyobb (redblack tree)
+	nicns direkt prioritás, de a nagyobb prioritású kisebb időcsökkenést szenved el - nincs 
+
+
+
+6.pdf
+-----
+
+IO eszközök:
+	- blokkos: adott méretű blokkokban tárolunk, ezek függetlenül írhatók/olvashatók, címezhetők, pl HDD, CD, szalagos...
+	- karakteres eszközök - sorban jönnek-mennek a bájtok
+	- időzítő: egyik sem
+
+IO eszközt a számítógéphez (rendszer buszhoz) kapcsoló elem az eszközvezérlő
+	pl. video vezérlő, soros-párhuzamos vezérlő, USB, HDD (IDE, SATA, SCSI)
+
+CPU eszközvezérlő kommunikációja:
+	- IO kapuk, memórialeképzésű IO
+		- IO kapuk:
+			"IN regiszter, port" - a port adatának regiszterbe olvasása
+			"OUT regiszter, port" - a regiszter kiírása a portra
+		- memórialeképzés: az IO eszköz regiszterei a memória egy részén helyezkedik el
+	- megszakítások - az IO eszköz a készenlétét megszakításkéréssel jelzi
+		polling helyett (állapotbit figyelése), mert az tevékeny
+		A hardver jelzi a megszakítás igényt, a CPU a kövi utasítás előtt a tevékenységét megszakítja, végrehajtja a kért sorszámú kiszolgálót, majd visszatér az eredeti utasítássorozathoz
+		INTR/NMI (prioritások)
+	- DMA: memcím regiszter, átviteli irány, mennyiség, vezérlés
+		1. CPU beállítja a DMA vezérlőt, regisztereket
+		2. a DMA a lemezvezérlőt megkéri a műveletre
+		3. miután a lemezvezérlő beolvasta a pufferébe, a rendszersínen keresztül a memóriába/ból írja/olvassa az adatot
+		4. lemzvezérlő nyugtáz
+		5. DMA megszakítással jelez
+
+	IO szoftver: eszközfüggetlen, sync/async, megosztott/egyedi használat
+
+	IO szoftverrendszer felépítése:
+		1. megszakítás kezelő réteg (legalsó kernel szint, szemaforokkal védve a kritikus rész)
+		2. eszközmeghajtó programok
+			eszközspecifikus kód (driver)
+			pontosan ismeri az eszköz jellemzőit
+			felülről érkező absztrakt kérések kiszolgálása
+		3. eszközfüggetlen OS program
+			egységes, szabványos hívási felület biztosítása (interfész)
+			IO eszközök szimbolikus neveinek valós meghajtókohoz kapcsolása
+				- főeszköz szám: meghajtóra utaló azonosító
+				- mellékeszköz szám: + paraméter, pl. írás/olvasás jelzése
+			IO eszköz védelme (jogosultságok)
+			pufferezés
+			hibakezelés
+			monopol módú eszközök lefoglalása, elengedése
+		4. felhasználói program
+			IO eljárások két kategóriája:
+				- továbbítja a paramétereket a rendszerhívás számára (pl write)
+				- tényleges feladatot is végeznek, majd rendszerívás (printf)
+			Háttértárolás (spooling)
+
+Holtpont: folyamatokból álló halmaz holtpontban van, ha minden folyamata olyan eseményre vár, amit csak a halmaz egy másik folyamata okozhat
+Feltételei:
+	1. kölcsönös kizárás feltétel: minden erőforrás hozzá van rendelve egy folyamathoz, vagy szabad
+	2. birtoklás és várakozás feltétel: korábban kapott erőforrást birtokló folyamat kérhet újabbat.
+	3. megszakíthatatlanság: nem lehet egy folyamattól elvenni az erőforrást, csak a folyamat engedheti el
+	4. ciklikus várakozás: két vagy több folyamatlánc kialakulása, amiben minden folyamat olyan erőforrásra vár, amit egy másik tart fogva
+
+Stratégiák holtpont ellen:
+	- figyelmen kívül hagyás - strucc algoritmus (os ezt használja)
+	- felismerés és helyreállítás (kör esetén kilőjuk az egyik folyamatot, vagy ha sokáig nem válaszol valami, kilőjük)
+	- megelőzés, a 4 feltétel egyikének meghiúsítása
+		2. ha előre tudjuk a folyamat összes igényét, akkor mondhatjuk, hogy csak akkor kaphat újat, ha elengedi a jelenlegit
+		4. erőforrások sorszámozása, csak ilyen sorrendben kérhetik
+	- dinamikus elkerülés, óvatos erőforrásfoglalás
+
+Dinamikus elkerülés
+
+Ha előre ismertek az erőforrás igények (pl max), akkor pl Bankár algoritmus
+Törekvés a biztonságos állapotokra: olyan helyzetek, melyekből létezik olyan kezdődő állapotsorozat, melynek eredményeként mindegyik folyamat megkapja amit kér és befejeződnek
+Meg kell nézni minden kérés előtt, hogy biztonságosan teljesíthető-e
+Több erőforrásra: olyan folyamat-erőforrás párt keresünk, hogy a folyamat fennálló igénye az adott erőforrásra kevesebb legyen, mint a még szabad erőforrások: ekkor kapjon meg a folyamat mindent, hogy végezzen, és adja vissza az összes erőforrást
+
+
+
+7.pdf
+-----
+
+MEMÓRIAKEZELÉS
+alapvetően kétféle csoport: kell csere/nem kell
+
+Multiprogramozás - párhuzamosan több program fut, memóriamegosztás kell
+	- rögzített memóriaszeletek
+	- memóriacsere
+	- virtuális memória
+	- szegmentálás
+
+Rögzített:
+	N nem egyenlő szeletre osztás, pl rendszerindításkor
+	Közös várakozási sor (ha felszabadul egy, a sorban első beleférő belemegy) / külön-külön
+	Kötegelt rendszerek tipikus megoldása
+	Relokáció: nem tudjuk, hova kerül a folyamat, így a program betöltésekor az OS frissíti a relokálandó címeket
+	Védelem: a program ne érje el másik program területét
+
+Memóriacsere:
+	Teljes folyamat mozgatása memória-lemez közt
+	Nincs rögzített memória partíció - dinamikus, de a sok csere lyukakat szül
+	Tömöríteni kell a memóriát, de ez sok esetben túl lassú
+
+	Dinamikus memóriafoglalás: a kód rész fix szeletet kap, az adat és a verem része változó. Ha elfogy a memória, akkor vár, vagy kikerül a lemezre
+	Allokációs egység: ha kicsi, akkor kevésbé lyukasodunk, de bonyolultabb nyilvántartani
+	Ha nagy, akkor túl sok lesz a maradékokból adó memóriaveszteség
+	Nyilvántartás: bittérkép (010101100111) / láncolt lista (P/H, kezd, hossz, mut)
+
+	új vagy swap partícióról behozott folyamat elhelyezésére stratégia:
+		- first fit
+		- next fit (előzős befejezési ponttól keres)
+		- best fit - sok kis lyuk
+		- worst fit - nincs sok kis lyuk de ugyanúgy nem hatékony
+		- quick fit - méretek szerinti lyuklista, a lyukak összevonása költséges
+
+Virtuális memória:
+	egy program használhat több memóriát, mint a rendelkezésre álló, az oprendszer csak a "szükséges részt" tartja a memóriában
+
+	virtuális címtér, ez lapokra van osztva (laptábla)
+	virtuális-fizikai lapok összerendelése
+	ha az MMU látja, hogy egy lap nincs benn a memóriában, laphibát okoz, kitesz egy lapkeretet, majd behozza a szükségeset
+
+	virtuális cím 16 bitnél: 4 bit a lapszám, 12 az offset (4KB)
+	32 bitnél 4KB-os laptáblánál 20 bit a lapszám, ami kb 1mil elem
+	64 bitnél már teljesen impossible ekkora laptábla
+
+	már 32 bit is nehézkes, használjunk kétszintű laptáblát:
+		10 bit az LT1, 10 bit az LT2, 12 bit az offset
+		(így csak 4 db 1024 elemű tábla kell)
+
+	táblabejegyzés: védemi bit (rwx), dirty bit (módosult, tényleg ki kell írni), hivatkozás bit (1 ha használják, nem lehet kitenni), gyorsítótár tiltás
+
+	Lapozás helyett/mellett: TLB - Translation Lookaside BUffer
+	virtuális címfordítást segítő cache
+
+	Lapcserélési algok:
+		- NRU - Not Recently Used
+			használjuk a laptábla Modify és Reference bitjét
+			a Reference bitet időnként nullázzuk:
+				0. osztály: nem hivatkozott, nem módosított
+				1. osztály: nem hivatkozott, módosított
+				2. osztály: hivatkozott, nem módosított
+				3. osztály: hivatkozott, módosított
+			válasszunk egy random lapot a legkisebb nem üres osztályból
+		- FIFO - First In First Out
+			a legrégebbit dobjuk ki
+			javítás: "második esély": ha a kidobandó lap reference bitje 1, tegyük a lista elejére és állítsuk 0-ra
+		- óra lapcserélés
+			mint a második lehetőség, csak a lapok körben, és mutató rájuk
+			kidobásnál az 1-es biteket nullázzuk, majd ugrunk, ha elérünk egy 0-t, kitesszük
+		- LRU - Least Recently Used
+			legrégebben HASZNÁLT lap kidobása
+			pl. közös memóriahivatkozás számláló, hivatkozásnál beírjuk a lapba az aktuális értéket, kidobásnál a legkisebb számlálóértkű lapot dobjuk ki
+		- NFU - Not Frequently Used
+			laponként számláló, minden óramegszakításnál adjuk hozzá a lap reference bitjét
+			kidobásnál a legkisebbet
+			de ez nem felejt: javítsuk, óramegszakításonként a számlálót toljuk el jobbra, balról pedig a hivatkozás bitet tegyük be
+
+Szegmentálás:
+	egymástól független címterek létrehozása, amelyek mérete változó
+	egy cím két részből: szegmens szám és az ezen belül cím

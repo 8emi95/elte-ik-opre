@@ -1,0 +1,90 @@
+Mostantól belekezdünk az unsupervised learning-be
+
+
+
+7. dia:
+Lesznek kategóriaváltozók távolságai, sima távolságok, ... stb. (valós és egész értékek keveredhetnek)
+Ezekbõl pedig összerakunk egy végleges (kopmlex) távolságot, a súlyozással
+
+
+
+K-MEANS:
+
+Megmondjuk hogy hány klaszterünk lesz (amit igazából nem (feltétlenül) tudunk...), majd megválasztjuk a kezdeti klaszterközepeket (ez fontos, itt el lehet rontani)
+
+Iteráció:
+A klaszterközepet frissítjük a hozzájuk tartozó pontok átlagára, majd újra hozzárendeljük a pontokat a legközelebbi klaszterhez (ehhez kiszámítjuk minden pontra a klaszterközepektõl vett távolságokat)
+
+Lehet megállási feltételeket definiálni, vagy egy iterációszámot megadni
+
+A klaszterközepek ún. mesterséges adatpontok, nem (feltétlenül) vannak benne az eredeti ponthalmazban
+
+Mérõszámok:
+- Inercia: Minden egyes adatpontra megnézzük, hogy melyik klaszterhez tartozik, vesszük a távolság négyzetet és ezeket összeadjuk. A klaszter(ek) kompaktságát határozza meg. Természetesen minél kisebb, annál jobb.
+- Silhouette-score: Azt méri, hogy mennyire vannak elkülönülve a különbözõ klaszterek, mekkora a köztük lévõ "ûr", mennyire nincsenek/vannak átfedések.
+
+A K-means alapból számol inerciát, ugyanis ez alapján határozza meg, hogy a sok futás (iteráció??) közül melyik lesz a legjobb. Ne felejtsük el, hogy az algoritmus nagyon érzékeny a kezdõ klaszterközép-értékekre.
+Most ez a futás szerintem a fentebb leírt iteráció. Elsõre ellentmondásos, de nem biztos hogy a több lépést követõen jobb eredményt kapunk. Persze lehet hogy ezt most faszán félreértettem.
+
+Emellett fontos azt is megjegyezni, hogy ugye mivel nem tudjuk a megfelelõ klaszterszámot (már ha egyáltalán lehet ilyenrõl beszélni) ezért általában futtatjuk az algót több klaszterszámmal is. Viszont itt sem biztos, hogy a több klaszter jobb inercia-eredményt ad.
+
+Példa: Van 3 jól elkülöníthetõ ponthalmazom. Ha 2 klaszterrel próbálkozok, úgy hogy az egyik középpont beállt/ottvan?? az egyik halmazba, a másik pedig a másik kettõ közé, akkor az inercia jó nagy lesz (és ez nem jó). Ha viszont 6 klaszterközéppel nézem (minden halmazban 2), akkor az inercia ugyan kicsi lesz, de a Silhouette-score szerint viszont rossz erdeményt kapok (a nagy érték a jó).
+
+Költségmentesítés céljából a Silhouette-score számítható mintavételezéssel (pl. 500 random mintából számolja csak ki)
+
+Ez egy TÁVOLSÁG-ALAPÚ MÓDSZER
+
+
+
+
+SÛRÛSÉG-ALAPÚ MÓDSZEREK:
+
+* DBSCAN)
+Figyelembe veszi, hogy a közel lévõ pontok ugyanabban a klaszterben lesznek majd, vagyis vizsgálja a pontok környezetét
+
+
+* Agglomerative clustering
+Hierarchikus megoldás
+
+Kezdetben minden pont egy külön klaszterben van
+Iterálok és összevonom a két legközelebbi klasztert, amíg el nem érem a kívánt klaszterszámot
+
+Ehhez persze definiálni kell két klaszter távolságát (ez lehet a klaszterbeli pontokra értve a legközelebbi/legtávolabbi/átlagos? pontok távolsága (természetesen úgy, hogy az egyik pont az egyik, a másik pedig a másik klaszterben van))
+
+
+
+
+17. dia:
+A 2. és 3. ábrában eltranszformálom a pontokat úgy, hogy "párhuzamosak legyenek az x-tengellyel", így csak az x koordinátától függ a klaszter (vagyis igazából nem 2 dimenziós a pontfelhõm, csak úgy néz ki)
+De: a 3. ábrában a dimenziócsökkentéskor információt is vesztek (amúgy pedig valamit a varianciával kell variálni :) )
+
+Ez a mószer tulajdonképpen a...
+
+PCA (fõkomponens-analízis):
+
+"Megmondja hogy melyik tengely mennyire lesz fontos" (a variancia alapján: ahol nagy, az fontosabb lesz, hiszen a többi ezek szerint "homogénebb", vagyis jobban leírhatja õket egy db. érték)
+A fõkomponenseket fontossági sorrend szerint kapjuk meg és igény szerint elhagyjuk a legkevésbé fontos dimenziókat (annyit, amennyi ahhoz kell, hogy a számunkra kívánt dimenziójú térbe transzformáljunk. A PCA minimalizálja az így felmerülõ adatveszteséget)
+
+Látens feature-ök:
+Olyan feature-ök, amik igazából több feature-bõl állnak, csak össze vannak vonva ("össze vontam magamban")
+Összetett feature-nek is nevezhetjük ezeket
+Ilyeneket (is) kapunk PCA-val ("automatikusan megtalálja ezeket az összefüggéseket/látens értékeket")
+
+Sok esetben (az adathalmaz dimenziója nagy) az ismert módszereink csak akkor alkalmazhatók, ha elõtte dimenziócsökkentést végeztünk (amit lehet PCA-val csinálni (összetett leírókat kapok), de úgy is, hogy csak simán kidobálok oszlopokat (feature-öket) (NaN-t tartalmazó sorok eldobása, ha nincs túl sok...))
+
+
+
+
+Megjegyzés a feladathoz: Ha a hallgatók ízlése teljesen random, akkor természetesen nem tudunk majd jó klaszterezést csinálni (hiszen nincs is)
+
+Mi most azt csináljuk, hogy minden elõadóhoz kiválasztjuk a leggyakoribb tag-et és azzal írjuk le (ha nincs leggyakoribb -> véletlen választunk a maximálisok közül)
+Ezt meg lehet csinálni ("manuálisan") minden elõadóra -> megkapjuk minden elõadóhoz a rá legjellemzõbb tag-et
+
+
+
+
+Linkek:
+https://www.naftaliharris.com/blog/visualizing-k-means-clustering/
+http://scikit-learn.org/stable/modules/clustering.html
+http://scikit-learn.org/0.17/modules/clustering.html#k-means
+http://scikit-learn.org/0.17/modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans

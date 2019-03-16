@@ -1,0 +1,24 @@
+gcc gyak.c -out
+gcc gyak.c
+./a.out
+
+ylik6z //gyakvez neptun
+
+gcc gyak.c -Wall //warningot írjon
+
+
+void novel(int * a){
+	*a = *a+1;
+}
+
+main(){
+	char str[] ="helloszia";
+	printf("szia %s szia\n",str);
+
+	printf("Egy int: %i",2);
+
+	int = 0;
+	i++;
+	novel(&i);
+	printf("novelt ertek: %i \n", i);
+}

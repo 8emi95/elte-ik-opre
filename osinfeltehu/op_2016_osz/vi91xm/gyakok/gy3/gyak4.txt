@@ -1,0 +1,7 @@
+4. gyakorlat
+
+Pipeline megvárja, amíg kap adatot, nem tér vissza üressel -> nem feltétlen kell sleep-pel kezelni
+fflush(stdout) - ürít
+
+ipcs -> 
+msgctl -> uzenetsor kodbol torol

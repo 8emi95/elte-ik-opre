@@ -1,0 +1,27 @@
+V "GNAT Lib v2016"
+P ZX
+
+RN
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U max_index%b		max_index.adb		36db62e1 NE OO SU GE IL
+
+U max_index%s		max_index.ads		307fd1f6 BN EE NE OO GE IL
+
+D max_index.ads		20170317095008 307fd1f6 max_index%s
+D max_index.adb		20170317095032 06a4b317 max_index%b
+D system.ads		20160516092930 2da59038 system%s
+X 1 max_index.ads
+2+14 Elem 4r46 5r33
+3E14 Index 4r28 6r40 2|1r40 2r12
+4A14 Tomb(2+14)<3E14> 6r27 2|1r27
+5V24 "<"{boolean} 5>27 5>30 2|5s25
+5*27 A{2+14}
+5*30 B{2+14}
+6v10*max_index 6>20 2|1b10 10l5 10t14
+6*20 T{4A14} 2|1b20 2r21 4r18 5r20 5r27
+X 2 max_index.adb
+2*9 M{1|3E14} 5r22 6m25 9r16
+4e13 I 5r29 6r28
+

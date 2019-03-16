@@ -1,0 +1,24 @@
+Operációs rendszerek 2. ZH. 2012. május 14.
+
+A Maradj Talpon vetélkedõben a játékos maximum 10 körben párbajozik az aktuális ellenfelével.
+Nyertes párbaj után a játékos pörgethet egy nyeremény összeget a következõk közül {100,125 000,
+250 000,500 000,1 000 000}. Ha rosszul válaszol, akkor kiesik, ha jól akkor az 5. párbaj után
+kiszállhat az összeg felével, a 7., 8. és 9. játékban elviheti a teljes összeget, a 10 jó válasz után pedig
+a 25 000 000FT-ot.
+
+a) Készítsen gyerek folyamatot (õ lesz a játékos). A program argumentumának elsõ értéke adja meg,
+hogy hányadik körig tudott nyerni a játékos a párbajokban. Minden nyert párbaj után a
+gyerekfolyamat generáljon egy véletlen nyereményösszeget a fentiek közül és ezt az összeget küldje
+el a szülõnek egy messagequeue-n keresztül. A szülõ minden összeget kiolvas és kiírja azokat a
+képernyõre.
+b) Az argomentum 2. paramétere k(kiszáll)/v(veszetett) Ha a játékos veszít (2. paraméter v), akkor a
+szülõ egy másik gyerekfolyamatnak (párbajozás másik résztvevõjének) küld egy jelzést, aki erre
+pörget egy nyereményösszeget saját magának a fentiek közül. Az elnyert összeget beírja a
+messagequeue-ba és õ is elküldi azt a szülõ folyamatnak, amelyik az összeget kiolvassa a sorból és
+kiírja azokat a képernyõre.
+c) A szülõ a játék végén beírja az osztott memóriába a nyertes pidszámát, a megnyert párbajok
+számát (-1, ha a másik játékos nyert) és a teljes összeget. Küld egy jelzést egy másik (bankár)
+programnak, a program az osztott memóriából olvassa ki az adatokat és írja ki azokat.
+d) A bankár program az eredményt (PID-et is) írja ki egy fájlba úgy, hogy az 5. párbajnál az összeget
+felezze meg, a 7,8,9 párbajnál hagyja változatlanul, a 10. párbajnál javítsa 25 000 000-ra. 1-4 illetva 7
+párbajnál nem lehet kiszállni így ott írja ki, hogy hiba.

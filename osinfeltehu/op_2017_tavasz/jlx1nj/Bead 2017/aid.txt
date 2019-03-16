@@ -1,0 +1,5 @@
+1 Te
+1 En
+2 Igen
+2 Nem
+2 Csak a kapust

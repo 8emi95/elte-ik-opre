@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>  //fork
+#include <sys/wait.h> //waitpid
+#include <errno.h> 
+
+
+int main()
+{
+ int i;
+ for (i=1;i<4;i++)
+  fork();
+ fork();
+ // getpid() az a getprocessid
+ // a get ppid meg a get parent process id
+ printf("Hello myid:%i parent: %i \n",getpid(), getppid());
+ return 0;
+}

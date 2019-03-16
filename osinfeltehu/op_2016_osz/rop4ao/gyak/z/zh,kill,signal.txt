@@ -1,0 +1,104 @@
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <string.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <sys/ipc.h>
+#include <signal.h>
+s
+void handler(int signumber){printf("jelzést kaptam\n");}
+
+
+int main()
+{
+        signal(SIGTERM,handler);
+
+        int ovaspipe[2];
+
+        int gol[2];
+        gol[0]=0;
+        gol[1]=0;
+        int status;
+
+        char ovas[32];
+
+        pid_t csap1;
+        pid_t csap2;
+        csap1=fork();
+        if (csap1<0){perror("The fork calling was not succesful\n"); exit(1);}
+        if (csap1>0)
+        {
+                if (pipe(ovaspipe) == -1)
+                {
+                    perror("Hiba a pipe nyitaskor!");
+                    exit(EXIT_FAILURE);
+                }
+                csap2=fork();
+                if (csap2<0){perror("The fork calling was not succesful\n"); exit(1);}
+                if(csap2>0)
+                {
+
+                pause(); //waits till a signal arrive
+                printf("Signal arrived from first team \n");
+                pause(); //waits till a signal arrive
+                printf("Signal arrived from second team \n");
+
+                close(ovaspipe[1]);//nem ir a csobe
+                sleep(1);
+                printf("a biro megfujja a sipot\n");
+                kill(csap1,SIGTERM);
+                kill(csap2,SIGTERM);
+
+                read(ovaspipe[0],ovas,sizeof(ovas));
+                close(ovaspipe[0]);
+                printf("%s\n",ovas);
+
+                waitpid(csap1,&status,0);
+                waitpid(csap2,&status,0);
+
+                }
+                else
+                {
+                        printf("Waits 3 seconds, then jelez. \n");
+                        sleep(3);
+                        kill(getppid(),SIGTERM);
+                        close(ovaspipe[0]);//nem olvas a csobol
+                        pause();
+                        printf("a 2. csapat szerint megszolalt a sip\n");
+                        sleep(6);
+                        //memcpy(ovas,"ovast nyujtok be", sizeof("ovast nyujtok be"));
+
+                        write(ovaspipe[1], "2. csapat ovast nyujt be",25);
+                        close(ovaspipe[1]);
+                        fflush(NULL);
+
+
+
+                        printf("Csap2 process ended\n");
+                }
+        }
+        else
+        {
+                printf("Waits 1 seconds, then jelez. \n");
+                sleep(1);
+                kill(getppid(),SIGTERM);
+                pause();
+                printf("az 1. csapat szerint megszolalt a sip\n");
+                sleep(5);
+                printf("elso csapat vagyok: es golt lottem\n");
+    //1. parameter the pid number of process, we send the signal
+    //          if -1, then eacho of the processes of the same uid get the signal
+    //          we kill our bash as well! The connection will close
+    //2. parameter the name or number of signal
+                printf("Csap1 process ended\n");
+        }
+
+
+        return 0;
+}
+                                

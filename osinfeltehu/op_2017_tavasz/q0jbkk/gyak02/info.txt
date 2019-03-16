@@ -1,0 +1,2 @@
+házi:
+setitimert úgy, hogy írja ki a másodperceket

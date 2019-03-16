@@ -1,0 +1,134 @@
+Tárgy: Elte IK Operációs rendszerek 1. Beadandó
+Készítette: Sándor Balázs - AZA6NL
+Git: https://github.com/SandorBalazsHU/elte-ik-os-1
+
+A projekt alapvető dokumentációja
+
+A feladatkiírás felbontása funkcionalitásokra:
+A "King of Stands" rendezvény szervező társaság, amint a rendezvény ideje eljön, megbízza egy partnerét(gyermekét) az esemény lebonyolítására.
+A gyermekfolyamat indulása után csővezetéken megkapja, hogy hol kerül a rendezvény lebonyolításra!
+A helyszínre utazik, majd visszajelzi (jelzést küld vissza) a központnak, hogy a megadott helyszinen van, várja a résztvevőket,
+kész a rendezvény lebonyolítására.
+Ezután a rendezvényszervező csővezetéken elküldi a helyszínen tartózkodó partnernek, hogy kik a résztvevők.
+Ezt a partner képernyőre írja, majd várja a vendégeket és levezényli a rendezvényt!
+A rendezvény végén jelentést küld vissza, amiben tájékoztatja a főszervezőt,
+hogy mennyire sikeres volt a rendezvény (véletlenszám), illetve a jelentkezettek közül végül is ki nem érkezett meg!
+(Minden résztvevő 10% valószínűséggel nem érkezik meg!)
+Miután egy esemény lebonyolításra került, "King of Stands" újra megvizsgálja, melyik rendezvény a következő! 
+
+Menürendszer: 
+    Főképernyő ->- FROM: \
+    1.) +-VIEW1
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-LIST EVENTS
+        |-MAIN MENU:+
+                    |->-Jelentkezés       --> VIEW2
+                    |->-Adminisztráció    --> VIEW3
+                    |->-Kilépés           --> EXIT
+    Jelentkezés ->- FROM: VIEW1
+    2.) +-VIEW2
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-LIST EVENTS
+        |-INPUT FORM:+
+                     |-<-NAME
+                     |-<-EMAIL
+                     |-<-EVENTID
+                     |-<-SUB MENU:+
+                                  |->-Mentés    --> VIEW1
+                                  |->-Mégse     --> VIEW1
+    Adminisztráció ->- FROM: VIEW1
+    3.) +-VIEW3
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-LIST EVENTS
+        |-SUB MENU:+
+                   |->-Vendéglista            --> VIEW4
+                   |->-Rendezvényszervezés    --> VIEW5
+                   |->-Rendezvénytörlés       --> VIEW6
+                   |->-Vissza                 --> VIEW1
+    Vendéglista ->- FROM: VIEW3
+    4.) +-VIEW4
+        |-CLEAR 
+        |-INTRO
+        |-HEADER
+        |-LIST EVENTS
+        |-INPUT FORM:+
+        |            |-<-EVENTID --> VIEW7
+    Rendezvényszervezés ->- FROM: VIEW5
+    5.) +-VIEW5
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-INPUT FORM:+
+        |            |-<-EVENTNAME
+        |-SUB MENU:+
+                   |->-Mentés    --> VIEW3
+                   |->-Mégse     --> VIEW3
+    Rendezvénytörlés ->- FROM: VIEW3
+    6.) +-VIEW6
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-LIST EVENTS
+        |-INPUT FORM:+
+        |            |-<-EVENTID
+        |			 
+        |-SUB MENU:+
+                   |->-Törlés    --> VIEW3
+                   |->-Mégse     --> VIEW3
+    Listáz (Vendégeket)  ->- FROM: VIEW4
+    7.) +-VIEW7
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-LIST VISITORS
+        |-SUB MENU:+
+                   |->-Vendégmódosítás    --> VIEW8
+                   |->-Vendégtörlés       --> VIEW10
+                   |->-Mégse              --> VIEW3
+        Vendégmódosítás (Választás) ->- FROM: VIEW7
+    8.) +-VIEW8
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-LIST VISITORS
+        |-INPUT FORM:+
+                     |-<-EVENTID    --> VIEW9
+    Vendégmódosítás ->- FROM: VIEW9
+    9.) +-VIEW9
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-PRINT VISITOR
+        |-INPUT FORM:+
+                     |-<-NAME
+                     |-<-EMAIL
+                     |-<-EVENTID
+                     |-<-SUB MENU:+
+                                  |->-Módosítás mentéss    --> VIEW7
+                                  |->-Mégse                --> VIEW7
+    Vendégtörlés ->- FROM: VIEW7
+    10.) +-VIEW10
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-LIST VISITORS
+        |-INPUT FORM:+
+        |            |-<-VISITORID
+        |			 
+        |-SUB MENU:+
+                   |->-Törlés    --> VIEW7
+                   |->-Vissza    --> VIEW3
+    Szimuláció ->- FROM: VIEW1
+    11.) +-VIEW11
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-LIST EVENTS
+        |-SUB MENU:+
+                   |->-Vissza    --> VIEW1

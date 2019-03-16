@@ -1,0 +1,57 @@
+45 - papíros (DataLog????, 6. GY????) (relációs algebra, datalog papíron lesz, 1-6 EA anyaga, SELECT is lesz papíron) (DELETE, INSERT, UPDATE is inkább papíros, mivel nehézkes a constraintek miatt gépnél írni (késõbb: "csak papíron lesz" (????)))
+45 gépes (SQL SELECT utasítás (1-7 GY anyaga))
+
+45 - DataLog (??) inkébb: PLSQL és gépes megvalósításai (?)
+45 - vizsgamegajánló (E/K modell, az is feladat talán (mármint a vizsgamegajánló ??))
+
+
+szerda - fogadóóra
+péntek - konzultáció
+
+
+
+A papíros hasonló lesz az órai +/- okhoz
+
+Papíros ZH:
+DataLog-ban felírt szabályt (lekérdezést, formulát) kapunk, át kell írni
+MIVÉ???? (talán WITH RECURSIVE...-á, de ezt most tényleg nem tudom...)
+
+"Datalog szabályt with el írod át sfw-re" (????????????????? nem biztos hogy ezt mondta)
+
+
+
+???????????:
+
+Inline nézet:
+FROM után ALKÉRDÉS (ekkor kötelezõ sorváltozónevet megadni (??))
+
+Ha Create-el kimentem: néettábla (????)
+
+és a 3-ik: ha a WHERE-ben van
+
+
+
+6. EA anyaga: DataLog
+lényeg: 27 - 29 oldal (vagy 26-tól ???)
+(majd ki fogja vonatolni HCS)
+
+
+
+Hivatkozási épség:
+Alapértelmezetten nem engedi törölni/módosítani azt a sort amihez van kapcsolódás
+
+
+
+Szorgalmi: 2.4.Relációs algebra (SEMI JOIN, ANTI JOIN, "MINDEN" JOIN)
+jövõ órára lehet hozni papíron
+
+
+
+
+FELADATSOR-4/A  (DELETE, INSERT, UPDATE) házi feladatok (le kell futtatni egy no-constraint-es scriptet)
+
+
+"2C és 1A a gépes részre jól felkészít"
+
+
+"Adatdefiníciós nyelv (CreateTable) nem kell" (vagyis nem lesz a dogában ????)

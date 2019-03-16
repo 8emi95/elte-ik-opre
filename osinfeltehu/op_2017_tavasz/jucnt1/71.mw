@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Worksheet>
+<Version major="13" minor="0"/>
+<Label-Scheme value="2" prefix=""/>
+<View-Properties presentation="false"><Zoom percentage="150"/></View-Properties>
+<MapleNet-Properties elisiondigitsbefore="100" labelling="true" indentamount="4" elisiontermsthreshold="10000" ansi="false" errorbreak="1" useclientjvm="true" echo="1" imaginaryunit="I" labelwidth="20" plotdriver="openviz" elisiondigitsafter="100" plotoutput="terminal" rtablesize="10" elisiontermsbefore="100" elisiondigitsthreshold="10000" typesetting="standard" plotdevice="inline" verboseproc="1" showassumed="1" errorcursor="false" longdelim="true" plotoptions="" quiet="false" elisiontermsafter="100" screenwidth="79" preplot="" prettyprint="3" displayprecision="-1" warnlevel="3" screenheight="25" latexwidth="6.0" postplot="" prompt="&gt; " ShowLabels="true"/>
+<Styles><Font name="Annotation Text" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 1" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 2" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 3" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 4" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Maple Name" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[104,64,92]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Ordered List 5" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Math Bold" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Math Italic" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Menus" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Annotation Title" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="18" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Fixed Width" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Normal" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Plot Text" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="8" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Text Output" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Nonterminal" background="[255,255,255]" bold="true" executable="false" family="Monospaced" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Heading" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="14" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Italic" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Variable" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Italic Bold" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Default" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Underlined Italic" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Dash Item" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Maple Input" background="[255,255,255]" bold="true" executable="true" family="Monospaced" foreground="[255,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Output" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,255]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="HyperlinkError" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[255,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="2D Math Bold Small" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="1" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Math Small" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="1" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Page Number" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Output Labels" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="8" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Bullet Item" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Plot Title" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Emphasized" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Math Symbol 2" background="[255,255,255]" bold="false" executable="false" family="SymbolPi" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Maple Comment" background="[255,255,255]" bold="true" executable="false" family="Monospaced" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Author" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Warning" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Maple Input Placeholder" background="[255,255,255]" bold="true" executable="true" family="Monospaced" foreground="[200,0,200]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Code" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[255,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Maple Plot" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Line Printed Output" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Diagnostic" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[64,128,64]" italic="false" opaque="false" readonly="true" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="9" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Inert Output" background="[255,255,255]" bold="false" executable="true" family="Times New Roman" foreground="[144,144,144]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Normal" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Math Italic Small" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="1" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Comment" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Underlined Bold" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Copyright" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Hyperlink" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,128,128]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Help Underlined" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Maple Output" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Prompt" background="[255,255,255]" bold="true" executable="false" family="Monospaced" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Math" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="2D Input" background="[255,255,255]" bold="false" executable="true" family="Times New Roman" foreground="[255,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Header and Footer" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Title" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="18" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Error" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[255,0,255]" italic="false" opaque="false" readonly="true" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Heading 1" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="18" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Text" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Notes" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Bold" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Equation Label" background="[255,255,255]" bold="true" executable="false" family="Monospaced" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Heading 4" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="LaTeX" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Heading 3" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="true" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="HyperlinkWarning" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Heading 2" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="14" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Popup" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,128,128]" italic="true" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Dictionary Hyperlink" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[147,0,15]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="true" placeholder="false"/>
+<Font name="Left Justified Maple Output" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="List Item" background="[255,255,255]" bold="false" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Font name="Help Fixed" background="[255,255,255]" bold="false" executable="false" family="Monospaced" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="10" subscript="false" superscript="false" underline="false" placeholder="false"/>
+<Layout name="Ordered List 1" alignment="left" bullet="numeric" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="Ordered List 2" alignment="left" bullet="alphabetic" firstindent="0" leftmargin="36" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="Ordered List 3" alignment="left" bullet="roman" firstindent="0" leftmargin="72" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="Ordered List 4" alignment="left" bullet="ALPHABETIC" firstindent="0" leftmargin="108" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="Ordered List 5" alignment="left" bullet="ROMAN" firstindent="0" leftmargin="144" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="-1" bulletsuffix=""/>
+<Layout name="Author" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="8" spacebelow="8" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Warning" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Annotation Title" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="12" spacebelow="12" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Fixed Width" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Maple Plot" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Line Printed Output" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Help" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Text Output" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Diagnostic" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Normal" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Maple Output" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.5" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Dash Item" alignment="left" bullet="dash" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="HyperlinkError" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Error" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Title" alignment="centred" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="12" spacebelow="12" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Heading 1" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="8" spacebelow="4" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Bullet Item" alignment="left" bullet="dot" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Heading 4" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Heading 3" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Heading 2" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="8" spacebelow="2" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="HyperlinkWarning" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="Left Justified Maple Output" alignment="left" bullet="none" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.5" spaceabove="0" spacebelow="0" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Layout name="List Item" alignment="left" bullet="indent" firstindent="0" leftmargin="0" rightmargin="0" linespacing="0.0" spaceabove="3" spacebelow="3" linebreak="space" pagebreak-before="false" initial="0" bulletsuffix=""/>
+<Pencil-style name="Pencil 5" pen-color="[255,0,0]" pen-height="5.0" pen-width="5.0" pen-opacity="1.0"/>
+<Pencil-style name="Pencil 4" pen-color="[0,0,255]" pen-height="3.0" pen-width="3.0" pen-opacity="1.0"/>
+<Pencil-style name="Pencil 3" pen-color="[0,0,0]" pen-height="3.0" pen-width="3.0" pen-opacity="1.0"/>
+<Pencil-style name="Pencil 2" pen-color="[0,0,255]" pen-height="1.0" pen-width="1.0" pen-opacity="1.0"/>
+<Pencil-style name="Pencil 1" pen-color="[0,0,0]" pen-height="1.0" pen-width="1.0" pen-opacity="1.0"/>
+<Highlighter-style name="Highlighter 2" pen-color="[255,204,0]" pen-height="14.0" pen-width="14.0" pen-opacity="0.8"/>
+<Highlighter-style name="Highlighter 1" pen-color="[255,153,255]" pen-height="12.0" pen-width="8.0" pen-opacity="0.8"/>
+<Highlighter-style name="Highlighter 4" pen-color="[0,255,255]" pen-height="32.0" pen-width="32.0" pen-opacity="0.8"/>
+<Highlighter-style name="Highlighter 3" pen-color="[51,255,0]" pen-height="24.0" pen-width="24.0" pen-opacity="0.8"/>
+<Highlighter-style name="Highlighter 5" pen-color="[255,255,0]" pen-height="48.0" pen-width="48.0" pen-opacity="0.8"/>
+</Styles>
+<Task-table>
+    <Task-category name="&lt;default&gt;">
+    </Task-category>
+</Task-table>
+<Task>
+</Task>
+<Text-field style="Text" size="24" bold="true" layout="Normal" alignment="centred" spacebelow="12" spaceabove="12"><Font bold="true" encoding="UTF-8" size="24">Line\303\241ris algebra</Font></Text-field>
+<Text-field style="Normal" layout="Normal"></Text-field>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">A Maple line\303\241ris algebrai rutinjainak haszn\303\241lat\303\241hoz a </Font><Font bold="true" style="Text">linalg </Font><Font encoding="UTF-8">csomag bet\303\266lt\303\251s\303\251re van sz\303\274ks\303\251g. Ez a </Font><Font bold="true" style="Text">with(LinearAlgebra) </Font><Font encoding="UTF-8">parancs beg\303\251pel\303\251s\303\251vel \303\251rhet\305\221 el. </Font></Text-field>
+<Group labelreference="L3" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">with(LinearAlgebra); # regebben with(linalg);</Text-field>
+</Input>
+</Group>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">A bet\303\266lt\303\266tt f\303\274ggv\303\251nyek m\303\241trix \303\251s vektor t\303\255pusokkal dolgoznak. Ezeket tekintj\303\274k \303\241t az al\303\241bbiakban</Font></Text-field>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">T\303\266mb\303\266k, vektorok, m\303\241trixok</Font></Text-field></Title>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">T\303\266mb</Font></Text-field></Title>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">A list\303\241hoz hasonl\303\263, de tetsz\305\221leges eg\303\251sz intervallummal indexelhet\305\221 \303\266sszetett t\303\255pus a t\303\266mb (array). Tov\303\241bbi k\303\274l\303\266nbs\303\251g a list\303\241hoz k\303\251pest, hogy l\303\251trehoz\303\241skor a t\303\266mb lefoglal mag\303\241nak egy fix mem\303\263riater\303\274letet, \303\251s \303\255gy a t\303\266mb egy elem\303\251nek v\303\241ltoztat\303\241sakor csak az adott elemnek megfelel\305\221 t\303\241rter\303\274let \303\255r\303\263dik fel\303\274l (m\303\255g list\303\241n\303\241l egy teljesen \303\272j lista j\303\266n l\303\251tre). Ez a gyakorlatban azt jelenti, hogy ha el\305\221re tudjuk a t\303\266mb hossz\303\241t, az hat\303\251konyabb a list\303\241n\303\241l.
+T\303\266mb\303\266k l\303\251trehoz\303\241s\303\241ra val\303\263 az </Font><Font bold="true" style="Text">array </Font><Font encoding="UTF-8">parancs. Az alapv\303\241ltozatban els\305\221 param\303\251tere az indextartom\303\241ny, m\303\241sodik az elemek list\303\241ja.</Font></Text-field>
+<Group labelreference="L4" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">t1 := Array(1..5,[1,3,4,5,2]);
+t2 := Array(-3..2,[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;]);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L5" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">t1[3]; t2[-2];</Text-field>
+</Input>
+</Group>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">T\303\266bbdimenzi\303\263s t\303\266mb\303\266ket is l\303\251trehozhatunk. Ekkor az intervallumokat vessz\305\221vel elv\303\241lasztva, az elemeket pedig egym\303\241sba \303\241gyazott list\303\241kban lehet megadni.</Font></Text-field>
+<Group labelreference="L6" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">t3 := Array(1..3,1..2,[[1,2],[3,4],[5,6]]);</Text-field>
+</Input>
+</Group>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Arra is van m\303\263d, hogy a t\303\266mb l\303\251trehoz\303\241sakor az elemek k\303\266z\303\274l egyet sem (vagy csak n\303\251h\303\241nyat) inicializ\303\241lunk.</Font></Text-field>
+<Group labelreference="L7" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">t4 := Array(1..2, 1..3); </Text-field>
+</Input>
+</Group>
+<Group labelreference="L8" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">t4[2,1] := 7;
+eval(t4);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L9" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">t5 := Array(1..2, 1..3, [(2,2)=4, (2,3)=5]);</Text-field>
+</Input>
+</Group>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2">Vektor</Text-field></Title>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">A vektorok l\303\251nyeg\303\251ben egydimenzi\303\263s t\303\266mb\303\266k. A </Font><Font bold="true" style="Text">vector</Font><Font encoding="UTF-8"> paranccsal hozhat\303\263k l\303\251tre, melynek haszn\303\241lata hasonl\303\255t az </Font><Font bold="true" style="Text">array</Font><Font encoding="UTF-8">-hez. A vektor elemeinek indexel\303\251se mindig 1-n\303\251l kezd\305\221dik. Az intervallum helyett teh\303\241t el\303\251g hosszt megadni, s\305\221t, ha minden elemet megadunk egy list\303\241ban, ez sem sz\303\274ks\303\251ges:</Font></Text-field>
+<Group labelreference="L10" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">v0 := vector(4, [1,2,3,4]);
+v1 := Vector([5,6,7,8]);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L11" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">v2 := vector(4);
+v2[3] := 333;
+eval(v2);
+Vector(5, symbol=v);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L57" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">oszlop_vector_igy_is_megadhato := &lt;1,2,3&gt;;</Text-field>
+</Input>
+</Group>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">L\303\251trehozhatunk olyan vektorokat, melyeknek az </Font><Font style="Text" italic="true">i-</Font>edik eleme az <Font style="Text" italic="true">i </Font><Font encoding="UTF-8">valamely f\303\274ggv\303\251nye (speci\303\241lisan konstans f\303\274ggv\303\251ny). Egy </Font><Font style="Text" italic="true">i-</Font><Font encoding="UTF-8">t\305\221l f\303\274gg\305\221 k\303\251plet megad\303\241s\303\241hoz haszn\303\241ljuk a -&gt; jel\303\266l\303\251st:</Font></Text-field>
+<Group labelreference="L12" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">v3 := vector(7, 0);
+v4 := vector(10, isprime);
+v5 := vector(8, (i)-&gt;i^2);</Text-field>
+</Input>
+</Group>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">M\303\241trix</Font></Text-field></Title>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">A m\303\241trixok k\303\251tdimenzi\303\263s t\303\266mb\303\266k, melyekben az indexel\303\251s 1-t\305\221l kezd\305\221dik. Megad\303\241suk a </Font><Font bold="true" style="Text">matrix</Font><Font encoding="UTF-8"> paranccsal vagy a [&lt;...&gt;...] karakterekkel t\303\266rt\303\251nik, melynek haszn\303\241lata a </Font><Font bold="true" style="Text">vector-</Font><Font encoding="UTF-8">ral anal\303\263g.</Font></Text-field>
+<Group labelreference="L13" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">m1 := Matrix(2, 3, [[1,2,3], [4,5,6]]);
+m2 := Matrix([[1,2,3], [4,5,6]]);
+m3 := matrix([[1,2,3], [4,5,6]]);
+m4 := &lt;1,2,3; 4,5,6&gt;;</Text-field>
+</Input>
+</Group>
+<Group labelreference="L14" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">m5 := Matrix(4, 4, 0);
+m6 := Matrix(3, 3, (i,j)-&gt;i+j-1);
+m7 := Matrix(3, 3, (i,j)-&gt;i+j-1, shape=triangular);
+m8 := Matrix(5, 5, m7, fill=8);
+m7 := Matrix(3, 7, shape=identity);</Text-field>
+</Input>
+</Group>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Bizonyos m\303\241trixt\303\255pusoknak be\303\251p\303\255tett neve van. P\303\251ld\303\241ul olyan m\303\241trixot, melynek csak a f\305\221\303\241tl\303\263j\303\241ban van elem, a </Font><Font bold="true" style="Text">diag </Font><Font encoding="UTF-8">paranccsal hozhatunk l\303\251tre (ehhez m\303\241r kell a linalg csomag). </Font></Text-field>
+<Group labelreference="L15" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">m1 := DiagonalMatrix([1, 2, 3, 4]);</Text-field>
+</Input>
+</Group>
+</Section>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">Line\303\241ris algebrai f\303\274ggv\303\251nyek</Font></Text-field></Title>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">Vektorm\305\261veletek</Font></Text-field></Title>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">N\303\251h\303\241ny vektorokkal kapcsolatos m\305\261velet k\303\266vetkezik.</Font></Text-field>
+<Group labelreference="L16" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart;
+with(LinearAlgebra):
+v1 := Vector([1,1,0]);
+v2 := Vector([1,0,0]);
+v3 := Vector([3,1,0]);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L17" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">A vektorok \303\241ltal bez\303\241rt sz\303\266g:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">VectorAngle(v1, v2);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L18" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Skal\303\241ris szorzat:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">DotProduct(v1, v2);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L19" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Vektori\303\241lis szorzat:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">CrossProduct(v1, v2);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L20" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal">Euklideszi norma (avagy 2-norma, &quot;hossz&quot;):</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Norm(v1, 2);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L21" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Alt\303\251r b\303\241zisa:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Basis({v1, v2, v3});</Text-field>
+</Input>
+</Group>
+<Group labelreference="L22" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Gram-Schmidt ortogonaliz\303\241ci\303\263:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">GramSchmidt([v1, v2]);</Text-field>
+</Input>
+</Group>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">M\303\241trixm\305\261veletek</Font></Text-field></Title>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 3" layout="Heading 3"><Font encoding="UTF-8">Alapm\305\261veletek </Font></Text-field></Title>
+<Group labelreference="L23" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">m1 := &lt;1,2;3,4&gt;;
+m2 := &lt;-1,2;3,0&gt;;</Text-field>
+</Input>
+</Group>
+<Group labelreference="L24" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">m1 + m2;</Text-field>
+</Input>
+</Group>
+<Group labelreference="L25" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">evalm(m1 + m2);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L26" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">A m\303\241trixok szorz\303\241s\303\241nak speci\303\241lis jele van \303\251s nem kell foglalkozni, hogy oszlop vagy sorvektorral szorzunk.</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">evalm(m1 &amp;* m2);
+v := &lt;1,2&gt;;
+evalm(m1 &amp;* v);
+evalm(v &amp;* m1);</Text-field>
+</Input>
+</Group>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Egy vektor/m\303\241trix elemeinek mindegyik\303\251n a </Font><Font bold="true" style="Text">map</Font><Font encoding="UTF-8"> paranccsal tudunk v\303\241ltoztatni:</Font></Text-field>
+<Group labelreference="L27" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Map(x-&gt;x^2, m1);</Text-field>
+</Input>
+</Group>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 3" layout="Heading 3"><Font encoding="UTF-8">Gyakran haszn\303\241lt m\303\241trixf\303\274ggv\303\251nyek</Font></Text-field></Title>
+<Group labelreference="L28" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">M := &lt;1, 3, 3; 2, 1, 2; 4, 1, 5&gt;;</Text-field>
+</Input>
+</Group>
+<Group labelreference="L29" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">M\303\241trix nyoma</Font>:</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Trace(M);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L30" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">M\303\241trix adjung\303\241ltja:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Adjoint(M);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L31" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Determin\303\241ns:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Determinant(M);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L32" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal">Inverz:</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">MatrixInverse(M);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L33" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Karakteristztikus polinom, minim\303\241lpolinom (a polinom hat\303\241rozatlanj\303\241t is meg kell adni):</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">CharacteristicPolynomial(M, x);
+MinimalPolynomial(M, y);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L34" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Saj\303\241t\303\251rt\303\251kek:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Eigenvalues(M);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L35" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Saj\303\241tvektorok (a v\303\241lasz egy list\303\241ban 3-elem\305\261 list\303\241k, a saj\303\241t\303\251rt\303\251kkel, multiplicit\303\241ssal, saj\303\241talt\303\251r b\303\241zis\303\241val):</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Eigenvectors(&lt;1,0;0,2&gt;);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L36" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">M\303\241trix rangja</Font>:</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Rank(M);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L37" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Sorok ill. oszlopok \303\241ltal gener\303\241lt alt\303\251r:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">RowSpace(M);
+ColumnSpace(M);</Text-field>
+</Input>
+</Group>
+</Section>
+<Text-field style="Normal" layout="Normal"></Text-field>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 2" layout="Heading 2"><Font encoding="UTF-8">M\303\241trixok manipul\303\241l\303\241sa</Font></Text-field></Title>
+<Group labelreference="L38" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">evalm(M);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L39" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">M\303\241trix sor\303\241nak, oszlop\303\241nak kinyer\303\251se:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">Row(M, 2);
+Column(M, 1);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L40" drawlabel="true">
+<Input>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">R\303\251sz kinyer\303\251se:</Font></Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">SubMatrix(M, 1..2, 2..3);
+SubMatrix(M, [1,3], [1,3]);</Text-field>
+</Input>
+</Group>
+<Text-field style="Normal" layout="Normal"></Text-field>
+</Section>
+</Section>
+<Section collapsed="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title>
+<Text-field style="Heading 1" layout="Heading 1">Feladatok</Text-field></Title>
+<Text-field style="List Item" layout="List Item">1. <Font style="Normal" encoding="UTF-8">V\303\251gezz\303\274k el az al\303\241bbi szorz\303\241st:</Font></Text-field>
+<Text-field style="2D Comment" layout="Normal"><Equation executable="false" style="2D Comment" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYoLUkjbWlHRiQ2I1EhRictSShtZmVuY2VkR0YkNiYtRiM2JkYrLUknbXRhYmxlR0YkNjYtSSRtdHJHRiQ2Jy1JJG10ZEdGJDYoLUYsNiVRImFGJy8lJ2l0YWxpY0dRJXRydWVGJy8lLG1hdGh2YXJpYW50R1EnaXRhbGljRicvJSlyb3dhbGlnbkdGLi8lLGNvbHVtbmFsaWduR0YuLyUrZ3JvdXBhbGlnbkdGLi8lKHJvd3NwYW5HUSIxRicvJStjb2x1bW5zcGFuR0ZOLUY7NigtRiM2Ji1JI21uR0YkNiRGTi9GRFEnbm9ybWFsRictSSNtb0dGJDYtUSgmbWludXM7RidGWC8lJmZlbmNlR1EmZmFsc2VGJy8lKnNlcGFyYXRvckdGam4vJSlzdHJldGNoeUdGam4vJSpzeW1tZXRyaWNHRmpuLyUobGFyZ2VvcEdGam4vJS5tb3ZhYmxlbGltaXRzR0Zqbi8lJ2FjY2VudEdGam4vJSdsc3BhY2VHUSwwLjIyMjIyMjJlbUYnLyUncnNwYWNlR0Zpb0Y9RlhGRkZIRkpGTEZPRkZGSEZKRjcvJSZhbGlnbkdRJWF4aXNGJy9GR1EpYmFzZWxpbmVGJy9GSVEnY2VudGVyRicvRktRJ3xmcmxlZnR8aHJGJy8lL2FsaWdubWVudHNjb3BlR0ZCLyUsY29sdW1ud2lkdGhHUSVhdXRvRicvJSZ3aWR0aEdGaXAvJStyb3dzcGFjaW5nR1EmMS4wZXhGJy8lLmNvbHVtbnNwYWNpbmdHUSYwLjhlbUYnLyUpcm93bGluZXNHUSVub25lRicvJSxjb2x1bW5saW5lc0dGZHEvJSZmcmFtZUdGZHEvJS1mcmFtZXNwYWNpbmdHUSwwLjRlbX4wLjVleEYnLyUqZXF1YWxyb3dzR0Zqbi8lLWVxdWFsY29sdW1uc0dGam4vJS1kaXNwbGF5c3R5bGVHRmpuLyUlc2lkZUdRJnJpZ2h0RicvJTBtaW5sYWJlbHNwYWNpbmdHRmFxRitGWEZYLyUlb3BlbkdRIltGJy8lJmNsb3NlR1EiXUYnRistRjA2Ji1GIzYmRistRjU2Ni1GODYnLUY7NigtRiw2JVEiYkYnRkBGQ0ZGRkhGSkZMRk8tRjs2KC1GIzYmRlVGWkZnc0ZYRkZGSEZKRkxGT0ZGRkhGSkZjc0ZccEZfcEZhcEZjcEZlcEZncEZqcEZccUZfcUZicUZlcUZncUZpcUZcckZeckZgckZickZlckYrRlhGWEZnckZqckYrRlg=">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYoLUkjbWlHRiQ2I1EhRictSShtZmVuY2VkR0YkNiYtRiM2JkYrLUknbXRhYmxlR0YkNjYtSSRtdHJHRiQ2Jy1JJG10ZEdGJDYoLUYsNiVRImFGJy8lJ2l0YWxpY0dRJXRydWVGJy8lLG1hdGh2YXJpYW50R1EnaXRhbGljRicvJSlyb3dhbGlnbkdGLi8lLGNvbHVtbmFsaWduR0YuLyUrZ3JvdXBhbGlnbkdGLi8lKHJvd3NwYW5HUSIxRicvJStjb2x1bW5zcGFuR0ZOLUY7NigtRiM2Ji1JI21uR0YkNiRGTi9GRFEnbm9ybWFsRictSSNtb0dGJDYtUSgmbWludXM7RidGWC8lJmZlbmNlR1EmZmFsc2VGJy8lKnNlcGFyYXRvckdGam4vJSlzdHJldGNoeUdGam4vJSpzeW1tZXRyaWNHRmpuLyUobGFyZ2VvcEdGam4vJS5tb3ZhYmxlbGltaXRzR0Zqbi8lJ2FjY2VudEdGam4vJSdsc3BhY2VHUSwwLjIyMjIyMjJlbUYnLyUncnNwYWNlR0Zpb0Y9RlhGRkZIRkpGTEZPRkZGSEZKRjcvJSZhbGlnbkdRJWF4aXNGJy9GR1EpYmFzZWxpbmVGJy9GSVEnY2VudGVyRicvRktRJ3xmcmxlZnR8aHJGJy8lL2FsaWdubWVudHNjb3BlR0ZCLyUsY29sdW1ud2lkdGhHUSVhdXRvRicvJSZ3aWR0aEdGaXAvJStyb3dzcGFjaW5nR1EmMS4wZXhGJy8lLmNvbHVtbnNwYWNpbmdHUSYwLjhlbUYnLyUpcm93bGluZXNHUSVub25lRicvJSxjb2x1bW5saW5lc0dGZHEvJSZmcmFtZUdGZHEvJS1mcmFtZXNwYWNpbmdHUSwwLjRlbX4wLjVleEYnLyUqZXF1YWxyb3dzR0Zqbi8lLWVxdWFsY29sdW1uc0dGam4vJS1kaXNwbGF5c3R5bGVHRmpuLyUlc2lkZUdRJnJpZ2h0RicvJTBtaW5sYWJlbHNwYWNpbmdHRmFxRitGWEZYLyUlb3BlbkdRIltGJy8lJmNsb3NlR1EiXUYnRistRjA2Ji1GIzYmRistRjU2Ni1GODYnLUY7NigtRiw2JVEiYkYnRkBGQ0ZGRkhGSkZMRk8tRjs2KC1GIzYmRlVGWkZnc0ZYRkZGSEZKRkxGT0ZGRkhGSkZjc0ZccEZfcEZhcEZjcEZlcEZncEZqcEZccUZfcUZicUZlcUZncUZpcUZcckZeckZgckZickZlckYrRlhGWEZnckZqckYrRlg=</Equation></Text-field>
+<Group labelreference="L52" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Text-field style="List Item" layout="List Item">2. <Font style="Normal" encoding="UTF-8">Sz\303\241m\303\255tsuk ki az al\303\241bbi m\303\241trixokat:</Font></Text-field>
+<Text-field style="Normal" layout="Normal">A, <Equation executable="false" style="2D Comment" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2I1EhRictRiM2JkYrLUklbXN1cEdGJDYlLUkobWZlbmNlZEdGJDYmLUYjNiZGKy1JJ210YWJsZUdGJDY2LUkkbXRyR0YkNictSSRtdGRHRiQ2KC1JI21uR0YkNiRRIjJGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRicvJSlyb3dhbGlnbkdGLi8lLGNvbHVtbmFsaWduR0YuLyUrZ3JvdXBhbGlnbkdGLi8lKHJvd3NwYW5HUSIxRicvJStjb2x1bW5zcGFuR0ZRLUZANigtRiM2JS1JI21vR0YkNi1RKiZ1bWludXMwO0YnRkYvJSZmZW5jZUdRJmZhbHNlRicvJSpzZXBhcmF0b3JHRmhuLyUpc3RyZXRjaHlHRmhuLyUqc3ltbWV0cmljR0Zobi8lKGxhcmdlb3BHRmhuLyUubW92YWJsZWxpbWl0c0dGaG4vJSdhY2NlbnRHRmhuLyUnbHNwYWNlR1EmMC4wZW1GJy8lJ3JzcGFjZUdRLDAuMTExMTExMWVtRictRkM2JFEiNEYnRkZGRkZJRktGTUZPRlJGSUZLRk0tRj02Jy1GQDYoLUZDNiRGUUZGRklGS0ZNRk9GUi1GQDYoLUYjNiVGWEZCRkZGSUZLRk1GT0ZSRklGS0ZNLyUmYWxpZ25HUSVheGlzRicvRkpRKWJhc2VsaW5lRicvRkxRJ2NlbnRlckYnL0ZOUSd8ZnJsZWZ0fGhyRicvJS9hbGlnbm1lbnRzY29wZUdRJXRydWVGJy8lLGNvbHVtbndpZHRoR1ElYXV0b0YnLyUmd2lkdGhHRmZxLyUrcm93c3BhY2luZ0dRJjEuMGV4RicvJS5jb2x1bW5zcGFjaW5nR1EmMC44ZW1GJy8lKXJvd2xpbmVzR1Elbm9uZUYnLyUsY29sdW1ubGluZXNHRmFyLyUmZnJhbWVHRmFyLyUtZnJhbWVzcGFjaW5nR1EsMC40ZW1+MC41ZXhGJy8lKmVxdWFscm93c0dGaG4vJS1lcXVhbGNvbHVtbnNHRmhuLyUtZGlzcGxheXN0eWxlR0Zobi8lJXNpZGVHUSZyaWdodEYnLyUwbWlubGFiZWxzcGFjaW5nR0ZeckYrRkZGRi8lJW9wZW5HUSJbRicvJSZjbG9zZUdRIl1GJy1GQzYkUSUxMTExRidGRi8lMXN1cGVyc2NyaXB0c2hpZnRHUSIwRidGK0ZGRitGRg==">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2I1EhRictRiM2JkYrLUklbXN1cEdGJDYlLUkobWZlbmNlZEdGJDYmLUYjNiZGKy1JJ210YWJsZUdGJDY2LUkkbXRyR0YkNictSSRtdGRHRiQ2KC1JI21uR0YkNiRRIjJGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRicvJSlyb3dhbGlnbkdGLi8lLGNvbHVtbmFsaWduR0YuLyUrZ3JvdXBhbGlnbkdGLi8lKHJvd3NwYW5HUSIxRicvJStjb2x1bW5zcGFuR0ZRLUZANigtRiM2JS1JI21vR0YkNi1RKiZ1bWludXMwO0YnRkYvJSZmZW5jZUdRJmZhbHNlRicvJSpzZXBhcmF0b3JHRmhuLyUpc3RyZXRjaHlHRmhuLyUqc3ltbWV0cmljR0Zobi8lKGxhcmdlb3BHRmhuLyUubW92YWJsZWxpbWl0c0dGaG4vJSdhY2NlbnRHRmhuLyUnbHNwYWNlR1EmMC4wZW1GJy8lJ3JzcGFjZUdRLDAuMTExMTExMWVtRictRkM2JFEiNEYnRkZGRkZJRktGTUZPRlJGSUZLRk0tRj02Jy1GQDYoLUZDNiRGUUZGRklGS0ZNRk9GUi1GQDYoLUYjNiVGWEZCRkZGSUZLRk1GT0ZSRklGS0ZNLyUmYWxpZ25HUSVheGlzRicvRkpRKWJhc2VsaW5lRicvRkxRJ2NlbnRlckYnL0ZOUSd8ZnJsZWZ0fGhyRicvJS9hbGlnbm1lbnRzY29wZUdRJXRydWVGJy8lLGNvbHVtbndpZHRoR1ElYXV0b0YnLyUmd2lkdGhHRmZxLyUrcm93c3BhY2luZ0dRJjEuMGV4RicvJS5jb2x1bW5zcGFjaW5nR1EmMC44ZW1GJy8lKXJvd2xpbmVzR1Elbm9uZUYnLyUsY29sdW1ubGluZXNHRmFyLyUmZnJhbWVHRmFyLyUtZnJhbWVzcGFjaW5nR1EsMC40ZW1+MC41ZXhGJy8lKmVxdWFscm93c0dGaG4vJS1lcXVhbGNvbHVtbnNHRmhuLyUtZGlzcGxheXN0eWxlR0Zobi8lJXNpZGVHUSZyaWdodEYnLyUwbWlubGFiZWxzcGFjaW5nR0ZeckYrRkZGRi8lJW9wZW5HUSJbRicvJSZjbG9zZUdRIl1GJy1GQzYkUSUxMTExRidGRi8lMXN1cGVyc2NyaXB0c2hpZnRHUSIwRidGK0ZGRitGRg==</Equation></Text-field>
+<Text-field style="Normal" layout="Normal">B, <Equation executable="false" style="2D Comment" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2I1EhRictRiM2JkYrLUklbXN1cEdGJDYlLUkobWZlbmNlZEdGJDYmLUYjNiZGKy1JJ210YWJsZUdGJDY2LUkkbXRyR0YkNictSSRtdGRHRiQ2KC1JI21uR0YkNiRRIjFGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRicvJSlyb3dhbGlnbkdGLi8lLGNvbHVtbmFsaWduR0YuLyUrZ3JvdXBhbGlnbkdGLi8lKHJvd3NwYW5HRkUvJStjb2x1bW5zcGFuR0ZFRj9GSUZLRk0tRj02Jy1GQDYoLUZDNiRRIjBGJ0ZGRklGS0ZNRk9GUUY/RklGS0ZNLyUmYWxpZ25HUSVheGlzRicvRkpRKWJhc2VsaW5lRicvRkxRJ2NlbnRlckYnL0ZOUSd8ZnJsZWZ0fGhyRicvJS9hbGlnbm1lbnRzY29wZUdRJXRydWVGJy8lLGNvbHVtbndpZHRoR1ElYXV0b0YnLyUmd2lkdGhHRmJvLyUrcm93c3BhY2luZ0dRJjEuMGV4RicvJS5jb2x1bW5zcGFjaW5nR1EmMC44ZW1GJy8lKXJvd2xpbmVzR1Elbm9uZUYnLyUsY29sdW1ubGluZXNHRl1wLyUmZnJhbWVHRl1wLyUtZnJhbWVzcGFjaW5nR1EsMC40ZW1+MC41ZXhGJy8lKmVxdWFscm93c0dRJmZhbHNlRicvJS1lcXVhbGNvbHVtbnNHRmdwLyUtZGlzcGxheXN0eWxlR0ZncC8lJXNpZGVHUSZyaWdodEYnLyUwbWlubGFiZWxzcGFjaW5nR0Zqb0YrRkZGRi8lJW9wZW5HUSJbRicvJSZjbG9zZUdRIl1GJy1GQzYkUSI3RidGRi8lMXN1cGVyc2NyaXB0c2hpZnRHRllGK0ZGRitGRg==">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2I1EhRictRiM2JkYrLUklbXN1cEdGJDYlLUkobWZlbmNlZEdGJDYmLUYjNiZGKy1JJ210YWJsZUdGJDY2LUkkbXRyR0YkNictSSRtdGRHRiQ2KC1JI21uR0YkNiRRIjFGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRicvJSlyb3dhbGlnbkdGLi8lLGNvbHVtbmFsaWduR0YuLyUrZ3JvdXBhbGlnbkdGLi8lKHJvd3NwYW5HRkUvJStjb2x1bW5zcGFuR0ZFRj9GSUZLRk0tRj02Jy1GQDYoLUZDNiRRIjBGJ0ZGRklGS0ZNRk9GUUY/RklGS0ZNLyUmYWxpZ25HUSVheGlzRicvRkpRKWJhc2VsaW5lRicvRkxRJ2NlbnRlckYnL0ZOUSd8ZnJsZWZ0fGhyRicvJS9hbGlnbm1lbnRzY29wZUdRJXRydWVGJy8lLGNvbHVtbndpZHRoR1ElYXV0b0YnLyUmd2lkdGhHRmJvLyUrcm93c3BhY2luZ0dRJjEuMGV4RicvJS5jb2x1bW5zcGFjaW5nR1EmMC44ZW1GJy8lKXJvd2xpbmVzR1Elbm9uZUYnLyUsY29sdW1ubGluZXNHRl1wLyUmZnJhbWVHRl1wLyUtZnJhbWVzcGFjaW5nR1EsMC40ZW1+MC41ZXhGJy8lKmVxdWFscm93c0dRJmZhbHNlRicvJS1lcXVhbGNvbHVtbnNHRmdwLyUtZGlzcGxheXN0eWxlR0ZncC8lJXNpZGVHUSZyaWdodEYnLyUwbWlubGFiZWxzcGFjaW5nR0Zqb0YrRkZGRi8lJW9wZW5HUSJbRicvJSZjbG9zZUdRIl1GJy1GQzYkUSI3RidGRi8lMXN1cGVyc2NyaXB0c2hpZnRHRllGK0ZGRitGRg==</Equation></Text-field>
+<Group labelreference="L53" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Text-field style="List Item" layout="List Item">3. <Font style="Normal" encoding="UTF-8">Legyenek a,b val\303\263s sz\303\241mok</Font><Font style="Normal">, </Font><Equation executable="false" style="2D Comment" input-equation="">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRictRiM2J0YrLUYjNiMtSSVtc3VwR0YkNiUtRiw2JVEiYkYnLyUnaXRhbGljR1EldHJ1ZUYnLyUsbWF0aHZhcmlhbnRHUSdpdGFsaWNGJy1JI21uR0YkNiRRIjJGJy9GPVEnbm9ybWFsRicvJTFzdXBlcnNjcmlwdHNoaWZ0R1EiMEYnLUkjbW9HRiQ2LVEiPUYnRkMvJSZmZW5jZUdRJmZhbHNlRicvJSpzZXBhcmF0b3JHRk4vJSlzdHJldGNoeUdGTi8lKnN5bW1ldHJpY0dGTi8lKGxhcmdlb3BHRk4vJS5tb3ZhYmxlbGltaXRzR0ZOLyUnYWNjZW50R0ZOLyUnbHNwYWNlR1EsMC4yNzc3Nzc4ZW1GJy8lJ3JzcGFjZUdGZ24tRiM2J0Y/LUZJNi1RMSZJbnZpc2libGVUaW1lcztGJ0ZDRkxGT0ZRRlNGVUZXRlkvRmZuUSYwLjBlbUYnL0ZpbkZgby1GLDYlUSJhRidGOUY8RlxvLUkobWZlbmNlZEdGJDYkLUYjNiUtRkA2JFEiMUYnRkMtRkk2LVEoJm1pbnVzO0YnRkNGTEZPRlFGU0ZVRldGWS9GZm5RLDAuMjIyMjIyMmVtRicvRmluRmFwRmJvRkNGK0Yr</Equation><Font style="Normal" encoding="UTF-8"> \303\251s</Font></Text-field>
+<Text-field style="Normal" layout="Normal">A=<Equation executable="false" style="2D Comment" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2I1EhRictSShtZmVuY2VkR0YkNiYtRiM2JkYrLUknbXRhYmxlR0YkNjctSSRtdHJHRiQ2KC1JJG10ZEdGJDYoLUYsNiVRImFGJy8lJ2l0YWxpY0dRJXRydWVGJy8lLG1hdGh2YXJpYW50R1EnaXRhbGljRicvJSlyb3dhbGlnbkdGLi8lLGNvbHVtbmFsaWduR0YuLyUrZ3JvdXBhbGlnbkdGLi8lKHJvd3NwYW5HUSIxRicvJStjb2x1bW5zcGFuR0ZOLUY7NigtRiM2JkY9LUkjbW9HRiQ2LVEoJm1pbnVzO0YnL0ZEUSdub3JtYWxGJy8lJmZlbmNlR1EmZmFsc2VGJy8lKnNlcGFyYXRvckdGZ24vJSlzdHJldGNoeUdGZ24vJSpzeW1tZXRyaWNHRmduLyUobGFyZ2VvcEdGZ24vJS5tb3ZhYmxlbGltaXRzR0Znbi8lJ2FjY2VudEdGZ24vJSdsc3BhY2VHUSwwLjIyMjIyMjJlbUYnLyUncnNwYWNlR0Zmby1JI21uR0YkNiRGTkZZRllGRkZIRkpGTEZPLUY7NigtRiw2JVEiYkYnRkBGQ0ZGRkhGSkZMRk9GRkZIRkotRjg2KEZRRjpGXHBGRkZIRkotRjg2KC1GOzYoLUYjNiUtRlY2LVEqJnVtaW51czA7RidGWUZlbkZobkZqbkZcb0Zeb0Zgb0Ziby9GZW9RJjAuMGVtRicvRmhvUSwwLjExMTExMTFlbUYnRl5wRllGRkZIRkpGTEZPRmVwLUY7NigtRiM2J0YrLUYjNiYtRmpvNiRRIjJGJ0ZZLUZWNi1RMSZJbnZpc2libGVUaW1lcztGJ0ZZRmVuRmhuRmpuRlxvRl5vRmBvRmJvRlxxL0Zob0ZdcUY9RllGVUZpb0ZZRkZGSEZKRkxGT0ZGRkhGSi8lJmFsaWduR1ElYXhpc0YnL0ZHUSliYXNlbGluZUYnL0ZJUSdjZW50ZXJGJy9GS1EnfGZybGVmdHxockYnLyUvYWxpZ25tZW50c2NvcGVHRkIvJSxjb2x1bW53aWR0aEdRJWF1dG9GJy8lJndpZHRoR0Zqci8lK3Jvd3NwYWNpbmdHUSYxLjBleEYnLyUuY29sdW1uc3BhY2luZ0dRJjAuOGVtRicvJSlyb3dsaW5lc0dRJW5vbmVGJy8lLGNvbHVtbmxpbmVzR0Zlcy8lJmZyYW1lR0Zlcy8lLWZyYW1lc3BhY2luZ0dRLDAuNGVtfjAuNWV4RicvJSplcXVhbHJvd3NHRmduLyUtZXF1YWxjb2x1bW5zR0Znbi8lLWRpc3BsYXlzdHlsZUdGZ24vJSVzaWRlR1EmcmlnaHRGJy8lMG1pbmxhYmVsc3BhY2luZ0dGYnNGK0ZZRlkvJSVvcGVuR1EiW0YnLyUmY2xvc2VHUSJdRidGK0ZZ">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbWlHRiQ2I1EhRictSShtZmVuY2VkR0YkNiYtRiM2JkYrLUknbXRhYmxlR0YkNjctSSRtdHJHRiQ2KC1JJG10ZEdGJDYoLUYsNiVRImFGJy8lJ2l0YWxpY0dRJXRydWVGJy8lLG1hdGh2YXJpYW50R1EnaXRhbGljRicvJSlyb3dhbGlnbkdGLi8lLGNvbHVtbmFsaWduR0YuLyUrZ3JvdXBhbGlnbkdGLi8lKHJvd3NwYW5HUSIxRicvJStjb2x1bW5zcGFuR0ZOLUY7NigtRiM2JkY9LUkjbW9HRiQ2LVEoJm1pbnVzO0YnL0ZEUSdub3JtYWxGJy8lJmZlbmNlR1EmZmFsc2VGJy8lKnNlcGFyYXRvckdGZ24vJSlzdHJldGNoeUdGZ24vJSpzeW1tZXRyaWNHRmduLyUobGFyZ2VvcEdGZ24vJS5tb3ZhYmxlbGltaXRzR0Znbi8lJ2FjY2VudEdGZ24vJSdsc3BhY2VHUSwwLjIyMjIyMjJlbUYnLyUncnNwYWNlR0Zmby1JI21uR0YkNiRGTkZZRllGRkZIRkpGTEZPLUY7NigtRiw2JVEiYkYnRkBGQ0ZGRkhGSkZMRk9GRkZIRkotRjg2KEZRRjpGXHBGRkZIRkotRjg2KC1GOzYoLUYjNiUtRlY2LVEqJnVtaW51czA7RidGWUZlbkZobkZqbkZcb0Zeb0Zgb0Ziby9GZW9RJjAuMGVtRicvRmhvUSwwLjExMTExMTFlbUYnRl5wRllGRkZIRkpGTEZPRmVwLUY7NigtRiM2J0YrLUYjNiYtRmpvNiRRIjJGJ0ZZLUZWNi1RMSZJbnZpc2libGVUaW1lcztGJ0ZZRmVuRmhuRmpuRlxvRl5vRmBvRmJvRlxxL0Zob0ZdcUY9RllGVUZpb0ZZRkZGSEZKRkxGT0ZGRkhGSi8lJmFsaWduR1ElYXhpc0YnL0ZHUSliYXNlbGluZUYnL0ZJUSdjZW50ZXJGJy9GS1EnfGZybGVmdHxockYnLyUvYWxpZ25tZW50c2NvcGVHRkIvJSxjb2x1bW53aWR0aEdRJWF1dG9GJy8lJndpZHRoR0Zqci8lK3Jvd3NwYWNpbmdHUSYxLjBleEYnLyUuY29sdW1uc3BhY2luZ0dRJjAuOGVtRicvJSlyb3dsaW5lc0dRJW5vbmVGJy8lLGNvbHVtbmxpbmVzR0Zlcy8lJmZyYW1lR0Zlcy8lLWZyYW1lc3BhY2luZ0dRLDAuNGVtfjAuNWV4RicvJSplcXVhbHJvd3NHRmduLyUtZXF1YWxjb2x1bW5zR0Znbi8lLWRpc3BsYXlzdHlsZUdGZ24vJSVzaWRlR1EmcmlnaHRGJy8lMG1pbmxhYmVsc3BhY2luZ0dGYnNGK0ZZRlkvJSVvcGVuR1EiW0YnLyUmY2xvc2VHUSJdRidGK0ZZ</Equation></Text-field>
+<Text-field style="Normal" layout="Normal"><Font encoding="UTF-8">Ellen\305\221rizz\303\274k a Maple-lel, hogy A 1 determin\303\241ns\303\272 m\303\241trix.</Font></Text-field>
+<Group labelreference="L54" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Text-field style="List Item" layout="List Item"><Font encoding="UTF-8">4. Hozzunk l\303\251tre egy 10x10-es m\303\241trixot, melyben 1-t\305\221l 100-ig vannak sorfolytonosan a sz\303\241mok.</Font></Text-field>
+<Group labelreference="L41" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Text-field style="List Item" layout="List Item"><Font encoding="UTF-8">5. Hozzunk l\303\251tre egy 5x5-\303\266s Vandermonde-f\303\251le m\303\241trixot az </Font><Font italic="true">a, b, c, d, e</Font><Font encoding="UTF-8"> elemekb\305\221l. Sz\303\241m\303\255tsuk ki a determin\303\241ns\303\241t. Alak\303\255tsuk szorzatt\303\241 a determin\303\241nst.</Font></Text-field>
+<Group labelreference="L42" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Text-field style="List Item" layout="List Item"><Font encoding="UTF-8">6.* Hozzunk l\303\251tre egy 6x6-os m\303\241trixot, melyben a f\305\221\303\241tl\303\263ban </Font><Font italic="true">a, </Font><Font encoding="UTF-8">a t\303\266bbi helyen </Font><Font italic="true">b </Font><Font encoding="UTF-8">szerepel. Sz\303\241m\303\255tsuk ki szorzat alakban a determin\303\241nst.</Font></Text-field>
+<Group labelreference="L43" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Text-field style="List Item" layout="List Item"><Font encoding="UTF-8">7. Hozzunk l\303\251tre egy </Font><Font italic="true">n</Font>x<Font italic="true">n-</Font>es <Font encoding="UTF-8">m\303\241trixot, melyben csak a f\305\221\303\241tl\303\263 feletti mell\303\251k\303\241tl\303\263ban vannak 1-esek, a t\303\266bbi elem 0. Sz\303\241m\303\255tsuk ki az els\305\221 </Font><Font italic="true">n</Font><Font encoding="UTF-8"> hatv\303\241ny\303\241t (</Font><Font italic="true">n </Font><Font encoding="UTF-8">egy el\305\221tte r\303\266gz\303\255tett konstans</Font>). </Text-field>
+<Group labelreference="L44" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Text-field style="List Item" layout="List Item"><Font encoding="UTF-8">8.* Hozzunk l\303\251tre egy 10x10-es Hilbert-m\303\241trixot racion\303\241lis ill. lebeg\305\221pontos elemekkel. Sz\303\241m\303\255tsuk ki az inverzeiket. Hasonl\303\255tsuk \303\266ssze a kapott eredm\303\251nyt. </Font></Text-field>
+<Group labelreference="L55" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Text-field style="List Item" layout="List Item"><Font encoding="UTF-8">9.* Hozzunk l\303\251tre egy 5x5-\303\266s m\303\241trixot, melyben az i. sor j. eleme annak a val\303\263sz\303\255n\305\261s\303\251g\303\251vel egyenl\305\221, hogy i-hez egy v\303\251letlen kockadob\303\241s eredm\303\251ny\303\251t adva az eredm\303\251ny j-vel kongruens modulo 5. Sz\303\241moljuk ki a m\303\241trix 30. hatv\303\241ny\303\241t. Mennyi annak a val\303\263sz\303\255n\305\261s\303\251ge, hogy 30 kockadob\303\241s \303\266sszege \303\266ttel oszthat\303\263?</Font></Text-field>
+<Group labelreference="L56" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+<Text-field style="List Item" layout="List Item"><Font encoding="UTF-8">10.* Legyen G az a gr\303\241f, melynek cs\303\272csai az {&quot;ember&quot;, &quot;farkas&quot;, &quot;kecske&quot;, &quot;k\303\241poszta&quot;} halmaz r\303\251szhalmazai, \303\251s k\303\251t cs\303\272cs k\303\266zt akkor van \303\251l, ha a megfelel\305\221 r\303\251szhalmazok az ismert foly\303\263n \303\241tkel\305\221 probl\303\251m\303\241ban egym\303\241st k\303\266vet\305\221 balpart-\303\241llapotokat \303\241br\303\241zolnak. Hozzuk l\303\251tre G adjacenciam\303\241trix\303\241t. Sz\303\241moljuk ki az els\305\221 n\303\251h\303\241ny hatv\303\241ny\303\241t, \303\251s ebb\305\221l olvassuk ki a megold\303\241st az \303\241tkel\303\251si feladatra.</Font></Text-field>
+<Group labelreference="L45" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
+</Input>
+</Group>
+</Section>
+</Worksheet>

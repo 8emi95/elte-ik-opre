@@ -1,0 +1,26 @@
+A Magyar Labdajátékok Szervezete (MLSZ) nemzeti konzultációt hirdet a labdajátékok felvirágoztatására! Elsõ lépésként meg kell alkotni azt a kérdéssort és hozzá kérdésenként azt a minimum kettõ, maximum 4 választási lehetõséget amelyet majd a labdajátékok jobbítása iránt felelõsséget érzõk kitölthetnek. A készítendõ program adjon lehetõséget a kérdéssor megalkotására. Tudjunk új kérdést felvenni, kérdést módosítani és kérdést törölni. Módosításhoz, törléshez kínálja fel választásra a kérdést és válaszait a program! Tudjunk emellett természetesen kérdéseket és válaszaikat listázni! A kérdésekhez tároljuk automatikusan annak felvételi dátumát (év,hó,nap,óra,perc,másodperc).
+Végezetül a program adjon lehetõséget a kérdések véglegesítésére, azaz annak meghatározására, hogy mely kérdések szerepeljenek a végsõ konzultációs kérdõíven! 
+
+1 kérdés +2-4 válasz
+(kérdéssor megalkotása)
+kérdés felvétel
+kérdés módosítás
+	list q numbered
+	get num
+	seek hozzá
+	átírás
+kérdés törlés
+	list q numbered
+	get num
+	kérdés or answer?
+	if(kérdés){
+		seek hozzá
+		átírás (whole file?)
+	}else{
+		list answers
+		
+	}
+törlés/módosítás során kiválasztás
+kérdések listázása (válasszal)
+kérdésekhez felvétel idejét is kell tárolni!
+véglegesítés (szükséges kérdések meghatározása)

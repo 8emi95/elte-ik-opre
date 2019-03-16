@@ -1,0 +1,2 @@
+gcc kos.c -o /home/op/ztpd2d/bin/kos
+

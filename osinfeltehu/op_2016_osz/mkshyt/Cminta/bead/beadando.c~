@@ -1,0 +1,12 @@
+#include<stdio.h>
+
+main()
+{
+    printf("1-Új vendég jelentkezése \n");
+    printf
+    return 0;
+}
+
+            
+            
+            

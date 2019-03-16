@@ -1,0 +1,39 @@
+# Tárgy: Elte IK Operációs rendszerek 1. Beadandó
+# Készítette: Sándor Balázs - AZA6NL
+# Git: https://github.com/SandorBalazsHU/elte-ik-os-1
+
+# A git által kihagyandó fájlok
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su

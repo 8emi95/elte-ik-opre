@@ -1,0 +1,20 @@
+1. Rendezvények
+	1. Új rendezvény
+		- azon, név
+	2. Rendezvény adatainak törlése
+		- azon
+		- visszakérdez névvel
+2. Vendégek
+	1. Új vendég felvétele
+		- index, rendezvény azon, név, email, rendszerido
+	2. Vendég adatainak módosítása
+		- index
+		- visszakérdez névvel
+	3. Vendég adatainak törlése
+		- index
+		- visszakérdez névvel
+	
+	
+Fájlok:
+	rendezvények: azon, név
+	vendégek: index, rendszerido, név, email, rendezvény azon

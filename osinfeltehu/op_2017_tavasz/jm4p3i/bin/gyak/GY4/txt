@@ -1,0 +1,5 @@
+nevcso
+pipe -> olvasasra varakozik
+select, poll -> esemenyre var, csak akkor olvas
+
+socketeknel select vagy poll, nem sima pipe (poll egyszerubb)

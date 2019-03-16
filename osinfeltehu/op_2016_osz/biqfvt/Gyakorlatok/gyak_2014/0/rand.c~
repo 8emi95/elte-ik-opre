@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h> //srand
+#include <time.h>
+#include <unistd.h>
+
+int main()
+{ 
+  //srand(time(NULL)); //the starting value of random number generation (use seconds)
+  
+  pid_t child=fork();    //srand(getpid()) - if several are running at the same time
+  if (child>0){
+    srand(getpid()); //the starting value of random number generation (use seconds)
+  
+    int r=rand()%100; //number between 0-99
+    printf("Random number %i\n",r);
+  }else {
+    srand(getpid()); //the starting value of random number generation (use seconds)
+  
+    int r=rand()%100; //number between 0-99 
+    printf("Random number %i\n",r);
+  }
+  return 0;
+}

@@ -1,0 +1,70 @@
+- ellenõr:   ellenõrzi a választók adatait
+- pecsételõ:   lepecsételi és kiadja a választási lapot
+
+- elnök:
+A szülõ generáljon minden szavazóhoz egy véletlen azonosítószámot! A választók azonosítószámait egy csövön keresztül továbbítja az adatellenõrzõ tagnak, aki kiírja, hogy fogadta az adatokat és kiírja a képernyõre. A szülõ bevárja a gyerekek befejezését.
+
+jelzest es csovezeteket is kell hasznalni
+
+A gyerek nem tudja hogy hány adatot fog kapni, de a szülõ tudja az argumentumból, gyerek pedig egy while ciklussal olvasgat addig, amíg be nem zátódik a csõvezeték (író vége)
+Minden író vége záródjon be!
+
+ezutan a szülö beolvassa hogy hany szavazo lesz (parancssori argumentumból)
+veletlen szamokat kell generealni (amennyit a ps-ban megadtunk)
+nem kell kulonbozoseget ellenorizni
+csovon keresztul kell tovabbitani a szulobol az elso gyerek szamara, aki kioplvassa a csobol az adatokat es kiirja a kepernyore
+
+
+
+Csõvezetéket mindig a fork elõtt kell létrehozni (miért??)
+
+A pause-al az lehet a probléma, ha a gyerek elõbb küldi az üzenetet, minthogy a szülõ a pause-hoz ér, akkor gond van
+
+wait(NULL);  -  szülõ vár a gyerekek befejezõdésére
+
+a szignál fv kapcsolja össze a handlert azzal a jelzéssel, amit majd meg fog kapni. Ez legyen a kódban minél hamarabb (pl. az nem jó, ha a gyerek folyamat elején van, mivel a szülõ is küldhet szignált)
+
+A szignál beállítás öröklõdik (tehát a gyerek folyamatra is érvényes)
+
+sigterm, siguser1, siguser2  -  ezzel a 3 sjelzéssel mindent meg lehet oldani (??)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2) Az ellenõrzést végzõ tag a választói azonosításhoz adatellenõrzést végez. Minden azonosító 20% eséllyel hibás. A hibás azonosítójú választó nem szavazhat. Az ellenõrzést végzõ gyerek így a szavazhat/nem szavazhat jelzéssel csõvezetékbe írja az adatokat, majd errõl jelzést küld a választási lapokat kezelõ testvérének, aki ezt a képernyõre írja. A választási lapokat kezelõ testvér egy összesítést végez, megadja, hogy hány érvényes/érvénytelen szavazó jelent meg, majd ezt az összesített adatot továbbítja csövön keresztül a szülõnek, aki errõl jegyzõkönyvet (érvényes-érvénytelenek százalékos aránya) készít egy szöveges fájlba. A szülõ ezt a képernyõre is kiírja. 
+
+
+jegyzokonyvet egy szöveges fájlba kell kiírni
+
+
+
+
+
+
+3) Az érvényes iratokkal rendelkezõ választó, választási lapot kap, majd szavaz (a 2. gyerekben).  A valahány (4,5,6 bármi lehet, konstans) lehetséges párt közül véletlenszerûen választ egyet, majd az eredményt csõbe írja, errõl a bizottság elnökének jelzést küld. A szavazás eredményét a szülõ innen olvassa ki és kihirdeti (kiírja). 
+
+osztott memóriát kell használni
+
+jelzest kell kuldeni amikkopr befejezte a megfelelo folyamat a beirast
+
+
+
+
+
+4) Idõnként egyikük (véletlenszerûen) kimegy egy idõre - kettõnek azonban folyamatosan a teremben kell maradnia. (szemafor). A távozásokat és visszaérkezéseket jegyzõkönyvezni kell. (Ez már nincs…mivel szemafor még nem volt!)

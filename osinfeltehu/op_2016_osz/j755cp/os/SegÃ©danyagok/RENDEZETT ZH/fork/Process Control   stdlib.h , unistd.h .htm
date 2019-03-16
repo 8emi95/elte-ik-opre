@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- saved from url=(0070)http://www.cs.cf.ac.uk/Dave/C/node22.html#SECTION002200000000000000000 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Process Control: &lt;stdlib.h&gt;,&lt;unistd.h&gt;</title>
+<meta name="description" content="Process Control: &lt;stdlib.h&gt;,&lt;unistd.h&gt;">
+<meta name="keywords" content="C">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<link rel="STYLESHEET" href="http://www.cs.cf.ac.uk/Dave/C/C.css">
+</head>
+<body>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+<ul>
+<li><a name="tex2html1164" href="http://www.cs.cf.ac.uk/Dave/C/node22.html#SECTION002210000000000000000">
+Running UNIX Commands from C</a>
+</li><li><a name="tex2html1165" href="http://www.cs.cf.ac.uk/Dave/C/node22.html#SECTION002220000000000000000">
+execl()</a>
+</li><li><a name="tex2html1166" href="http://www.cs.cf.ac.uk/Dave/C/node22.html#SECTION002230000000000000000">
+fork()</a>
+</li><li><a name="tex2html1167" href="http://www.cs.cf.ac.uk/Dave/C/node22.html#SECTION002240000000000000000">
+wait()</a>
+</li><li><a name="tex2html1168" href="http://www.cs.cf.ac.uk/Dave/C/node22.html#SECTION002250000000000000000">
+exit()</a>
+</li><li><a name="tex2html1169" href="http://www.cs.cf.ac.uk/Dave/C/node22.html#SECTION002260000000000000000">
+Exerises</a>
+</li></ul>
+<!--End of Table of Child-Links-->
+<hr>
+<h1><a name="SECTION002200000000000000000">
+Process Control: <tt>&lt;stdlib.h&gt;,&lt;unistd.h&gt;</tt></a>
+</h1>
+<p>
+A <em>process</em> is basically a single running program. It may be a ``system'' 
+program (<em>e.g</em> login, update, csh) or program initiated by the user
+(textedit, dbxtool or a user written one).
+<br>
+</p><p>
+When UNIX runs a process it gives each process a unique number - a process ID,
+<tt>pid</tt>.
+<br>
+</p><p>
+The UNIX command <tt>ps</tt> will list all current processes running on your
+machine and will list the pid.
+<br>
+</p><p>
+The C function <tt>int getpid()</tt> will return the pid of process that called
+this function.
+<br>
+</p><p>
+A program usually runs as a single process. However later we will see how we can
+make programs run as several <u>separate</u> communicating processes.
+</p><p></p><h1><a name="SECTION002210000000000000000">
+Running UNIX Commands from C</a>
+</h1>
+<p>
+We can run commands from a C program just as if they were from the UNIX command
+line by using the <tt>system()</tt> function. <b>NOTE:</b> this can save us a lot of
+time and hassle as we can run other (proven) programs, scripts <em>etc.</em> to do
+set tasks.
+<br>
+</p><p>&nbsp;&nbsp;&nbsp;<tt>int system(char *string)</tt> -- where string can be the name of a unix
+utility, an executable shell script or a user program. System returns the exit
+status of the shell. System is prototyped in <tt>&lt;stdlib.h&gt;</tt>
+<br>
+</p><p>
+Example: Call <tt>ls</tt> from a program
+<br>
+</p><p><tt>
+</tt></p><pre><tt><tt>
+main()
+{ printf(``Files in Directory are:<img width="12" height="32" align="MIDDLE" border="0" src="./Process Control   stdlib.h , unistd.h _files/img3.gif" alt="$\backslash$">n'');
+		 system(``ls -l'');
+}
+</tt></tt></pre><tt>
+</tt>
+ <br>
+<p><tt>system is a call that is made up of 3 other system calls: <tt>execl(), wait()
+and fork()</tt> (which are prototyed in &lt;unistd&gt;)
+<br>
+</tt></p><p></p><h1><a name="SECTION002220000000000000000">
+execl()</a>
+</h1>
+<p><tt>execl</tt> has 5  other related functions -- see <tt>man</tt> pages.
+</p><p><tt>execl</tt> stands for <em>execute</em> and <em>leave</em> which means that a process
+will get executed and then terminated by <tt>execl</tt>.
+</p><p>
+It is defined by:
+<br>
+</p><p><tt>execl(char *path, char *arg0,...,char *argn, 0);</tt>
+<br>
+</p><p>
+The last parameter must always be 0. It is a <em>NULL terminator</em>. Since the
+argument list is variable we must have some way of telling C when it is to end.
+The NULL terminator does this job.
+<br>
+</p><p>
+where <tt>path</tt> points to the name of a file holding a command that is to be
+executed, <tt>argo</tt> points to a string that is the same as path (or at least
+its last component. 
+<br>
+</p><p><tt>arg1 ... argn</tt> are pointers to arguments for the
+command and 0 simply marks the end of the (variable) list of arguments.
+<br>
+</p><p>
+So our above example could look like this also:
+<br>
+</p><p><tt>
+</tt></p><pre><tt><tt>
+main()
+{ printf(``Files in Directory are:<img width="12" height="32" align="MIDDLE" border="0" src="./Process Control   stdlib.h , unistd.h _files/img3.gif" alt="$\backslash$">n'');
+		 execl(`/bin/ls'',``ls'', ``-l'',0);
+}
+</tt></tt></pre><tt>
+</tt>
+ <br>
+<p></p><h1><a name="SECTION002230000000000000000">
+fork()</a>
+</h1>
+<p><tt>int fork()</tt> turns a single process into 2 identical processes, known as
+the <em>parent</em> and the <em>child</em>. On success, fork()  returns  0  to  the 
+child  process  and returns  the  process  ID of the child process to the parent
+process.  On failure, fork() returns -1 to the  parent  process, sets errno to
+indicate the error, and no child process is created.
+<br>
+</p><p><b>NOTE:</b> The child process will have its own unique PID.
+<br>
+</p><p>
+The following program illustrates a simple use of fork, where two copies are
+made and run together (multitasking)
+ <br>
+</p><p><tt>
+</tt></p><pre><tt><tt>
+main() 
+{&nbsp;int return_value;
+&nbsp;
+		 printf(``Forking process<img width="12" height="32" align="MIDDLE" border="0" src="./Process Control   stdlib.h , unistd.h _files/img3.gif" alt="$\backslash$">n'');
+		 fork();
+		 printf(``The process id is %d
+		 &nbsp;&nbsp;and return value is %d<img width="12" height="32" align="MIDDLE" border="0" src="./Process Control   stdlib.h , unistd.h _files/img3.gif" alt="$\backslash$">n",
+		 &nbsp;&nbsp;getpid(), return_value);
+		 execl(``/bin/ls/'',``ls'',``-l'',0);
+		 printf(``This line is not printed<img width="12" height="32" align="MIDDLE" border="0" src="./Process Control   stdlib.h , unistd.h _files/img3.gif" alt="$\backslash$">n'');
+}
+</tt></tt></pre><tt>
+</tt>
+ <br>
+<p>
+The Output of this would be:
+<br>
+</p><p><tt>
+</tt></p><pre><tt><tt>
+Forking process
+The process id is 6753 and return value is 0
+The process id is 6754 and return value is 0
+<em>two lists of files in current directory</em>
+</tt></tt></pre><tt><tt>
+</tt>
+<br>
+<p><b>NOTE:</b> The processes have unique ID's which will be different at each
+run.
+<br>
+</p><p>
+It also impossible to tell in advance which process will get to CPU's time --
+so one run may differ from the next.
+ <br>
+</p><p>
+When we spawn 2 processes we can easily detect (in each process) whether it is
+the child or parent since fork returns <u>0</u> to the <u>child</u>. We
+can trap any errors if fork returns a -1. <em>i.e.</em>:
+<br>
+</p><p><tt>
+</tt></p><pre><tt><tt>
+int pid; /* process identifier */
+&nbsp;
+pid = fork();
+if ( pid &lt; 0 )
+		 {&nbsp;printf(``Cannot fork!!<img width="12" height="32" align="MIDDLE" border="0" src="./Process Control   stdlib.h , unistd.h _files/img3.gif" alt="$\backslash$">n'');
+				 exit(1);
+		 }
+if ( pid == 0 )
+		 { /* Child process */ ...... } 
+else
+		 { /* Parent process pid is child's pid */
+		 .... }
+</tt></tt></pre><tt><tt>
+</tt>
+<br>
+</tt></tt><p><tt><tt></tt></tt></p><h1><a name="SECTION002240000000000000000">
+wait()</a>
+</h1>
+<p><tt>int wait (int *status_location)</tt> -- will force a parent process to wait
+for a child process to stop or terminate. <tt>wait()</tt> return the pid of the
+child or -1 for an error. The exit status of the child is returned to <tt>
+status_location</tt>.
+<br>
+</p><p></p><h1><a name="SECTION002250000000000000000">
+exit()</a>
+</h1>
+<p><tt>void exit(int status)</tt> -- terminates the process which calls this function
+and returns the exit <tt>status</tt> value. Both UNIX and C (forked) programs can
+read the status value.
+<br>
+</p><p>
+By convention, a status of 0 means <em>normal termination</em> any other value
+indicates an error or unusual occurrence. Many standard library calls have
+errors defined in the <tt>sys/stat.h</tt> header file. We can easily derive our own
+conventions.
+ <br>
+</p><p>
+A complete example of forking program  is
+originally titled <tt>fork.c</tt>:
+</p><p></p><pre>/* fork.c - example of a fork in a program */
+/* The program asks for UNIX commands to be typed and inputted to a string*/
+/* The string is then "parsed" by locating blanks etc. */
+/* Each command and sorresponding arguments are put in a args array */
+/* execvp is called to execute these commands in child process */
+/* spawned by fork() */
+
+/* cc -o fork fork.c */
+
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+
+main()
+{
+    char buf[1024];
+    char *args[64];
+
+    for (;;) {
+        /*
+         * Prompt for and read a command.
+         */
+        printf("Command: ");
+
+        if (gets(buf) == NULL) {
+            printf("\n");
+            exit(0);
+        }
+
+        /*
+         * Split the string into arguments.
+         */
+        parse(buf, args);
+
+        /*
+         * Execute the command.
+         */
+        execute(args);
+    }
+}
+
+/*
+ * parse--split the command in buf into
+ *         individual arguments.
+ */
+parse(buf, args)
+char *buf;
+char **args;
+{
+    while (*buf != NULL) {
+        /*
+         * Strip whitespace.  Use nulls, so
+         * that the previous argument is terminated
+         * automatically.
+         */
+        while ((*buf == ' ') || (*buf == '\t'))
+            *buf++ = NULL;
+
+        /*
+         * Save the argument.
+         */
+        *args++ = buf;
+
+        /*
+         * Skip over the argument.
+         */
+        while ((*buf != NULL) &amp;&amp; (*buf != ' ') &amp;&amp; (*buf != '\t'))
+            buf++;
+    }
+
+    *args = NULL;
+}
+
+/*
+ * execute--spawn a child process and execute
+ *           the program.
+ */
+execute(args)
+char **args;
+{
+    int pid, status;
+
+    /*
+     * Get a child process.
+     */
+    if ((pid = fork()) &lt; 0) {
+        perror("fork");
+        exit(1);
+
+	/* NOTE: perror() produces a short  error  message  on  the  standard
+           error describing the last error encountered during a call to
+           a system or library function.
+       */
+    }
+
+    /*
+     * The child executes the code inside the if.
+     */
+    if (pid == 0) {
+        execvp(*args, args);
+        perror(*args);
+        exit(1);
+
+       /* NOTE: The execv() vnd execvp versions of execl() are useful when the
+          number  of  arguments is unknown in advance;
+          The arguments to execv() and execvp()  are the name
+          of the file to be executed and a vector of strings  contain-
+          ing  the  arguments.   The last argument string must be fol-
+          lowed by a 0 pointer. 
+
+          execlp() and execvp() are called with the same arguments  as
+          execl()  and  execv(),  but duplicate the shell's actions in
+          searching for an executable file in a list  of  directories.
+          The directory list is obtained from the environment.
+        */
+    }
+
+    /*
+     * The parent executes the wait.
+     */
+    while (wait(&amp;status) != pid)
+        /* empty */ ;
+}
+</pre>
+<p></p><h1><a name="SECTION002260000000000000000">
+Exerises</a>
+</h1>
+<p>
+<b>Exercise 12727</b></p>
+<p>
+Use <tt>popen()</tt> to pipe the <tt>rwho</tt> (UNIX command) output
+into <tt>more</tt> (UNIX command) in a C program.</p>
+<p>
+<br></p><hr>
+<address>
+<i>Dave Marshall</i>
+<br><i>1/5/1999</i>
+</address>
+
+
+</body></html>

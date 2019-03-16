@@ -1,0 +1,25 @@
+2. beadandó feladat.
+Beadási határidő: 2015 május 7.
+Bemutatási határidő: 2015 május 11.
+
+Továbbra is nagy szükség van a nyuszik megfigyelésére(főleg így Húsvét táján),
+így automatizáljuk a megfigyeléseinket. A "Nyuszimentő akciótervet" felügyelő
+miniszteri biztos (szülő program) megfigyelő expedíciókat (gyerek program) szervez! 
+
+1. A szülő program paraméterben kapja meg, hogy hány expedíciót kell szerveznie
+	és mennyi ideig tart a nyuszifigyelő akció. A gyerek programok a helyszínre érve
+	egy-egy jelzéssel tudatják a megérkezésük tényét! 
+
+2. Miután mindenki a helyszínre ért és visszajelzett a szülőnek, hogy indulhat a
+	munka, a szülő egy-egy szöveges azonosítót küld jelzés vagy cső segítségével az
+	expedícióknak. (pl. medve, farkas, oroszlán) Az expedíció kiírja, hogy megkapta
+	az azonosítót, majd visszajelzésben tudatja, hogy adott azonosítójú expedíció
+	megfigyelésre kész! 
+
+3. Az azonosítás után minden expedíció kezdje el a megfigyeléseit és mindhárom
+	nyuszikorosztályt figyelje meg. Minden expedíció egy idő múlva (véletlenszerűen
+	megválasztva 2,3,4 vagy 5 másodperc) üzenetsoron keresztül küldje vissza
+	mindhárom megfigyelési adatot és a megfigyelő azonosítót! A szülő menti az
+	adatbázisba a kapott megfigyelési adatokat. 4. A szülő a "fáradt" expedíciókat a
+	projekt vége előtt visszahívhatja (véletlenszerűen), míg a maradék expedíciók
+	csak a projekt végén fejezik be tevékenységüket!

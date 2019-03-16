@@ -1,0 +1,11 @@
+#ifndef FUNCTIONS_H_INCLUDED
+#define FUNCTIONS_H_INCLUDED
+
+
+#include "SYSTEM_FUNCTIONS.h"
+#include "RENDER_FUNCTIONS.h"
+#include "FILE_IO_FUNCTIONS.h"
+
+
+
+#endif // FUNCTIONS_H_INCLUDED

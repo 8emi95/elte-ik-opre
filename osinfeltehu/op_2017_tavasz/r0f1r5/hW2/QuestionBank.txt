@@ -1,0 +1,36 @@
+**Tue May 16 14:15:55 2017
+what is your name?
+10
+23
+14
+11
+*Tue May 16 14:16:12 2017
+where are you?
+budapest
+paris
+china
+USA
+*Tue May 16 14:16:55 2017
+what are you like to do?
+sleep
+work
+play game
+study
+*Tue May 16 14:17:31 2017
+who is your GF?
+lux
+javy
+jax
+linda
+*Tue May 16 14:17:58 2017
+when are you come/
+today
+tomorrow
+next week
+i don't know
+*Tue May 16 14:18:22 2017
+Elte 2016
+1
+2
+3
+4

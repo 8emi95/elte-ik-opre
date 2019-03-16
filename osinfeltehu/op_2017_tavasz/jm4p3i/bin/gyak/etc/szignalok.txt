@@ -1,0 +1,14 @@
+/*************************************************
+Néhány szignál:
+
+SIGFPE: matematikai hiba (pl: 0-val osztás)
+SIGEGV: nem megengedett memóriaelérési kísérlet
+SIGBUS: nem létezõ memória elérésére kísérlet
+SIGTERM: kilépésre felszólító (alap kill parancs)
+SIGINT: megszakítás (pl.: CTRL+C)
+SIGKILL: folyamat azonnali megszakitása (kill -9)
+SIGHUP: a futtatást végzõ felhasználó kilépett
+SIGALRM: ébresztõóra jelzése alarm(int)
+SIGCHLD: valamelyik gyerek befejezte a futását
+
+*************************************************/

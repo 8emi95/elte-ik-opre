@@ -1,0 +1,378 @@
+
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>export</title>
+</head>
+<body>
+    <a href="#1511122840">Az NTFS fájlrendszer</a><br>
+    <hr>
+    <a href="#1511125840">Az operációs rendszerek folyamatainak milyen állapotait, állapotátmeneteit ismerjük?</a><br>
+    <hr>
+    <a href="#1511122992">Ext2 fájlrendszer</a><br>
+    <hr>
+    <a href="#1511097404">Holtpont fogalma</a><br>
+    <hr>
+    <a href="#1511100025">Holtpont-elkerülési algoritmusok: Mi a “strucc” algoritmus, hol használjuk? Milyen eszközöknél van (lehet) kivétel?</a><br>
+    <hr>
+    <a href="#1511383667">Hány folyamat lehet aktuálisan futási (running) állapotban?</a><br>
+    <hr>
+    <a href="#1511110867">Kivétel, megszakítás fogalma</a><br>
+    <hr>
+    <a href="#1511097523">Kiéheztetés fogalma</a><br>
+    <hr>
+    <a href="#1511112594">Mi a FAT, van-e MBR-je?</a><br>
+    <hr>
+    <a href="#1511097798">Mi a kiéheztetés és holtpont közti különbség?</a><br>
+    <hr>
+    <a href="#1511383982">Mi a kölcsönös kizárás, kritikus szakasz, mik a kölcsönös kizárás megvalósításának a feltételei?</a><br>
+    <hr>
+    <a href="#1511124521">Mi a különbség a folyamat és a szál között?</a><br>
+    <hr>
+    <a href="#1511382634">Mi a különbség a szemafor és a mutex között?</a><br>
+    <hr>
+    <a href="#1511106982">Mi a lapozás során alkalmazott munkahalmaz modell?</a><br>
+    <hr>
+    <a href="#1511108127">Mi a memóriakezelő feladata dinamikus memóriahasználat során?</a><br>
+    <hr>
+    <a href="#1511103735">Mi a memóriakezelő feladata? Létezik egyáltalán?</a><br>
+    <hr>
+    <a href="#1511372186">Mi a Round-Robin-ütemezés lényege?</a><br>
+    <hr>
+    <a href="#1511103001">Mi a virtuális memóriakezelés és a virtuális gép közti különbség?</a><br>
+    <hr>
+    <a href="#1511100061">Mi a virtuális rendszer fogalma? Honnan a név?</a><br>
+    <hr>
+    <a href="#1511110482">Mi az operációs rendszer kernelmódja és felhasználói módja közti különbség?</a><br>
+    <hr>
+    <a href="#1511109069">Mik a holtpont kialakulásának feltételei?</a><br>
+    <hr>
+    <a href="#1511382941">Mikor nem használható a szemafor?</a><br>
+    <hr>
+    <a href="#1511108655">Milyen dinamikusmemória-nyilvántartási módszereket ismer?</a><br>
+    <hr>
+    <a href="#1511098554">Mit jelent a holtpont gráfmodellje?</a><br>
+    <hr>
+    <a href="#1511383834">Mit nevezünk versenyhelyzetnek?</a><br>
+    <hr>
+    <a href="#1511371292">Mit takar a folyamatleíró táblázat?</a><br>
+    <hr>
+    <a href="#1511124336">Mit értünk folyamatok ütemezésén?</a><br>
+    <hr>
+    <a href="#1511107402">Mit értünk szegmentált memóriakezelésen, mi a lényege? Szegmentált memóriahasználatnál van-e szükség virtuális memóriakezelésre?</a><br>
+    <hr>
+    <a href="#1511105670">Mit értünk virtuális memóriakezelésen, mi a lapozás?</a><br>
+    <hr>
+    <a href="#1511009771">Regiszter</a><br>
+    <hr>
+<br>
+<br>
+<br>
+<br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511122840"><strong>Téma: </strong>Az NTFS fájlrendszer</div>
+    <div><strong>Kulcsszavak: </strong>NTFS</div>
+    <div><strong>Kidolgozás: </strong><p></p><p>Az NTFS fájlrendszer (avagy New Technology File System) a Microsoft korábbi FAT fájlrendszerét váltotta le. Rengeteg újítás, újdonság és extra funkció érhető el benne, ami az elavult FAT fájlrendszerben nem volt elérhető, és emiatt a FAT fájlrendszer hiányosságaként soroltuk fel az előző pontban. Ilyen például a metaadatok támogatása, a fejlettebb adatstruktúrák támogatása a sebesség, a megbízhatóság és a lemezterület-felhasználás érdekében, valamint már rendelkezik hozzáférés-védelmi listával, és megtalálható benne a naplózás is.</p><p>NTFS fájlrendszeren belül megadható, hogy melyik felhasználó mikor és mit végezhet egy-egy fájllal, továbbá minden elvégzett művelet visszakövethető benne. Ez a biztonsági modell az, amivel az NTFS fájlrendszer valóban hatalmas előrelépés volt a FAT fájlrendszerhez képest. Az NTFS fájlrendszer mellett szól még az is, hogy egy többfelhasználós környezetben, mint amilyen a Microsoft Windows NT operációs rendszer szerver verziója, feltétlenül szükséges egy ilyenfajta biztonsági modell követése.</p><p>A FAT fájlrendszerrel ellentétben az NTFS fájlrendszer volt az első olyan Microsoft Windows platformú fájlrendszer, ami natívan (bármiféle „hack” nélkül) támogatta a hosszú fájlneveket.</p><p>A FAT fájlrendszer legnagyobb hibáját, miszerint a FAT fájlrendszerben nincs semmilyen hibatűrő megoldás, az NTFS fájlrendszer ügyesen megoldotta.</p><p>A hibatűrő megoldás alatt azt értjük, hogy ha a nyitott fájlok módosítása, szerkesztése során fellép egy esetleges rendszerhiba, például a számítógép „lefagy”, akkor a fájlrendszer -partíción tárolt adatok nem vállnak inkonzisztenssé.</p><p>Az NTFS fájlrendszer megoldása az lett, hogy vezet egy beépített fájlművelet-végzési nyilvántartást (azaz egy úgynevezett log fájlt). Ebbe a speciális log fájlba minden egyes fájlművelet során egy bejegyzést tesz. Így amikor egy esetleges rendszerhiba következik be (pl. a fentebb említett „lefagyás”), akkor az újrabootolás során a log fájlok alapján azonnal meg lehet állapítani, hogy a rendszerhiba bekövetkezésekor történt-e bármiféle adatvesztés, vagy sem. Amennyiben a log fájlok alapján megállapítható az adatvesztés megtörténte (a log fájlban benne lesz, hogy a fájlmódosító művelet félbemaradt), akkor el kell indítani az úgynevezett CHKDSK (lemezellenőrző) programot. A CHKDSK program a log fájlt felhasználva megpróbálja visszaállítani az eredeti konzisztens állapotot. A log fájl minden bejegyzése két típusú lehet: vagy ismétlő (redo), vagy visszavonó (undo) parancsot tartalmazhat.</p><div>A log fájl mérete a merevlemeztől függően két és négy megabájt között (2 MB – 4 MB) mozoghat. Ha az NTFS fájlrendszer nem vizsgálná meg mindig, hogy az ismétlő (redo) és a visszavonó (undo) információk szükségesek-e hibajavítás esetére, akkor a log fájl mérete gyorsan megnőne, és így hamar be is telne. Ennek az elkerülése végett az összes módosított adatot lemezre menti az NTFS fájlrendszer, és törli a log fájl tartalmát. Ez a vizsgálat az úgynevezett checkpoint- (határpont-) képzés. A vizsgálat körülbelül minden 4. vagy 5. másodpercben megtörténik.</div><p>NTFS-nek is van MBR és MBC</p><p><span>Az NTFS fájlrendszer a fájlok és a könyvtárak adatai mellett egy sereg egyéb fájlt is használ a lemezkezeléssel összefüggő adatok tárolása végett. Ezekben a fájlokban és más, az NTFS fájlrendszerrel kapcsolatos fájlban, illetve könyvtárban tárolt adatok összességét úgynevezett metaadatnak (metadata) nevezzük. Egy NTFS fájlrendszerbeli partíció formázása során 11 metaadatfájl jön létre, ezt a következő táblázatban pontosan részletezzük. A metaadatfájlok nem láthatóak egyszerűen semmilyen felsorolásban, viszont ha tudjuk, mi az általunk keresett a metaadatfájl neve, akkor kilistáztathatjuk.</span></p><p><span>Az NTFS fájlrendszer legfeljebb 32 000 Unicode karakter hosszúságú elérési útvonalakat támogat, amelyeknek minden komponense (ami egy könyvtár vagy egy fájlnév) legfeljebb 255 Unicode karakter hosszúságú lehet. Bizonyos azonosító neveket a rendszer azonban fenntart a saját használatra. Ennek az az oka, hogy az NTFS fájlrendszer metaadatai szabályos (ámbár rejtett és általában nem hozzáférhető) fájlokban tárolódnak; emiatt a felhasználói adatállományok nem használhatják fel a neveiket. Ezek a rendszerfájlok mindig az NTFS fájlrendszerű kötet gyökerében tárolódnak, és kizárólag a gyökérkönyvtárban vannak fenntartva.</span></p><p><span>Egy NTFS fájlrendszerbeli partíció formázása során tizenegy metaadatfájl jön létre. </span><span>A fájlnevek: $Mft, $MftMirr, $LogFile, $Volume, $AttrDef, . (pont), $Bitmap, $Boot, $BadClus, $Secure, $Upcase és $Extend. A . (pont) és az $Extend egyaránt könyvtárak, a többiek fájlok.</span></p><p><span>Az MFT (Master File Table, magyarul: mesterfájltábla) az NTFS fájlrendszer úgymond „legközpontibb” része. Az MFT a FAT fájlrendszerek FAT táblájához hasonlítható a legjobban, ugyanis minden egyes fájlt, könyvtárat és metaadatfájlt magában foglal. Az MFT különálló egységekből, úgynevezett rekordokból áll.</span></p><p><span>Az NTFS fájlrendszer egy vagy több MFT rekordot használ egy fájl vagy egy könyvtár metaadatainak (pl. biztonsági információk és általános attribútumok), illetve a fájl vagy a könyvtár elhelyezkedési jellemzőjének tárolására.</span></p><p><span>Mivel az MFT maga is egy fájl, az NTFS fájlrendszer az MFT rekordokat használva állapítja meg elhelyezkedését, méretét. Ez a sajátos felépítés teszi lehetővé, hogy az MFT növekedhessen (pl. ha új fájlok adatait kell tárolni), vagy mérete csökkenhessen a metaadatok helyszükségének függvényében. Továbbá, mivel az MFT maga is egy fájl, így elmondható róla is, hogy ugyanúgy töredezhet a méretváltozása során, akár egy közönséges fájl. A töredezettség mennyiségének indokolatlan nagysága jelentősen csökkentheti az NTFS fájlrendszer összteljesítményét amiatt, hogy nem olvasható be sorfolytonosan az egész MFT metaadatfájl, hanem csak külön-külön lemezművelettel lehet beolvasni az egyes rekordok számára. Kérdés merülhet fel ekkor az olvasóban: miért alakulhat ki egyáltalán az MFT töredezettsége?</span></p><p><span>Ez a töredezés csak úgy jöhet létre, hogy az NTFS fájlrendszer nem tudja lefoglalni az MFT teljes méretét a dinamikus helykihasználás miatt. Így ha az MFT növekedne, és már foglaltak a kevés hely miatt az MFT után közvetlenül elhelyezkedő klaszterek, akkor az MFT csak a megmaradt felhasználható maradék területen tud újabb rekordokat létrehozni, tehát nem egy összefüggő klaszterterületen fog helyet foglalni, és az újabb rekordjait nem ugyanazon klaszterterületen fogja tárolni. Az MFT metaadatfájl töredezésének elkerülésére találták ki az úgynevezett „MFT zónát”, ami bizonyos számú klasztert foglal le előre az MFT metaadatfájl körül, így nagyobb az esélye annak, hogy az MFT metaadatfájl összefüggő területen, vagy az MFT darabjai egymáshoz viszonylag közel helyezkedjenek el. Az MFT zónába semmilyen fájl vagy könyvtár semmiféle adata nem kerülhet be. Amennyiben az NTFS fájlrendszerű partíció kezd betelni, és már nincs máshol szabad hely, akkor szabad csak a fájlrendszernek az MFT zónába is írnia, viszont ekkor a kevés szabad hely miatt az MFT metaadatfájl biztosan töredezik. Az MFT metaadatfájl töredezettségmentesítése az NTFS fájlrendszer API felépítése miatt elég bonyolult probléma, amit csak a legújabb NTFS defragmentáló (töredezettségmentesítő) programok tudnak megoldani.</span></p><p></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511125840"><strong>Téma: </strong>Az operációs rendszerek folyamatainak milyen állapotait, állapotátmeneteit ismerjük?</div>
+    <div><strong>Kulcsszavak: </strong>folyamatok állapotai, állapotátmenetek</div>
+    <div><strong>Kidolgozás: </strong><p> a folyamatok önálló egységek, a memória egy kis szeletében helyezkednek el. Ahhoz, hogy a központi egység ezeket végre tudja hajtani, a folyamatokhoz tartozzon saját utasításszámláló, verem, és legyenek egyéb állapotjelzői. Tudható, hogy a folyamatok közül biztosan egy folyamat fut mindig, és az összes többi arra vár, hogy lehetőséget kapjon a futásra. </p><p>A várakozó folyamatokat több csoportba sorolhatjuk az operációs rendszerektől függően. Bármilyen csoportosítást is nézünk, jellemzően két lényeges csoport különböztethető meg a várakozó folyamatok között. <br/>Ebből talán a folyamatok többségét a futásra készen álló folyamatok adják, melyeknek nincs semmire szükségük, csak arra, hogy újra „processzorhoz jussanak”! A másik csoportot a blokkolt folyamatok alkotják, melyeknek további működéséhez szükségük van egy másik folyamat eredményére vagy valamilyen adatára. Ezek nem tudnak futni még akkor sem, ha processzoridőt kapnának. A csoportok között az alábbi négy átmenetet különböztethetjük meg: </p><p><b>Futó -&gt; Blokkolt</b> - Várni kell még valamire. A futó folyamat nem tudja folytatni a futását, mert valamilyen bemeneti adatra van szüksége. Ez akár egy másik folyamat eredménye is lehet.</p><p><b>Futó -&gt; Futásra kész</b> - Ez egy természetes átmenet. Egyszerűen lejárt az aktuális folyamat processzorideje, és az operációs rendszer a folyamatot a futásra kész, várakozó folyamatok csoportjába sorolja.</p><p><b>Futásra kész -&gt; Futó</b> - Az előző átmenet fordítottja. Az operációs rendszer ütemezője a futásra készen várakozó folyamatok csoportjából a soron következő folyamatot futtatja. A sorrendről az ütemező dönt, a folyamatok nem nagyon tudnak róla, hogy melyikük fog következni.</p><p><b>Blokkolt -&gt; Futásra kész</b> - A várva várt adat megérkezett, a blokkolt folyamat marad még a várakozó folyamatok csoportjában, de már futásra készen várja, hogy az ütemező döntése esetén újra futhasson.<br/></p><p><br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511122992"><strong>Téma: </strong>Ext2 fájlrendszer</div>
+    <div><strong>Kulcsszavak: </strong>ext2</div>
+    <div><strong>Kidolgozás: </strong><p><span>Az ext2 fájlrendszer </span></p><p><span>Az ext2 fájlrendszer, amely a GNU/LINUX operációs rendszereken kívül más rendszereken is megjelent, több Linux disztribúció alapértelmezett fájlrendszere volt, amíg az utódja, az „ext3” fájlrendszer (third extended filesystem – harmadik kiterjesztett fájlrendszer) el nem készült. </span></p><p>Az ext2 fájlrendszer nagy előnye a többi más fájlrendszerekhez képest, hogy már a tervezésénél készültek a folytatására, továbbfejlesztésére úgy, hogy a még meg nem valósított, azaz nem implementált funkcióknak meghagyták benne a helyet. </p><div><p>Az ext2 fájlrendszer adatszerkezete </p><p>A szabad területet az ext2 fájlrendszer blokkokra osztja, a blokkokat pedig további csoportokra osztja tovább. Egy-egy fájl – amennyire csak lehet – egy csoportba tartozik, hogy a csökkentse a fájlrendszer szabad területének töredezését, és hogy csökkentse a keresést nagyméretű folytonos elérésű fájlok esetén. Minden csoport tartalmazza a saját leírótábláját és a szuperblokk leírójának másolatát, egy blokktérképet, amely számon tartja, hogy mely fizikai részek foglaltak, és melyek nem. Ezeken kívül tartalmaz még egy úgynevezett egy i-node -ot, melynek szintén van blokktérképe és leírótáblája. Ezek címeit a csoportleíró tartalmazza.</p><p><br/></p></div></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511097404"><strong>Téma: </strong>Holtpont fogalma</div>
+    <div><strong>Kulcsszavak: </strong>holtpont</div>
+    <div><strong>Kidolgozás: </strong><p><span>Azt mondjuk, hogy a folyamatok egy részhalmaza holtpontban van, ha a folyamatok halmazának minden egyes eleme valamelyik másik halmazbeli folyamat által kiváltható eseményre várakozik. (A holtpont egy rendszernek egy olyan állapota, ahonnan külső beavatkozás nélkül nem tud elmozdulni.)</span></p><p><span>Tehát hétköznapi nyelven fogalmazva: akkor fordulhat elő holtpon néhány folyamat között (azaz a folyamatok egy halmazában), ha ez a néhány folyamat mindegyike használatba vesz valamilyen mennyiségű erőforrást, és közben ezen erőforrásokra a folyamatok mindegyike várakozik is.</span></p><p><span>Akkor is holtpon alakul ki, ha ezek a folyamatok nem kimondottan egy megadott erőforrásra várakoznak, hanem például egymás végeredményére. Ezt a kommunikációban létrejövő paradox állapotot is holtpontnak nevezzük.</span></p><p><span>A holtpontproblémával nagyon széles körben foglalkoztak, és a mai napig is foglalkoznak, ám érdekes módon nem tekinthető megoldottnak. A holtpontok kivédésére alkalmazható megoldási módszer, ami még minden kétséget kizáróan megbízható is, nagyon költséges. A holtpontok felderítése leginkább az osztott rendszerbeli környezetben a legnehezebb. Nagyon kevés olyan operációs rendszer van, amely garantálná azt, hogy a folyamatok ütemezésének során soha sem fordulhat elő holtponthelyzet.</span></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511100025"><strong>Téma: </strong>Holtpont-elkerülési algoritmusok: Mi a “strucc” algoritmus, hol használjuk? Milyen eszközöknél van (lehet) kivétel?</div>
+    <div><strong>Kulcsszavak: </strong>holtpont, holtpont-elkerülés, strucc</div>
+    <div><strong>Kidolgozás: </strong><p>A strucc algoritmus a „struccpolitika” elvét vallja, aminek egyszerűen a lényege az, hogy nem veszünk tudomást a holtpont létezéséről. Ha tudjuk azt, hogy egy esetleges holtpont kialakulásának valószínűsége meglehetősen kicsi, és az operációs rendszer újraindításának nincsenek kritikus következményei, akkor előfordulhat, hogy érdemes ezt a „megoldást” választani, mint holtpont „elkerülő” algoritmust.</p><p>Előnyök: <span>Gyors holtpontelkerülés.</span></p><p>Hátrányok: Adatvesztés, a folyamatok végeredményeinek elvesztése fennállhat. </p><p>Holtpontok megléte: mivel az algoritmus szerint csak figyelmen kívül hagyjuk a holtpontokat, azaz a holtponthelyzeteket, azok ugyanúgy ott lesznek, és maguktól nem fognak köddé válni. </p><p>Nem ajánlott, mivel ez csak egy „struccpolitika”.<br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511383667"><strong>Téma: </strong>Hány folyamat lehet aktuálisan futási (running) állapotban?</div>
+    <div><strong>Kulcsszavak: </strong>folyamatok, futás állapot</div>
+    <div><strong>Kidolgozás: </strong><p>Valódi párhuzamosságról akkor beszélhetünk, amikor valóban több folyamat fut egy időben. Ez akkor lehetséges, ha a számítógépünkben több processzor van. Közös órajelre működhetnek, akár közös memóriát is használhatnak. Ezek a megoldások gyors kommunikációt tesznek lehetővé a folyamatok között. Nagy teljesítményű úgynevezett „tudományos” számítógépek akár több száz processzort is tartalmazhatnak. Másik elterjedt megoldás, amikor önálló számítógépeket hálózati kapcsolat segítségével üzemeltetnek úgy, mint egy többprocesszoros gépet. Ebben az esetben a számítógépek egymással hálózaton keresztül kommunikálnak, aminek következménye a sokkal lassabb kommunikáció. Viszont egy egyprocesszoros (néhány processzoros) gép esetén is megteremthetjük a párhuzamosság illúzióját, ha a folyamatokat gyorsan váltogatjuk. Ekkor a folyamatok egy kis ideig futhatnak (egy kis időszeletet kapnak), majd az operációs rendszer keres egy másik folyamatot, és azt futtatja egy kis ideig. Az interaktív felhasználók ezt úgy látják, mintha több folyamat futna párhuzamosan. Ezt a technikát látszatpárhuzamosságnak nevezik.<br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511110867"><strong>Téma: </strong>Kivétel, megszakítás fogalma</div>
+    <div><strong>Kulcsszavak: </strong>kivétel, megszakítás</div>
+    <div><strong>Kidolgozás: </strong><p style="text-align: justify;color: rgb(0, 0, 0);"><strong><span class="fogalom">Megszakításnak</span></strong><span> </span>nevezünk egy olyan eseményt , amelynek hatására a program futása félbemarad, tehát nem fejeződik be. A megszakításokat egy szám azonosítja (ez általában egy 1 bájt méretű szám), és az int utasításnak is ez lesz a paramétere. A megszakítás azonosító száma alapján tudja a processzor azonosítani, hogy milyen esemény történt.</p><p style="text-align: justify;color: rgb(0, 0, 0);">A<span> </span><strong><span class="fogalom">kivétel</span><span> </span></strong>egy olyan<span> </span><span class="fogalom">Megszakítás</span>, amit az éppen végrehajtott utasítás vagy valamilyen belső esemény váltott ki.</p><p style="text-align: justify;color: rgb(0, 0, 0);">Észrevehető, hogy különbséget teszünk az általános<span> </span><span class="fogalom">Megszakítások</span><span> </span>(interrupt) és a beviteli/kiviteli eszközök megszakításkérelmei (IRQ) között.</p><p style="text-align: justify;color: rgb(0, 0, 0);">A<span> </span><span class="fogalom">kivételek</span><span> </span>típusai a következők:</p><ul style="color: rgb(0, 0, 0);"><li><strong><span class="fogalom">Csapda</span></strong><span> </span>(trap)<ul><li>Ez a fajta<span> </span><span class="fogalom">kivétel</span><span> </span>leginkább a<span> </span><strong><span class="fogalom">debuggoláskor</span></strong><span> </span>fordulhat elő. A<span> </span><strong><span class="fogalom">debuggolás</span></strong><span> </span>a szoftverekben rejlő hibák felderítésének és kijavításának a folyamata, amelynek során a fejlesztők<span> </span><span class="fogalom">töréspontok</span><span> </span>és lépésenkénti végrehajtás segítségével követik nyomon a program állapotainak változásait, hogy behatárolhassák és azonosíthassák a hibás algoritmusokat és/vagy adatokat.</li><li>A<span> </span><span class="fogalom">csapda</span><span> </span>esetén a megszakított program futása folytatható a következő utasítással.</li><li>Példák a<span> </span><span class="fogalom">csapdákra</span>:<span> </span><span class="fogalom">rendszerhívás</span><span> </span>(call kapu és taszk kapu),<span> </span><span class="fogalom"><strong>töréspont</strong></span>.</li></ul></li><li><strong>Hiba</strong><span> </span>(fault)<ul><li>Hiba esetén a hiba javítása után a megszakított program folytatható a<span> </span><span class="fogalom">kivételt</span><span> </span>okozó utasítás újrapróbálásával.</li><li>Példa a hibákra: laphiba.</li></ul></li><li><strong>Vetélés</strong><span> </span>(abort)<ul><li>Vetélés esetén a megszakított program nem folytatható tovább sem a következő utasítással, sem pedig az aktuális utasítás újrapróbálásával.</li><li>Példa a vetélésekre: nullával való osztás.</li></ul></li></ul><p style="text-align: justify;color: rgb(0, 0, 0);"><br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511097523"><strong>Téma: </strong>Kiéheztetés fogalma</div>
+    <div><strong>Kulcsszavak: </strong>kiéheztetés</div>
+    <div><strong>Kidolgozás: </strong><p>Azt mondjuk, hogy ha egy folyamat az erőforrás-kezelési módszer miatt nem jut az általa igényelni kívánt erőforráshoz „belátható időn belül”, akkor a folyamat ki van éheztetve az adott erőforrásra vonatkozóan.<br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511112594"><strong>Téma: </strong>Mi a FAT, van-e MBR-je?</div>
+    <div><strong>Kulcsszavak: </strong>FAT, MBR</div>
+    <div><strong>Kidolgozás: </strong><p>A FAT (File Allocation Table) talán a legrégebbi, ma is használt fájlrendszer. A FAT fájlrendszer eredeti változatát (ami a FAT12 nevet viselte,) eredetileg hajlékony (floppy) lemezekre tervezték, a klasztereket (amik néhány egymást követő fizikai szektorból álló blokkok) egy 12 bites címmel indexelték, így maximálisan 32 megabájt volt megcímezhető. <br/></p><p>Egy partíció formázásakor és a FAT fájlrendszer beállításakor egy úgynevezett <strong style="color: rgb(0, 0, 0);text-align: justify;background-color: rgb(255, 255, 255);">Master Boot Record</strong> (MBR) jön létre a háttértárolón. A Master Boot Record, vagy más néven a partíciós szektor a merevlemez legelső szektorának (azaz az első lemezfelület első sávja első szektorának) elnevezése. Csak a particionált merevlemezeknek van Master Boot Recordjuk.</p><p>A Master Boot Record a merevlemez legelején, az első partíció előtt található meg. A Master Boot Record egy kisebb végrehajtható kódot (Master Boot Code) és egy partíciós táblát tartalmaz. Egy új partíció becsatolásakor a Master Boot Record végrehajtja a Master Boot Code-ot, és átadja a vezérlést a lemez boot szektorának.<br/></p><p></p><p>A FAT fájlrendszer az elnevezését a benne megvalósított fájlláncolási eljárásról kapta. Ebben a fájlláncolási eljárásban nemes egyszerűséggel felvettek egy táblázatot, ami megmondja, hogy az ikszedik klaszteren elhelyezkedő fájl következő darabja pontosan hol található. A FAT táblában szerepelhet a valós értékek mellett egy-két extrém érték is, amelyek a fájl végét, hibás klasztert vagy üres blokkot jelölhetnek.</p><div><span>A FAT tábla összesen két példányban került a lemezre, így ha az egyik megsérült valamilyen oknál fogva, akkor az a másikból helyreállítható volt. Sajnálatos módon a tervezésnél a két FAT tábla (az eredeti és a duplikátum) pontosan egymás mögött helyezkedik el, így egy szerencsétlen hardverhiba esetén mind a kettő akár egyszerre is megsérülhet. A dupla hibalehetőségre viszont az informatikában nem lehet tervezni, mivel elég költséges. </span></div><div><span>A FAT fájlrendszer napjainkban elavult fájlrendszernek tekinthető, mert sem naplózási, sem biztonsági jogosultságok tárolására nem alkalmas.</span></div><div><div><div><div><p><br/></p><table class="lecke" style="color: rgb(0, 0, 0);"><tbody><tr><td style="text-align: left;"><p style="text-align: left;"><strong>Boot sector</strong></p></td><td style="text-align: left;"><p style="text-align: left;">Bootolható partíció, amely információkat tartalmaz a lemez kialakításáról, a fájlrendszer struktúrájáról. Itt tárolódik a boot code is, amely az Ntdlr-t tölti be.</p></td></tr><tr><td style="text-align: left;"><p style="text-align: left;"><strong>Master Boot Record</strong></p></td><td style="text-align: left;"><p style="text-align: left;">Olyan végrehajtható kódot tartalmaz, amit a rendszer BIOS (Basic Input/Output System) tölt be a memóriába. A kód a partíciós tábla alapján eldönti, hogy melyik partíció aktív vagy bootolható.</p></td></tr><tr><td style="text-align: left;"><p style="text-align: left;"><strong>Ntldlr.dll</strong></p></td><td style="text-align: left;"><p style="text-align: left;">A processzort (<span class="fogalom">CPU</span>) védett módba állítja, elindítja a fájlrendszert, majd kiolvassa a Boot.ini fájl tartalmát. Ezek az információk meghatározzák a kezdeti beállításokat és a kezdeti „boot menu” opciókat.</p><p style="text-align: left;">Az<span> </span><strong>Ntldr</strong><span> </span>Windows NT alapú operációs rendszerek betöltőprogramja, amelynek feladata az alapvető hardverkonfigurációs jellemzők felderítése és az ezeknek megfelelő rendszermagváltozat betöltése és elindítása.</p></td></tr><tr><td style="text-align: left;"><p style="text-align: left;"><strong>Fastfat.sys</strong></p></td><td style="text-align: left;"><p style="text-align: left;">System file driver a<span> </span><span class="fogalom">FAT</span><span> </span>16-hoz és a<span> </span><span class="fogalom">FAT</span><span> </span>32-höz.</p></td></tr><tr><td style="text-align: left;"><p style="text-align: left;"><strong>Ntoskrnl.exe</strong></p></td><td style="text-align: left;"><p style="text-align: left;">Információt ad arról, hogy melyik system device drivert kell betölteni, és hogy mi a megfelelő betöltési sorrend.</p></td></tr></tbody></table></div></div></div></div></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511097798"><strong>Téma: </strong>Mi a kiéheztetés és holtpont közti különbség?</div>
+    <div><strong>Kulcsszavak: </strong>kiéheztetés, holtpont</div>
+    <div><strong>Kidolgozás: </strong><p>Kiéheztetés: a folyamat nem jut a számára szükséges erőforráshoz belátható időn belül az erőfoorás-kezelő hibája miatt.</p><p>Holtpont: a folyamatok halmazának minden egyes eleme valamelyik másik halmazbeli folyamat által kiváltható eseményre várakozik (egy erőforrás felszabadulására, vagy számított eredményre).</p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511383982"><strong>Téma: </strong>Mi a kölcsönös kizárás, kritikus szakasz, mik a kölcsönös kizárás megvalósításának a feltételei?</div>
+    <div><strong>Kulcsszavak: </strong>kölcsönös kizárás, versenyhelyzet, kritikus szakasz</div>
+    <div><strong>Kidolgozás: </strong><p><span>Ha egy folyamat elkezdte az eljárás végrehajtását, akkor egy másik folyamat ne kezdhessen bele az eljárás végrehajtásába, amíg az előbbi be nem fejezte azt. Tehát amikor egy folyamat használ egy közös erőforrást, megtiltjuk, hogy egy másik folyamat is használja ugyanazt az erőforrást. Ezt nevezzük kölcsönös kizárásnak. A programkódnak azt a részét, amelyik közös erőforrást használ, kritikus szakasznak (szekciónak) nevezzük. Akkor tudjuk biztosítani a kölcsönös kizárást, ha meg tudjuk oldani, hogy egy időben legfeljebb egy folyamat legyen a kritikus szakaszban (adott erőforrás tekintetében). Ezzel elkerülhetjük a versenyhelyzetet, ellenben további feltételek is szükségesek a korrekten együttműködő párhuzamos folyamatok közös erőforrás-használatához, hiszen ettől még előfordulhat az, hogy a folyamatok végtelen sokáig várakoznak az erőforrás megszerzésére.</span></p><p><span>A párhuzamos környezetben egy közös erőforrás használatakor javasolt feltételek</span></p><p><span>Tehát a javasolt feltételek:</span></p><ul><li><span>A kritikus szakaszban legfeljebb egy folyamat legyen</span></li><li><span>Semmilyen előfeltétel ne legyen a sebességről, vagy a processzorok (CPU) számáról</span></li><li><span>A folyamat a kritikus szakaszon kívül ne blokkoljon másik folyamatot</span></li><li><span>A kritikus szakaszba belépni kívánó folyamatok közül minden folyamat előbb-utóbb kerüljön sorra.</span></li></ul></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511124521"><strong>Téma: </strong>Mi a különbség a folyamat és a szál között?</div>
+    <div><strong>Kulcsszavak: </strong>program, folyamat, szál</div>
+    <div><strong>Kidolgozás: </strong><p style="text-align: justify;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);">Ha elindítunk egy programot a számítógépen, akkor a program utasítássorozata a kezdetétől fogva az utolsó utasításáig egy egyszerű, egymás utáni (szekvenciális) parancssorozatnak tekinthető. A legtöbb programot ma is ez jellemzi, de néha előfordul, hogy a feladatunk szempontjából célszerűbb lenne, ha több, „párhuzamosan” futó vezérlési<span> </span><span class="fogalom" title="szál">szála</span><span> </span>lenne a folyamatnak. Ezeket a vezérlési<span> </span><span class="fogalom" title="szál">szálakat</span><span> </span>egyszerűen<span> </span><span class="fogalom" title="szál"><strong>szálnak</strong></span><span> </span>(thread) nevezik.</p><p style="text-align: justify;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);">Egy<span> </span><span class="fogalom" title="szál">szálnak</span><span> </span>is vannak regiszterei az aktuális változók tárolására, van utasításszámlálója, ami mutatja az aktuálisan következő utasítást, és tartozik hozzá verem is, hiszen a függvények hívási módja megköveteli ennek a meglétét.</p><p style="text-align: justify;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);">Ha a<span> </span><span class="fogalom" title="szál">szálra</span><span> </span>jellemző információkat tárolni kell, márpedig ezek minden<span> </span><span class="fogalom" title="szál">szálra</span><span> </span>egyediek, akkor az adatokat – a folyamatokhoz hasonlóan – egy táblázatban célszerű elraktározni. Ebben a táblázatban annyi bejegyzés van, ahány<span> </span><span class="fogalom" title="szál">szálat</span><span> </span>létrehoz a folyamat. Az ilyen párhuzamosan futó vezérlési<span> </span><span class="fogalom" title="szál">szálak</span><span> </span>egy közös memóriaterületet használnak, amit az eredeti folyamat címtartományából, memóriaterületéből kapnak.</p><p style="text-align: justify;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);">A legjellemzőbb sajátosságok, amelyek egy folyamatban biztosan vannak, de egy<span> </span><span class="fogalom" title="szál">szálban</span><span> </span>(száltáblában) pedig biztosan nincsenek, a következők:</p><ul style="color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);"><li>címtartomány,</li><li>globális változók,</li><li>nyitott fájlleírók,</li><li>gyermekfolyamatok,</li><li>jelzések (<span class="fogalom" title="szignál">szignálok</span>),</li><li>jelzéskezelők,</li><li>függőben lévő ébresztők.</li></ul><p style="text-align: justify;color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);">Egy<span> </span><span class="fogalom" title="szál">szálban</span><span> </span>is biztosan nyilván kell tartani az alábbiakat (természetesen ezek egy folyamathoz is kötődnek):</p><ul style="color: rgb(0, 0, 0);background-color: rgb(255, 255, 255);"><li>utasításszámláló,</li><li>regiszterek,</li><li>verem,</li><li>szálállapot.</li></ul></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511382634"><strong>Téma: </strong>Mi a különbség a szemafor és a mutex között?</div>
+    <div><strong>Kulcsszavak: </strong>szemafor, mutex</div>
+    <div><strong>Kidolgozás: </strong><p><b>Szemafor: </b> Egy olyan speciális változó, ami a kölcsönös kizárás megvalósításához szükséges.</p><p><b>Mutex: </b>Olyan szemafor, ami csak bináris értékeket vehet fel.</p><p>A szemafor egy változó vagy absztrakt adattípus, amit az osztott erőforrásokhoz való hozzáférések szabályozásához, kezeléséhez használnak a többszálú programozási környezetekben. A szemafor megalkotása Edsger Wybe Dijkstra holland matematikus nevéhez fűződik. Dijkstra definiált a szemafortípusra egy P és egy V, valamint egy init nevű műveletet. Az init művelet beállítja a szemafor értékét a megadott számra (n); ez pontosabban azt jelenti, hogy az erőforrás kihasználtsága maximálisan „n” lehet. A P művelettel várakozni lehet a szemaforra („k” egységre lehet várni, ha rendelkezésre áll „k” egység, akkor csökkenti a szemafor értékét „k”-val). A V művelettel lehet felszabadítani a foglalt erőforrást (ami hozzáad a szemafor értékéhez „k’”-t). Ha az „n” értéke eggyel egyenlő (azaz n = 1), akkor bináris szemafornak, vagy más néven mutexnek (mutual exclusion – kölcsönös kizárás) nevezzük. A hétköznapi használat során a P műveletet szokták „Down”-nak, a V műveletet pedig „Up”-nak is hívni.<br/><br/><br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511106982"><strong>Téma: </strong>Mi a lapozás során alkalmazott munkahalmaz modell?</div>
+    <div><strong>Kulcsszavak: </strong>munkahalmaz modell, lapozás</div>
+    <div><strong>Kidolgozás: </strong></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511108127"><strong>Téma: </strong>Mi a memóriakezelő feladata dinamikus memóriahasználat során?</div>
+    <div><strong>Kulcsszavak: </strong>dinamikus memóriahasználat, MMU</div>
+    <div><strong>Kidolgozás: </strong></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511103735"><strong>Téma: </strong>Mi a memóriakezelő feladata? Létezik egyáltalán?</div>
+    <div><strong>Kulcsszavak: </strong>MMU, memóriakezelő</div>
+    <div><strong>Kidolgozás: </strong><p>Minden program előállít valamilyen memóriacím-halmazt; ezeket <strong style="color: rgb(0, 0, 0);text-align: justify;background-color: rgb(255, 255, 255);"><em>virtuális címekne</em></strong>k nevezik. Ha nincs meg ez az eszközünk, akkor a memóriacímek közvetlenek. Ha használjuk a virtuális technikát – és a programunk nem fér be egyszerre még az egyre nagyobb és nagyobb memóriába se –, akkor a címek nem közvetlen memóriacímek, hanem egy MMU (Memory Management Unit) nevű egységbe kerülnek, ami leképezi azt egy fizikai címmé.<br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511372186"><strong>Téma: </strong>Mi a Round-Robin-ütemezés lényege?</div>
+    <div><strong>Kulcsszavak: </strong>ütemezés, round-robin</div>
+    <div><strong>Kidolgozás: </strong><p>Ez az egyik legismertebb, legrégebbi és legpártatlanabb ütemezés az interaktív rendszerek világában. Az ütemező beállít egy időzítő segítségével egy időintervallumot, és az időzítő megszakítást ad minden egyes esetben, amikor lejárt a beállított idő. Ez egy hardverelem-szolgáltatás, mint egy speciális jelzőóra, ami, mondjuk, 10 percenként jelez. Természetesen a mai számítógépek esetében nem 10 perces intervallumról van szó, hanem általában 10–30 ezredmásodpercről. Általában igaz, hogy ha túl kicsi intervallumot állít be az ütemező, akkor gyakran kapja meg a megszakítás miatt a vezérlést, ezzel „elaprózza” az operációs rendszer teljesítményét, ami nem igazán hatékony. Ha túl nagy intervallumot adunk meg, akkor pedig a sok input/output igénnyel fellépő folyamatok ütemezése nem lesz túlságosan hatékony, dinamikus. Persze tudható, hogy mindenki számára tökéletes megoldás nem létezik, de azért minden rendszer igyekszik egy „arany középutat” találni, ami ma körülbelül 20 ezredmásodperc körül van.<br/><br/>Tehát a megadott időközönként az óramegszakítás bekövetkezik, és ekkor az ütemező a következő folyamatnak adja a processzort. A folyamatokat egy sorban tárolja a rendszer, és amikor lejárt az időszelet, akkor az a folyamat, amelyiktől az ütemező éppen elveszi a vezérlést, a sor végére kerül. Ha egy aktuális működő folyamat az időszelete lejárta előtt blokkolódik vagy véget ér, akkor is megtörténik a központi egység átadása.<br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511103001"><strong>Téma: </strong>Mi a virtuális memóriakezelés és a virtuális gép közti különbség?</div>
+    <div><strong>Kulcsszavak: </strong>virtuális memóriakezelés, virtuális gép</div>
+    <div><strong>Kidolgozás: </strong><p>A modern operációs rendszerek képesek arra, hogy látszólag több memóriát biztosítsanak a programoknak, mint amennyi fizikailag a rendelkezésükre áll. A módszert <strong style="color: rgb(0, 0, 0);text-align: left;background-color: rgb(255, 255, 255);"><em>virtuális memóriakezelésnek</em></strong> hívják.<br/></p><p>A virtuális gép nem csak a &#34;nem létező&#34; memóriát biztosítja, hanem egy egész virtuális számítógépet szolgáltat, mely bár csak virtuálisan, de rendelkezik minden szükséges hardver és szoftverelemmel.</p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511100061"><strong>Téma: </strong>Mi a virtuális rendszer fogalma? Honnan a név?</div>
+    <div><strong>Kulcsszavak: </strong>virtuális rendszer</div>
+    <div><strong>Kidolgozás: </strong><p>A &#34;virtuális&#34; szót általában úgy szokták magyarázni, hogy &#34;olyan, ami van, de mégsincs&#34;. Így átfogalmazva a virtuális gép egy olyan gép, ami nincs, de közben mégis van :)<br/></p><p><br/></p><p><b>Virtuális hardver </b></p><div>A kernelkoncepció lényege, hogy a felhasználói és a rendszerprogramok számára a processzor utasításkészletének kiterjesztésével a kernel egy virtuális gépet jelenít meg. Mind a felhasználói, mind a rendszerprogramok futásuk során tehát egyrészt a processzor utasításkészletét (eltekintve a privilegizált utasításoktól), másrészt a kernel által nyújtott, rendszerhívással elérhető műveleteket használhatják. A rendszerben egyetlen kernel és több aktív program van jelen, a programok tehát mind a valódi processzort, mind a kernelt közösen, megosztottan használják. Ez azt jelenti, hogy nem csak a valódi processzort, hanem a kernelt is multiprogramozottan kell használni, azaz a processzor állapotának elmentéséhez hasonlóan a kernel állapotát is menteni kell, amikor egyik programról a másik futtatására vált át a rendszer. Az IBM kutatóinak ötlete volt, hogy a kernel alatt elhelyezkedő rétegbe olyan funkció kerüljön, amelyik egyszerűen a fizikai eszközök megosztott használatára ad lehetőséget, nem kiterjesztett, hanem pontosan a fizikai processzorral és eszközökkel azonos felületen. Így minden felhasználó egy saját virtuális hardvert lát, amelyen elvileg tetszőleges kernelt, operációs rendszert futtathat (általában egyfelhasználós, interaktív üzemmódban)<span>.</span></div><div><span>A megoldást először az IBM 360/67-es számítógépre dolgozták ki (1970), kereskedelmi forgalomba pedig az IBM VM/370 operációs rendszerben került (1979).</span></div></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511110482"><strong>Téma: </strong>Mi az operációs rendszer kernelmódja és felhasználói módja közti különbség?</div>
+    <div><strong>Kulcsszavak: </strong>kernelmód, felhasználói mód</div>
+    <div><strong>Kidolgozás: </strong><p>Két vagy több módja van egy operációs rendszernek</p><ol><li>felhasználói mód (user space): a felhasználói programok nem megbízhatóak, a rendszert meg kell védeni a felhasználói programok hibáitól. Ebben a módban csak azt szabad, amit az OS &#34;megenged&#34;. Direkt hardware hozzáférés általában tiltott.</li><li>kernel mód (kernel space, privilegized mode): az operációs rendszer módja. Az OS-nek &#34;mindent szabad&#34;</li></ol><p>Kernelmódban az operációs rendszer azon része fut, amelyek az egész számítógép működése, stabilitása szempontjából a legkritikusabb feladatokat végzik. Ilyenek például a beolvasó és kiíró utasítások és a hardverelemekkel kommunikáló programrészek. Ily módon azt mondhatjuk, hogy a <strong>rendszerhívás</strong> olyan speciális eljáráshívás, mikor ezek a hívások kritikus feladat végrehajtására a kernelbe vagy más privilegizált operációs rendszerbelikomponensbe irányulnak. Ilyen rendszerhívások például egy állomány írására, olvasására, átnevezésére irányuló programhívásoké.</p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511109069"><strong>Téma: </strong>Mik a holtpont kialakulásának feltételei?</div>
+    <div><strong>Kulcsszavak: </strong>holtpont, holtpont kialakulás</div>
+    <div><strong>Kidolgozás: </strong><p>A holtpont kialakulásának szükséges feltételei (Coffman)</p><p>1. kölcsönös kizárás (mutex): <b>legalább egy</b> – többek által igényelt – <b>erőforrás nem megosztható, azaz egyszerre csak egy processzus használhatja</b>;<br>2. foglalva várakozás (hold &amp; wait): <b>valamelyik processzus már lefoglalt egy erőforrást, és arra vár, hogy továbbiakat lefoglaljon</b>;</p><p>3. nem elvehető erőforrások (nonpreemptive): <b>az erőforrást a foglalótól nem lehet kívülről – operációs rendszer beavatkozással – elvenni</b>;</p><p>4. körkörös várakozás (circular waiting): <b>a körben állók folyamatok&nbsp;</b><span><b>mindegyike a következő által foglalt erőforrásra vár</b>.</span><br></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511382941"><strong>Téma: </strong>Mikor nem használható a szemafor?</div>
+    <div><strong>Kulcsszavak: </strong>szemafor</div>
+    <div><strong>Kidolgozás: </strong><p>Olyan többmagos rendszerben, ahol a magok más-más operációs rendszert (virtuális) futtatnak.</p><p>Olyan többprocesszoros rendszerekben is, amiben minden processzornak külön memóriája van.</p><p><br/></p><p>Időalapú (pl: Round-robin) ütemezés használata esetén könnyen előfordulhat a következő szituáció:</p><p>P operáció kellős közepén járunk. Ekkor már tudjuk, hogy az eredmény nem negatív lesz, már készülünk az erőforrást birtokba venni, de a P operációt se tudtuk éppen még befejezni, mert lejárt az időszeletünk, és egy következő folyamat kapja meg a processzort (CPU -t). Ez pedig szintén a mi erőforrásunkat szeretné magáénak tudni, de mivel nem fejeztük előzőleg mi be a P operációt, a következő folyamat boldogan birtokba veszi erőforrásunkat, míg mi a következő körben „váratlanul” toppanunk így be, kialakítva a nem kívánt hármas társaságot.<br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511108655"><strong>Téma: </strong>Milyen dinamikusmemória-nyilvántartási módszereket ismer?</div>
+    <div><strong>Kulcsszavak: </strong></div>
+    <div><strong>Kidolgozás: </strong></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511098554"><strong>Téma: </strong>Mit jelent a holtpont gráfmodellje?</div>
+    <div><strong>Kulcsszavak: </strong>holtpont, gráfmodell</div>
+    <div><strong>Kidolgozás: </strong><p>Az erőforrás-foglalási gráf (resource allocation graph) egy nagyon szemléletes, és nagyon jó illusztrációs eszköz a folyamatok erőforrás-igényeinek és erőforrás-birtoklásainak ábrázolására. Az erőforrás-foglalási gráf egy irányított gráf, a folyamatok és erőforrások közötti viszonyt jellemzi egy adott időpillanatban.</p><p>Az erőforrás-foglalási gráfban kétfajta csúcspontot tartunk számon (a folyamatokat és az erőforrásokat), és ezeket különbözőképpen is jelöljük. Az erőforrás-foglalási gráfban a folyamatokat körrel és az abbaírt folyamatazonosítóval jelöljük, míg az erőforrásokat egy téglalappal és az abba írt erőforrás-azonosítóval jelöljük.<br><br>Az erőforrás-foglalási gráf élei között ugyancsak kétfajta élt tudunk megkülönböztetni aszerint, hogy az irányított él milyen típusú csúcspontból milyen típusú csúcspontba mutat. Az erőforrás-foglalási gráfban ugyanolyan típusú csúcspontok közötti élek nem szerepelhetnek, mindenképpen különböző típusú csúcspontok között állíthatunk fel éleket!<br><br>Ha a gráf irányított éle az „A” feliratú folyamatot jelző körből az „X” feliratú erőforrást jelző téglalap felé mutat, akkor azt mondjuk, hogy egy „A” azonosítójú folyamat az „X” azonosítójú erőforrást megigényli, azaz a folyamat az erőforrásra várakozik.<br><br>Ha a gráf irányított éle az „Y” feliratú erőforrást jelző téglalapból a „B” feliratú folyamatot jelző kör felé mutat, akkor azt mondjuk, hogy egy „B” azonosítójú folyamat az „Y” azonosítójú erőforrást birtokolja, azaz az erőforrás a folyamathoz hozzá van rendelve.<br><br>Ha az erőforrás -foglalási gráfban az erőforrásokba pöttyök vannak rajzolva, akkor a pöttyök száma azt jelenti, hogy az adott erőforrás összesen hány példányban áll a folyamatok rendelkezésére.<br><br>Ha a gráfban egy irányított kört találunk, akkor azt mondjuk, hogy az operációs rendszer van.<br></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511383834"><strong>Téma: </strong>Mit nevezünk versenyhelyzetnek?</div>
+    <div><strong>Kulcsszavak: </strong>versenyhelyzet</div>
+    <div><strong>Kidolgozás: </strong><p>Párhuzamosan futó folyamatok esetén amikor a futás kimenete attól függ, hogy melyik folyamat mikor és mennyit futott, azaz a párhuzamos végrehajtás következtében előforduló nem determinisztikus viselkedést <strong style="color: rgb(0, 0, 0);text-align: justify;background-color: rgb(255, 255, 255);">versenyhelyzetnek</strong> nevezzük.</p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511371292"><strong>Téma: </strong>Mit takar a folyamatleíró táblázat?</div>
+    <div><strong>Kulcsszavak: </strong>folyamatleíró táblázat, folyamattáblázat</div>
+    <div><strong>Kidolgozás: </strong><p>Ahhoz, hogy a folyamatokat – a részletes vagy kevésbé részletes folyamatok modelljétől eltekintve – megfelelően tudja ütemezni az operációs rendszer, nyilván kell tartani minden olyan információt, ami a folyamat újraütemezéséhez szükséges. A nyilvántartáshoz az operációs rendszer egy táblázatot használ, amit folyamattáblázatnak neveznek. Más irodalmakban a folyamattáblázat gyakori elnevezése a folyamatvezérlő blokk (Process Control Block – PCB).</p><p>Ebben a táblázatban minden olyan információ tárolva legyen, ami ahhoz kell, hogy a folyamatot a futó állapotából a futásra kész állapotba hozzuk át, majd ha újra futó állapotba kerül, akkor úgy folytathassa a futását, mintha semmi sem történt volna.</p><p>A teljesség igénye nélkül egy folyamathoz tartozó ilyen adatok:</p><ul><li>a folyamat utasításszámlálója,</li><li>a folyamat veremmutatója,</li><li>a processzor regisztereinek adatai,</li><li>a nyitott fájlok állapotinformációja, illetve nem utolsósorban</li><li>a memória (kapcsolódó) adatai.</li></ul><p>A teljesség igénye nélkül a folyamattábla legfontosabb mezőit felsoroljuk:</p><ul><li>kernelinformációk: a regiszterek, az utasításszámláló, a programállapot-szó, a folyamatállapot, a veremmutató, az aktuális ütemezési prioritás, a maximális ütemezési prioritás, az időzítési egység mérete, a felhasznált processzoridő (CPU idő) stb.</li><li><span>Folyamatkezelő információk: </span><span>a kódszegmens-mutató, az adatszegmens-mutató, a szignálállapot, a kilépési állapot, a folyamat azonosítója (PID), a szülőfolyamat azonosítója (PPID), a gyermekfolyamatok processzorideje, a valódi felhasználói azonosító (UID), a valódi csoportazonosító (GID), a folyamat neve stb.</span></li><li><span>Fájlkezelő információk: </span><span>az umask-érték (user mask), a gyökérkönyvtár, a munkakönyvtár, a fájlleírók, a valós felhasználói azonosító (UID), a valós csoportazonosító (GID), a TTY vezérlő stb.</span></li></ul><p><span>Zárásképpen meg kell jegyezni, hogy a hardvereszközök kezelésének alapja minden mai operációs rendszerben a megszakításelven működik. Adott egy táblázat, aminek sorszáma a megszakítás számát jelenti, míg a táblázat eleme megadja a kiszolgálórutin címét. Ezt a táblát megszakításvektornak nevezzük. Ilyen kiszolgálási elvre épül az ütemező időzítője is. Ekkor az ütemező, az időzítő kiszolgálórutinja az aktuális folyamatot lecseréli a következőre.</span></p><p><span>Tegyük fel, hogy egy folyamat adatot vár egy lemezegységtől. Az adat hozzáférhetőségét a lemezegység egy megszakításkéréssel jelzi. Ennek kiszolgálása során a kért adatokat a folyamat rendelkezésére bocsátja (a fájlleírók területére másolja), majd a folyamatot blokkolt állapotból futásra készbe állítja, így egy következő ütemezés során a folyamat végrehajtása tovább folytatódik.</span></p><div><br/><br/></div></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511124336"><strong>Téma: </strong>Mit értünk folyamatok ütemezésén?</div>
+    <div><strong>Kulcsszavak: </strong>folyamatok ütemezése</div>
+    <div><strong>Kidolgozás: </strong><p>A mai számítógépekre már nem csak az egyszerű, egyidejűleg csak egy feladat végrehajtási módja a jellemző. Elsősorban a hardverelemek teljesítményének növekedése miatt (nőtt a mikroprocesszor utasítás-végrehajtási sebessége, nőtt a memória mérete stb.) olyan alapprogram, azaz operációs rendszer készül a megfelelő hardverre, amely lehetővé teszi, hogy a felhasználó – ha úgy kívánja – egyszerre több feladatot is végrehajthasson a gépen. Ezt természetesen úgy teszi, hogy jellemzően rövid időközönként (10-20 milliszekundumonként) megszakítja az aktuális feladat végrehajtását, majd egy következő feladat végrehajtásába kezd. Olyan gyorsan képes a központi egység végrehajtani az utasításokat (több millió utasítást másodpercenként), hogy ha ezen sebesség mellett váltogatjuk az éppen végrehajtódó feladatokat, az számunkra azt az illúziót kelti, mintha egymással párhuzamosan történnének a feladat-végrehajtások. </p><p><i>A folyamatok közti gyors kapcsolást, a végrehajtás váltását multiprogramozásnak nevezzük. Egy folyamatból, azaz processzből több más parancs is indítható. Ahogy láttuk kezdő lépésként, ezt megtehetjük egy UNIX vagy egy UNIX -szerű (mint amilyen például a GNU/LINUX) operációs rendszerrel működő kiszolgálóhoz kapcsolódva a shell, általában a „bash” révén. Azt a folyamatot, amelyből létrehozzuk az újabb folyamatokat, szülőfolyamatnak (egyszerűbben szülőnek) nevezik, míg az új folyamatokat gyermekfolyamatnak (egyszerűbben gyermeknek). A gyermekfolyamat örökli a szülőfolyamat tulajdonságait. </i></p><p><i>Az operációs rendszernek ahhoz, hogy ezeket a folyamatokat helyesen tudja kezelni, felügyelnie kell a folyamatokat. Az operációs rendszerünk így minden egyes folyamatot nyilvántart, és az operációs rendszer lelkének is nevezett ütemező (scheduler) segítségével szépen sorban minden egyes folyamatnak ad egy kis processzor- (CPU-) időszeletet, amíg az adott folyamat dolgozik, azaz a processzorra kerülhet. </i></p><p>A folyamatok önálló egységek, a központi memória egy szeletében helyezkednek el. Ahhoz, hogy a központi egység ezeket végre tudja hajtani, az kell, hogy a folyamatokhoz saját utasításszámláló, verem és egyéb állapotjelzők tartozzanak. Tudható, hogy a folyamatok közül biztosan egy folyamat fut mindig, az összes többi pedig arra vár, esetlegesen blokkolt állapotban, hogy lehetőséget kapjon a futásra, azaz processzoridőhöz jusson. </p><p>Elmondhatjuk azt is – a részletes vagy kevésbé részletes folyamatok modelljétől eltekintve –, hogy a folyamatok megfelelő ütemezéséhez az operációs rendszernek nyilván kell tartani minden olyan információt, ami a folyamat újraütemezéséhez szükséges. Ehhez a nyilvántartáshoz az operációs rendszer egy táblázatot használ, amit folyamattáblázatnak nevezünk. Gyakran olvashatjuk más irodalmakban erre a folyamatvezérlő blokk (Process Control Block – PCB) megnevezést. <br/><br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511107402"><strong>Téma: </strong>Mit értünk szegmentált memóriakezelésen, mi a lényege? Szegmentált memóriahasználatnál van-e szükség virtuális memóriakezelésre?</div>
+    <div><strong>Kulcsszavak: </strong>szegmentált memóriakezelés, virtuális memóriakezelés</div>
+    <div><strong>Kidolgozás: </strong><p><span>A virtuális memória</span></p><p><span>Amennyiben a számítógépnek egy program vagy folyamat futtatásához kevés közvetlen elérésű memória (RAM) áll rendelkezésére, a Windows a virtuális memóriát használja.</span></p><p><span>A virtuális memória a számítógép RAM memóriáját a merevlemezen egy ideiglenes használatú területtel kombinálja. Ha nincs elegendő RAM memória, a virtuális memória az adatokat a RAM memóriából a lapozófájlnak nevezett területre mozgatja. Az adatok lapozófájlba mozgatása RAM memória területet szabadít fel, mellyel befejezhetők a feladatok.</span></p><p><span>Általánosan elmondható, hogy minél több RAM memória van a számítógépben, annál gyorsabban futnak a programok. Ha a számítógép működését a kevés RAM memória lelassítja, akkor ellensúlyozásként a virtuális memória növelése látszik megoldásnak. Azonban tudni kell, hogy a számítógép az adatokat a RAM memóriából sokkal gyorsabban tudja olvasni, mint a merevlemezről, így a RAM memória bővítése jobb megoldás.</span></p><p><span>Az operációs rendszer úgy szabadít fel operatív memóriát az éppen futó program számára, hogy a memóriában tárolt, de éppen nem használt blokkokat (lapokat) kiírja a külső tárolóra, amikor pedig ismét szükség van rájuk, visszaolvassa őket. Mivel a merevlemez sebessége töredéke a memória sebességének, nagyon sok múlik azon, hogy a virtuálismemória-kezelő milyen stratégiát alkalmaz az operatív memóriából kimozgatandó lapok kiválasztásakor. A memóriakezelésnek két fajtája létezik. Az egyik az úgy nevezett lapozás, a másik pedig a szegmentálás.</span></p><p><span>Szegmentálás</span></p><p><span>A szegmentálás egy memóriakezelési módszer. Célja a memória több címtérre bontása. A memóriát logikailag részekre úgynevezett szegmensekre osztják, és minden résznek megvan a saját, 0-tól kezdődő címtartománya. Egy memóriacím így két részből áll, egy szegmenscímből és egy eltolási- (offset) címből, azaz a memória kétdimenziós. Két szinten valósul meg, hardver és operációs rendszer szinten. A lapozással ellentétben ez nem marad rejtve a felhasználó (programozó) előtt.</span></p><p><span>Szegmentálás nélkül egyetlen egydimenziós címterünk lenne, pl.:0-100 címig. Tegyük fel, hogy a programunk két folyamatosan növekvő méretű memóriaterületet használ. Előfordulhat, hogy az első a 0-49. címig tart, a második az 50-től 80-ig. Az első memóriaterületet nem tudjuk tovább növelni, pedig még lenne szabad memória a 81-től kezdődően. A megoldás a szegmentálás. Létrehozunk egy-egy szegmenst a két memóriaterület számára, mindkettő a 0. címtől kezdődik, így mindkét memóriaterületet addig tudjuk növelni amíg a memória el nem fogy.</span></p><p><span>A szegmensekhez elérési jogok tartoznak: írható, olvasható, futtatható. Így például a programunk nem írhatja felül saját magát, mert a programkódot egy olyan szegmensben tároljuk, amely csak futtatható.</span></p><p><span>A szegmentálás hasznos osztott programkönyvtárak használata esetén is. Ha a függvények külön-külön szegmensben helyezkednek el, akkor a programkönyvtár újabb verziójával a függvények kezdőcíme nem fog megváltozni, még akkor sem, ha a méretük megváltozik.</span></p><p><span>Kétféleképp lehet megvalósítani: cseréléssel és lapozással. Cserélésnél a rendszer a memóriában csak néhány szegmenst tárol. Kezdetben a szegmensek folyamatosan helyezkednek el. Ha a memória betelt, és egy olyan szegmensre van szükség, amely nincs benn a memóriában, helyet kell neki csinálni, azaz ki kell egyet írni a lemezre. Mivel egy szegmenst csak a vele legalább egyenlő méretű helyre tudunk beilleszteni, a memória előbb-utóbb lyukacsossá válik -mivel a pontos illeszkedés valószínűsége csekély-, ezt hívják külső elaprózódásnak. Ennek elkerülésére több módszer lehetséges.</span></p><p><span>Az egyik, hogy a szegmenseket a memória eleje felé tolják, így a sok apró lyuk helyett a memória végén egy nagy lyuk keletkezik. Egy másik, hatékonyabb módszer, hogy olyan szegmenseket írnak ki a lemezre, amelyek két lyuk közé esnek, így a lyukak mérete nő.</span></p><p><span>Lapozásnál nem teljes szegmensek cserélődnek, hanem ezeket a rendszer fix méretű részekre -lapokra- osztja. Ezeket a lapokat írja ki, vagy olvassa be. A klasszikus lapozáshoz képest, a különbség csak annyi, hogy minden szegmensnek külön laptábla kell.</span></p><p><span>Lapozás</span></p><p><span>A memóriakezelésnek az a módja, amelyben a logikai címtartományt (tehát amit a programozó lát) azonos méretű keretekre, a fizikai memóriát ugyanakkora lapokra bontjuk, és a logikai címből egy képlettel álltjuk elő a fizikai címet. Létezik két- , három- illetve négyszintű lapozás is.</span></p><p><br/></p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511105670"><strong>Téma: </strong>Mit értünk virtuális memóriakezelésen, mi a lapozás?</div>
+    <div><strong>Kulcsszavak: </strong>virtuális memóriakezelés, lapozás</div>
+    <div><strong>Kidolgozás: </strong><p style="text-align: justify;color: rgb(0, 0, 0);"></p><p style="text-align: justify;color: rgb(0, 0, 0);">A modern operációs rendszerek képesek arra, hogy látszólag több memóriát biztosítsanak a programoknak, mint amennyi fizikailag a rendelkezésükre áll. A módszert <strong style="color: rgb(0, 0, 0);text-align: left;background-color: rgb(255, 255, 255);"><em>virtuális memóriakezelésnek</em></strong> hívják.</p><p style="text-align: justify;color: rgb(0, 0, 0);">Az alapvető memóriakezelési módszerek két csoportba sorolhatók:</p><ul style="color: rgb(0, 0, 0);"><li>végrehajtás közben mozgatják az egyes processzusokat a központi tár és a lemezterületek között (ennek módszerei a<span> </span><span class="fogalom">lapozás</span>, illetve a csere);</li><li>már a betöltéskor eldől, hogy mi hova kerül, és a futás végéig állandósul a memória, azaz a programon belüli esetleges dinamikus definíciókon kívül a memóriának a „programot” tartalmazó része állandó</li></ul></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <!--    <a name="--><? //= $id?><!--"></a>-->
+    <div id="1511009771"><strong>Téma: </strong>Regiszter</div>
+    <div><strong>Kulcsszavak: </strong>Regiszter</div>
+    <div><strong>Kidolgozás: </strong><p>A regiszterek a számítógépek központi feldolgozó egységeinek (CPU-inak), illetve mikroprocesszorainak gyorsan írható-olvasható, ideiglenes tartalmú, és általában egyszerre csak 1 gépi szó (word, általában 2-4 bájt) feldolgozására alkalmas tárolóegységei.</p></div>
+    <a href="#top">fel</a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+
+</body>
+</html>

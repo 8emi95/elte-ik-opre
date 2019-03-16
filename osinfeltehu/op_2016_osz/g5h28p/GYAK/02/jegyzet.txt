@@ -1,0 +1,35 @@
+argc - paraméter szám
+argv - argomentumok szöveges formában egy tömbben (0-maga a program)
+
+./avg elso masodik
+ekkor argc = 3 /mivel 0-1-2/
+argv[0] = "./avg\0"
+argv[1] = "elso\0"
+argv[2] = "masodik\0"
+argv[3] = /NULL POINTER de ki kell probalni/ ILYEN NINCS - NEM DEFINÁLT - VMI MEMÓRIA CUCC
+
+passwd.c /struct mint adattipus/
+	- ugyan úgy van neki sizeof múvelete pl
+
+	struct coords {
+		int x;
+		int x;
+	};
+
+	struct coord cov;
+	sizeof(cov) //itt is a pointer méretét adja meg a sizeof így az int es char* mas lesz
+
+03 ORA ANYAGA - File műveletek
+
+ gyak1.c - open/close/read/write/lseek fv 
+ lseek - egy poziciora lehet ugyra pl ha csak minden 10. karaktert szeretnénk olvasni
+
+masik file olvaso fv.csoport az fopen/fclode/fget/fputs (lseek nincs) - itt ez egy pointert ad vissza ami a filera mutat + egy struct ami a file-lal kapcsolatos infókat tartalmaz.
+pl: f=fopen(fname,"r"); //read mode
+	f=fopen(fname,"rb"); //read binaris mode-ban itt ki lehet irni struct-oket 
+
+open		fopen(text)		fopen(bin)
+close		fclode			fclose
+read		fget			fread
+write		fputs			fwrite
+lseek						lseek

@@ -1,0 +1,6 @@
+2. lépcső: daemon módban megy a server és kiszolgál 1 klienst
+3. lépcső: sleep
+4. lépcső: párhuzamosítás forkokkal: gyerekek rámenek a kliensekre
+
+ZH: UDP szerver 2 különböző portot kell kezelni egy programban, és közben 5 mpenként pontot kell kiírni
+	egyik porton inkrementál, másikon dekrementál egy számot

@@ -1,0 +1,11 @@
+server
+client
+
+elõször a server-t futtatom, cc server.cpp -o server
+jobb klikk és a legfelsõre,a nevére katt, lesz ketto
+aztán a client cc client.cpp -o client
+majd vissza a serveresre, ott ./server
+majd a client és ott ./client
+
+honlap
+https://github.com/dementor5457/szhalok-gyak-11-29

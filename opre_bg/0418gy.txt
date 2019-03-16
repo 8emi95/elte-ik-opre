@@ -1,0 +1,8 @@
+poll: várakozás erõforrástakarékosan pl csõvezeték readre
+select: ua. csak máshogy
+ppoll: még advancedebb; nemcsak adatra lehet várni, és nemcsak idõzítõvel, hanem lehet signalra is várni
+named pipe: h más alkalmazás is tudjon rá kapcsolódni
+pipének lehet több write-endje is, mind be kell zárni hogy a read ne várjon tovább
+
+üzenetsor: a key_t típusú kulcs ismeretében bármely folyamat rá tud kapcsolódni
+kulcs helyett IPC_PRIVATE - egyedi kulcs, ha kizárólag a szülõ-gyerek közt akarok üzizni, más nem tudja a kulcsot (én se :D)

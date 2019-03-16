@@ -1,0 +1,19 @@
+Operációs rendszerek PÓTZH. 2017 december 11. 1 óra. // bs 2017.12.21 14h
+A „Már ám oficér, Loptyák a kocsi at” ápónak sok ellensége lett. A sok hivatalos tehetetlenséget látva a
+KápóVadász (szülő) akcióba lép! Két fontos segítője van, a felderítő(k) és a fejvadász(ok). (Gyerekek)
+1, A KápóVadász megkapja a jelentéseket parancssori argumentumon keresztül, hogy hol látták az utóbbi időben a
+Kápót. Például: kapovadasz dunakeszi vac godollo. Ezt a KápóVadász osztott memóriába rja és elindítja a két
+felderítőjét, hogy pontosítsák, hova is kell küldeni a „fejvadászt”. A felderítők kiírják a kapott adatokat a képernyőre
+PID számukkal együtt, majd visszajeleznem a főnöknek, hogy elindították a keresést. A szülő veszi a Felderítő
+jelzését és megvárja, amíg azok befejeződne
+2, Mindkét elderítő 10% eséllyel találja meg Kápót mindegyik városban. A felderítők csövön visszaküldik
+KápóVadásznak a felderítés eredményét (Például: dunakeszi nincs vac nincs godollo talalt), majd egy jelzést
+küldenek, hogy a kapott felderítési feladatot befejezték, majd befejezik működésüket. KápóVadász kiírja a
+képernyőre a csövön kapott eredményt, és megvárja a felderítők befejeződését
+3, A KápóVadász ha nem kap kielégítő eredményt, akkor a felderítőket egészen addig visszaküldi Kápó keresésre,
+amíg nem megy biztosra! Akkor megy biztosra, ha mindkét felderítő megerősíti, hogy ugyanabban a városban van
+Kápó!
+4, Amint KápóVadász biztos tippet kap, elindítja két legjobb Fejvadászát, osztott memóriába írva a város nevét és a
+vérdíj összegét. Az osztott memória szemaforral védett! Fejvadászok képernyőre írják az adatokat és PID számukat és
+15% eséllyel fülön csípik Kápót, és adnak neki egy „játékautót”. Sikertelen küldetés esetén KápóVadász emeli a
+„sikerdíjat 50% al és újra indítja a vadászatot!

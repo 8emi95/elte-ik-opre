@@ -1,0 +1,36 @@
+Csütörtök 4-tõl lesz NumMód konzultáció
+
+
+Hilbert-térbeli approximációig bezárólag lesz a Zh anyaga
+
+kézi számolásúú példákkal a 11. gyak. feléig
+
+
+Biztos hogy lesz Spline-os feladat, de lehet hogy egyszerû lesz, lehet hogy nem
+
+
+Hogyan is lehet Spline-okat csinálni? Intervallumonkénti megadás. Kézzel: Felírjuk a polinomok formáját, plusz a LER-t -> a MATLAB innentõl kezdve megoldja (a hosszú vektorból négyesével kleszedjük a számokat, ezek lesznek a polinomok együtthatói (3. fokú Spline esetén))
+
+Pl.: 4 intervallum, 3. fokú Spline esetén:
+4 db polinomom lesz a 4 db intervallumra
+Felírom a LER-t a 4 db polinomra (??) -> megoldja a MATLAB
+Kiszedjük belõle a 4 db polinomot (figyelni kell arra, hogy a tetején vagy az alján van a fõegyüttható)
+
+
+
+VAGY!!
+Elõadáson szereplõ képletek (5x5, 4x4 (Hermite), 3x3 (természetes) lesz a LER (????))
+
+
+Gyakorlásként érdemes így (10.2.b  -  gyak_10_2_masodfoku_ujabb.m) megcsinálni a pénteki kézzel felírt cuccokat (??)
+
+
+
+A pchip nem Spline, hanem egy szakaszonként folytonos polinom. Egyszer folytonosan deriválható, de kétszer mér nem. Differenciahányadosból számolja a deriváltközelítéseket
+
+
+ZH-ra kell:
+Kézzel: 11.1, 11.2, 11.3.a
+Programozás: 11.2, 11.3
+
+Általánosított inverz, látalánosított megoldás felírása, legkisebb négyzetek módszere szerinti megoldás

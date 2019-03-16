@@ -1,0 +1,143 @@
+legutóbbi félévben is üzenetsorral kellett megoldani a zh-t (csõvezetékkel nem volt jó)
+
+http://ntibi.web.elte.hu/elte/2010-2011-2/opr/osztmem_szemafor.pdf
+http://ntibi.web.elte.hu/elte/2010-2011-2/opr/
+
+osztott memória, üzenetsor várható a zh-ban
+
+uzenet.c
+kell egy üzenetstruktúra... egy számérték
+
+MEGNÉZNI....mtype-ból néz vmit?
+
+
+
+ipcs - lekérdezzük az üzenetsort
+ipcrm -q id		így lehet törölni
+ipcmk -Q saját üzenetsor
+
+priorításos posix üzenetsorok
+
+
+<mqueue.h>
+mq_open(név, mód) 
+mq_open(név, mód, engedélyek, &attribútumok)
+vagy létrehoz egy új üzenetsort, vagy csatlakozik egy már létezõhöz
+
+mód:
+O_RDONLY
+O_WRONLY
+O_RDWR
+O_CREAT vagy létrehozzon vagy csatlakozzon ha már nincs 
+O_EXECL  már meglévõhöz
+O_NONBLOCK
+
+engedélyek: szokásos
+
+attribútumok
+mq_attr: típusú struktúrát kell átadnunk, illetve annak a címét.
+mq_maxmsg	üzenetszám
+m_msgsize	q üzenet maximális mérete bájtokban
+NULL		alapértelmezett üzenetszám és méret fog átadódni az üzenetsornak (10db, 8192 byte a oprendszerek szerveren)
+
+/proc/sys/fs/mqueue/
+
+mq_open visszatérési értéke egy mqd_t típusú üzenetsor leíró, vagy pedig -1 ha hiba
+(típuskényszerítéssel tudjuk ellenõrizni:	== (mqd_t)
+
+mq_send(üzenet leíró, &üzenet, méret, &prioritás)	visszatérés 0 ha sikeres, -1 ha nem
+hozzáadja az üzenetet az üzenetsorhoz
+
+prioritas elõjel nélküli egész... minél magasabb prioritást adunk át, annál elõbb kerül az üzenetsorba, annál hamarabb olvassuk majd ki
+
+mq_receive(leíró, &üzenet, max méret, &prioritás)
+maximális méret: mennyi olvasható be erre a helyre (ha kisebb max méretet adunk meg, mint az érkezõ üzenet mérete, akkor hibát generál)
+visszatérési értéke a tényleges üzenet bájtokban és -1 ha nem sikerült
+
+mq_close(leíró)		lezárja a kapcsolódást az üzenetsorhoz (de nem szünteti meg az üzenetsort)
+
+mq_unlink(leíró)	ténylegesen törli az üzenetsort
+utobbi két függvény 0-val tér vissza ha sikerült, -1-gyel ha nem
+
+mq_notify(leíró, &signal event)		ezzel tudjuk értesíteni a folyamatot az üzenet érkezésérõl
+akkor küldi el a signált ha ÜRES az üzenetsor és ÉRKEZIK bele üzenet
+
+signal event egy sigevent típusú struktúra
+
+csak egy folyamatra lehet feliratkozni
+
+
+
+http://slideplayer.hu/slide/11290940/
+https://www.cs.ubbcluj.ro/~laura/so2/dokumentacio/uzenet.htm
+
+
+
+gy5.zip példái!
+mquezenet.c
+
+
+<sys/shm.h>
+shmget(kulcs, méret, flagek)	létrehoz vagy "csatlakozik" egy legalább méret paraméterben megadott bájtméretû oszlop memóriaterületet
+lefoglal egy megfelelõ memóriaméretû területet osztott memória céljára (még nincs csatlakoztatva maga a folyamat)
+(tehát ha így megpróbálom címezni, akkor segmentation fault-ot kapok)
+csatlakozni kell! csatlakozás után már nem generál hibát ha az adott folyamatból próbálom megcímezni
+shmid (egész érték) osztott memóriaazonosítót adja vissza
+
+getpagesize()	// 4096 byte az oprendszerek szerveren
+ilyen memórialapokkal dolgozunk... ha pl 5byte-ra lenne szükség akkor is lefoglal 4096-ot...
+
+
+flagek: 
+S_IRUSR...
+IPC_CREAT megpróbál csatlakozni, ha nem létezik létrehozza
+IPC_EXCL
+
+shmat(shmid, NULL, 0)
+ezzel csatlakozik ténylegesen az osztott memóriához és a kezdõcímet adja vissza
+visszatérési érték a kezdõcím (shmaddr)
+
+shmdt(shmaddr)	elengedi...
+
+shmctl(shmid, IPC_RMID, NULL)	felszabadítja a memóriát és törli az ipc bejegyzések közül
+
+
+osztmem.c
+
+
+szemaforok
+
+<sys/sem.h>
+semget(kulcs, szemaforok száma, flagek)
+itt is a kulcs határozza meg az azonosítóját és a kulcs segítségével tudunk majd másik folyamattal csatlakozni
+semid-t ad vissza?
+0-tól számozzuk a szemaforokat
+
+
+semop(semid, &mûveletek tömbje, mûveletek száma)
+http://www.tankonyvtar.hu/hu/tartalom/tamop412A/2010-0011_szamalap2/lecke8_lap3.scorml
+sembuf (mûveletek tömbje): 
+sem_num,
+sem_flag : - IPC_NOWAIT 	nem fog várni az adott mûvelet végrehajtására, ahnem hibát generál
+	   - SEM_UNDO		ha hiba lenne, akkor visszavonódik
+Ha sem_op > 0, akkor a szemaforFogalom magyarázata:A szemafor a számítógép-programozásban használt változó vagy absztrakt adattípus, amit az osztott erõforrásokhoz való hozzáférések szabályozásához használnak a többszálú környezetekben. Megalkotása Edsger Dijkstra holland matematikusnak, a programozás egyik úttörõjének nevéhez fûzõdik. értéke nõ. Ez nem okoz blokkolást. Általában a kritikus szakaszFogalom magyarázata:.A programkódnak azt a részét, amelyik közös erõforrást használ, kritikus szakasznak nevezzük. végén használjuk.
+Ha sem_op < 0, akkor az operációs rendszerFogalom magyarázata:Olyan programrendszer, amely a számítógépes rendszerben a programok végrehajtását vezérli: így például ütemezi a programok végrehajtását, elosztja az erõforrásokat, biztosítja a felhasználó és a számítógépes rendszer közötti kommunikációt. megpróbálja a szemaforFogalom magyarázata:A szemafor a számítógép-programozásban használt változó vagy absztrakt adattípus, amit az osztott erõforrásokhoz való hozzáférések szabályozásához használnak a többszálú környezetekben. Megalkotása Edsger Dijkstra holland matematikusnak, a programozás egyik úttörõjének nevéhez fûzõdik. értékét csökkenteni, ha a szemaforFogalom magyarázata:A szemafor a számítógép-programozásban használt változó vagy absztrakt adattípus, amit az osztott erõforrásokhoz való hozzáférések szabályozásához használnak a többszálú környezetekben. Megalkotása Edsger Dijkstra holland matematikusnak, a programozás egyik úttörõjének nevéhez fûzõdik. értéke negatívvá válna, akkor nem hajtja végre, hanem blokkolja a folyamatot.
+Ha sem_op = 0, akkor a szemaforFogalom magyarázata:A szemafor a számítógép-programozásban használt változó vagy absztrakt adattípus, amit az osztott erõforrásokhoz való hozzáférések szabályozásához használnak a többszálú környezetekben. Megalkotása Edsger Dijkstra holland matematikusnak, a programozás egyik úttörõjének nevéhez fûzõdik. értéke nem változik. Ha a szemaforFogalom magyarázata:A szemafor a számítógép-programozásban használt változó vagy absztrakt adattípus, amit az osztott erõforrásokhoz való hozzáférések szabályozásához használnak a többszálú környezetekben. Megalkotása Edsger Dijkstra holland matematikusnak, a programozás egyik úttörõjének nevéhez fûzõdik. értéke nem nulla, akkor a folyamat blokkolódik egészen addig, míg a szemaforFogalom magyarázata:A szemafor a számítógép-programozásban használt változó vagy absztrakt adattípus, amit az osztott erõforrásokhoz való hozzáférések szabályozásához használnak a többszálú környezetekben. Megalkotása Edsger Dijkstra holland matematikusnak, a programozás egyik úttörõjének nevéhez fûzõdik. nulla nem lesz. Ezt nullára várakozásnak is szokták nevezni.
+
+semctl(semid, szemafor, parancs, érték)
+parancs...
+
+évfolyam zh-ban tuti lesz valami termelõ-fogyasztós szemaforos 
+(2 szemaforral érdemes... jobb, mint ha 1-et használnánk... igazából egyszerûbb is, mert nem kell figyelni rá, h éppen mit jelent a szemafor)
+
+
+<semaphore.h>
+
+nevesített szemafor
+sem_open(név, mód, [,engedélyek, kezdõérték])	// egy szemafort hoz létre, vagy kapcsolódik hozzá
+név pl "/temp"
+
+sem_post(semaddr)
+sem_wait(semaddr
+sem_trywait
+sem_unlink(nev)

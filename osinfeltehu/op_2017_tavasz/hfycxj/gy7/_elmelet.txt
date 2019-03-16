@@ -1,0 +1,258 @@
+http://man7.org/linux/man-pages/man7/signal.7.html
+http://man7.org/linux/man-pages/man3/sigqueue.3.html
+http://man7.org/linux/man-pages/man2/sigaction.2.html
+
+Forrás: Pere László - Programozás C nyelven
+
+Jelzések
+
+A Unix rendszerek jelzéseket (signal) küldenek a folyamatoknak, ha valamilyen 
+különleges esemény következik be, amiről a folyamatnak tudnia kell és lehetővé 
+teszik a folyamatok számára is, hogy jelzéseket küldjenek egymásnak. 
+A folyamatok sorsa szempontjából a jelzéseket három csoportba sorolhatjuk:
+- Az első csoportba tartoznak azok a jelzések, amelyek mindenképpen a folyamat megszakítását okozzák. pl: kill -9. 
+- A második csoportba tartoznak azok a jelzések, amelyeket a folyamat fogadhat 
+	vagy tilthat annak érdekében, hogy a futását ne szakítsák meg. Az ilyen jelzések 
+	nem szakítják meg a folyamat futását, ha az előzőleg úgy rendelkezett. Ilyen jellegű 
+	jelzés a futó programnak a Ctrl+C billentyűkombinációval küldhető jelzés. 
+- A harmadik csoportba tartozn azok a jelzések, amelyeket ha nem fogad a folyamat, 
+	akkor is tovább futhat. Az ilyen jelzések miatt a rendszer soha nem szakítja meg a folyamat futását. 
+
+Erdekes módon a jelzések nem hordoznak a szó hétköznapi értelmében vett üze- 
+netet, vagyis nincs adat, ami a jelzésbe lenne csomagolva. A jelzésnek csupán típusa 
+van, az információt a puszta megjelenése hordozza. A folyamat csupán azt tudja 
+meg a jelzés megjelenéséből, hogy a jelzés típusa által jelzett esemény bekövetke- 
+zett, annak körülményeiről más forrásból kell tájékozódnia. 
+A jelzések fogadására Unix rendszereken visszahívható függvényeken (callback 
+function) keresztül van mód. A visszahívható függvények olyan C nyelven megírt 
+függvények, amelyeket a felhasználó készít el és helyez el a programban, de a rend- 
+szer hív meg. 
+A felhasználó tehát elkészíti a visszahívható függvényt és elhelyezi a programban, 
+majd értesíti a rendszert, hogy az adott típusú esemény bekövetkezésekor ezt a függ- 
+vényt kell meghívnia. A felhasználó a bejelentést a visszahívható függvény címének 
+átadásával teheti meg. Erre a célra a C könyvtár ad eszközt, amelyet ebben a részben 
+mutatunk be. 
+Mivel a jelzéskezelő visszahívható függvényt a rendszer hívja meg, annak típusa 
+kötött. A jelzés fogadására használható függvények típusa — a jelzés típusától füg- 
+getlenül — a következő: 
+void név ( int arg ) 
+Minden visszahívható függvénynek, amely jelzéseket fogad, a bemutatott típusúnak 
+kell lennie. A függvénynek átadott paraméter mindig a jelzés típusa, ami a hívást 
+kiváltotta. 
+A jelzést fogadni tehát nem jelent többet, mint a bemutatott típusú függvény elké- 
+szítése és a rendszeren való bejegyeztetése mint az adott folyamat adott típusú jel- 
+zésének kezelője. Jelzéskezelő függvényt írni azonban nem egyszerű feladat, ezért a 
+jelzéskezelés támogatására használható C könyvtárbeli függvények bemutatása után 
+visszatérünk erre a kérdésre. 
+
+
+
+A GNU C könyvtár a következő — a signal. h fejállományban létrehozott — függ- 
+vényeket biztosítja a jelzések fogadására és küldésére: 
+
+- sighandler_t signal(int jelzés, sighandler_t függvény) ; 
+	A függvény jelzéskezelő függvényt vesz nyilvántartásba a hívó folyamat számára. 
+	A függvény első paramétere annak a jelzésnek a száma, amelyet a második 
+	paraméterként átadott című függvény kezel. 
+	A signal() függvény lefutása után a Linux az adott számú jelzést átadja a 
+	függvénynek, azaz a jelzés jelentkezése esetén meghívja a jelzéskezelő függvényt. 
+	Ha a függvény második paramétere a SIG_DFL, a függvény törli a nyilvántar- 
+	tásból az adott jelzéstípushoz tartozó jelzéskezelő függvényt. 
+	Ha a függvény második paramétere a SIG_IGN, a függvény arra szólítja fel a 
+	rendszert, hogy az adott jelzéstípust hagyja figyelmen kívül, az adott típusú 
+	jelzéseket semmisítse meg.
+ 
+- int raise(int jelzés) ; 
+	A függvény segítségével jelzéseket küldhetünk a saját folyamatnak, annak a 
+	folyamatnak, amelyik a függvényt meghívja. 
+	A függvény paramétere a jelzés, amelyet a program önmagának küld. 
+	A függvény visszatérési értéke 0, ha a művelet sikeres volt, illetve nem nulla, 
+	ha hiba lépett fel a művelet végrehajtása közben. Mivel a folyamat mindig jo- 
+	gosult arra, hogy önmagának jelzést küldjön, csak a jelzés hibás értéke okozhat 
+	problémát. 
+	
+- int kill (pid_t PID, int jelzés) ; 
+	A függvény jelzést küld egy folyamatnak. 
+	A függvény első paramétere a folyamat folyamatazonosítója, amelynek a jel- 
+	zést küldeni szeretnénk, a második pedig a jelzés. 
+	A függvény visszatérési értéke 0, ha a jelzés küldése megtörtént, és -1, ha 
+	hiba lépett fel. Ekkor a függvény beállítja az errno értékét, ami a következők 
+	egyike lehet: 
+	-- EINVAL A függvény második paramétereként megadott jelzésszám érvénytelen értéket képvisel. 
+	-- EPERM A folyamatnak nincs joga jelzést küldeni az első paraméterként átadott folyamatazonosítóval jelzett folyamatnak. 
+	-- ESRCH Az első paraméterrel meghatározott folyamat nem létezik. 
+
+- void psignal (int jelzés, const char *szoveg) ; 
+	A függvény kiírja a második paramétere által jelzett szöveget a szabványos hi- 
+	bacsatornára. A szöveget egy kettőspont követi, amely után az első paraméter 
+	által jelzett jelzés szöveges leírása következik. 
+
+
+A jelzéseket nem csak fogadhatjuk, hanem vissza is tarthatjuk. A folyamat beállíthatja, 
+hogy bizonyos jelzések ne jussanak el hozzá, amíg a visszatartást fel nem oldja.
+A Linux a jelzés beérkezésekor automatikusan visszatartásra jelöli ki az adott jel- 
+zéstípust, a jelzéskezelő függvény lefutása után - a függvény végrehajtása vagy a 
+return utasítás után — pedig feloldja a visszatartást. Ez azért hasznos, mert így a jel- 
+zéskezelő függvény futása alatt a függvény nem hívódhat újra az újabb jelzés miatt. 
+A jelzések visszatartását és engedélyezését jelzéscsoportok segítségével végezhet- 
+jük el. A jelzéscsoportok a signal.h fejállományban létrehozott sigset_t típusban 
+helyezhetők el és arra szolgálnak, hogy egyszerre több — akár az összes — jelzéstípusra hivatkozzunk a segítségükkel. 
+A GNU C könyvtár a következő függvényeket biztosítja jelzéscsoportok kezelésére, 
+valamint a jelzések visszatartására és újraengedélyezésére: 
+
+- int sigemptyset (sigset_t *csoport) ; 
+	Új jelzéscsoport alapbeállítását végezhetjük el. 
+	Paramétere a jelzéscsoportot jelöli, amelynek az alapbeállítását el kívánjuk végezni. 
+	Az alapbeállítást úgy végzi el a függvény, hogy a jelzéscsoport EGYETLEN jelzéstípust se tartalmazzon a függvény lefutása után. 
+	Soha ne használjunk olyan jelzéscsoportot, amelynek alapbeállítását a 
+	sigemptyset ( ) vagy a sigfillset ( ) függvények valamelyikével nem végeztük el. 
+	A függvény visszatérési értéke mindig 0. 
+
+- int sigfillset (sigset_t *csoport) ; 
+	Új jelzéscsoport alapbeállítást végezhetjük el. 
+	Paramétere a jelzéscsoportot jelöli, amelynek az alapbeállítását el kívánjuk végezni. 
+	Az alapbeállítást úgy végzi el a függvény, hogy a jelzéscsoportban MINDEN jelzéstípus szerepeljen a függvény lefutása után. 
+	Soha ne használjunk olyan jelzéscsoportot, amelynek alapbeállítását a 
+	sigemptyset ( ) vagy a sigfillset ( ) függvények valamelyikével nem végeztük el. 
+	A függvény visszatérési értéke mindig 0. 
+	
+- int sigaddset (sigset_t *csoport, int jelzés) ; 
+	Újabb jelzéstípust adhatunk az jelzéscsoporthoz. 
+	Első paramétere azt a jelzéscsoportot jelöli, amelyhez újabb jelzést szeretnénk adni
+	Második paramétere pedig a csoporthoz adandó jelzéstípus. 
+	A függvény visszatérési értéke 0, ha a művelet sikeresen lezajlott, és -1, ha hiba lépett fel. 
+
+- int sigdelset (sigset_t *csoport, int jelzés) ; 
+	Jelzéstípust távolíthatunk el a jelzéscsoportból. 
+	Első paramétere azt a jelzéscsoportot jelöli, amelyből a jelzést el szeretnénk távolítani, 
+	Második paramétere pedig az eltávolítandó jelzéstípus. 
+	A függvény visszatérési értéke 0, ha a művelet sikeresen lezajlott, és -1, ha hiba lépett fel. 
+	
+- int sigprocmask(int parancs, const sigset_t *csoport, sigset_t *régicsoport) ; 
+	A függvény segítségével lekérdezhetjük és módosíthatjuk azoknak a jelzéstí- 
+	pusoknak a halmazát, amelyeket a rendszer a folyamat számára visszatart. 
+	A függvény első paramétere azt határozza meg, hogy milyen műveletet kívá- 
+	nunk elvégezni a jelzéshalmazon, amely meghatározza, mely jelzéstípusokat 
+	tart vissza a rendszer a folyamat számára. Az első paraméter a következő állandók egyike lehet: 
+	--SIG_BLOCK A függvény második paramétereként jelölt jelzéscsoport elemei 
+		hozzá lesznek adva a visszatartandó jelzések listájához, azaz a függvény 
+		hívása után a második paraméter által előírt jelzéstípusú jelzések is vissza 
+		lesznek tartva a folyamat számára. 
+	-- SIG_UNBLOCK A függvény második paramétere által jelölt jelzéscsoport ele- 
+		mei el lesznek távolítva a visszatartandó jelzések listájából, azaz a függ- 
+		vény hívása után a második paraméter által előírt típusú jelzéseket a 
+		függvény megkapja. A függvény hívása után a felszabadított típussal vá- 
+		rakozó jelzéseket is megkapja a folyamat. 
+	-- SIG_SETMASK A függvény hívása után pontosan azok — és csak azok — a jelzé- 
+		sek lesznek visszatartva, amelyek a második paraméterként jelölt jelzés- 
+		csoportban megtalálhatók. 
+	A függvény második paramétere a jelzéscsoportot jelöli, amellyel az adott mó- 
+	dosítást el szeretnénk érni a visszatartandó jelzések listájával. Ha ez a paramé- 
+	ter NULL, a visszatartandó jelzések listája nem változik. Ezt a módszert akkor 
+	használhatjuk, ha a függvény segítségével nem módosítani, csak lekérdezni 
+	szeretnénk. 
+	A függvény harmadik paramétere egy területet jelöl a memóriában, ahová 
+	a függvény a változtatás előtti állapotot helyezi. Ha nem akarjuk megtudni, 
+	hogy mit tartalmazott a visszatartandó jelzések listája a változtatás előtt, a 
+	harmadik paraméter legyen NULL. 
+
+
+Jelzéstípusok (signal.h-ban létrehozott állandók)
+, amelyeket a rendszer a folyamatoknak küldhet:
+- SIGFPE: végzetes matematikai hiba -> nullával való osztás vagy a túlcsordulás. 
+- SIGILL: A program nem megengedett utasítást próbált meg végrehajtani. (verem sérülését, hibás mutató, memóriában található programkód sérülését jelzi)
+- SIGSEGV: Nem megengedett memóriaelérési kísérletet (szegmentációs hibát) jelez, 
+	hibás mutatókezelés, helytelen tömbhasználat 
+- SIGBUS: memóriaterület elérésére tett kísérletet jelez, amely nincs 
+	jelen a rendszerben. A hiba oka ugyanaz lehet, mint a SIGSEGV jelzésé.
+- SIGTERM: kilépésre szólítja fel a folyamatot. (kill())
+	A folyamat ezt a jelzést figyelmen kívül hagyhatja, az üzenetkezelő függvény a return utasítással a folyamatot folytathatja. 
+- SIGINT: a folyamat megszakítása előtt kapja, (Ctrl+C billentyűkombináció) 
+	A folyamat ezt az üzenetet figyelmen kívül hagyhatja, az üzenetkezelő függvény a return utasítással visszatérve a folyamatot folytathatja. 
+- SIGKILL: a folyamat azonnali megszakítását eredményezi. (kill -9)
+	Az ilyen üzenetek nem kezelhetők, nem hagyhatók figyelmen kívül. 
+- SIGHUP a futtatást végző felhasználó kilépett, vagy más okból nem használható a konzol a továbbiakban. 
+- SIGALRM az általa kért ébresztésnek eljött az ideje. A folyamat az alarm() vagy a setitimer() függvények valamelyikével kérhet ébresztést. 
+- SIGCHLD Ez az üzenet jelzi a folyamat számára, hogy valamelyik gyermekfolyamata befejezte a futását. Ekkor általában a waitpid() függvényt kell hívnunk. 
+
+
+Jelzéskezelók készítése 
+A jelzéskezelő függvény elkészítésekor háromféle stratégia közül választatunk, 
+amelyek a következők: 
+
+1. Rendelkezhetünk úgy, hogy a jelzéskezelő függvény végrehajtása után a fo- 
+	lyamat tovább fusson. Ekkor a jelzéskezelő függvényből a return utasítással 
+	kell visszatérnünk. Ha ezt a módszert választjuk, néhány fontos szempontot 
+	figyelembe kell vennünk: 
+	• A legtöbb esetben a jelzéskezelő függvényből való visszatérés a folyamat 
+		folytatását eredményezi. Ha éppen egy műveletet, egy függvényhívást 
+		hajt végre a programunk, azt ott folytatja, ahol a jelzés érkezése a folya- 
+		mat futását megszakította. 
+		Néhány, a C könyvtárban található függvény esetébe azonban ez nem 
+		így van. Ha ezen függvények végrehajtása közben jelzés érkezik, a függ- 
+		vények végrehajtása megszakad, nem folytatódik. Ilyen függvények pél- 
+		dául az open(), a close (), a write() vagy a read ( ) , amelyek az errno 
+		változót EINTR értékre állítják és „félbeszakítják” a művelet végrehajtá- 
+		sát, ha jelzés érkezik a működésük során. 
+		Ha tehát jelzéskezelő függvényt készítünk, ekkor esetleg gondoskod- 
+		nunk kell arról, hogy minden, jelzések által megszakítható függvényt a 
+		megfelelő módon újrahívjunk, ha éppen akkor érkezne jelzés, amikor 
+		futnak. (Ha nincs jelzéskezelő függvény, a megszakítható függvények fu- 
+		tását akkor is megszakítja a beérkezett jelzés, de akkor általában a folya- 
+		mat futása is megszakad, ezért nem kell ismételnünk a függvényhívást.) 
+		A 44. példa bemutatja, hogyan szakítja meg a felhasználó által létreho- 
+		zott jelzés a sleep ( ) függvény végrehajtását a paraméterként átadott idő 
+		letelte előtt. 
+	• A kritikus hiba által kiváltott jelzések azt jelzik, hogy a programfutás 
+		nem folytatható. Az ilyen jelzéseket kezelő függvények nem térhetnek 
+		vissza a return utasítással, hiszen az a folyamat folytatását célozná. 
+	• Igen fontos ügyelnünk a jelzéskezelő elkészítése során, hogy ne használ- 
+		junk olyan függvényeket, amelyek adott memóriaterületre helyezik el az 
+		adataikat. 
+		A readdir() függvény például egy bizonyos memóriaterületen helyezi 
+		el a könyvtárból olvasott adatokat. Ez a memóriaterület a függvény is- 
+		mételt hívásakor felülíródik, az ott tárolt adatok elvesznek. Ha éppen az 
+		után hívódik meg a jelzéskezelő, hogy a readdir ( ) függvényt meghívta 
+		a program, a jelzéskezelőben hívott readdir ( ) felülírja az adatterületet, 
+		amelyben a program számára fontos adatok vannak. 
+		Láthatjuk, hogy bizonyos függvények hívásától mindenképpen őrizked- 
+		nünk kell a jelzéskezelő írása során. 
+
+2. Rendelkezhetünk úgy is, hogy a jelzéskezelő megszakítsa a program futását. 
+	Ehhez a módszerhez általában akkor folyamodunk, ha kritikus hiba lépett fel 
+	és a jelzéskezelő függvényben — az esetleges adminisztratív teendők elvégzése 
+	után — gondoskodni szeretnénk a kilépésről. 
+	Ekkor azonban nem szerencsés, ha a kilépésre a szokásos módot — az exit ( ) 
+	függvény hívását — választjuk, mert akkor a szülőfolyamat nem értesül arról, 
+	hogy a programfutást jelzés szakította meg. Ha a jelzéskezelő függvény kriti- 
+	kus hiba miatt meg akarja szakítani a folyamat futását, először törölnie kell 
+	a rendszer nyilvántartásából az adott jelzés kezelésére bejegyzett függvényt, 
+	majd a saját folyamatnak újra el kell küldenie a jelzést. Ekkor a jelzés — mi- 
+	vel már nincs jelzéskezelő — a folyamat megszakítását eredményezi és így a 
+	szülőfolyamat értesülhet arról, hogy a programfutást az adott jelzés okozta. 
+
+3. Dönthetünk úgy, hogy a jelzés beérkezésekor a program egy bizonyos pontról 
+	folytatódjon tovább. Ekkor a setjmp ( ) és longjmp ( ) függvények használatá- 
+	val kell a jelzéskezelő függvényből kiugranunk. 
+	Ha ezt a módszert használjuk, igen fontos szem előtt tartani, hogy a 
+	longjmp() függvénnyel nem léphetünk olyan függvénybe, amely már befe- 
+	jezte futását. 
+	
+44. példa:
+
+#include <stdio.h>
+#include <stdlib.h> 
+#include <signal.h> 
+void kezelo( int uzenet ) { printf("mi van?\n"); }
+main ( ) { 
+	signal( SIGINT, kezelo ) ; // bejegyzi a függvényt SIGINT jelzés kezelésére.
+	while( 1 ) { sleep (10); } // végtelen ciklusban várakozik, néhány másodpercenként üzenetet küldve a felhasználónak. 
+}
+
+$ . / a. out 
+Ctrl+C
+mi van? 
+Ctrl+C
+mi van? 
+Ctrl+Z
+Stopped 

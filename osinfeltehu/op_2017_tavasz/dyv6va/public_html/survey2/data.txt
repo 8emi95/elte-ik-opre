@@ -1,0 +1,55 @@
+On orul a magyar foci sikereinek?
+Sat Apr 08 00:59:59 2017
+Igen
+Nem
+Talan
+<empty>
+
+Letezik ilyen?
+Sat Apr 08 01:03:16 2017
+Volt mar
+Megeshet
+<empty>
+<empty>
+
+Ki az abszolut magyar futball legenda?
+Sat Apr 08 01:04:16 2017
+Fabry Sandor
+Usain Bolt
+Arnie
+Nem tudom
+
+Ki a relativ magyar futball legenda?
+Sat Apr 08 01:04:17 2017
+Fabry Sandor
+Usain Bolt
+Arnie
+Nem tudom
+
+Hany ora van?
+Sat Apr 10 01:04:17 2017
+Ejfel
+03:20
+Kilenc
+Nem tudom
+
+On milyen rendszeresen nez labdajatekokat?
+Sat Apr 18 01:04:17 2017
+Naponta
+Hetente
+Havonta
+Ritkaban, mint havonta
+
+Mit sportolt eleteben?
+Sat Apr 19 01:04:17 2017
+Futball
+Foci
+Labdarugas
+Soccer
+
+Gyakran szurkol az FTC-nek?
+Mon Apr 20 01:04:17 2017
+Mindenkepp
+Nana
+Lehetetlen lenne, hogy nem
+Hogyne

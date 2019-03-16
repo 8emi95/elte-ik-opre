@@ -1,0 +1,133 @@
+BEADANDÓ!!! JÖVÕ 7 hétfõ!!!!
+
+külsõ program végrehajtása
+
+
+execv(parancs, argumentumok) - lecseréli azt a folyamatot, amibõl meghívjuk, arra, amire meghívjuk!
+	argumentum tömb elsõ eleme legyen a parancs, amire lecseréljük, utolsó eleme a NULL
+	nincs visszatérési értéke, hisz értelmetlen lenne... (ami meghívta az lecserélõdik)
+
+system(parancs) létrehoz egy gyerekfolyamatot és végrehajtatja azt a parancsot, amit átadtunk
+	ez visszatér
+
+
+megnéztük exec.c-t
+megnéztük system.c-t
+
+
+fcntl_0.c
+
+ha lefuttatjuk igen kusza lesz az eredmény a data_0.txt-ben
+
+mit csináljunk?
+lock-oljuk
+
+short l_type : 
+	F_RDLCK
+	F_WRLCK
+	F_UNLCK
+
+l_whence: SEEK_SET
+
+l_start:
+l_len: lockolt bájtok száma ... ha 0, akkor az a teljes fájl
+l_pid: lock-oló folyamat pid-jét kell megadnunk
+
+magát a lockolást az fcntl függvény végzi
+fcntl(f, mód, &flock)		-1, ha hiba...
+mód: 
+	F_SETLKW	
+	F_SETLK
+mindkettõ beállítja a lockolást, de ha már lockolva van, akkor az elsõ vár addig, amíg felszabadul, a második -1-et ad vissza rögtön
+
+
+fcntl.c -t optimalizáljuk ... csak az kerüljön külön folyamatba, aminek ténylegesen külön folyamatba kell kerülnie!
+valamelyik-nél F_SETLKW helyett a sima F_SETLK-t próbáljuk ki
+
+
+
+cstdlib.h-ban van a 
+rand() függvény [0,1)	// minden futtatásnál ugyanúgy fog lefutni
+
+srand(kezdõérték) // de így is minden futtatásnál ugyanúgy fog lefutni)
+
+használjuk a rendszerórát
+<time.h> -ban
+time(NULL)	time_t típusú érték	1970.01.01. 00:00:00 óta eltelt idõt tartalmazza
+srand(time(NULL))
+
+localtime(&time_t)
+tm típusú
+tm:
+tm_sec 0 és 61 közé esõ érték (a szökõ másodpercek miatt... normálisan 0-tól 59-ig megy)
+tm_min 0 és 59 közé esik
+tm_hour 0 és 23 közé
+tm_mday	1 és m2 közé
+tm_mon
+tm_year 1900 óta eltelt évek számát adja
+tm_wday vasárnap óta eltelt napok
+tm_yday adott év kezdõnapja óta eltelt napok száma (0 és 365 közé eshet (szökõév miatt))
+
+
+házi! írja ki az aktuális napot (formátum : 2017.04.03. Hétfõ 10:45:20 Téli/Nyári - Az év x. napja)
+
+konstans tömb:
+char *napok[] = {"Vasárnap", ... }
+
+
+
+Szignálok
+jelzések (valójában interruptok) 
+eszköz, hogy a folyamatok közötti kommunikációt megoldjuk... 
+(eddig csak úgy tudtuk volna megoldani ha egy közös fájlba küldözgetünk üzeneteket (lásd óra eleje) ... nyilván elég nyakatekert)
+
+<signal.h>
+pause() 
+(veszély: ha a szülõ kap egy ilyen pause() szignált, de a gyerek egy pillanattal hamarabb elküldte, akkor a szülõ beragad)
+kill(PID, SIGNAL)	
+	eredménye 0: ha legalább 1 szignált sikerült küldeni
+	eredménye -1: ha egyet sem sikerült
+SIGNAL:
+	0 : csoportnak küldünk	
+	-1: engedély	...
+
+
+fotó!
+gyerek 2 másodpercig várakozik
+majd küld szülõnek(getppid()-del szülõt kérdezi le) egy SIGSTOP-ot)
+
+vár 2 másodpercet kiírja, hogy a gyereknek vége, de a szülõ nem írja ki a saját üzenetét, mert SIGSTOP-ot kapott, tehát csak megáll!
+cserélgethetjük más szignálra... de gond van, mert megöli a szülõ folyamatot... 
+
+
+ha sleep() közben érkezik signal, akkor a sleep() tovább engedi a programot... (ilyen szempontból nem megbízható a signal)
+
+
+kill -l		megmutatja, hogy melyik szignálnak mi a száma
+kill -szignálszám PID	így tudok küldeni szignált
+
+
+annak érdekében, hogy a szignál ne nyírja ki a folyamatunkat, írjunk egy handlert
+void handler(signum)			// signum a szignál száma, ami meghívta
+{
+	
+}
+
+
+<signal.h>
+signal(signal, handler)			
+// signal a szignál száma, amihez a handlert akarjuk kapcsolni		handler a függvény neve... valójában ez is egy memóriacím(ide fog ugrani), amikor azzal végez, akkor visszaugrik
+handler:
+	SIG_IGN		figyelmen kívül hagyjuk a szignált
+	SIG_DFL		alapértelmezett	
+
+
+
+signal.c-ben
+a szülõ folyamatba ha beraknék a pause elé egy sleep(3)-at, akkor a gyermek megszakítaná a sleep-et és a pause végtelenségig várakozna
+(mindkét helyrõl kiszedem a sleep(3)-at ...versenyhelyzet alakul ki
+
+házi ez is
+gyerek küldjön egy sigterm signált a szülõnek erre szülõ egy sigusr1 szignált a gyereknek (signal.c jó kiindulásnak)
+
+

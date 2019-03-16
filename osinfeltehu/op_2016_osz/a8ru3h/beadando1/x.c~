@@ -1,0 +1,4 @@
+#include <stdlib.c>
+
+void main(int argc, char** argv) {
+}

@@ -1,0 +1,208 @@
+SET serveroutput ON;
+procedure Kell
+DECLARE
+  osszeg   NUMBER(8,2);
+  p1 osztaly.telephely%type;
+BEGIN
+  p1:= '&k';
+  SELECT sum(fizetes) INTO osszeg
+  FROM dolgozo natural join osztaly
+  where telephely=p1
+  group by telephely;
+dbms_output.put_line('bonus '|| osszeg);
+
+END;
+/
+
+SET serveroutput ON;
+procedure Kell
+DECLARE
+  d   NUMBER(8);
+  b NUMBER(8);
+  sum1 NUMBER(8);
+BEGIN
+  sum1:=0;
+  d:= '&k';
+  b:= '&k';
+  for i in d..b loop
+    if i mod 2=1 then
+      sum1:=sum1+i;
+    end if;
+  end loop;
+dbms_output.put_line('osszeg '|| sum1);
+
+END;
+/
+set serveroutput on;
+DECLARE
+  my_sal dolgozo.dnev%TYPE;
+  masik dolgozo.oazon%TYPE;
+  CURSOR c1 IS
+    SELECT dnev,oazon FROM dolgozo;
+BEGIN
+  OPEN c1;
+  LOOP
+    FETCH c1 INTO my_sal, masik;
+    EXIT WHEN c1%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE(my_sal || ' ' || masik);
+  END LOOP;
+  CLOSE c1;
+END;
+/
+
+set serveroutput on;
+DECLARE
+  my_sal dolgozo.dnev%TYPE;
+  masik dolgozo.oazon%TYPE;
+  CURSOR c1 IS
+    SELECT dnev,oazon FROM dolgozo
+    order by fizetes;
+  db NUMBER(8);
+BEGIN
+  OPEN c1;
+  db:=0;
+  LOOP
+    db:=db+1;
+    FETCH c1 INTO my_sal, masik;
+    EXIT WHEN c1%NOTFOUND;
+    if db=3 or db=5 or db=8 then
+      DBMS_OUTPUT.PUT_LINE(my_sal || ' ' || masik);
+    end if;
+  END LOOP;
+  CLOSE c1;
+END;
+/
+
+DECLARE
+  emp_job     dolgozo.dkod%TYPE;
+  emp_salary  dolgozo.fizetes%TYPE;
+  my_record   dolgozo%ROWTYPE;
+
+  CURSOR c1 (job dolgozo.oazon%TYPE) IS
+    SELECT * FROM dolgozo
+    where oazon=job;
+    cv char;
+BEGIN
+  cv:='&k';
+  case cv
+    when 'A' then emp_job:=10;
+    when 'B' then emp_job:=20;
+    when 'R' then emp_job:=30;
+    when 'S' then emp_job:=40;
+  end case;
+  OPEN c1(emp_job);
+
+  LOOP
+     FETCH c1 INTO my_record;
+     EXIT WHEN c1%NOTFOUND;
+     DBMS_OUTPUT.PUT_LINE
+       ('Name = ' || my_record.dnev || ', salary = ' ||
+        my_record.fizetes);
+  END LOOP;
+END;
+/
+
+SET serveroutput ON;
+procedure Kell
+DECLARE
+  osszeg   NUMBER(8,2);
+BEGIN
+  SELECT fizetes INTO osszeg
+  FROM dolgozo natural join osztaly
+  where dnev='KONG';
+dbms_output.put_line('bonus '|| osszeg);
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE ('No Data found for SELECT on ');
+
+
+END;
+/
+
+DECLARE
+  emp_job     dolgozo.dkod%TYPE;
+  emp_salary  dolgozo.fizetes%TYPE;
+
+  CURSOR c1 (job osztaly.telephely%TYPE) IS
+    SELECT count(dkod),sum(fizetes) FROM dolgozo natural join osztaly
+    group by telephely having telephely=job;
+    cv osztaly.telephely%type;
+BEGIN
+  cv:='&k';
+  OPEN c1(cv);
+
+  LOOP
+     FETCH c1 INTO emp_job, emp_salary;
+     EXIT WHEN c1%NOTFOUND;
+     DBMS_OUTPUT.PUT_LINE
+       ('Name = ' || emp_job || ', salary = ' ||
+        emp_salary);
+  END LOOP;
+END;
+/
+
+set serveroutput on;
+DECLARE
+  emp_job     dolgozo.dkod%TYPE;
+  emp_salary  dolgozo.fizetes%TYPE;
+  my_record   dolgozo%ROWTYPE;
+
+  CURSOR c1 (job dolgozo.dkod%TYPE) IS
+    SELECT * FROM dolgozo
+    where oazon=job;
+    cv char;
+BEGIN
+  emp_job:='&k';
+  OPEN c1(emp_job);
+
+  LOOP
+     FETCH c1 INTO my_record;
+     EXIT WHEN c1%NOTFOUND;
+     DBMS_OUTPUT.PUT_LINE
+       ('Name = ' || my_record.dnev || ', salary = ' ||
+        my_record.fizetes);
+  END LOOP;
+END;
+/
+
+DECLARE
+  my_emp_id dolgozo.dkod%type;
+  my_job_id dolgozo.foglalkozas%type;
+  my_sal    dolgozo.fizetes%type;
+  CURSOR c1 IS
+    SELECT dkod, foglalkozas, fizetes
+    FROM dolgozo FOR UPDATE;
+BEGIN
+  OPEN c1;
+  LOOP
+    FETCH c1 INTO my_emp_id, my_job_id, my_sal;
+    IF my_job_id = 'SA_REP' THEN
+      UPDATE dolgozo
+      SET fizetes = fizetes * 1.02
+      WHERE CURRENT OF c1;
+    END IF;
+    EXIT WHEN c1%NOTFOUND;
+  END LOOP;
+END;
+/
+
+set serveroutput on;
+DECLARE 
+  dk dolgozo.dkod%type;
+  dn dolgozo.dnev%type;
+FUNCTION nev1(x dolgozo.dnev%type) 
+RETURN number  
+IS 
+   f dolgozo.dkod%type; 
+BEGIN 
+  select dkod into f from dolgozo
+  where dnev=x;
+RETURN f; 
+END;  
+
+BEGIN 
+   dn:='KING';
+   dk := nev1(dn); 
+   dbms_output.put_line(' Factorial  is ' || dk); 
+END; 
+/

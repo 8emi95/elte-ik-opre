@@ -1,0 +1,18 @@
+- printf("Number of command line arguments are: %i\n",argc);
+- str2=(char*)malloc(80*sizeof(char));  (malloc(), typecast (<- malloc void*-ot ad vissza))
+- sizeof()  -  megállapítható vele egy struktúra hossza
+- karakterfv-ek string.h-ban
+- atoi()
+- /'  -  kiír egy '-t
+- string/tömbindexelés (str2[1]='S'; str2[2]=0;)
+- strcpy(mutato, "szöveg")  -  bemásolja a "szöveg"-et a mutato-ba
+- strcmp(str1,str2) - string-ek összehasonlítása
+- while (*str++ != 0) {} nagyon szép :D
+
+<MINTAKÓD>
+    if (argc!=3)
+    {
+        perror("You have to use program with two arguments, the file names copy_from copy_to");
+        exit(1);
+    }
+</MINTAKÓD>

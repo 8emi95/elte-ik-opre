@@ -1,0 +1,2 @@
+szövegkezelés fájlal
+struktúrát mint rekordot kiírunk fájlba, kiolvasunk, módosítunk

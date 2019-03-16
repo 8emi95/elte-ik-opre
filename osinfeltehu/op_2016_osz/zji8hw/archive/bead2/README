@@ -1,0 +1,24 @@
+Operációs rendszerek - ELTE-IK
+2. Beadandó feladat: "King of Stands"
+--------------------------------------
+
+Programok buildelése:
+- javasolt a Makefile használata a "make" paranccsal (elvégzi a lentieket)
+- vagy kézzel, ebben az esetben fordítsuk le a láncolt lista implementációt a "common" könyvtárból,
+  a keletkezett tárgykódot pedig fordítsuk össze egy binárisba egyszer a nyilvántartóval, egyszer pedig
+  a lebonyolító programmal, külön-külön
+
+Programok használata:
+- a nyilvátartás fájlnevei konstansok, szükség esetén a "common/defines.h" állományban nevezhetőek át
+- a nyilvántartás az első beadandónak megfelelő, a második beadandó céljainak alkalmasan módosított változatával,
+  a "nyilvantarto" nevet viselő programmal generálható (ez abban tér el az első beadandótól, hogy a rendezvényünkhöz
+  itt már tartozik helyszín is, azaz bekéri a helyszínt és ki is menti azt a kimeneti fájlba)
+- ha elkészült a nyilvántartásunk, kiléphetünk a nyilvántartóból (7-es parancs a menüben)
+- elindíthatjuk a lebonyolítót, ami levezényli a nyilvántartásban szereplő rendezvényeket
+- a feladat szövegének megfelelően, időzítésekkel szimulálja a rendezvények soron következését, a partner leutazását, a
+  vendégek megérkezését (véletlenszerű várakozási idők); szintén véletlen a rendezvények sorrendje és sikeressége,
+  ahogy a vendégek megérkezése/meg-nem-érkezése is az
+- a kimeneten megszámozza, hogy melyik lépésnél tart a rendezvény lebonyolítása - a sorrend a kódban a kommenteknél is
+  látszik, hogy könnyebben nyomon lehessen követni, hogy a gyerek-szülő kommunikáció milyen sorrendben történik
+- a kimeneten szintén látszik, melyik üzenetet írta a szülő (P) és melyiket a gyerek (C) a konzolra
+- a lebonyolító program a dolga végeztével törli a nyilvántartást - hisz az a lezajlott rendezvények adatait tárolta

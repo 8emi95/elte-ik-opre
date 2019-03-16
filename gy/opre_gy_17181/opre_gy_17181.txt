@@ -1,0 +1,147 @@
+2017.09.15
+01. Opre GY
+
+Heizlerné Bakonyi Viktória
+hbv@inf.elte.hu
+2-403
+8462
+inf.elte.hu/mot
+
+10:15
+
+2 utsó ea +pont
+
+3-tól papíros
+4-től gépes
+
+http://os.inf.elte.hu/
+id: neptun
+pwd: almafa1 - change
+linux
+
+ea-diák: olyanra kérdez aminek van nyoma ott, de címszavak nem elegek
+
+1. beadra épül a 2.
+nem pontos leírás, csak funkciók, saját fantáziánkat használjuk
+nem gyakon mutatjuk be
+javítás: nagyon nem csinált funkciókat - lehet lefelé kerekítés
+1-2 nap csúszás oké, emailben küldeni, lefelé kerekítés
+fut-e a feladat a szerveren (valós idejű modult is tartalmaz)
+határidő végén lefagy a szerver
+
+*************************************************************
+
+2017.09.19
+02. Opre GY
+
+Baráth Ádám
+
+winscp:
+os.inf.elte.hu
+t6esml
+<new pwd>
+
+putty:
+os.inf.elte.hu
+t6esml
+77k1nGm_58
+
+cc arg.c
+./a.out hello hello2
+
+cc string.c
+./a.out
+
+ylik6z
+
+C:\Users\8emi95\AppData\Local\Temp\scp25994\home\op\t6esml
+
+F1: ciklussal bejárni karaktertömböt, megszámolni hány 'a' betű
+
+*************************************************************
+
+2017.09.26
+03. Opre GY
+
+text.txt...
+
+wtf
+
+*************************************************************
+
+2017.10.03
+04. Opre GY
+
+// absent
+
+*************************************************************
+
+2017.10.10
+05. Opre GY
+
+file.c
+
+*************************************************************
+
+2017.10.17
+06. Opre GY
+
+?
+
+*************************************************************
+
+2017.10.24
+07. Opre GY
+
+?
+
+*************************************************************
+
+2017.11.07
+08. Opre GY
+
+bead1 bemutatás
+
+*************************************************************
+
+2017.11.14
+09. Opre GY
+
+bead1 bemutatás
+
+4. gyakorlat: feladatmegoldás
+választási körzetben 3 tagból álló választási bizottság: elnök (szülő) + 2 tag (gyerekek)
+1. gyerek: választók adatainak ellenőrzése
+2. gyerek: lepecsételi + kiadja a választási lapot
+1) fasztérdekli
+2)
+3)
+4)
+
+*************************************************************
+
+2017.11.21
+10. Opre GY
+
+?
+
+*************************************************************
+
+2017.11.28
+11. Opre GY
+
+?
+
+*************************************************************
+
+2017.12.05
+12. Opre GY
+
+?
+
+*************************************************************
+
+2017.12.12
+13. Opre GY
+
+?

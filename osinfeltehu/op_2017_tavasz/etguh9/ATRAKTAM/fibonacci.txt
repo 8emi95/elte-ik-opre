@@ -1,0 +1,31 @@
+﻿'''FIBONACCI (20 pont) 
+Legyen m egy 1-nél nagyobb egész. Könnyű matematikailag belátni, hogy ha a
+Fibonacci-számok sorozatát modulo m tekintjük, akkor a sorozat periodikus
+(előbb-utóbb újra szerepel benne 0 és 1, aztán ismétlődni kezdenek az értékek).
+Írjunk egy eljárást, melynek az egyetlen paramétere m, a kimeneti értéke pedig
+egy 2 hosszú lista: ennek első eleme a periódus hossza, második eleme pedig egy
+lista a periódus elemeiből. Például, ha az eljárás neve f, akkor az f(3)
+parancsra kapjuk azt válaszul, hogy [8, [0, 1, 1, 2, 0, 2, 2, 1]].'''
+
+
+
+
+#Függvény:
+
+def fibonacci(m):
+    list = [0, 1]
+    size = 2
+    while list[size-2] <> 1 or list[size-1] <> 0:
+        list.append((list[size-2] + list[size-1]) % m)
+        size = size + 1
+    return [m, list[0:size-1]]
+
+
+
+
+#Tesztelés:
+
+fibonacci(3)
+fibonacci(5)
+fibonacci(10)
+fibonacci(11)

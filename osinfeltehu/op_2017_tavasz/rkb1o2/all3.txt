@@ -1,0 +1,285 @@
+module testmidterm
+
+import StdEnv
+
+// For the mark 2 ex1 and ex2 and ex3 and ex4 must be done
+// For a mark >2 ex.1,2,3,4 + any from ex. 5(1p), 6(1p), 7(1p), 8(1p)
+
+// 1. Generate the first 10 square elements that are not divisible by 2.
+// e.g. [1,9,25,49,81,121,169,225,289,361]
+l1 :: [Int]
+l1 =take 10 [x*x\\x<-[1..]| (isEven x==False)]
+
+//Start = l1
+
+
+
+// 2. Compute the sum of all the elements in a list (you must use map) 
+sumlists :: [[Int]] -> Int
+sumlists x=sum (map sum x)
+
+//Start = sumlists [[1, 2, 3], [3, 4], [5, 7, 8, 9]] //42
+
+
+// 3. Concatenate sublists using foldr
+sublists :: [[Int]] -> [Int]
+sublists x=foldr (++) [] x
+
+//Start = sublists [[1, 2, 3], [3, 4], [5, 7, 8, 9]] 
+
+
+// 4. Insert x as first element in every sublist of a list.
+// [[1,2], [3,4,5], [6,5,9,7]] 0 -> [[0,1,2], [0,3,4,5], [0,6,5,9,7]]
+zerof :: [[Int]] Int -> [[Int]]
+zerof x y = map ((++)[y]) x
+
+//Start = zerof [[1,2], [3,4,5], [6,5,9,7]] 0
+
+// 5. Generate pairs like in the following: 
+//[[1,2,3], [4,5], [6,7,8]] -> [(1,6),(2,20),(3,336)]
+fpair :: [[Int]] -> [(Int, Int)]
+fpair x=[(a,b)\\a<-[1..3] & b<-map (foldr (*) 1) x] // or use prod
+
+//Start = fpair [[1,2,3],[4,5],[6,7,8]]
+
+
+// 6. Extract the "middle" of the sublists
+// e.g. [[1,2,3], [3,4,5,6], [5,7,8], [8,9]]-> [2,5,7,9]
+middle::[Int]->[Int] // the middle for one sublist
+middle y= take 1(drop ((length y)/2) y) // so the middle element will be first in my new list and I will take it
+//Start=middle [1,2,3,4,5,6]
+
+g:: [[Int]] -> [Int]
+g x=flatten [y\\y<-map middle x] // map function to elements of my list
+
+//Start = g [[1,2,3], [3,4,5,6], [5,7,8], [8,9]]
+
+// 7. Check if a list contains 3 equal elements one after the other 
+// (it can be anywhere in the list) 
+// for [1,2,3,3,3,2,4,5] is True for [1 .. 5] is False
+checks :: [Int] -> Bool
+checks []=False
+checks [x]=False
+checks [x,y,z:xs]
+|(x==y&&x==z)=True
+| otherwise = (x==y&&x==z) || checks xs
+//Start = checks [1,2,3,4,4,3,3,2,4,5] 
+
+
+// 8. Generate the following list
+// [[1],[1,2],[1,2,3],[1,2,3,4],[1,2,3,4,5],[1,2,3,4,5,6],
+// [1,2,3,4,5,6,7],[1,2,3,4,5,6,7,8],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9,10]]
+genNlist :: Int -> [[Int]]
+genNlist x=[[1..x]\\x<-[1..10]]
+
+//Start = genNlist 10
+
+
+
+
+
+
+import StdEnv
+
+// For the mark 2 ex1 and ex2 and ex3 and ex4 must be done
+// For a mark >2 ex.1,2,3,4 + any from ex. 5(1p), 6(1p), 7(1p), 8(1p)
+
+// 1. Generate the first 10 square elements that are not divisible by 2.
+// e.g. [1,9,25,49,81,121,169,225,289,361]
+//l1 :: [Int]
+l1 :: [Int]
+l1 = [x \\ x <- [1..10] | 10 rem x == 0] ]
+
+// Start = 1
+
+
+// 2. Compute the sum of all the elements in a list (you must use map) 
+//sumlists :: [[Int]] -> Int
+f5 :: [[Int]] -> [Int]
+f5 lists = map (foldr (+) 0) lists
+
+// Start = f5 [[1, 2, 3], [3, 4], [5, 7, 8, 9]] //42
+
+
+// 3. Concatenate sublists using foldr
+//sublists :: [[Int]] -> [Int]
+
+flat :: [[Int]] -> [Int]
+flat x = foldr (++) [] x
+//Start = flat [[1, 2, 3], [3, 4], [5, 7, 8, 9]] 
+
+
+// 4. Insert x as first element in every sublist of a list.
+// [[1,2], [3,4,5], [6,5,9,7]] 0 -> [[0,1,2], [0,3,4,5], [0,6,5,9,7]]
+//zerof :: [[Int]] Int -> [[Int]]
+
+
+//Start = zerof [[1,2], [3,4,5], [6,5,9,7]] 0
+
+// 5. Generate pairs like in the following: 
+//[[1,2,3], [4,5], [6,7,8]] -> [(1,6),(2,20),(3,336)]
+//fpair :: [[Int]] -> [(Int, Int)]
+
+
+//Start = fpair [[1,2,3],[4,5],[6,7,8]]
+
+
+// 6. Extract the "middle" of the sublists
+// e.g. [[1,2,3], [3,4,5,6], [5,7,8], [8,9]]-> [2,5,7,9]
+//g :: [[Int]] -> [Int]
+g :: [[Int]] -> Int
+g x = foldr (+) 0 (map length x)
+// Start = g [[1,2,3], [3,4,5,6], [5,7,8], [8,9]]
+
+
+// 7. Check if a list contains 3 equal elements one after the other 
+// (it can be anywhere in the list) 
+// for [1,2,3,3,3,2,4,5] is True for [1 .. 5] is False
+//check3 :: [Int] -> Bool
+check3 :: [Int] -> Bool
+search s [(x,y):ts]
+| x == s = y
+| otherwise = search s ts
+
+//Start = check3 [1,2,3,4,4,4,4,3,3,2,4,5] 
+
+
+// 8. Generate the following list
+// [[1],[1,2],[1,2,3],[1,2,3,4],[1,2,3,4,5],[1,2,3,4,5,6],
+// [1,2,3,4,5,6,7],[1,2,3,4,5,6,7,8],[1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6,7,8,9,10]]
+//genNlist :: Int -> [[Int]]
+
+//Start = genNlist 10
+
+
+module exam2
+import StdEnv
+
+// Student: Renan Oliveira Moreira
+
+// 1. Compute the number of elements in a list of lists
+// e.g. [[1,2,3], [2,5], [], [8,9,11,13]] -> 9
+
+question1 x = length (flatten x)
+
+//Start = question1 [[1,2,3], [2,5], [], [8,9,11,13]]
+
+// 2. Compute the factorial of every element in a list
+// e.g. [1, 2, 3, 4] -> [1, 2, 6, 24]
+
+question2 x = [ factorial a \\ a <- x]
+
+factorial a 
+| a == 1 = 1
+= a * factorial (a-1)
+
+//Start = question2 [1, 2, 3, 4, 5]
+
+// 3. Generate elements from 1 to x in increasing then in decreasing order
+// e.g. if x=4 then the list is [1,2,3,4,4,3,2,1]
+
+question3 x = [a \\ a <- [1..x]] ++ [a \\ a <- [x,x-1..1]]
+
+//Start = question3 4
+
+// 4. insert as middle element the element 0 in every sublist of a list
+// [[1,2], [3,4,5], [6,5,9,7]] -> [[1,0,2], [3,0,4,5], [6,5,0,9,7]]
+
+question4 x = [insertAt (length a/2) 0 a \\ a <- x] 
+
+//Start = question4 [[1,2], [3,4,5], [6,5,9,7]] 
+
+// 5. Remove the duplicates of a list that are in a sequence, i.e. one after the other
+// e.g. [1,2,2,2,2,3,4,2,2,1,1,1,3,3,5,4,4,4,4] -> [1,2,3,4,2,1,3,5,4]
+
+question5 [a,b]
+|a == b = [a]
+= [a,b]
+question5 [a,b:tail]
+|a == b = question5 [b:tail]
+|otherwise = [a:question5 [b:tail]]
+
+//Start = question5 [1,2,2,2,2,3,4,2,2,1,1,1,3,3,5,4,4,4,4]
+
+// 6. Create a search tree and write the elements of it by visiting the nodes in inorder way.
+
+:: Tree a = Node a (Tree a) (Tree a) | Leaf
+
+question6 Leaf = []
+question6 (Node a l r) = question6 l ++ [a] ++ question6 r
+
+Start = question6 (Node 4 (Node 2 (Node 1 Leaf Leaf)(Node 3 Leaf Leaf)) (Node 5 Leaf Leaf) ) 
+
+
+
+module exam1
+import StdEnv
+
+
+// 1. Rewrite flatten with foldl // ok
+
+flatten2 l = foldl (++) [] l 
+// Start = flatten2 [[1,2],[5,6]]
+
+// 2. Generate pairs like in the following: // e.g. [[1,2,3], [4,5], [6,7,8], [9,11]] -> [(1,1),(2,4),(3,6),(4,9)]
+
+test1 list | reverse list == list =True False 
+// Start = test1 list [[1,2,3], [4,5], [6,7,8], [9,11]]
+
+// 3. Check if a list of any length is symetrical // for the [1,2,3,3,2,1] list the answer is True, for [1 .. 5] is False
+
+take1 l = foldl (++) [] (map hd l) 
+pairs list = [[y,take1 x] \\ x <- list && y <-[1..]] 
+// Start =  pairs  [[1,2,3],[4,5],[6,7,8]]
+
+
+
+// 4. insert 10 at the end of each sublist // [[1,2], [3,4,5], [6,7]] -> [[1,2,10], [3,4,5,10], [6,7,10]] // ok
+
+f4 l = map (map (\x = x)) l
+//Start = f4 [[1,2], [3,4,5], [6,7]] 
+//Start = f4 [[1,2,10],[3,4,5,6,10],[7,8,10]]
+
+// 5. filter the elements that are square [1,3,4,2,1,6,9,1,2,16] -> [3,2,6,2]
+
+sq x [] = False sq x [h:t] | x== h*h = True | otherwise = sq x t filter2 = filter ( not(sq x [1..x])) list 
+
+// Start = filter2 [1,3,4,2,1,6,9,1,2,16]
+
+
+// 1. Create using an input list of tuples a new list of tuples like:
+// [(1,1), (2,6), (3,9)] -> [(1,1,2), (2,6,8), (3,9,12)] 
+create1 :: (Int,Int) -> (Int,Int,Int)
+create1 (x,y) = (x,y,(x+y))
+//Start = create1 (1,5)
+
+create :: [(Int, Int)] -> [(Int, Int, Int)] 
+create l = map (create1) l
+//Start =  create [(1,1), (2,6), (3,9)]
+
+
+// 2. Compute the average of tuple elements using map
+average1 :: (Int,Int) -> Int
+average1 (x,y) = (x+y)/2
+//Start = average1 (2,4)
+
+averages :: [(Int, Int)] -> [Int]
+averages l = map (average1) l
+//Start = averages [(1,1), (2,6), (3,9)]
+
+
+// 3. Put the product of the sublist elements in a list, you must use foldr
+
+sublistsp :: [[Int]] -> [Int]
+sublistsp [] = []
+sublistsp [x:xs] = [foldr (*) 1 x : sublistsp xs]
+//Start = sublistsp [[1, 2, 3], [3, 4], [5, 7, 1]] // [6,12,35]
+
+
+// 4. Generate the following list of lists
+// [[1],[2,1],[3,2,1],[4,3,2,1],[5,4,3,2,1]]
+genNlist :: Int -> [[Int]]
+genNlist a = [[ x \\ x <- reverse [1..y]] \\  y <-  [1..a]]
+//Start = genNlist 5
+
+

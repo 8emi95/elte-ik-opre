@@ -1,0 +1,117 @@
+
+fseek(f, elmozdulás byte, viszonyítási pont) -> Hiba:nem 0
+SEEK_SET	fájl eleje
+SEEL_CUR	jelenlegi pozíciója a fájl pointernek
+SEEK_END	fájl vége
+
+
+írjuk át óra eleji feladatot(gyak4.c)
+fájlból olvasunk hátulról... de elölrõl töltjük fel a tömbünket
+
+gyak4_2.c-be
+
+
+
+
+open_fopen.c
+<fcnt.h>-ra szükségünk van
+
+int f = open(fájlnév, mód)
+vagy 
+int f = open(fájlnév, mód, engedélyek)
+
+-1-gyel tér vissza ha hiba! 
+
+mód értékei lehetnek:
+O_RDONLY
+O_WRONLY
+O_RDWR
+O_APPEND
+O_TRUNC		minden adatot töröl a fájlból
+O_CREAT		létrehozza, ha nem létezik (ennél kötelezõek az engedélyek)
+O_EXCL	O_CREAT-tel együtt kombinálva	létre KELL hozni... ha nem tudja létrehozni, akkor hibát generál, mert már létezett
+
+Engedélyek:
+S_I[R|W|X][USR|GRP|OTH]
+pl. tulajdonosnak végrehajtási jogot akarok adni:
+S_IXUSR
+pl. mindenkinek olvasási jog:
+S_IROTH
+USR: user(tulajdonos)
+GRP: group(csoport,amelyben a tulajdonos van)
+OTH: other(minden más felhasználó)
+
+lezárás:
+close(f)		(f = fileazonosító)
+
+olvasás:
+read(f, kezdõcím, olvasandó bytok száma)
+visszatérési érték az olvasott bytok száma... negatív jelenti a hibát
+
+írás:
+write(f, kezdõcím, írandó bytok száma)
+
+
+pozicionálni itt az lseek-kel tudunk
+lseek(f, elmozdulás byte, viszonyítási pont)
+
+!!! BEADANDÓHOZ ezzel a módszerrel megcsinálni az óra eleji feladatot
+
+
+
+void use_open_bin(char* fname)-ben ...
+while-nál nem kell eof...
+
+
+OTTHON megnézni a mintafájlokat!
+
+
+
+
+
+PÁRHUAMOS FOLYAMATOK!!!
+2 dolog kivételével minden ugyanaz lesz a gyerekfolyamatban
+pl mutató egy memóriacímre is ugyanaz lesz a két folyamatban
+(mi azt hisszük, hogy fizikai címet látunk, de csak virtuális memóriacímet látunk)
+
+
+kell:
+<sys/types.h>
+pid_t tíus  a PID, PPID
+rendszer
+fork()
+létrejön egy gyerekfolyamat... a szülõ és gyerekfolyamat a szétválás pillanatában csak
+a PID és a PPID értékben különbözik
+fork()	visszatérési értéke maga a gyerekfolyamat azonosítója (PID)
+	a másikban a visszatérés 0 (a gyereknél)
+	ha -1 a visszatérés, akkor pedig nem tudott új folyamatot indítani
+
+getpid() -> a folyamat azonosítóját adja vissza
+getppid() -> a szülõfolyamat azonosítója
+
+sleep(mp) -> felfüggeszti a folyamat végrehajtását a megadott másodperccel
+usleep(mikrosec) -> felfüggeszti a folyamat végrehajtását megadott mikrosec-kel 
+
+
+feladat:
+szülõ indít két gyereket
+gyerekek kiírják a saját és a szülõ PID-jét 
+a szülõ pedig kiírja a két gyerek PID-jét
+
+
+wait(&status)
+mindig a szülõfolyamatban kell a wait-et elhelyezni
+
+waitpid(pid,&status,options)	felfüggeszti a végrehajtást, míg a megadott azonosítójú folyamat
+állapota meg nem váltoik... (pid helyére -1... az összes gyerekfolyamatot jelenti)
+értéke: -1 ha hiba van		(mikor lehet hiba? pl ha nincs ilyen gyerekfolyamat
+vagy az a pid-jû folyamat nem tartozik ide)
+
+WNOHANG		azt jelenti, hogy terminál
+WUNTRACED	azt jelenti, hogy leállt
+WCONTINUED	azt jelenti, hogy folyatódott
+
+
+0-ás összes
+1-es fork mintaprogram...
+össszes...

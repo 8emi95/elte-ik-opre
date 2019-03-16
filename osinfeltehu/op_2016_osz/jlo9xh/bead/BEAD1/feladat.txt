@@ -1,0 +1,7 @@
+1. beadandó feladat. Beadási határidõ: 2012 április 10.
+
+Készítsen C programot, amely zeneszámok adatait tartja nyilván, megvalósítva a listázást, 
+beszúrást, módosítást, törlést illetve kereshetõségeket. Az adatokat (szerzõ, cím, szám hossza, mûfaja) 
+bináris fájlban tárolja. A megoldás legyen helytakarékos, azaz a szerzõk nevét illetve a 
+mûfajok megnevezését egy-egy sorszámmal helyettesítse az adatfájlban. 
+A név-sorszám párokat pedig másik fájlban tárolja. 

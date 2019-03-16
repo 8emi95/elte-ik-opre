@@ -1,0 +1,2 @@
+hossz,karakter count, word search,word count,word replace
+struct szöveges,bináris

@@ -1,0 +1,24 @@
+Operációs rendszerek ZH. 2012 november 22. 16 óra.
+
+1. Mit nevezünk bankár algoritmusnak, mi a lényege? (2 pont)
+2. Milyen I/O eszközkategóriákat ismer? Mi a kivétel? (1 pont)
+3. Milyen partíciónak nincs i-node táblája? (1? pont)
+4. Mi az SSTF ütemezés? (2? pont)
+5. Mi a RAID0+1 illetve RAID1+0 lemezek közti különbség? (1? pont)
+6. Honnan származik az op.rendszer virtualizáció, mik a jellemzõi, mi köze a virtuális memóriakezeléshez? (2? pont)
+7. Ismertesse a kölcsönös kizárás megvalósítását TSL utasítással! (2 pont)
+8. Mit értünk monopol módú eszköz alatt? (1? pont)
+9. Mit értünk folyamatok erõforrás görbéjén, mire használható? (1 pont)
+10. Mi a mutex? (1 pont)
+11. Mit takar az alábbi algoritmus részlet, mi a baj vele, ha van? (2 pont)
+	while(1)
+	{
+		while(kovetkezo!=1);
+		kritikus_szekcio();
+		kovetkezo = 0;
+		nem_kritikus_szekcio();
+	}
+
+12. Mit nevezünk szegmentált memóriakezelésnek? (1? pont)
+13. Mi a szoftveres és a hardveres megszakítás közti különbség? Van egyáltalán? (1 pont)
++1. Mi a valós idejû ütemezés lényege? (1? pont)

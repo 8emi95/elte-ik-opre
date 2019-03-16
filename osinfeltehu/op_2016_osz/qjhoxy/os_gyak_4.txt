@@ -1,0 +1,11 @@
+futó folyamatok:
+ps
+ps -ef
+top
+
+
+fork() hívás után a program kettéágazik, a változók értékkel együtt lemásolódnak
+pid_t child = fork(); után ha child>0, akkor parent, ha child==0, akkor child, ha child<0, akkor hiba
+
+system() - a program megvárja, míg lefut
+execv()  - az aktuális process lecserélődik a futtatottra

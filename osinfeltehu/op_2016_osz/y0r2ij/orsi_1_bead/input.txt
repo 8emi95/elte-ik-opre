@@ -1,0 +1,6 @@
+5 3
+aaaaaa WoW 20
+bbbbbb LoL 300
+cccccc Csi 50
+aaaaaa Csi 400
+cccccc WoW 200

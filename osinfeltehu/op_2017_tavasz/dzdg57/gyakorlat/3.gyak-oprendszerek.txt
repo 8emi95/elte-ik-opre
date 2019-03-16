@@ -1,0 +1,233 @@
+http://klettner.web.elte.hu/?page_id=67
+
+elõzõ oldali feladat egy megoldása:
+
+int length(char * str) {
+	int len=0;
+	while (str[len] != 0) {
+		len++;
+	}
+	return len;
+}
+
+// itt mint karaktertömböt kezeljük az str-t
+
+
+optializáljuk:
+
+int length(char * pointer) {
+	int len=0;
+	while (*pointer != 0)
+		len++;
+		pointer++;
+	}
+	return len;
+}
+
+// nekem *pointer++ is jó volt... miért???????????????????????????????????
+
+
+mégtovább:
+
+int length(char * pointer) {
+	int len=0;
+	while (*pointer++ != 0)
+		len++;
+	}
+	return len;
+}
+
+mégtovább:
+
+int length(char * pointer) {
+	int len=0;
+	while (*pointer++)
+		len++;
+	}
+	return len;
+}
+
+mégtovább
+int length(char * pointer) {
+	char * start;
+	start = pointer;
+	int len=0;
+	while (*pointer++){
+	}
+	return --pointer-start;
+}
+
+
+
+
+// egyenlõ-e a két string?
+int equal(char * str1, char *str2) {
+	while(*str1 || * str2)
+	{
+		if(*str1 != *str2)
+			return 0;
+		str1++;
+		str2++;
+	}
+	return 1;
+}
+
+
+// belenéztünk a strings.c mintamegoldásba
+szerepel a free(str2) a végén
+ha mégegyszer fel akarnám szabadítani a memóriaterületet (tehát mégegyszer meghívnám
+a free(str2)-t, akkor összeomlasztanám a rendszert!
+
+
+
+char ** a típusa annak a mutatónak, ami a paramétertömbünkre mutat
+a main-nek két értéket ad át
+main(int argc, char** argv)
+
+argv[0]		: ide kerül, amit beírtunk a futtatáshoz (pl.: ./string ... ha 
+úgy hívnám, hogy ../gy0/string akkor ezt írná ki...)
+[1] - [argc-1]	: itt lesznek a paraméterek, amiket átadtunk (argv[1] ..így kell érteni természetesen)
+[argc]		: ezen a helyen a nullpointer
+
+példa: arg.c
+
+
+// Struktúrák:
+
+struct típusnév
+{
+	mezõtípus1 mezõnév1;
+
+	mezõtípusN mezõnévN;
+} 
+
+struct típusnév azonosító;
+
+
+//hivatkozás rá:
+azonosító.mezõnév
+
+
+struct típusnév *ptr;	
+//hivatkozás erre:
+(*ptr).mezõnév		// pont az erõsebb priorítású... kell a zárójel
+ptr->mezõnév		// ez az elõzõvel ekvivalens
+
+
+Hibakezelés:
+
+<errno.h>
+
+errno		// ennek kezdeti értéke nulla (vagyis hamis) és bármelyik fv módosíthatja
+
+// az errno-t csak közvetve használjuk
+van az <stdlib.h> -ban egy perror(saját hibaüzenet) függvény
+	// kiiratja a saját szövegünket a hibával...
+
+
+
+
+
+
+// Fájlkezelés
+<stdio.h> -ból milyen függvényeket kell ismernünk?
+
+FILE		pl. FILE *f	// ez az f lesz a pointer
+
+fopen
+fclose
+fseek
+feof
+
+// Text módban való használatra való függvények:
+fprintf
+fputs
+fgets
+
+// Bináris módban való hozzáférésre való függvények:
+fwrite
+fread
+
+
+f=fopen(fájlnév; mód)	// ha nem sikeres, akkor NULL... a mód egy string
+fclose(f)
+
+
+// Szöveges (Text)
+módok:
+r	file-t megnyit olvasásra
+w	írásra ... mindenképpen létrehoz
+a	hozzáírás...akkor ír hozzá ha létezik ha létezik
+r+	olvasásra és írásra
+w+	új fájlt hoz létre, de olvasási és írási joggal
+a+	olvasásra és hozzáírásra... ha nem létezik itt is létrehozza
+
+
+fputs(string, f)	// negatív értékkel tér vissza ha hiba történt az írás során
+// arra vonatkozólag, hogy ha sikerült mit ad vissza nincs definiált érték
+
+fprintf(f, formátumstring, változólista)	// a ténylegesen kiírt karakterek számával tér vissza
+
+fgets(string, max karakter, f)		// olvasásra... null-t ad vissza ha nem tudott
+// olvasni egyáltalán... fájl végénél, sor végénél, (max karakter-1)-nél (mert kell a lezáró 0) is abbahagyja
+
+feof(f)		// nem elég ha eljutott a fájl végére a mutató... akkor változik ha már a fáj vége után akarok olvasni
+
+
+
+<unistd.h>	// a rendszerhíváshoz szükséges függvények ebben vannak
+
+access("filenév"; mód)		// aktuális felhasználó hozzáférési jogát ellenõrzi
+// 0-át ad vissza ha hozzáférés engedélyezett, -1-et ha nem
+
+jogokat ellenõrzi
+R_OK	// olvasásra hozzáférhetõ
+W_OK	// írásra
+X_OK
+F_OK	// adott felhasználó számára létezik-e
+
+
+kijavíttottuk az eof-ot a use_fopen_text-ben!!!!!!!!!!!!!!!!!!!!!
+ez volt: (kétszer írta volna ki az utolsó sort ha lenne sorvége)
+while (!feof(f)){
+   fgets(line,sizeof(line),f);
+   printf("%s",line);
+ } 	
+
+
+
+BINÁRIS
+
+fwrite(kezdõcím, elemméret, elemszám, f)	// ténylegesen kiírt elemszámot adja vissza
+fread()
+
+
+use_fopen_bin(..) fv-ben is javítottunk... fread()-nél
+
+
+Tömb : t[]
+fread
+fwrite(t, sizeof(t[0]),sizeof(T)/sizeof(t[0]), t)
+
+v változó értékét akarom beolvasni:
+fread
+fwrite(&v, sizeof(v), 1, f)
+
+
+// HF: 
+kijavítani, hogy utolsó karaktert ne többször írja ki!
+
+(Kijavítottam!... megoldás hasonló ehhez: http://stackoverflow.com/questions/23185622/fscanf-reads-the-last-integer-twice)
+(régi while ciklus elejét és a ciklusmag egy részét kikommenteltem)
+
+készítsünk egy olyan programot, amely egy char és egy int-bõl álló struktúrát hoz létre
+ebbõl csinál egy n elemû tömböt. az n páros
+tömb nulladik eleme legyen a és 1
+elsõ eleme b és 2
+... így töltsük fel
+ezután tömb teljes tartalmát írja ki egy fájlba
+
+olvassuk a fájlt elsõ kettõt rakjuk a tömb végére, következõ kettõt az elõtte lévõre...
+
+!! structtomb2.c -ben megcsináltam dinamikus foglalással... (statikussal hogy lehetne?)
+http://stackoverflow.com/questions/16997141/writing-structs-to-a-file-in-c 

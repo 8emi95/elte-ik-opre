@@ -1,0 +1,13 @@
+gyak02bõl maradék
+1,
+sigaction value példa 100. sorban írjuk át &adam-ra a &zoli-t
+a parent megkapja a gyerek memóriacímét -> nem jó eredmény
+
+2, int küldés
+s_value_ptr.sival_ptr=&adam; -> s_value_ptr.sival_int = 3;
+
+gyak03:
+két fajta csõ:1, névtelen: pipe.c
+			  2, nevesített: nevcso.c
+			  
+3, pipe.c alapesetben

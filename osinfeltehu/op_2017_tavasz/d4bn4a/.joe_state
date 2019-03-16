@@ -1,0 +1,50 @@
+# JOE state file v1.0
+search
+	backwards 0
+	ignore 0
+	replace 0
+	block_restrict 0
+done
+macros
+done
+files
+	"debug.sor\n"
+	"asd\n"
+	"Makefile\n"
+	"Makefile\n"
+	"Makefile\n"
+done
+find
+done
+replace
+done
+run
+done
+build
+done
+grep
+done
+cmd
+done
+math
+done
+yank
+	"q"
+	"h"
+	"main "
+	"a.out"
+	"."
+	" "
+	"	"
+	" "
+	"	"
+	"t"
+	"	"
+	"\nrun: zh\n	./zh\n"
+	" run"
+done
+file_pos
+	1 "debug.sor"
+	0 "asd"
+	3 "Makefile"
+done

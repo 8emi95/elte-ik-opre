@@ -1,0 +1,133 @@
+NIKOVITS OLDALÁN ZH_SEGÍTSÉG
+
+A megírt függvények és procedúrák eredménye ellenőrizhető, lásd a fájl alján.
+=============================================================================
+
+Akinek az első zh-ja 1-es lett, vagy azért mert nem érte el a 2-eshez szükséges pontszámot
+vagy azért, mert a gépes részből nem érte el a 8 pontot, annak az alábbi öt feladatból 
+kettőt kötelező megcsinálnia. További segítség, hogy a javító zh-n egy feladatot bele fogok 
+tenni a feldatsorba az alábbi ötből, zehát, aki mind az ötöt megcsinálja, annak már
+egy jó feladata biztosan lesz a javító zh-n.
+A feladatokat emailben kérem elküldeni, de előtte kötelező letesztelni az alább látható
+ELLENORIZ nevű procedúrával. 
+
+
+---------------------------------------------------------
+1. feladat
+/* Írjunk meg egy PL/SQL procedúrát, amelyik kiírja, hogy a NIKOVITS.CUSTOMERS táblának
+   hány olyan adatblokkja van, amiben nincs egyetlen sor sem.
+*/
+CREATE OR REPLACE PROCEDURE uresblokk IS
+...
+set serveroutput on
+call uresblokk();
+---------------------------------------------------------
+2. feladat
+/* Írjunk meg egy PL/SQL procedúrát, amelyik kiírja egy sorba, vesszővel elválasztva névsorban
+   az SH felhasználó olyan tábláit, amelyekre létre van hozva BITMAP index és a táblának nincs 
+   NUMBER(10,2) típusú oszlopa.
+*/
+CREATE OR REPLACE PROCEDURE sh_tablak IS
+...
+set serveroutput on
+call sh_tablak();
+---------------------------------------------------------
+3. feladat
+/* Írjunk meg egy PL/SQL procedúrát, amelyik kiírja egy sorba a NIKOVITS felhasználó tulajdonában 
+   lévő cluster indexek (clusterre létrehozott indexek) nevét és méretét (ábécé sorrendben). A név 
+   és méret közé ":"-ot írjon, az újabb indexeket vesszővel válassza el. 
+*/
+CREATE OR REPLACE PROCEDURE cl_index IS
+...
+set serveroutput on
+call cl_index();
+---------------------------------------------------------
+4. feladat
+/* Írjunk meg egy függvényt, amelyik egy karakterláncban visszaadja a Nikovits felhasználó olyan tábláinak
+   nevét (ábécé sorrendben, vesszővel elválasztva), amelyeknek az utolsó előtti oszlopa dátum típusú?
+*/
+CREATE OR REPLACE FUNCTION nt_tablak RETURN VARCHAR2 IS
+...
+SELECT nt_tablak() from dual;
+---------------------------------------------------------
+5. feladat
+/* Írjunk meg egy PL/SQL procedúrát, amelyik kiírja, hogy a paraméterül kapott tábla melyik fájlban mennyi 
+   helyet (bájtot) foglal. Az eredményt egy sorba írja ki, fájlnevek szerint rendezve, a fájlnév és méret 
+   közé ":"-ot írjon. Ha több fájlt kell kiírnia, azokat vesszővel válassza el.
+*/
+CREATE OR REPLACE PROCEDURE fajl_hely(p_tulaj VARCHAR2, p_tabla VARCHAR2) IS
+...
+set serveroutput on
+call fajl_hely('NIKOVITS', 'TABLA_123');
+call fajl_hely('NIKOVITS', 'HIVAS');
+
+=========================================================
+Az ellenőrzés az ARAMIS adatbázisban működik!
+Az ellenőrző procedúra:
+PROCEDURE ellenoriz(p_str VARCHAR2, p_user VARCHAR2 DEFAULT USER) 
+
+Az első paraméterben (p_str) egy karakterláncban kell megadni aposztfófok között
+az ellenőrzendő függvény vagy procedúra nevét és paramétereit. A második paraméter
+arra szolgál, hogy az oktató ellenőrizni tudja a különböző hallgatók programjait,
+tehát azt a hallgatónak NEM kell megadnia.
+Ha az ellenőrzendő program karakter típusú paraméterekkel rendelkezik, és így a
+meghívásakor már aposztrófokat kellene a paraméterében használni, akkor az ilyen 
+aposztrófok helyett két aposztrófot kell szerepelteni. 
+
+Példák:
+-------
+nt_tablak függvény hívása: nt_tablak()
+ellenőrzése:
+set serveroutput on
+call ellenoriz('nt_tablak()');
+
+uresblokk procedúra hívása: uresblokk();
+ellenőrzése:
+set serveroutput on
+call ellenoriz('uresblokk()');
+
+fajl_hely procedúra hívása: fajl_hely('NIKOVITS', 'TABLA_123');
+ellenőrzése:
+set serveroutput on
+call ellenoriz('fajl_hely(''NIKOVITS'', ''TABLA_123'')');
+
+
+
+****************************************************************************************************************
+
+
+Ütemezési gráf:
+    Nikovits-> Megelőzési gráf példa: ab2_feladat10.txt | 9.2.4. feladatű
+
+
+SQL:
+
+select /*+ USE_NL(eladasok,eladasok2) */ * from ELADASOK natural join ELADASOK2; 
+/* Nested loop kényszerítése */
+
+select /*+ USE_merge(eladasok,eladasok2) */ * from ELADASOK natural join ELADASOK2; 
+/* alapból HASH JOIN-t használ, kiegészítéssel átalakítom merge-re */
+
+select /*+ no_USE_hash(eladasok,eladasok2) */ * from ELADASOK natural join ELADASOK2; 
+/* Keres a gép egy kevésbé költséges megoldást, ami most itt a merge lesz */
+
+create table cikkek as select * from NIKOVITS.CIKK;
+select * from cikkek;
+create index ársorm on cikkek(suly);
+select * from cikkek where suly='10';
+
+select /*+ no_index(cikkek) */ * from cikkek where suly='10';
+/* Megadályozom hogy az indexet használja */
+
+create index cikknevsor on cikkek(cnev,suly); 
+/* Ha van azonos nevü(cnev), akkor a sulyt fogja használni */
+select * from cikkek where suly='10';
+/* Még mindig az 'ársorm' indexet használja */
+select /*+ index(cikkek, cikknevsor) */ * from cikkek where suly='10';
+/* Kényszerítem hogy a 'cikknevsor' indexet használja a 'cikkek' táblán */
+
+select /*+ index(c cikknevsor) */ * from cikkek c where suly='10';
+
+select /*+ USE_NL(a, b, c) */ * from BRANYI.pizza a natural join BRANYI."HOZZÁVALÓ" b natural join BRANYI.ALAPANYAG c;
+
+

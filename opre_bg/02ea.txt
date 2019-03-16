@@ -1,0 +1,33 @@
+csak az oprendszeren keresztül lehet szöszmötölni a hardverrel
+	magasszinten portkezelés (io), megszakításkezelés
+
+megszakítás kezelés: teljesen az oprendszeré, nem hozzáférhetõ
+billeütés: megszakítást generál, driver beolvas, oprendszerben eseménypropagálás, aztán megkapják a szoftverek
+	oprendszer válogathat, pl általában csak a fókuszban lévõ ablakban váltja ki az eseményt
+
+mikroproc <-> mikrokontroller: utóbbi beépített memóriát tartalmaz, és eszközkezelést (pl soros port)
+	célszámítógép feladatokat lássanak el
+
+ma a procinak több üzemmódja:
+1. az elsõ lépés: BIOS test, ugyanaz mindenhol
+2. védett mód - 
+3. kernel mód - minden elérhetõ
+4. felh mód - proc utasítás és memóriahasználat korlátozott
+
+megszakítás elindul: csapdába kell ejteni, ki kell szolgálni, majd continue
+pl. jön a jel, minden megszakítás egy szám, megszorozták 4-gyel és megkapták az eszközkezelõ memóriacímét
+ma 256 megszakításra vannak felkészítve a gépek, ebbõl max 15öt a hardverek használnak, többi szoftveres
+	egy bitet átlök amibõl a proci látja hogy helyzet van
+a forrás különbözõ, a kezelés egységes
+általában kicsi az interrupt kezelõ eljárás: beolvassa a hardverrõl az adatot és elmenti, kész
+
+maszkolhatóság: tiltás/engedélyezés
+
+interrupt priority: ha interrupt kezelés közben újabb interrupt jön be, megszakítsa-e vagy sem
+
+speciális felügyelt mód: pl JVM, .NET
+beágyazott rendszer: nem általános szgépre szánták, hanem speciális környezetekre, pl QNX
+
+Win8.1tõl nem POSIX kompatibilis
+
+OPRENDSZER GENERÁCIÓK KÖVETKEZIK (2. ppt)

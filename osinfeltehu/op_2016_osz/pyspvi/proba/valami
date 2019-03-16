@@ -1,0 +1,8 @@
+include <iostream.h>
+void main() {
+	int a = fork();
+	if ( a != 0 ) {
+		printf('%d', getppid());
+	}
+	exit(0);
+}

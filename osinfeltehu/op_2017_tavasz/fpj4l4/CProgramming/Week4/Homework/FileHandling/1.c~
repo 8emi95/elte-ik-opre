@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <errno.h>
+
+int main(int argc, char *argv[]) {
+
+  if(argc!=3) {
+  perror("arguments wrong");
+  exit(1);
+  }
+  
+  int f,g;
+
+}

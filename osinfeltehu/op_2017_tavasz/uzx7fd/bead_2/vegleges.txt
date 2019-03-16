@@ -1,0 +1,19 @@
+Kedvenc csapat?
+3
+FTC
+UTE
+ETO
+Kedvenc focista?
+4
+Botka
+Böde
+Torghelle
+Király
+Támogatná a katalógusos futballmérkőzéseket?
+2
+Igen
+Nem
+Milyen gyakran jár meccsre?
+2
+Néha
+Soha

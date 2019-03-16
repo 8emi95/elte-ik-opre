@@ -1,0 +1,10 @@
+fv: string length-re
+szoveg: megszamolni h ? karakter van benne
+szoveg: szo 2. parameterben adva: benne van e a szo a szövegben
+szo csere masik szora (adott mindketto)
+struct : szovegesen fajlba kiir egy kodbol, binarisan 
+
+
+egyeb:
+open : binaris fajl megnyitasa
+f.open/fopen (?) szoveges all megnyitasa

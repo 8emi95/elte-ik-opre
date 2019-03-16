@@ -1,0 +1,62 @@
+elméleti zh: 13+1 kérdés.
+
+bead2: rendezvények lehetnek fixek, nem véletlenszerűen generáltak.
+
+névtelen cső: bináris fájlszerű művelet, bájtsorozatot lehet rajta küldeni
+
+leghatékonyabb nyelv még ma is a C, nem a C++.
+
+gy5:
+
+1. Üzenetsorok
+2. Osztott memória
+
+************************************************************************
+
+2. Osztott memória
+	osztmem.c
+	készitésének kétféle módja van, mivel ezek oprendszer szintú erőforrások
+	ehhez az egyediségbiztositashoz általános kulcsgeneráló függvényt használnak, ez az "ftok"
+	osztott memória létrehozása a "shmget" függvénnyel (kulcs, méret, egyéb tulajdonságok megadása paraméterként)
+	
+	shmat: ezzel lehet használni az osztott memóriát
+	shmdt: az osztott memória elengedése
+	strcpy: ezzel tesszük bele az osztott memóriába a rendes bájtsorozatot 0-val a végén. (Mitől string a string? Attól, hogy van egy bájtsorozat és 0 bájt van a végén mint lezáró. Mikor ki teszi oda a 0-t? Valaki. Const string esetén a forditó. Egyébként Te vagy az, aki odateszi. Strcpy() a 0-t is átmásolja, van olyan fv. is ami a 0-t lehagyja.
+		strcpy() nem nagyon használható int másolására. Pl. akkor használható, ha olyan a szám, hogy mind az első négy bájtja szám (nem 0) és ahol tárolva van az osztott memórián az utána lévő 5. bájt 0. Vagy akkor, ha az első három bájtja szám, a negyedik pedig 0. Ez a kettő extrém eset van.
+	
+	Lehet struktúrát (akármilyen tipust) is osztott memóriába másolni ám. Nem strcpy()-val, hanem memcpy()-val.
+	
+	Bájtsorozatot használunk itt is. Azért szeretünk char*-ot használni, mert az ugyanúgy bájtsorozat, csak a char* alatt olyan bájtsorozatot értünk, amit még a szemed is ért! Ha pl. egész számot char*-ként jelenitenénk meg, kapnánk a hieroglifákat!
+	Mi ez a szöveges / bináris ügymenet: 
+	Hogy csinálsz számból szöveget? Triviális, veszel egy függvényt: sprintf() vagy sok környezetben itoa() (az atoi() ellentettje)
+	Osztott memóriába be lehet irni egy számot is, ha szöveggé konvertálod.
+	
+	osztmem.c: char* s elejébe beletoljuk az egész számot int-ként. Hogy lehet kiolvasni belőle?
+		int * péter = (int*) s; Ezzel azt mondom meg, hogy azt a memóriát ne egyszerű bájtsorozatként tekintsem, hanem egy egység annyi bájt legyen, amennyit a rendszer az int-hez használ (jelenleg 4 bájt).
+		Minden mutató memóriacim.
+	
+	ftok: IPC_PRIVATE k.szó használható, ekkor automatikusan generál egy kulcsot a ferditő a ...-hoz. Az ftok-os változat tud hibát generálni: ha a prg elszáll, nem fut rá a shmctl() eltávolitó utasitasra, igy legközelebb ugyanazt a kulcsot fogja generálni, mert az osztott memória megmarad (ekkor hiba: nem tudja létrehozni az osztott memóriát, mert ez az osztott memória kulcs már létezik). shmget() használatával biztos nem lesz már létező kulcs, csak ezt nem tudod másokkal megosztani.
+	
+	HF: hogy teszel bele egy egész számnak megfelelő 4 bájtot? Mert kiolvasni könnyű az előző sorban leirtakkal.
+
+************************************************************************
+
+1. Üzenetsorok világa
+	uzenet.c: klasszikus üzenetkezelő család, msg-vel kezdődő függvények. msgsnd: message send, msgrcv: message receive.
+		üzenetosztály definició: struct uzenet {long, char[]}. Az első paraméter long: szám van az üzenethez rendelve, ez kell az azonositashoz. A többi mező akármi lehet.
+
+	mq_uzenet.c:
+	
+	POSIX-os üzenetsor használata: mq_ kezdetű függvényekkel lehet ezeket elvégezni. A POSIX-os üzenetsor: üzenetcsomag méreteket szabályozó üzenetcsomagok továbbitasat végzi. Az attribűtum paraméterrel lehet meghatározni a ...-t.
+	-LRT-vel kell ezt is forditani!!
+		mq_open()
+
+	MAXMSGS: 5 jelentése: max 5 üzenet lehet, többet megadni sok értelme nincs
+	8 KB-os lehet egy üzenet
+	256 db különböző üzenetsort tud az oprendszer kezelni: ZH-n a "későn ébredők" elhasalnának, ha egyszerre mindenki üzenetsorozni akar.
+	
+	bájtsorozat-küldő formátum ez is
+	ha a sorban megjelen egy üzenet, jelzésküldést generál (notify). A prioritásgenerálás jelentése: oda szúrja be az üzenetet, ahol a prioritás szerint helye van.
+	
+	fölösleges várakozásnak itt sincs értelme úgy mint a csöveknél, ez a "poll", bár ez az üzenetsoros mintakódban nincs benne. A "poll"-t a csövezős mintakódban mondjuk meg lehet nézni.
+	Mire jó a poll? Ha egy darabra várakozol a receive-vel: a Bencét megállitja addig, amig a csőbe nincs olvasható valami. De az események többségében te nem egy csővel csövezel, hanem többel; hasonlóan több üzenetsort is használsz egy helyett. Tehát a poll arra használható, hogy a párhuzamosan több üzenetsorral, message csővezetékkel kommunikáló partnerek ne álljanak már le, a poll figyeli egyszerre mindet, aztán ha valamelyikben van duma, akkor olvassa, nem vár fölöslegesen.

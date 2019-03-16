@@ -1,0 +1,37 @@
+ps - folyamatok listázása
+
+kill -SIGKILL pid (& ->háttérben indítja el)
+  --> a folyamat mindenképp meg kell álljon
+  
+pause --> addig vár, amíg jelzést nem kap
+
+kill -SIGTERM pid
+  --> a folyamat terminált állapotba kerül és megáll
+  
+kill -SIGUSR1 pid
+  --> ilyet nem küldhet magának az oprendszer, csak a felhasználó használhatja (SIGUSR2 is hasonló)
+  erre is megáll a folyamat
+  
+raise(signumber) --> jelet generálunk
+
+a fork elõtti eventhandler-eket a fork is megörökli, mert lemásolja a szülõ akkori állapotát a létrehozása pontjában
+--> a gyerek elején szinte SOHA nincs signal kezelés
+
+PROBLÉMA:
+A szülõ megcsinálja a gyereket, ha az ütemezõ még ad neki idõt, akkor halad tovább.
+Ha itt kill-elné a gyereket egy jellel, és az ütemezõ még nem adott a gyereknek idõt, akkor a jel elszáll az éterbe,
+a gyerek pedig örökkévalóságig fogja várni a jelet.
+EZÉRT:
+int i=0;
+handler-en belül az i értékét növelem 1-el.
+a gyerekben pause helyett: while (i==0) { usleep(100); }
+
+handler-ben TILOS olyan függvényt használni, ami megszakítható (pl. printf)
+
+SIGALRM - alarm jelzés
+  --> alarm(1); implementált alarm jelzés -> ez az idõzítõ egyszer fog elsülni
+  
+setitimer() -> periodikusan fogja küldözgetni az alarm() jeleket. ezredmásodpercben mérhetõ
+  elsõ paramétere: ITIMER_REAL -> valós timer, mindegy mennyit töltött a cpu-ban, ennyi idõ múlva megkapom a jelemet
+getitimer(ITIMER_REAL, &expires) -> lekérdezi a 2. paraméterbe, hogy milyen állapotban van az ITIMER_REAL
+

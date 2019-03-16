@@ -1,0 +1,25 @@
+
+Sorszam: 1
+Elso kerdes
+- a
+- b
+- c
+- d
+Felvetel ideje: Sat Apr  8 15:10:34 2017
+
+Sorszam: 2
+Masodik kerdes
+- a
+- b
+- c
+- d
+Felvetel ideje: Sat Apr  8 15:10:43 2017
+
+Sorszam: 3
+Harmadik kerdes
+- a
+- b
+- c
+- d
+Felvetel ideje: Sat Apr  8 15:10:55 2017
+

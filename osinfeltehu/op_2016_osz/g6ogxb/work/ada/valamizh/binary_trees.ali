@@ -1,0 +1,59 @@
+V "GNAT Lib v2016"
+P ZX
+
+RN
+RV NO_ALLOCATORS
+RV NO_EXCEPTIONS
+RV NO_LOCAL_ALLOCATORS
+RV NO_RECURSION
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_DEALLOCATION
+RV SPARK_05
+
+U binary_trees%b	binary_trees.adb	0a4e2755 NE OO PK GE
+W ada%s			ada.ads			ada.ali
+W ada.unchecked_deallocation%s
+
+U binary_trees%s	binary_trees.ads	ed2b01c6 BN EE NE OO PK GE
+
+D ada.ads		20160516092928 3ffc8e18 ada%s
+D a-uncdea.ads		20160516092930 f15a5ed1 ada.unchecked_deallocation%s
+D binary_trees.ads	20161209083430 ed2b01c6 binary_trees%s
+D binary_trees.adb	20161209083432 163f7842 binary_trees%b
+D system.ads		20160516092930 2da59038 system%s
+X 1 ada.ads
+16K9*Ada 19e8 4|1r6 19r44
+X 2 a-uncdea.ads
+20u15*Unchecked_Deallocation 4|1w10 19r48
+X 3 binary_trees.ads
+2+14 Element 9r35 14r52 17r61 39r23 4|10r23 29r52 38r61
+4k9*Binary_Trees 2z14 36E14 43l5 43e17 4|2b14 72l5 72t17
+6P14*Binary_Tree 8r31 9r57 10r24 14r31 17r39 20r31 20r52 23r32 23r53 26r35
+. 28r31 37c14 40r30 4|4r31 11r30 12r26 18r35 19r76 29r31 38r39 47r31 47r52
+. 56r32 56r53 65r31
+8V18*Empty{6P14} 4|4b18 7t12
+9V18*Construct{6P14} 9>29 9>44 9>50 4|9b18 16t12 41s30
+9*29 Item{2+14} 4|10b17 15r34
+9p44 Left{6P14} 4|11b17 15r40
+9p50 Right{6P14} 4|11b23 15r46
+12X9*Tree_Empty 4|32r31 50r31 59r31
+14V18*Get_Root{2+14} 14>28 4|29b18 36t12
+14p28 T{6P14} 4|29b28 31r20 34r32
+17U19*Set_Root 17=29 17>52 4|38b19 45t12
+17p29 T{6P14} 4|38b29 40r20 41m25 43r25
+17*52 Item{2+14} 4|38b52 41r40 43r35
+20V18*Get_Left{6P14} 20>28 4|47b18 54t12
+20p28 T{6P14} 4|47b28 49r20 52r32
+23V18*Get_Right{6P14} 23>29 4|56b18 63t12
+23p29 T{6P14} 4|56b29 58r20 61r32
+26U19*Free 26=25 4|18b19 22s25 23s25 27t12
+26p25 T{6P14} 4|18b25 21r20 22r30 23r30 24m35 25m25
+28V18*Is_Empty{boolean} 28>28 4|65b18 68t12
+28p28 T{6P14} 4|65b28 67r24
+36R14 Node 37r36 38c14 41e27 4|15r28 19r71
+39*17 Item{2+14} 4|34r34 43m27
+40p17 Left{6P14} 4|22m32 52r34
+40p23 Right{6P14} 4|23m32 61r34
+X 4 binary_trees.adb
+19U27 Free_Node[2|20] 24s25
+

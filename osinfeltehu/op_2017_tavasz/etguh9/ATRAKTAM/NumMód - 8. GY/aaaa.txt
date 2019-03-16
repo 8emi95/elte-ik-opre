@@ -1,0 +1,12 @@
+6. GY.:
+Matlab::4. feladat  -  könnyû, szimpla ip.-s feladat
+Matlab::5. feladat  -  Newton-bázisos feladat:
+	Készítsük el az (1;1), (4;2) és (9;3) pontokra illeszkedõ másodfokú interpolációs polinom Newton-alakját.
+	a)	Készítsük el az osztott differencia táblázatot a konkrét példára.
+	b)	Készítsük el a Newton-bázis elemeit. 
+	c)	Rajzoljunk egy ábrára az interpolálandó pontokat és az interpolációs polinom Newton alakját.
+
+
+
+
+8. gyak házijaiból lehetnek zh példák

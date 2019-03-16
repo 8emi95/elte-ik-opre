@@ -1,0 +1,4 @@
+2,Kiss,Béla,kissbela@email.com,Fri Apr 01 15:37:12 2016
+1,Nagy,Géza,nagygeza@email.com,Sat Apr 02 10:24:54 2016
+2,Kovacs,Ferenc,kovacsferenc@email.com,Fri Apr 01 15:40:12 2016
+2,Kiss,István,kissistvan@email.com,Sat Nov 05 17:10:13 2016

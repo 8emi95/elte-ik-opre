@@ -1,0 +1,7 @@
+1;Ez az elso kerdes;2017.04.09.11.49.10.;0;elso;masodik;harmadik;NULL;
+2;Ez az masodik kerdes;2017.04.09.11.49.10.;0;elso;masodik;harmadik;NULL;
+3;Milyen nap van?;2017.05.13.14.03.40;1;nem;igen;NULL;NULL;
+4;Mi ez a kiskutya?;2017.05.13.21.57.36;0;hmm;eb;NULL;NULL;
+5;adsada;2017.05.14.12.43.34;0;aaaa aa;bbb bb;ccc asad;NULL;
+6;Mi a foci ez?;2017.05.14.12.44.16;1;ajandek;valami;nem tudom;sport;
+7;Jo lesz ez a kerdes?;2017.05.14.20.03.18;1;aha;nem;NULL;NULL;

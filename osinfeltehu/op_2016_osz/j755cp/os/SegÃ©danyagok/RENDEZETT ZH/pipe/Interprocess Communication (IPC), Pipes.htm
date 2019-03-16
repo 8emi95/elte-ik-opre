@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- saved from url=(0070)http://www.cs.cf.ac.uk/Dave/C/node23.html#SECTION002300000000000000000 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Interprocess Communication (IPC), Pipes</title>
+<meta name="description" content="Interprocess Communication (IPC), Pipes">
+<meta name="keywords" content="C">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<link rel="STYLESHEET" href="http://www.cs.cf.ac.uk/Dave/C/C.css">
+</head>
+<body>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+<ul>
+<li><a name="tex2html1181" href="http://www.cs.cf.ac.uk/Dave/C/node23.html#SECTION002310000000000000000">
+Piping in a C program: &lt;<tt>stdio.h</tt>&gt; </a>
+</li><li><a name="tex2html1182" href="http://www.cs.cf.ac.uk/Dave/C/node23.html#SECTION002320000000000000000">
+<tt>popen()</tt> -- Formatted Piping</a>
+</li><li><a name="tex2html1183" href="http://www.cs.cf.ac.uk/Dave/C/node23.html#SECTION002330000000000000000">
+<tt>pipe()</tt> -- Low level Piping</a>
+</li><li><a name="tex2html1184" href="http://www.cs.cf.ac.uk/Dave/C/node23.html#SECTION002340000000000000000">
+Exercises</a>
+</li></ul>
+<!--End of Table of Child-Links-->
+<hr>
+<h1><a name="SECTION002300000000000000000">
+Interprocess Communication (IPC), Pipes</a>
+</h1>
+<p>
+We have now began to see how multiple processes may be running on a
+machine and maybe be controlled (spawned by <tt>fork()</tt> by one of our
+programs.
+</p><p>
+In numerous applications there is clearly a need for these processes to
+communicate with each exchanging data or control information. There are a
+few methods which can accomplish this task. We will consider:
+</p><p></p><ul>
+<li> Pipes
+</li><li> Signals
+</li><li> Message Queues
+</li><li> Semaphores
+</li><li> Shared Memory
+</li><li> Sockets
+</li></ul>
+<p>
+In this chapter, we will  study the piping of two processes. We will
+study the others in turn in subsequent chapters.
+</p><p></p><h1><a name="SECTION002310000000000000000">
+Piping in a C program: &lt;<tt>stdio.h</tt>&gt; </a>
+</h1>
+<p>
+Piping is a process where the input of one process is made the input of
+another. We have seen examples of this from the UNIX command line using <img width="8" height="32" align="MIDDLE" border="0" src="./Interprocess Communication (IPC), Pipes_files/img17.gif" alt="$\mid$">.
+<br>
+</p><p>
+We will now see how we do this from C programs.
+<br>
+</p><p>
+We will have two (or more) <tt>forked</tt>   processes and will communicate
+between them.
+<br>
+</p><p>
+We must first open a <em>pipe</em>
+<br>
+</p><p>
+UNIX allows two ways of opening a pipe.
+</p><p></p><h1><a name="SECTION002320000000000000000">
+<tt>popen()</tt> -- Formatted Piping</a>
+</h1>
+<p><tt>FILE *popen(char *command, char *type)</tt> --   opens a pipe for I/O
+where the command is the process that will be connected to the calling process
+thus creating the <em>pipe</em>. The type is either ``r'' - for reading, or ``w''
+for writing.
+<br>
+</p><p><tt>popen()</tt> returns is a stream pointer or NULL for any errors.
+<br>
+</p><p>
+A pipe opened by <tt>popen()</tt> should always be closed by <tt>pclose(FILE
+*stream)</tt>.
+<br>
+</p><p>
+We use <tt>fprintf()</tt> and <tt>fscanf()</tt> to communicate with the pipe's <tt>
+stream</tt>.
+</p><p></p><h1><a name="SECTION002330000000000000000">
+<tt>pipe()</tt> -- Low level Piping</a>
+</h1>
+<p><tt>int pipe(int fd[2])</tt> -- creates a pipe and   returns two file
+descriptors, <tt>fd[0], fd[1]</tt>. <tt>fd[0]</tt> is opened for reading, <tt>fd[1]</tt>
+for writing.
+<br>
+</p><p><tt>pipe()</tt> returns 0 on success, -1 on failure and sets <tt>errno</tt>
+accordingly.
+<br>
+</p><p>
+The standard programming model is that after the pipe has been set up, two (or
+more)   cooperative processes will be created by a fork and data will be
+passed using <tt>read()</tt> and <tt>write()</tt>.
+<br>
+</p><p>
+Pipes opened with <tt>pipe()</tt> should be closed with <tt>close(int fd)</tt>.
+ <br>
+</p><p>
+Example: Parent writes to a child
+<br>
+</p><p><tt>
+</tt></p><pre><tt><tt>
+int pdes[2];
+&nbsp;
+pipe(pdes);
+if ( fork() == 0 )
+&nbsp;&nbsp;{&nbsp;/* child */
+				 close(pdes[1]); 
+				 read( pdes[0]); /* read from parent */
+				 .....
+		 }
+else
+		 {  		close(pdes[0]); 
+				 write( pdes[1]); /* write to child */
+				 .....
+		 }
+</tt></tt></pre><tt>
+</tt>
+ <br>
+<p>
+An futher example of piping in a C program is <tt>plot.c and subroutines and it performs
+as follows:
+</tt></p><ul><tt>
+<li> The program has two modules <tt>plot.c</tt> (main) and <tt>plotter.c</tt>.
+</li><li> The program relies on you having installed the freely <em>gnuplot</em> graph drawing
+program in the directory <tt>/usr/local/bin/</tt> (in the listing below at least) -- this path
+could easily be changed.
+</li><li> The program <tt>plot.c</tt> calls <em>gnuplot</em>
+</li><li> Two Data Stream is generated from Plot
+<ul>
+<li> <i>y</i> = <i>sin</i>(<i>x</i>)
+</li><li> <i>y</i> = <i>sin</i>(1/<i>x</i>)</li></ul>
+</li><li> 2 Pipes created -- 1 per Data Stream.
+</li><li> °<em>Gnuplot</em> produces ``live'' drawing of output.
+</li></tt></ul><tt>
+<p>
+The code listing for <tt>plot.c</tt> is:
+</p><p></p><pre>/* plot.c - example of unix pipe. Calls gnuplot graph drawing package to draw
+   graphs from within a C program. Info is piped to gnuplot */
+/* Creates 2 pipes one will draw graphs of y=0.5 and y = random 0-1.0 */
+/* the other graphs of y = sin (1/x) and y = sin x */
+
+/* Also user a plotter.c module */
+/* compile: cc -o plot plot.c plotter.c */
+
+#include "externals.h"
+#include &lt;signal.h&gt;
+
+#define DEG_TO_RAD(x) (x*180/M_PI)
+
+double drand48();
+void quit();
+
+FILE *fp1, *fp2, *fp3, *fp4, *fopen();
+
+main()
+{   float i;
+    float y1,y2,y3,y4;
+
+    /* open files which will store plot data */
+    if ( ((fp1 = fopen("plot11.dat","w")) == NULL) ||
+           ((fp2 = fopen("plot12.dat","w")) == NULL) ||
+            ((fp3 = fopen("plot21.dat","w")) == NULL) ||
+             ((fp4 = fopen("plot22.dat","w")) == NULL) )
+              { printf("Error can't open one or more data files\n");
+                exit(1);
+              }
+              
+    signal(SIGINT,quit); /* trap ctrl-c call quit fn */
+    StartPlot();
+    y1 = 0.5;
+    srand48(1); /* set seed */
+    for (i=0;;i+=0.01) /* increment i forever use ctrl-c to quit prog */
+      { y2 =  (float) drand48();
+        if (i == 0.0)
+           y3 = 0.0;
+       else
+           y3 = sin(DEG_TO_RAD(1.0/i));
+        y4 = sin(DEG_TO_RAD(i));
+        
+        /* load files */
+        fprintf(fp1,"%f %f\n",i,y1);
+        fprintf(fp2,"%f %f\n",i,y2);
+        fprintf(fp3,"%f %f\n",i,y3);
+        fprintf(fp4,"%f %f\n",i,y4);
+       
+        /* make sure buffers flushed so that gnuplot */
+        /*  reads up to data file */ 
+        fflush(fp1);
+        fflush(fp2);
+        fflush(fp3);
+        fflush(fp4);
+        
+        /* plot graph */
+        PlotOne();
+        usleep(250); /* sleep for short time */
+      }
+}
+
+void quit()
+{  printf("\nctrl-c caught:\n Shutting down pipes\n");
+   StopPlot();
+   
+   printf("closing data files\n");
+   fclose(fp1);
+   fclose(fp2);
+   fclose(fp3);
+   fclose(fp4);
+   
+   printf("deleting data files\n");
+   RemoveDat();
+}
+</pre>
+<p>
+The plotter.c module is as follows:
+</p><p></p><pre>/* plotter.c module */
+/* contains routines to plot a data file produced by another program  */
+/* 2d data plotted in this version                                    */
+/**********************************************************************/
+
+#include "externals.h"
+
+static FILE *plot1,
+       *plot2,
+       *ashell;
+
+static char *startplot1 = "plot [] [0:1.1]'plot11.dat' with lines, 
+            'plot12.dat' with lines\n";
+
+static char *startplot2 = "plot 'plot21.dat' with lines, 
+            'plot22.dat' with lines\n";
+
+static char *replot = "replot\n";
+static char *command1= "/usr/local/bin/gnuplot&gt; dump1";
+static char *command2= "/usr/local/bin/gnuplot&gt; dump2";
+static char *deletefiles = "rm plot11.dat plot12.dat plot21.dat plot22.dat";
+static char *set_term = "set terminal x11\n";
+
+void
+StartPlot(void)
+ { plot1 = popen(command1, "w");
+   fprintf(plot1, "%s", set_term);
+   fflush(plot1);
+   if (plot1 == NULL)
+      exit(2);
+   plot2 = popen(command2, "w");
+   fprintf(plot2, "%s", set_term);
+   fflush(plot2);
+   if (plot2 == NULL)
+      exit(2);
+ }
+
+void 
+RemoveDat(void)
+ { ashell = popen(deletefiles, "w");
+   exit(0);
+ }
+
+void
+StopPlot(void)
+ { pclose(plot1);
+   pclose(plot2);
+ }
+
+void
+PlotOne(void)
+ { fprintf(plot1, "%s", startplot1);
+   fflush(plot1);
+
+   fprintf(plot2, "%s", startplot2);
+   fflush(plot2);
+ }
+
+void
+RePlot(void)
+ { fprintf(plot1, "%s", replot);
+   fflush(plot1);
+ }
+</pre>
+<p>
+The header file <tt>externals.h</tt> contains the following:
+</p><p></p><pre>/* externals.h */
+#ifndef EXTERNALS
+#define EXTERNALS
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+
+/* prototypes */
+
+void StartPlot(void);
+void RemoveDat(void);
+void StopPlot(void);
+void PlotOne(void);
+void RePlot(void);
+#endif
+</pre>
+</tt><p><tt></tt></p><h1><a name="SECTION002340000000000000000">
+Exercises</a>
+</h1>
+<p>
+<b>Exercise 12733</b></p>
+<p>
+Setup a two-way pipe between parent and child processes in a C program. i.e.
+both can send and receive signals.
+</p>
+<p>
+<br></p><hr>
+<address>
+<i>Dave Marshall</i>
+<br><i>1/5/1999</i>
+</address>
+
+
+</body></html>

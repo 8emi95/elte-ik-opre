@@ -1,0 +1,339 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+typedef struct guests
+{
+	char name[50];
+	char mail[100];
+	int eventID;
+	char signUptime[20];
+
+} Guests;
+
+typedef struct events
+{
+	char name[50];
+	int eventID;
+	
+}Events;
+
+static int guestCount = 0;
+static int eventCount = 0;
+Guests guestDatabase[1000];
+Events eventDatabase[1000];
+
+void Open_Database()
+{
+	FILE * fGuest;
+	// opening guests database file
+	 fGuest=fopen("guest.dat","rb");
+	 if (fGuest!=NULL)
+	 {
+	 	int i=0;
+	 	while (!feof(fGuest))
+	 	{
+	 		fread(&guestDatabase[i],sizeof(guestDatabase[i]),sizeof(guestDatabase[i]),fGuest);
+	 		++i;
+	 	}
+	 guestCount = i-1;
+	}
+	else {perror("File opening error\n"); exit(1);}
+	fclose(fGuest);
+
+	//opening events database file
+	FILE* fEvent;
+	 fEvent=fopen("event.dat","rb");
+	 if (fEvent!=NULL)
+	 {
+	 	int i=0;
+	 	while (!feof(fEvent))
+	 	{
+	 		fread(&eventDatabase[i],sizeof(eventDatabase[i]),sizeof(eventDatabase[i]),fEvent);
+	 		++i;
+	 	}
+	 eventCount = i-1;
+	}
+	else {perror("File opening error\n"); exit(1);}
+	fclose(fEvent);
+}
+
+ void Write_Database()
+ {
+ 	FILE * fGuest;
+ 	//writing guest data to datbase file
+ 	fGuest=fopen("guest.dat","wb");
+ 	if(fGuest==NULL){perror("File opening error\n"); exit(1);}
+ 	for(int i=0; i<guestCount; ++i)
+ 	{
+ 		fwrite(&guestDatabase[i],sizeof(guestDatabase[i]),sizeof(guestDatabase[i]),fGuest);
+ 	}
+ 	fclose(fGuest);
+
+ 	//writing event data to datbase file
+ 	FILE* fEvent;
+ 	 fEvent=fopen("event.dat","wb");
+ 	if(fEvent==NULL){perror("File opening error\n"); exit(1);}
+ 	for(int i=0; i<eventCount; ++i)
+ 	{
+ 		fwrite(&eventDatabase[i],sizeof(eventDatabase[i]),sizeof(eventDatabase[i]),fEvent);
+ 	}
+ 	fclose(fEvent);
+ }
+
+void SignUpTime(char _time[20])
+{
+	time_t current_time;
+	struct tm * time_info;
+
+	time(&current_time);
+	time_info = localtime(&current_time);
+
+	strftime(_time,20,"%Y.%m.%d %H:%M:%S", time_info);
+}
+
+int Getline(char line[], int max)
+{
+	int nch = 0;
+	int c;
+	max = max - 1;
+	while((c = getchar()) != EOF)
+	{
+		if(nch!=0)
+		{
+			if(c == '\n')
+				break;
+			if(nch < max)
+			{
+				line[nch-1] = c;
+				nch = nch + 1;
+			}
+		}
+		else
+			nch++;
+	}
+	if(c == EOF && nch == 0)
+		return EOF;
+	line[nch-1] = '\0';
+	return nch;
+}
+
+void NewEvent()
+{
+	Events event;
+	printf("Enter the Event deatils - name, and event id!\n");
+	printf("Name: ");
+	Getline(event.name,50);
+	int contains;
+	do{
+		int c=0;
+		int i=0;
+		contains=0;
+		printf("Event id: ");
+		scanf("%d",&c);
+		while(contains==0 && i<eventCount)
+		{
+			contains=(c==eventDatabase[i].eventID);
+			++i;
+		}
+
+		if(contains==0)
+		{
+			event.eventID=c;
+		}
+		else
+		{
+			printf("This ID has already been existed!\n");
+		}
+
+	}while(contains==1);
+	eventCount++;
+	eventDatabase[eventCount-1] = event;
+}
+
+void ListEvents()
+{
+	printf("\n********************************\nEvents in EventsDatabase \n********************************\n");
+	for(int i =0; i<eventCount; ++i)
+	{
+		printf("%d. Name: %s Event_ID: %d\n",i+1,&(eventDatabase[i].name),eventDatabase[i].eventID);
+	}
+}
+
+void DeleteAllEventData()
+{
+	int c=0;
+	int found =0;
+	ListEvents();
+	printf("Which event do you want to delete?: ");
+	scanf("%d",&c);
+	if(c<=eventCount)
+	{ 
+		for(int i=1; i<=guestCount; ++i)
+		{	
+			if(eventDatabase[c-1].eventID == guestDatabase[i-1].eventID)
+			{
+				found=1;
+				for(int j =i - 1 ; j <guestCount-1 ; ++j )
+				{
+					guestDatabase[j] = guestDatabase[j+1];
+				}
+				--guestCount;
+			}
+
+			if(found==1)
+			{
+				--i;
+				found=0;
+			}
+		}
+		
+		for(int i =c - 1 ; i <eventCount-1 ; ++i )
+		{
+			eventDatabase[i] = eventDatabase[i+1];
+		}
+		--eventCount;
+	}
+}
+
+void EventIDCheck(Guests* guest)
+{
+	int contains;
+	do{
+		int c=0;
+		int i=0;
+		contains=0;
+		printf("Event id: ");
+		scanf("%d",&c);
+		while(contains==0 && i<eventCount)
+		{
+			contains=(c==eventDatabase[i].eventID);
+			++i;
+		}
+
+		if(contains==1)
+		{
+			guest->eventID=c;
+		}
+		else
+		{
+			printf("This ID doens't exist!\n");
+		}
+
+	}while(contains!=1);
+}
+
+void SignUP()
+{
+	Guests guest;
+	printf("Enter the Guest deatils - name, e-mail address, and event id!\n");
+	printf("Name: ");
+	Getline(guest.name,50);
+  	printf("E-mail address: ");
+	scanf("%s",guest.mail);
+	EventIDCheck(&guest);
+	SignUpTime(guest.signUptime);
+	guestCount++;
+	guestDatabase[guestCount-1] = guest;
+	switch(guestCount){
+		case 1: printf("You are the 1st Guest!\n"); break;
+		case 2: printf("You are the 2nd Guest!\n"); break;
+		case 3: printf("You are the 3rd Guest!\n"); break;
+		default: printf("You are the %dth Guest",guestCount); break;
+	}
+}
+
+void ListGuests()
+{
+	printf("\n********************************\nGuests in guestDatabase \n********************************\n");
+	for(int i =0; i<guestCount; ++i)
+	{
+		printf("%d. Name: %s Email: %s event_ID: %d register_time: %s\n",i+1,&(guestDatabase[i].name),&(guestDatabase[i].mail),
+			guestDatabase[i].eventID,&(guestDatabase[i].signUptime));
+	}
+}
+
+void SubMenuRun(int index)
+{
+	int c=0;
+	printf("Which field would you like to modify?:\n");
+	printf(" 1. -E-mail adress\n");
+	printf(" 2. -Event id\n");
+	printf(" 0. -Cancel\n");
+	scanf("%d",&c);
+	switch(c){
+		case 1: printf("E-mail adress: "); scanf("%s",&(guestDatabase[index].mail)); printf("modyfied to: %s\n",&(guestDatabase[index].mail)); break;
+		case 2: EventIDCheck(&guestDatabase[index]); printf("modyfied to: %d",guestDatabase[index].eventID); break;
+		case 0: break;	
+	}
+}
+
+void ModifyGuest()
+{
+	int c=0;
+	ListGuests();
+	printf("Whose datum would you like to modify?: ");
+	scanf("%d",&c);
+	if(c<=guestCount)
+	{
+		SubMenuRun(c-1);
+		SignUpTime(guestDatabase[c-1].signUptime);	
+	}
+}
+
+void DeletGuest()
+{
+	int c=0;
+	ListGuests(guestDatabase);
+	printf("Who do you want to delete?: ");
+	scanf("%d",&c);
+	if(c<=guestCount)
+	{
+		for(int i =c - 1 ; i <guestCount-1 ; ++i )
+		{
+			guestDatabase[i] = guestDatabase[i+1];
+		}
+		--guestCount;
+	}
+}
+
+void MenuWrite() 
+{
+	printf("\n********************************\nKing of Stands - guestDatabase \n********************************\n");
+	printf("\n");
+	printf(" 1. -Sign up to the event\n");
+	printf(" 2. -List of registered users\n");
+	printf(" 3. -Modify guest data\n"); 
+	printf(" 4. -Delete guest\n");
+	printf(" 5. -New Event\n");
+	printf(" 6. -List Events\n");
+	printf(" 7. -Delete Event\n");
+	printf(" 0. -Exit\n");
+}
+
+void Run() 
+{
+	int c = 0; 
+	do{
+		MenuWrite(); 
+		scanf("%d",&c); 
+		switch(c){
+			case 1: SignUP(); break;
+			case 2: ListGuests(); break; 
+			case 3: ModifyGuest(); break; 
+			case 4: DeletGuest(); break;
+			case 5: NewEvent(); break;
+			case 6: ListEvents(); break;
+			case 7: DeleteAllEventData();
+		} 
+	}while(c!=0);
+}
+
+int main()
+{
+	Open_Database();
+	Run();
+	Write_Database();
+	return 0;
+}

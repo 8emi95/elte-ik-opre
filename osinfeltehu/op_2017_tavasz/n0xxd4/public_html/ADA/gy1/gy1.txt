@@ -1,0 +1,11 @@
+1. Feladat:
+Írj egy olyan programot, ami nem csinál semmit (de lefordul)!
+
+2. Feladat:
+Készíts olyan programot, ami beolvas a képernyőről egy egész számot. Ha a szám 1 és 5 közé esik, írja ki a "Hétköznap", ha 6 vagy 7, akkor a "Hétvége" szöveget. Minden más esetben írjon ki hibaüzenetet.
+
+3. Feladat:
+Készíts olyan programot, ami (két egymásba ágyazott ciklus és a mod függvény segítségével) kirajzol egy az alábbihoz hasonló sakktáblát!
+
+4. Feladat:
+Írj egy olyan programot, ami kiírja a programunk nevét, és kiírja az argumentum-paramétereket!

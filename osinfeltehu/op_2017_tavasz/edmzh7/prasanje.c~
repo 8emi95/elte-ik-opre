@@ -1,0 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+char prasanje[1000];
+FILE *fptr;
+
+ptr = fopen("C:\Users\Dimitar\Desktop\stu-BUD\fax sem6\OS\new.txt", "w");
+fclose(fptr);
+return 0;
+}

@@ -1,0 +1,6 @@
+1. beadandó feladat. Beadási határidõ: 2016-11-07. 
+Készítsen C programot, amely rendszerhívások alkalmazásával megoldja a következõ feladatot:
+
+Egy kiállításokat, rendezvényeket szervezõ társaság a "King of Stands", elektronikus látogatói nyilvántartást készített. A látogatók a nyilvántartásba jelentkezéskor megadják nevüket, mail címüket, a rendezvény azonosító számát! Az elektronikus rendszer a jelentkezés nyugtázásaként visszaadja, hogy hányadik vendégként történt meg a regisztráció! Az alkalmazás adjon lehetõséget vendég jelentkezéshez, a jelentkezettek listázásához, egy vendég adatainak módosításához, törléséhez. Legyen lehetõségünk egy új rendezvény indításához, egy rendezvény összes adatának törléséhez! A jelentkezõknél a korábbi adatok mellett rögzítsük automatikusan a jelentkezési idõt(rendszeridõ) is(ezt nem kell bekérni)!
+
+Készítsünk C programot, amellyel a leírt tevékenység elvégezhetõ. Az adatokat fájlban tároljuk.

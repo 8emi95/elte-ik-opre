@@ -1,0 +1,12 @@
+ _______________________________________
+|    program egy rendezvenyeket es az   |
+|      azokra feliratkozo vendegeket    |
+|      tartalmazo adatbazist tartja     |
+|        nyilvan, es kezeli is.         |
+|                                       |
+|    Az adatbazist TXT kiterjesztesu    |
+|       fajlokkal valositja meg.        |
+|  A fajlok tartalmarol feltetelezzuk,  |
+|        hogy azt csak a program        |
+|    szerkesztheti, es annak kezdeti    |
+|      tartalma helyes formatumu.       |

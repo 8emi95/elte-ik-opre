@@ -1,0 +1,4 @@
+könyv 2.4.8
+2.4.9
+2.4.10
+people.inf.elte.hu/sila/DB1Lect 2.15

@@ -1,0 +1,12 @@
+különböző sebességü eszközöket ugyanúgy kell tudni elérni (IO)
+
+megszakításkezelés, prioritások, kezelésük
+DMA (Direct Memory Access)
+
+Holtpont helyzetnek 4 alapfeltétele van - ebből a 4ből valamelyiket meg kell kerülni, így megkerülhető a holtpont
+
+Strucc algoritmus, bankár algoritmus
+Bankár: bizotnságos állapotra törekszik. csak akkor ad oda erőforrást folyamatnak, ha még van tartalék, szal nem alakulhat ki holtpont, mert más folyamat még hasznáhatja a maradékot
+
+
+SIGTERM, SIGUSER1, SIGUSER2

@@ -1,0 +1,60 @@
+///////// n child
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main ( int argc, char *argv[] )
+{
+    int i, pid;
+
+for(i = 0; i < atoi(argv[1]); i++) {
+    pid = fork();
+    if(pid < 0) {
+        printf("Error");
+        exit(1);
+    } else if (pid == 0) {
+        printf("Child (%d): %d\n", i + 1, getpid());
+        exit(0); 
+    } else  {
+        wait(NULL);
+    }
+}
+
+}
+The output is like that.
+
+Child (1): 5676
+Child (2): 4624
+Child (3): 4800
+Child (4): 5596
+Child (5): 5580
+
+//////////////////// 2 children
+
+pid_t firstChild, secondChild;
+firstChild = fork();
+if(firstChild > 0)
+{
+  // In parent
+  secondChild = fork();
+  if(secondChild > 0)
+  {
+    // In parent
+  }
+  else if(secondChild < 0)
+  {
+    // Error
+  }
+  else
+  {
+    // In secondChild
+  }
+}
+else if(firstChild < 0 )
+{
+  // Error
+} 
+else
+{
+  // In firstChild
+}

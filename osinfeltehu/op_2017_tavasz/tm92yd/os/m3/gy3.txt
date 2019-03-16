@@ -1,0 +1,49 @@
+﻿execv(parancs, argumentumok)
+
+system(parancs) - létrehoz egy gyerekfolyamatot és végrehajtatja vele a parancsot, Visszatér egy gyerek folyamattal
+
+<fcntl.h>
+flock
+    l_type :    F_RDLCK
+                F_WRLCK
+                F_UNLCK
+    l_whence :  SEEK_SET
+    l_start :   
+    l_len :     0 -teljes fájl
+    l_pid :
+
+fcntl(f, mód, &flock)
+    mód: F_SETLKW
+         F_SETLK
+
+<stdlib.h>
+rand() : [0,1)
+srand(kezdőérték)
+
+<time.h>
+time(NULL) : -aktuálsi rendszeridő : time_t tipusú
+localtme(&time_t) : tm - sturct
+                        tm_sec :    másodperc
+                        tm_min :    perc 
+                        tm_hour:    óra
+                        tm_mday:    hónap napja
+                        tm_mon :    eltelt hónapok száma január óta
+                        tm_year:    1900-tól eltelt évek száma
+                        tm_wday:    vasárnap óta eltelt hónapok
+                        tm_yday:    január 1-től eltelt napok 
+                        tm_isdst:   nyári vagy téli időszámitás 1 v 0
+
+<signal.h>
+pause()
+kill(PID, SIGNAL)
+
+void handler(signal_number) {
+    SIGUSR1
+}
+
+signal(signal, handler) 
+    SIG_IGN
+    SIG_DFL
+
+
+race condition

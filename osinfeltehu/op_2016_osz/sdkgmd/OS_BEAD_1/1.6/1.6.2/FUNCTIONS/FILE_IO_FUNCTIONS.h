@@ -1,0 +1,9 @@
+#ifndef FILE_IO_FUNCTIONS_H_INCLUDED
+#define FILE_IO_FUNCTIONS_H_INCLUDED
+
+
+VOID    openTheFile( FILE_POINTER*, STRING, MODE );
+INT     numberOfLinesInFile( STRING );
+
+
+#endif // FILE_IO_FUNCTIONS_H_INCLUDED

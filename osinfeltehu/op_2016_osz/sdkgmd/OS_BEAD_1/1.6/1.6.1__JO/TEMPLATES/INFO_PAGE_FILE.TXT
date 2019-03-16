@@ -1,0 +1,37 @@
+ _______________________________________
+|    program egy rendezvenyeket es az   |
+|      azokra feliratkozo vendegeket    |
+|      tartalmazo adatbazist tartja     |
+|        nyilvan, es kezeli is.         |
+|                                       |
+|    Az adatbazist TXT kiterjesztesu    |
+|       fajlokkal valositja meg.        |
+|  A fajlok tartalmarol feltetelezzuk,  |
+|        hogy azt csak a program        |
+|    szerkesztheti, es annak kezdeti    |
+|      tartalma helyes formatumu.       |
+|                                       |
+|  A felhasznalonak lehetosege van uj   |
+|  latogatot felvenni az adatbazisba,   |
+|    anannak barmely adatat torolni,    |
+|   illetve barmely latogatot torolni   |
+|            a listarol.                |
+|  A program uj rendezveny hozzaadasat  |
+|    is biztositja, illetve ezek is     |
+|    torolhetok vagy barmely adatuk     |
+|            modosithato.               |
+|                                       |
+| Iranyitas billentyuzet segitsegevel:  |
+|    a fel es le nyilak, illetve a 'w'  |
+|     es az 's' billyentyukkel fel es   |
+|    lefele navigalhatunk; az ENTER     |
+|  lenyomasaval az aktualis menuponton  |
+|    aktivalhatjuk annak funkciojat     |
+| (pl: belep egy masik menube); a 't'   |
+|  billentyuvel torolhetjuk az kurzor   |
+|    aktualis poziciojan levo elemet    |
+| (vendeg vagy rendezveny); az ESC-ape  |
+|  gombbal pedig bármikor kilephetunk   |
+|            a programbol.              |
+|_______________________________________|
+A vissza lepeshez nyomjon meg egy gombot.

@@ -1,0 +1,29 @@
+cd
+ls
+
+atoi
+malloc(hány byte-ot szeretnék lefoglalni)
+strcpy
+
+fordítás:
+gcc arg.c
+
+futtatás
+./a.out
+
+jelszó változtatás
+passwd
+
+Új jelszó: LCs19860809
+
+fordítás egyéb opciói:
+gcc arg.c -o arg vagy arg.exe (kiterjesztésnek nincs jelentõsége
+
+-WALL opció waningot is kiírja
+ 
+arg.c  fájl átbeszélése
+%i: int típus paraméter lesz itt
+printf("")
+%s: szöveget jelenti
+
+!!!!!0. argumentum: alkalmazás neve

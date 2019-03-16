@@ -1,0 +1,30 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int main(){
+ // printf("Hello World\n");
+ char cArr[80] ;
+ printf("Enter your life\n");
+ // scanf("%s", cArr);
+ // int len = strlen(cArr);
+ // printf("YOur input is %s \n LEngth of input is %d\n" , cArr,  len);
+ printf("WHat about fgets \n");
+ fgets(cArr, 80, stdin);
+ printf("THis is with fgets %s\n", cArr );
+ 
+ int ownLenFunc(char *stt){
+  int len = 0;
+  int i = 0;
+  
+  while(stt[i] != 0){
+    len++;
+    i++; 
+  }
+  return (len);
+ } 
+  printf("My function result is %d\n",ownLenFunc(cArr) );
+  return 0;
+}

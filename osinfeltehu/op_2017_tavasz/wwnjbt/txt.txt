@@ -1,0 +1,6 @@
+#include <stdio.h>
+
+int main() {
+	printf("Ez egy txt fajl.\n");
+	return 0;
+}

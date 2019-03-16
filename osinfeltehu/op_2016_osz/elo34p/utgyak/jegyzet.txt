@@ -1,0 +1,10 @@
+ftok()
+IPC_PRIVATE
+zh-n általában mindig szülő-gyerek folyamat a feladat
+
+wait() gyerek folyamat végére várakozik
+pause() valamire várakozik (utána nézni a neten)
+
+2-féle szemafor
+-pos: pos_szemafor.c
+-system5: szemafor.c

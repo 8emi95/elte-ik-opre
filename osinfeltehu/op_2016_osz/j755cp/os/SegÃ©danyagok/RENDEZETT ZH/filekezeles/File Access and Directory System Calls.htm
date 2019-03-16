@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- saved from url=(0070)http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002000000000000000000 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>File Access and Directory System Calls</title>
+<meta name="description" content="File Access and Directory System Calls">
+<meta name="keywords" content="C">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<link rel="STYLESHEET" href="http://www.cs.cf.ac.uk/Dave/C/C.css">
+</head>
+<body>
+<!--Table of Child-Links-->
+<a name="CHILD_LINKS"><strong>Subsections</strong></a>
+<ul>
+<li><a name="tex2html1128" href="http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002010000000000000000">
+Directory handling functions: <tt>&lt;unistd.h&gt;</tt></a>
+<ul>
+<li><a name="tex2html1129" href="http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002011000000000000000">
+Scanning and Sorting Directories:<tt>
+&lt;sys/types.h&gt;,&lt;sys/dir.h&gt;</tt></a>
+</li></ul>
+</li><li><a name="tex2html1130" href="http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002020000000000000000">
+File Manipulation Routines: unistd.h, sys/types.h, sys/stat.h</a>
+<ul>
+<li><a name="tex2html1131" href="http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002021000000000000000">
+File Access</a>
+<ul>
+<li><a name="tex2html1132" href="http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002021100000000000000">
+errno</a>
+</li></ul>
+</li><li><a name="tex2html1133" href="http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002022000000000000000">
+File Status</a>
+</li><li><a name="tex2html1134" href="http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002023000000000000000">
+File Manipulation:stdio.h, unistd.h</a>
+</li><li><a name="tex2html1135" href="http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002024000000000000000">
+Creating Temporary FIles:&lt;stdio.h&gt;</a>
+</li></ul>
+</li><li><a name="tex2html1136" href="http://www.cs.cf.ac.uk/Dave/C/node20.html#SECTION002030000000000000000">
+Exercises</a>
+</li></ul>
+<!--End of Table of Child-Links-->
+<hr>
+<h1><a name="SECTION002000000000000000000">
+File Access and Directory System Calls</a>
+</h1>
+<a name="ch:file">&nbsp;</a>
+There are many UNIX utilities that allow us to manipulate directories and files.
+<tt>cd, ls, rm, cp, mkdir</tt> <em>etc.</em> are examples we have (hopefully) already
+met.
+<br>
+<p>
+We will now see how to achieve similar tasks from within a C program.
+</p><p></p><h1><a name="SECTION002010000000000000000">
+Directory handling functions: <tt>&lt;unistd.h&gt;</tt></a>
+</h1>
+<a name="ch:dir">&nbsp;</a>
+This basically involves calling appropriate functions to traverse a
+directory hierarchy or inquire about a directories contents.
+<br>
+<p><tt>int chdir(char *path)</tt> -- changes directory to specified path string.
+ <br>
+</p><p>
+Example: C emulation of UNIX's <tt>cd</tt> command:
+</p><p><tt>
+</tt></p><pre><tt><tt>
+#include&lt;stdio.h&gt;
+#include&lt;unistd.h&gt;
+&nbsp;
+main(int argc,char **argv) 
+&nbsp;&nbsp;&nbsp;{&nbsp;
+				if (argc &lt; 2)
+						{&nbsp; printf(``Usage: %s
+								&nbsp;&nbsp;&lt;pathname<img width="32" height="32" align="MIDDLE" border="0" src="./File Access and Directory System Calls_files/img28.gif" alt="$\gt\backslash$">n'',argv[0]);
+								 exit(1);
+						 }
+				if (chdir(argv[1]) != 0)
+						{ printf(``Error in chdir<img width="12" height="32" align="MIDDLE" border="0" src="./File Access and Directory System Calls_files/img3.gif" alt="$\backslash$">n'');
+								 exit(1);
+						}
+		}
+</tt></tt></pre><tt>
+</tt>
+ <br>
+<p><tt>char *getwd(char *path) -- get the <u>full</u>   pathname
+of the current working directory. <tt>path</tt> is a pointer to a string where the
+pathname will be returned. <tt>getwd</tt> returns a pointer to the string or NULL
+if an error occurs.
+ <br>
+</tt></p><p></p><h2><a name="SECTION002011000000000000000">
+Scanning and Sorting Directories:<tt>
+&lt;sys/types.h&gt;,&lt;sys/dir.h&gt;</tt></a>
+</h2>
+<p>
+Two useful functions (On BSD platforms and <b>NOT</b> in multi-threaded
+application)  are available
+</p><p><tt>scandir(char *dirname, struct direct **namelist, int
+(*select)(),
+<br>
+int (*compar)())</tt> -- reads the directory dirname and builds an array
+of pointers  to directory entries or -1 for an error. <tt>namelist</tt> is a pointer
+to an array  of  structure  pointers.
+<br>
+</p><p><tt>(*select))()</tt> is  a  pointer  to a function which is
+called with a pointer to a directory entry (defined in &lt;sys/types&gt; and should
+return a  non  zero value <u>if</u> the directory entry should be
+<u>included</u> in the array.  If this pointer is NULL, then all the 
+directory  entries  will  be  included.   
+ <br>
+</p><p>
+The  last argument is a
+pointer to a routine which is passed to <tt>qsort</tt> (see <tt>man qsort</tt>) -- a
+built in function which sorts the completed  array.  <u>If</u> this pointer
+is NULL, the array is <u>not</u> sorted.
+<br>
+</p><p><tt>alphasort(struct direct **d1, **d2)</tt> --   alphasort() is a
+built in routine which will sort the  array alphabetically.
+ <br>
+</p><p>
+Example - a simple C version of UNIX <tt>ls</tt> utility
+<br>
+</p><p><tt>
+</tt></p><pre><tt><tt>
+#include &lt;sys/types.h&gt;
+#include &lt;sys/dir.h&gt;
+#include &lt;sys/param.h&gt;
+#include &lt;stdio.h&gt;
+&nbsp;
+#define FALSE 0
+#define TRUE !FALSE
+&nbsp;
+extern  int alphasort();
+&nbsp;
+char pathname[MAXPATHLEN];
+&nbsp;
+main() &nbsp;&nbsp;{&nbsp;int count,i;
+				struct direct **files;
+				int file_select();
+&nbsp;
+				if (getwd(pathname) == NULL )
+						{&nbsp;printf("Error getting path<img width="12" height="32" align="MIDDLE" border="0" src="./File Access and Directory System Calls_files/img3.gif" alt="$\backslash$">n");
+								exit(0);
+						}
+				printf("Current Working Directory = %s<img width="12" height="32" align="MIDDLE" border="0" src="./File Access and Directory System Calls_files/img3.gif" alt="$\backslash$">n",pathname);
+				count =
+				&nbsp;&nbsp;scandir(pathname, &amp;files, file_select, alphasort);
+&nbsp;
+				/* If no files found, make a non-selectable menu item */
+				if 		(count &lt;= 0)
+						{		 printf(``No files in this directory<img width="12" height="32" align="MIDDLE" border="0" src="./File Access and Directory System Calls_files/img3.gif" alt="$\backslash$">n'');
+								exit(0);
+						}
+				printf(``Number of files = %d<img width="12" height="32" align="MIDDLE" border="0" src="./File Access and Directory System Calls_files/img3.gif" alt="$\backslash$">n'',count);
+				for (i=1;i&lt;count+1;++i)
+						 printf(``%s  '',files[i-1]-&gt;d_name);
+				printf(``<img width="12" height="32" align="MIDDLE" border="0" src="./File Access and Directory System Calls_files/img3.gif" alt="$\backslash$">n''); /* flush buffer */
+		}
+</tt></tt></pre><tt>
+</tt>
+<br>
+<p><tt>
+</tt></p><pre><tt><tt>
+int file_select(struct direct   *entry)
+&nbsp;
+		{if ((strcmp(entry-&gt;d_name, ``.'') == 0) ||
+						(strcmp(entry-&gt;d_name, ``..'') == 0))
+						&nbsp;return (FALSE);
+				else
+								return (TRUE);
+		}
+</tt></tt></pre><tt><tt>
+</tt>
+<br>
+<p><tt>scandir returns the current directory (.) and the directory above this
+(..) as well as all files so we need to check for these and return <tt>FALSE</tt>
+so that they are not included in our list.
+</tt></p><p><tt>
+Note: <tt>scandir</tt> and <tt>alphasort</tt> have definitions in <tt>sys/types.h</tt> and
+<tt>sys/dir.h</tt>. <br><tt>MAXPATHLEN</tt> and <tt>getwd</tt> definitions in <tt>
+sys/param.h</tt>
+</tt></p><p><tt>
+We can go further than this and search for specific files: Let's
+write a  modified <br><tt>file_select()</tt> that only scans for files with a
+.c, .o or .h suffix:
+</tt></p><p><tt>
+<br>
+</tt></p><p><tt><tt>
+</tt></tt></p><pre><tt><tt><tt>
+int file_select(struct direct   *entry)
+&nbsp;
+		{char *ptr;
+				 char *rindex(char *s, char c);
+&nbsp;
+				if ((strcmp(entry-&gt;d_name, ``.'')== 0) ||
+						(strcmp(entry-&gt;d_name, ``..'') == 0))
+						&nbsp;return (FALSE);
+&nbsp;
+				 /* Check for filename extensions */
+				 ptr = rindex(entry-&gt;d_name, '.')
+				 if ((ptr != NULL) &amp;&amp;
+						 ((strcmp(ptr, ``.c'') == 0)
+						 <img width="13" height="32" align="MIDDLE" border="0" src="./File Access and Directory System Calls_files/img20.gif" alt="$\mid\mid$"> (strcmp(ptr, ``.h'') == 0)
+						 <img width="13" height="32" align="MIDDLE" border="0" src="./File Access and Directory System Calls_files/img20.gif" alt="$\mid\mid$"> (strcmp(ptr, ``.o'') == 0) ))
+								 return (TRUE);
+				 else
+						 return(FALSE);
+		}
+</tt></tt></tt></pre><tt><tt>
+</tt>
+<p>
+NOTE: <tt>rindex() is a string handling function that returns a pointer  to 
+the  last occurrence  of character <tt>c</tt> in string <tt>s</tt>, or a NULL pointer
+if <tt>c</tt> does not occur in the string.  (<tt>index()</tt> is similar function but
+assigns a pointer to 1st occurrence.)
+</tt></p><p><tt>
+The function <tt>struct direct *readdir(char *dir)</tt> also exists in
+&lt;sys/dir.h&gt;&gt; to return a given directory <tt>dir</tt> listing.
+</tt></p></tt><p><tt></tt></p><h1><a name="SECTION002020000000000000000">
+File Manipulation Routines: unistd.h, sys/types.h, sys/stat.h</a>
+</h1>
+<p>
+There are many system calls that can applied directly to files stored in
+a directory.
+</p><p></p><h2><a name="SECTION002021000000000000000">
+File Access</a>
+</h2>
+<tt>int access(char *path, int mode)</tt> -- determine accessibility of file.
+<br>
+<p><tt>path</tt> points to a path name naming a file.   <tt>access()</tt>  checks the
+named file for accessibility according to <tt>mode</tt>, defined in <tt>#include
+&lt;unistd.h&gt;</tt>:
+</p><p></p><dl>
+<dt><strong>R_OK</strong>
+</dt><dd>- test for read permission
+</dd><dt><strong>W_OK</strong>
+</dt><dd>- test for write permission
+</dd><dt><strong>X_OK</strong>
+</dt><dd>- test for execute or search permission
+</dd><dt><strong>F_OK</strong>
+</dt><dd>- test whether the directories leading  to the  file  can  be
+searched and the file exists.
+</dd></dl>
+<p><tt>access()</tt> returns: 0 on success, -1 on failure and sets <tt>errno</tt> to
+indicate the error. See <tt>man</tt> pages for list of errors.
+</p><p></p><h3><a name="SECTION002021100000000000000">
+errno</a>
+</h3>
+<p><tt>errno</tt> is a special <u>system</u> variable that is set if a system
+call cannot perform its set task. 
+<br>
+</p><p>
+To use <tt>errno</tt> in a C program it must be declared via:
+<br>
+</p><p>&nbsp;&nbsp;&nbsp;<tt>extern int errno;</tt>
+<br>
+</p><p>
+It can be manually reset within a C program other wise it simply retains its
+last value.
+ <br>
+</p><p><tt>int chmod(char *path, int mode)</tt> change the mode of access of a file.
+specified by <tt>path</tt> to the given <tt>mode</tt>.     
+<br>
+</p><p><tt>chmod()</tt> returns 0 on success, -1 on failure and sets <tt>errno</tt> to
+indicate the error. Errors are defined in <tt>#include &lt;sys/stat.h&gt;</tt>
+<br>
+</p><p>
+The access mode of a file can be set using predefined macros in <tt>sys/stat.h</tt>
+-- see <tt>man</tt> pages -- or by setting the mode in a a 3 digit octal number.
+ <br>
+</p><p>
+The rightmost digit specifies owner privileges, middle group privileges and the
+leftmost other users privileges. 
+<br>
+</p><p>
+For each octal digit think of it a 3 bit binary number. Leftmost bit = read
+access (on/off) middle is write, right is executable.
+<br>
+</p><p>
+So  4 (octal 100) = read only, 2 (010) = write, 6 (110) = read and write, 1
+(001)
+= execute.
+<br>
+</p><p>
+so for access mode 600 gives user read and write access others no access. 666
+gives everybody read/write access.
+<br>
+</p><p><b>NOTE</b>: a UNIX command <tt>chmod</tt> also exists
+</p><p></p><h2><a name="SECTION002022000000000000000">
+File Status</a>
+</h2>
+<p>
+Two useful functions exist to inquire about the files current status. You
+can find out how large the file is (<tt>st_size</tt>) when it was created
+(<tt>st_ctime</tt>) <em>etc.</em> (see <tt>stat</tt> structure definition below.
+The two functions are prototyped in <tt>&lt;sys/stat.h&gt;</tt>
+</p><p></p><pre>int stat(char *path, struct stat *buf),  
+int fstat(int fd, struct
+stat *buf)
+</pre>
+<br>
+<p><tt>stat()</tt> obtains information about the  file  named  by  path. Read,  write 
+or execute permission of the named file is not required, but all directories
+listed in the path name  leading to the file must be searchable.
+<br>
+</p><p><tt>fstat()</tt> obtains the same  information  about  an  open  file referenced 
+by  the  argument  descriptor,  such as would be obtained by an <tt>open</tt> call
+(Low level I/O).
+ <br>
+</p><p><tt>stat(), and fstat()</tt> return  0 on success, -1 on failure and sets <tt>
+errno</tt> to indicate the error. Errors are again defined in <tt>#include
+&lt;sys/stat.h&gt;</tt>
+</p><p><tt>buf</tt> is a pointer to a stat structure into which  information is  placed 
+concerning  the file.  A stat structure is define in <tt>#include
+&lt;sys/types.h&gt;</tt>, as follows
+</p><p></p><pre>struct stat {
+          mode_t   st_mode;     /* File mode (type, perms) */
+          ino_t    st_ino;      /* Inode number */
+          dev_t    st_dev;      /* ID of device containing */
+                                /* a directory entry for this file */
+          dev_t    st_rdev;     /* ID of device */
+                                /* This entry is defined only for */
+                                /* char special or block special files */
+          nlink_t  st_nlink;    /* Number of links */
+          uid_t    st_uid;      /* User ID of the file's owner */
+          gid_t    st_gid;      /* Group ID of the file's group */
+          off_t    st_size;     /* File size in bytes */
+          time_t   st_atime;    /* Time of last access */
+          time_t   st_mtime;    /* Time of last data modification */
+          time_t   st_ctime;    /* Time of last file status change */
+                                /* Times measured in seconds since */
+                                /* 00:00:00 UTC, Jan. 1, 1970 */
+          long     st_blksize;  /* Preferred I/O block size */
+          blkcnt_t st_blocks;   /* Number of 512 byte blocks allocated*/
+}
+</pre>
+<p></p><h2><a name="SECTION002023000000000000000">
+File Manipulation:stdio.h, unistd.h</a>
+</h2>
+<p>
+There are few functions that exist to delete and rename files. Probably
+the most common way is to use the <tt>stdio.h</tt> functions:
+</p><p></p><pre>int remove(const char *path);   
+int rename(const char *old, const char *new);
+</pre>
+<p>
+Two system calls (defined in <tt>unistd.h</tt>) which are actually used by
+<tt>remove()</tt> and  <tt>rename()</tt> also exist but are probably harder to
+remember unless you are familiar with UNIX.
+</p><p>   <tt>int unlink(cons
+char *path)</tt> -- removes the directory entry named by  <tt>path</tt>
+<br>
+</p><p><tt>unlink()</tt> returns 0 on success, -1 on failure and sets <tt>errno</tt> to
+indicate the error. Errors listed in <tt>#include
+&lt;sys/stat.h&gt;</tt>
+</p><p>
+A similar function <tt>link(const char *path1, const char *path2)</tt>
+creates a linking from an existing directory entry <tt>path1</tt> to a new
+entry <tt>path2</tt>
+<br>
+</p><p></p><h2><a name="SECTION002024000000000000000">
+Creating Temporary FIles:&lt;stdio.h&gt;</a>
+</h2>
+<p>
+Programs often need to create files just for the life of the program.
+Two convenient functions (plus some variants) exist to assist in this
+task. Management (deletion of files etc) is taken care of by the
+Operating System.
+</p><p>
+The function <tt>FILE *tmpfile(void)</tt> creates a temporary file and
+opens  a corresponding   stream.   The  file  will  automatically  be
+ deleted when all references to the  file  are  closed.
+</p><p>
+The function <tt>char *tmpnam(char *s)</tt> generate file names that can 
+safely be  used for a temporary file. Variant functions 
+<tt>char *tmpnam_r(char *s)</tt>  and 
+<tt>char *tempnam(const char *dir, const char *pfx)</tt> also exist
+</p><p><b>NOTE</b>: There are a few more file manipulation routines
+not listed here see <tt>man</tt> pages.
+</p><p></p><h1><a name="SECTION002030000000000000000">
+Exercises</a>
+</h1>
+<p>
+<b>Exercise 12675</b></p>
+<p>
+Write a C program to emulate the <tt>ls -l</tt> UNIX command that prints all files
+in a current directory and lists access privileges etc. DO NOT simply <tt>exec
+ls -l</tt> from the program.</p>
+<p></p><p>
+<b>Exercise 12676</b></p>
+<p>
+Write a program to print the lines of a file which contain a
+word given as the program argument (a simple version of <tt>grep</tt> UNIX utility).</p>
+<p></p><p>
+<b>Exercise 12677</b></p>
+<p>
+Write a program to list the files given as arguments, stopping
+every 20 lines until a key is hit.(a simple version of <tt>more</tt> UNIX utility)
+</p>
+<p></p><p>
+<b>Exercise 12678</b></p>
+<p>
+Write a program that will list all files in a current directory and all files
+in subsequent sub directories.
+</p>
+<p></p><p>
+<b>Exercise 12679</b></p>
+<p>
+Write a program that will only list subdirectories in alphabetical order.</p>
+<p></p><p>
+<b>Exercise 12680</b></p>
+<p>
+Write a program that shows the user all his/her C source programs and then
+prompts interactively as to whether others should be granted read permission; if
+affirmative such permission should be granted.</p>
+<p></p><p>
+<b>Exercise 12681</b></p>
+<p>
+Write a program that gives the user the opportunity to remove any or all of
+the files in a current working directory. The name of the file should appear
+followed by a prompt as to whether it should be removed.</p>
+<p>
+<br></p><hr>
+<address>
+<i>Dave Marshall</i>
+<br><i>1/5/1999</i>
+</address>
+
+
+</tt></body></html>

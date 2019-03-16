@@ -1,0 +1,25 @@
+1. Mit nevezünk bankár algoritmusnak, mi a lényege? (2 pont)
+2. Milyen I/O kommunikációs módokat ismer?
+3. Mi a POSIX? (1pont)
+4. Mi a memória kezelõ feladata?
+5. Ismertesse a második generációs operációs rendszerek jellemzõit?(2pont)
+6. Mi a kölcsönös kizárás, mik a megvalósítás feltételei?(2pont)
+7. Ismertesse a kölcsönös kizárás megvalósítását TSL utasítással?(2pont)
+8. Mit értünk tevékeny várakozás alatt? (1pont)
+9. Mit értünk folyamatok erõforrás görbélyén, mire használható?
+10.Mi a mutex, mikor nem használható?
+11.Mit takar az alábbi algoritmus részlet, mi a jellemzõje?(2pont)
+	...
+	condition tele, üres;
+	int darab;
+	termel(kenyér elem)
+	{
+		if (darab==N) wait(tele);
+		polcra(elem);
+		darab++;
+		if (darab==1) signal(üres);
+	}
+	...
+12.Mit értünk virtuális memóriakezelésen, mi a lényege?
+13.Mi a szoftveres és a hardveres megszakítás közötti különbség? Van egyáltalán?
++1.Mi az SS(T)F ütemezés lényege? (2pont)

@@ -1,0 +1,105 @@
+Az osszes jelentkezett venged osszes adata:
+felvitt adatok: Julis|julismaris@gmail.com|42|1|2016-11-07 14:25:51
+felvitt adatok: Jancsi|jancsika@gmail.com|42|2|2016-11-07 14:25:51
+felvitt adatok: Zolee|zolee@gmail.com|412|3|2016-11-07 14:25:51
+felvitt adatok: Chibe|chibe@gmail.com|412|4|2016-11-07 14:25:51
+felvitt adatok: Lacee|lacee@gmail.com|412|5|2016-11-07 14:25:51
+felvitt adatok: Oliveeer|oliveeer@gmail.com|18|6|2016-11-07 14:25:51
+felvitt adatok: Gubor|gubor@gmail.com|18|7|2016-11-07 14:25:51
+____________________
+Folyamat elindult.
+Szulo folyamat elindult.
+___________________
+Szulo inditja az esemenyek kilistazasat.
+Az 1. esemeny azonositoja: 42
+Az 2. esemeny azonositoja: 412
+Az 3. esemeny azonositoja: 18
+Szulo vegzett az esemenyek kilistazasaval.
+___________________
+Szulo atadja a gyereknek az 1(42.) esemenyt.
+Szulo tovabb haladt.
+Szulo inditja az esemenyre jelentkezettek kilistazasat.
+Az 1. esemenyre jelentkezett 1. vendeg: Julis
+Az 1. esemenyre jelentkezett 2. vendeg: Jancsi
+--------
+Szulo atadja a gyereknek a esemenyre jelentkezettek listajat
+Az osszes jelentkezett venged osszes adata:
+felvitt adatok: Julis|julismaris@gmail.com|42|1|2016-11-07 14:25:51
+felvitt adatok: Jancsi|jancsika@gmail.com|42|2|2016-11-07 14:25:51
+felvitt adatok: Zolee|zolee@gmail.com|412|3|2016-11-07 14:25:51
+felvitt adatok: Chibe|chibe@gmail.com|412|4|2016-11-07 14:25:51
+felvitt adatok: Lacee|lacee@gmail.com|412|5|2016-11-07 14:25:51
+felvitt adatok: Oliveeer|oliveeer@gmail.com|18|6|2016-11-07 14:25:51
+felvitt adatok: Gubor|gubor@gmail.com|18|7|2016-11-07 14:25:51
+____________________
+Folyamat elindult.
+Gyerek folyamat elindult.
+___________________
+Gyerek tovabb haladt.
+Gyerek olvassa a csobol az esemeny azonositojat.
+Gyereknel az aktualis esemeny: 42 
+Gyerek var a resztvevok listajara.
+Gyerek tovabb haladt.
+Gyerek olvassa a csobol a jelentkezettek.
+Gyereknel a jelentkezettek listaja:
+1. vendeg: Julis
+2. vendeg: Jancsi
+Gyerek vizsgalja az esemenyek sikeresseget.
+A 0 esemeny sikeressege: 8.
+1. vendeg; Julis  megjelent az esmenyen
+2. vendeg; Jancsi  nem jelent meg az esmenyen
+Gyere atadja a szulonek a rendezveny sikeresseget es a megerkezettek listajat.
+A 42 esemeny sikeressege: 8.
+1. vendeg; Julis  megjelent az esmenyen
+2. vendeg; Jancsi  nem jelent meg az esmenyen
+Szulo atadja a gyereknek az 2(412.) esemenyt.
+Szulo tovabb haladt.
+Szulo inditja az esemenyre jelentkezettek kilistazasat.
+Az 2. esemenyre jelentkezett 1. vendeg: Zolee
+Az 2. esemenyre jelentkezett 2. vendeg: Chibe
+Az 2. esemenyre jelentkezett 3. vendeg: Lacee
+--------
+Szulo atadja a gyereknek a esemenyre jelentkezettek listajat
+Gyerek olvassa a csobol az esemeny azonositojat.
+Gyereknel az aktualis esemeny: 412 
+Gyerek var a resztvevok listajara.
+Gyerek tovabb haladt.
+Gyerek olvassa a csobol a jelentkezettek.
+Gyereknel a jelentkezettek listaja:
+1. vendeg: Zolee
+2. vendeg: Chibe
+3. vendeg: Lacee
+Gyerek vizsgalja az esemenyek sikeresseget.
+A 0 esemeny sikeressege: 10.
+1. vendeg; Zolee  megjelent az esmenyen
+2. vendeg; Chibe  megjelent az esmenyen
+3. vendeg; Lacee  megjelent az esmenyen
+Gyere atadja a szulonek a rendezveny sikeresseget es a megerkezettek listajat.
+A 412 esemeny sikeressege: 10.
+1. vendeg; Zolee  megjelent az esmenyen
+2. vendeg; Chibe  megjelent az esmenyen
+3. vendeg; Lacee  megjelent az esmenyen
+Szulo atadja a gyereknek az 3(18.) esemenyt.
+Szulo tovabb haladt.
+Szulo inditja az esemenyre jelentkezettek kilistazasat.
+Az 3. esemenyre jelentkezett 1. vendeg: Oliveeer
+Az 3. esemenyre jelentkezett 2. vendeg: Gubor
+--------
+Szulo atadja a gyereknek a esemenyre jelentkezettek listajat
+Gyerek olvassa a csobol az esemeny azonositojat.
+Gyereknel az aktualis esemeny: 18 
+Gyerek var a resztvevok listajara.
+Gyerek tovabb haladt.
+Gyerek olvassa a csobol a jelentkezettek.
+Gyereknel a jelentkezettek listaja:
+1. vendeg: Oliveeer
+2. vendeg: Gubor
+Gyerek vizsgalja az esemenyek sikeresseget.
+A 0 esemeny sikeressege: 9.
+1. vendeg; Oliveeer  megjelent az esmenyen
+2. vendeg; Gubor  megjelent az esmenyen
+Gyere atadja a szulonek a rendezveny sikeresseget es a megerkezettek listajat.
+A 18 esemeny sikeressege: 9.
+1. vendeg; Oliveeer  megjelent az esmenyen
+2. vendeg; Gubor  megjelent az esmenyen
+Szulo folyamat leallt.

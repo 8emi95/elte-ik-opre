@@ -1,0 +1,51 @@
+Szemafor:
+egy jelzõrendszer
+folyamatok közötti kommunikációban vesz részt.
+szabályozza a kritikus felület elérését
+zártkörû rendezvény mintájára ( pl lehetnek 10-en egy rendezvényen... szemafor felügyeli, hogy max 10-en lehetnek bent egyszerre
+ha valaki még jön, akkor õt nem engedi be, hanem várakoztatja)
+
+gyakorlati példában a share memory-t 
+semget paranccsal tudunk egy új szemafort csinálni
+semop módosítja ezt az értéket
+
+mondjuk van két folyamat
+a közös szemafor értéke 1
+belép az elsõ folyamat, átállítja a szemafor értékét 0-ra
+most a másik akar belépni, de nem tud, mert 0-án van az érték
+az elsõ végez, visszaállítja az értéket 1-re
+most már a második is be tud lépni, mert a szemafor értéke 1
+
+vagy pl van 4 folyamat
+kezdetben a szemafor értéke 3
+elsõ 3 be tud lépni...
+4. már nem
+(ez csak egy implementáció... máshogy is mûködhet)
+
+
+
+gépes példában
+strcpy a kritikus mûvelet
+van egy szülõ és egy gyerek folyamat
+0 a szemafor értéke kezdetben...
+kezdetben csak a szülõ férhet hozzá
+
+
+
+ipcs 			interprocess communication...
+watch ipcs		
+
+
+http://www.tankonyvtar.hu/hu/tartalom/tamop412A/2010-0011_szamalap2/lecke6_lap6.scorml
+
+uzenet.c-ben:
+küld(5)
+küld(3)
+
+olvas(3)
+olvas(5)
+(tehát elõbb küldjük az 5-öt,utána a hármat, de fordítva olvassuk ki!)
+
+
+mq_uzenet1.c
+karaktertömbbel dolgozik

@@ -1,0 +1,7 @@
+<error.h>
+
+errno
+
+<stdlib.h>
+
+perror(saját hibaüzenet) .....: errno

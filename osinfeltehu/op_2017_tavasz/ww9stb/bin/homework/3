@@ -1,0 +1,10 @@
+focimeccs struct
+
+{
+csapat1_nev,
+csapat2_nev,
+csapat1_pont,
+csapat2_pont
+}
+
+átküldeni a strukturát pipe-al

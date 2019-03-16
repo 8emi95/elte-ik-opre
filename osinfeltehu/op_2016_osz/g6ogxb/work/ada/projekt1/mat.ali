@@ -1,0 +1,64 @@
+V "GNAT Lib v2016"
+P ZX
+
+RN
+RV NO_FLOATING_POINT
+RV NO_RECURSION
+RV SPARK_05
+
+U mat%b			mat.adb			c386b462 NE OO PK
+
+U mat%s			mat.ads			8663ef09 EE NE OO PK
+
+D mat.ads		20160923075828 8663ef09 mat%s
+D mat.adb		20160923075938 45e55b6b mat%b
+D system.ads		20160516092930 2da59038 system%s
+X 1 mat.ads
+1K9*Mat 16l5 16e8 2|1b14 109l5 109t8
+3V13*Lnko{positive} 3>20 3>23 2|3b13 15l8 15t12
+3i20 A{positive} 2|3b20 4r22
+3i23 B{positive} 2|3b23 5r22
+4V13*Faktorialis{positive} 4>26 2|17b13 24l8 24t19 75s40
+4i26 N{natural} 2|17b26 20r19
+5V13*max2{natural} 5>18 5>21 2|26b13 31l8 31t12 35s24 35s31
+5i18 A{natural} 2|26b18 28r20 28r37
+5i21 B{natural} 2|26b21 28r23 29r29
+6V13*max3{natural} 6>18 6>21 6>24 2|33b13 36l13 36t17
+6i18 A{natural} 2|33b18 35r29
+6i21 B{natural} 2|33b20 35r36
+6i24 C{natural} 2|33b22 35r38
+7V13*sumn{natural} 7>18 2|38b18 45l13 45t17
+7i18 n{natural} 2|38b23 41r29
+8V13*signx{integer} 8>19 2|47b18 54l13 54t18
+8i19 x{integer} 2|47b24 50r20 51r23
+9V13*pi{float} 9>16 2|55b18 64l13 64t15
+9i16 n{positive} 2|55b21 59r30
+10V13*combination{natural} 10>25 10>27 2|80b18 83l13 83t24
+10i25 n{natural} 2|80b30
+10i27 k{natural} 2|80b32
+11V13*mod2check{boolean} 11>23 2|66b18 69l13 69t22
+11i23 n{natural} 2|66b28 68r26
+12V13*euler{float} 12>19 2|71b18 78l13 78t18
+12i19 precision{positive} 2|71b24 74r29
+13V13*digitsum{natural} 13>22 2|87b18 90s42 92l13 92t21 96s24
+13i22 n{natural} 2|87b27 89r20 90r30 90r51
+14V13*d9{boolean} 14>16 2|94b18 97l13 97t15
+14i16 n{natural} 2|94b21 96r33
+15V13*isperfect{boolean} 15>23 2|99b18 108l13 108t22
+15i23 n{natural} 2|99b28 102r29 103r28 107r28
+X 2 mat.adb
+4i7 X{positive} 7r13 8r13 9m13 9r18 11r22 14r14
+5i7 Y{positive} 7r18 8r17 9r22 11m13 11r18
+18i7 Fakt{positive} 21m10 21r18 23r14
+20i11 I{integer} 21r25
+39i17 s{natural} 42m25 42r30 44r24
+41i21 I{integer} 42r32
+48i17 sig{integer} 50m31 51m34 53r24
+56f17 p{float} 61m25 61r28 63r28
+57f17 i{float} 60m25 61r37 61r49 61r65 61r75
+59i21 j{integer} 60r34
+72f17 e{float} 75m25 75r28 77r24
+74i21 i{integer} 75r52
+100i17 s{natural} 104m33 104r38 107r24
+102i21 i{integer} 103r34 104r42
+

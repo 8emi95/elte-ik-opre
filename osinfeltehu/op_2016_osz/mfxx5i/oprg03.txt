@@ -1,0 +1,50 @@
+kill rendszerhivas kuldi a jelzest mindig, ha nincs hozzáadott infó
+sigqueue kuldi a jelzest, ha van a jelzéshez hozzáadott infó is (sigaction_value.c)
+
+a jelzeskezelo fuggvenynek egy egesz parametert kell kapni, a signumbert
+
+valosideju jelzeseket (signalok) nem dobja el a rendszer attol fuggetlenul, hogy meg az elozot se dolgozta fol
+
+Windows világban is létezik az az eseménykezelés, hogy a rendszer plusz információt ad a szignálhoz (ami egy szám). Pl. egérlenyomás esemény (szignál) mellé még a pozíció is kell.
+
+union: helytakarékos struktúra C-ben, megnézi a definiált mezőket, és a legnagyobb méretű mezőt foglalja magába
+	pl. union sigval: ha int és void* van az union-ban, és az int 6 bájtos, a void* pointer 4 bájtos, akkor mindig az int-et foglalja le
+	union még a régebbi helytakarékos világból való, amikor át kellett adni az adatokat
+struktúra: definiálni lehet tetszőleges típusú mezőket bele, és mindegyik mezőt szépen magába foglalja
+
+sigaction_value.c-ben adam csak a child-ben létezik, így ha 100. sorban zoli helyett adam-ot adok át, akkor memóriaszemetet fog kiírni a szülő folyamat, mert az nem látja adam-ot
+	konklúzió: pointer (memóriacím) küldésekor óvatosnak kell lenni (a normál egésszám küldéskor nincs ilyen baj)
+
+signal-lal: 1. vagy egyszerű jelzést küldeni folyamatok között
+			2. vagy hozzácsapott adatot is küldeni a jelzéssel
+
+************************************************************************
+Névcsövek fajtái:
+	1. névtelen (pipe.c)
+		az ő lelkivilágához nem tartozik hozzá saját azonosító szám, csak kapcsolatban álló folyamatok (szülő-gyerek) között működik
+		pipe.c: write(pipefd[1], "Hajra Fradi!",13);
+				1. paraméter: mutató
+				karakterkonstans mutatót reprezentál mindig
+				3. paraméter: nincs olyan nagy jelentősége
+	2. nevesített (nevcso.c)
+		ilyen esetben fájlnévről van tkp. szó (mkfifo-val fájlt létrehozza, majd open-nel ez megnyitható, és ugyanúgy kezelhető, mint a többi fájl)
+		nevesített csövön lehet két folyamat között oda-vissza kommunikálni
+
+pipe.c:
+	write(pipefd[1], "Hajra MTK!",13);-t tegyuk be write(pipefd[1], "Hajra Fradi!",13); után
+	-> Hajra MTK! nem íródik ki
+	31. sor read(pipefd[0],sz,sizeof(sz)); miatt
+		-> 0 karakterrel jelzi a végét a "Hajra Fradi!" stringnek, ezután a "Hajra MTK!" már nem jelenik meg
+		--> ha 40. sorban write(pipefd[1], "Hajra Fradi!",12); lesz a 13 helyett a 3. paraméter, már megjelenik a második string is
+
+
+	lehet ám int-et is küldeni, nem csak stringet: pipe.c-ben a write és read részeknél ezek láthatók
+		int esetén létrehoztunk egy int x-et 
+
+sel_cso, poll_cso, ppoll_cso: arra jók, ha megjelenik egy csőben infó, akkor lehet azt olvasni. Ha nincs a csőbe semmi, akkor várakozni fog a folyamat.
+	A sel_cso egy select utasítást mutat meg, tehát ha rácuppansz egy csőre, azon nem jön semmi, akkor a többi csőre át lehet váltani, amiken küldenek infót
+
+HF: kinevezni számítóközpontnak az egyik folyamatot, átküldeni a
+számítóközpontnak a két darab számot, a két darab szám után átküldeni
+egy műveleti paramétert (+,-,*), ezeket olvassa be, és a műveleti 
+paraméternek megfelelő eredményt adja vissza a csőbe

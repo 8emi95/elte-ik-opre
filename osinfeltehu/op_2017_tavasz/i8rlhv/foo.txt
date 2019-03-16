@@ -1,0 +1,12 @@
+
+struct nev{
+	char nevaz[];
+	int i[];
+}
+int main(int argc, char argv[]){
+	struct nev vmi;
+		
+	FILE fp;
+	fp=fopen("vmi.txt", "r+");
+	fprintf(fp, "%s °%d",vmi.nevaz, vmi.i);
+	strcopy(c.nevaz, "Gipsz Jakab");

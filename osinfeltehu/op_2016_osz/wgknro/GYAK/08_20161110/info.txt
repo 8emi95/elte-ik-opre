@@ -1,0 +1,45 @@
+pipe.c
+
+Mi van ha nem akarok 3 secundumot várakozni a gyerek folyamattal, így hamarabb kezd olvasni, mint a szülõ írni:
+
+- ilyenkor is megvárja a gyerek a szülõt, azaz ha nincs a csõvezetékben adat, addig vár, amíg nincs
+
+Feladat:
+viszont válasz küldése a szülõnek (pipe2.c)
+ki kell kommentezni az elsõ close() -kat.
+
+nem az történt , a szülõ viszaolvasta a saját üzenetét
+megoldás:
+- 2 külön csõvezetéken kell olvasni
+- signál-lal tudatni kell a másiknak (szignálokkal vezérlem a dolgot)
+
+Nevesített csõvezeték:
+nevcso.c
+különbség: létrehozta a csõvezetéket, de nem volt nyitva, így meg kellettt nyitni vagy olvasásra, vagy írásara
+ez nem fog megszûnni, az unlink fügvénnyel lehet csak megszûntetni.
+
+Megnézni a többi,
+
+most: poll.c
+
+el szeretnénk érni, hogy csak akkor figyeljen a rendszer, ha van a csõben valami
+
+int result=poll(poll_fds,1,1000);
+1. érték: memória címe, ahol az adat van
+2. érték: adat nagysága
+3. érték: meddig várakozzunk
+
+result > 0 : érkezett adat valamelyik csõbe
+=0: nem érkezett semmi, a time lejárt
+<0: vmi nagy baj történt
+
+ poll_fds[0].events=POLLIN;
+Bejövõ adatokat figyelje
+
+le kell tudni kérdezni, hogy melyik csõben jött az adat:
+   if (poll_fds[0].revents & POLLIN) // POLLIN event occured
+
+a ppoll
+még ügyesebb.
+select fv használata ezt meg lehet nézni.
+

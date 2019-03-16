@@ -1,0 +1,21 @@
+V "GNAT Lib v2016"
+P ZX
+
+RN
+RV SPARK_05
+
+U cserel%b		cserel.adb		d9bd2e88 NE OO SU GE IL
+
+U cserel%s		cserel.ads		a42be9bc BN EE NE OO GE IL
+
+D cserel.ads		20170317094030 a42be9bc cserel%s
+D cserel.adb		20170317095040 7d96c734 cserel%b
+D system.ads		20160516092930 2da59038 system%s
+X 1 cserel.ads
+2+14 T 4r31 2|1r31 2r15
+4u11*cserel 4=18 4=20 2|1b11 6l5 6t11
+4*18 A{2+14} 2|1b18 2r20 4m9
+4*20 B{2+14} 2|1b20 4r14 5m9
+X 2 cserel.adb
+2*9 tmp{1|2+14} 5r14
+

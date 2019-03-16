@@ -1,0 +1,13 @@
+Rendezvenyek:
+{
+Kiallitas; 21;
+Mozi; 52;
+Koncert; 11;
+}
+
+Latogatok:
+{
+Tajti David; dtajti@caesar.elte.hu; 21; 1; 2016; 11; 10; 13:58;
+Vmi Laci; lll@freemail.hu; 11; 2; 2016; 11; 10; 13:59;
+Holnap Reka; rreka@gmail.com; 11; 3; 2016; 11; 10; 13:59;
+}

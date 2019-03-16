@@ -1,0 +1,4 @@
+3
+0 asd otthon
+1 egy nemotthon
+2 harom valahol

@@ -1,0 +1,87 @@
+Folyamatok közti kommunikáció
+
+A példakódokban szülõ-gyerek kommunikáció van, de lehetnének bármilyen folyamatok is
+
+A fogadó fél csak annyit tud, hogy milyen típusú jelzés érkezett
+
+32 normál (standard) jelzés van
+Ezekkel mûködik az OPRSZ (pl. lenyomjuk a ctrl + c-t  ->  kap az éppen futó folyamat egy jelzést hogy álljon le)
+
+Az OPRSZ egész szám formájában tárolja hogy milyen jelzés érkezett és hogy milyen feladatai vannak a jelzésekkel kapcsolatban (??)
+De hogy a felhasználónak könnyebb legyen, vannak szöveges aliasok
+Pl.:  sig kill  -  9
+
+
+
+signal.c:
+
+A WAIT egy adott folyamat gyerekfolyamatának befejezõdésére vár,
+a PAUSE pedig addig, ameddig nem kap egy megfelelõ jelzést
+
+ps  -  összes processz megnézése
+
+kill -SIGKILL 26577
+kill -SIGTERM 26801
+
+
+Háttérben való indítás: ./a.out &
+
+
+signal(SIGTERM,handler);  -  SIGTERM szignál hatására a handler eljárás fut le
+
+Pl. a SIGKILL default mûködése nem ítrható felül (de sok wszignálé igen)
+
+
+raise(SIGTERM)  -  "magamnak küldök" SIGTERM szignált
+
+
+Az ütemezõ miatt, ha valahol pause() van, akkor felmerül az a probléma, hogy ha akkor kerül elküldésre a szignál, amikor még nincs a másik folyamat a pause-nál, akkor nem fogja soha meegkapni azt a bizonyos szignált, amit a pause elérése elõtt kapott
+while ciklussal meg lehet oldani ezt a problémát (??)
+
+
+Handler-ben nem illik printf-et használni
+
+
+
+sigprocmask.c:
+
+Jelzést akarunk blokkoloni és megfigyelni hogy mi történik a blokkolt jelzéssel (valamint feloldani a blokkolást).
+Meg kell adni hogy melyik jelzéseket akarom blokkolni (a 32-bõl)
+
+32 bites szám, amelyik bit "be van billentve", azt blokkolom
+2 féle alapállapot van:
+- mindent blokkolok  -  sigfillset(&sigset);
+- semmit sem blokkolok  -  sigemptyset(&sigset);
+
+sigaddset(&sigset,SIGTERM); //SIGTERM blokkolása (belerakom a blokkolandó jelzések halmazába)
+
+
+sigprocmask(SIG_BLOCK,&sigset,NULL);  -  a NULL helyére meg lehet adni egy változóüt, amibe elmenthetjük a ... (????)
+
+
+
+sigaction.c
+
+pause() helyett lehet sigsuspend(&sigset)-et használni  -  blokkolja a (jelzéshalmazzal) megadott jelzéseket és ár egy jelzésre (amit éppen nem blokkol)
+
+
+
+Idõzítõ készítése rendszerszintû programokban
+Unix-ban van több "timerelési lehetõség" (egyszerû esetben lehet egyszerût használni)
+
+ITIMER_REAL  -  VALÓS IDÕT MÉR
+ITIMER_VIRTUAL  -  "CPU-ban eltöltött" idõt mér
+
+
+
+
+
+
+atkuldhetek sima szamot, de mutatot is (strukturara mutat -> ki tudom olvasni a mezöit a jelzeskezeloben)
+rendszeridõ kezelése általában része a beadandónak és az évfolyamzh-nak is
+
+
+sigaction_multile:
+
+Lényeg: ha olyan jelzést kap egy folyamat amit már megkapott (de még nem kezelt le), akkor azt kidobja  ->  ha túl hosszú az eseménykezelõ, elvesztünk szignálokat
+De ez van ahol nem történhet meg -> a valós idejû jelzéserk prioritása nagyopbb -> azok biztos lekezelõpdnek (????)

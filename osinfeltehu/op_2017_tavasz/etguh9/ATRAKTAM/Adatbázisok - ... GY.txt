@@ -1,0 +1,64 @@
+40-45 perc: gépes PL/SQL rész (9.-11. gyakorlat)
+
+gyakjegy: 4 részbõl: órai +/-, elsõ Zh két része, uccsó ZH PL/SQL része
+
+A medusa.inf.elte.hu-n az Oracle fülnél lévõ PL/SQL doksik elérhetõk a ZH-n
+
+http://medusa.inf.elte.hu/indexora.html
+http://medusa.inf.elte.hu/oradoc11/index.htm
+http://medusa.inf.elte.hu/oradoc11/server.112/e10592/toc.htm
+
+PL/SQL ("nyelvi reference" ??):
+http://medusa.inf.elte.hu/oradoc11/appdev.112/e10472/toc.htm
+
+
+
+create or replace procedure  -  tárolt eljárást csinál (valamilyen execute-al lehet végrehajtani)
+
+Kivételkezelés példa:
+http://medusa.inf.elte.hu/oradoc11/appdev.112/e10472/errors.htm#BABFBHGA
+
+
+DBMS_OUTPUT egy csomag, mivel alapból nincs input/output (a PL/SQL-ben??)
+
+
+Valamilyen példa
+http://medusa.inf.elte.hu/oradoc11/appdev.112/e10472/fundamentals.htm#BABHFEHA
+
+
+Lehet: Nem lesz tûzfal, bármilyen tutorialt, segédeszközt lehet használni, de nem biztos :)
+A PL/SQL doksi viszont elég jó
+
+
+http://medusa.inf.elte.hu/oradoc11/appdev.112/e10472/static.htm#BABCFDJE
+
+
+"Ez egy alapfeladat. Tehát kurzort definiáltunk, de elég az egyik, kinek melyik szimpatikusabb"
+"Lehet parametrikus kurzort is használni"
+"Az OPEN-nél értékeli ki a SELECT utasítást, megnyitja a munkaterületet"
+"A FETCH (INTO) betölti az aktuális sort valahova (vagy sorvége(??) jelet, ha végigért(??))"
+
+
+
+
+Vizsgán egy az egyben szokott lenni
+-- 9.) Növeljük meg a hivatalnokok (CLERK) fizetését a saját fizetésük 20%-ával!
+          -- for update kurzor módosításhoz, lásd ugyanez a feladat: példa-6-43
+
+
+
+Vizsgán a PL/SQL is papíron van számonkérve
+
+
+A Zh anyaga lényegében a múltheti gyakorlat anyaga, vagyis a kurzorhasználat, de lehet hogy tárolt eljárásként kell megvalósítani (create or replace , utána név, majd változók, kurzordeklarációk (??). Lehetnek természetesen paraméterek is.)
+
+
+Kapunk egy egyszerû szkriptet (ami létrehoz egy táblát néhány sorral)
+INSERT után azért oda lehet írni egy COMMIT-ot
+
+
+PL/SQL tutorial:
+https://www.tutorialspoint.com/plsql/index.htm
+
+
+A CUSTOMERS táblával kapcsolatban vannak jó feladatok

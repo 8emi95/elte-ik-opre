@@ -1,0 +1,14 @@
+1. Feladat:
+Készíts beágyazott függvényt, ami kiszámítja két 3 hosszú vektor skaláris szorzatát. A vektorok koordinátáit egy-egy tömbben tárold! Használd a Tomb'First és a Tomb'Last attribútumokat, vagy a Tomb'Range attribútumot a tömbindexeken végigfutó ciklus feltételében.
+
+2. Feladat:
+Készíts programot, ami a képernyőről beolvassa egy 8 méretű tömb elemeit, és megkeresi a maximumát! A maximumkeresést beágyazott függvény végezze!
+
+3. Feladat:
+Írd át az előző programot úgy, hogy a tömb méretét is a felhasználó adhassa meg. Az adott méretű tömbtípus deklarálásához használj beágyazott blokkot!
+
+5. Feladat:
+Készíts felsorolási típust a hét napjaira. Írj olyan függvényt, ami egy megadott napról eldönti, hogy hétköznap-e! A nap beolvasásához a Text_IO csomag Get_Line(S,Index) eljárását használd. Mivel ez az eljárás String-et vár paraméterként, deklarálnod kell egy String típusú változót. Figyelj arra, hogy a String elég nagy legyen a leghosszabb nap beolvasásához is (a felsorolási típus Tipus'Width attribútuma visszaadja a leghosszabb elem karaktereinek számát). A Get_Line második paramétere adja meg, hogy meddig töltötte fel a String változót. Vigyázz arra, hogy konvertáláskor csak a String értelmes részét használd fel. A konverzióhoz a Tipus'Value és a Tipus'Image attribútumokat használhatod.
+
+6. Feladat:
+Írd át a skaláris szorzásos feladatot úgy, hogy a függvény bármekkora vektorokra működjön!
