@@ -1,4 +1,0 @@
-fdgdga
-kairat
-hello
-gfregeregerg

@@ -1,3 +1,0 @@
-sudo ./dgs &
-netcat -vv localhost 8888 -u
-sudo ps aux | grep dgs

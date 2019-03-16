@@ -1,4 +1,0 @@
-FGH789,Gipsz Ilona,ez@az,Wed Nov  4 21:28:54 2016
-MON123,Kis Laci,regi@mail.cim,Wed Nov  9 17:28:54 2016
-MON123,Nagy Laci,nagy@ls.ci,Wed Nov  9 18:02:37 2016
-ABC123,Valaki Neve,email@cim.hu,Wed Nov  9 19:12:14 2016

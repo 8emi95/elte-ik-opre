@@ -1,2 +1,0 @@
-rts.c-ben ha nincs gyerek folyamat és saját magának küldök rt signalt,
-azonnal kézbesíti a prioritástól független sorrendben - meghivasi sorrend

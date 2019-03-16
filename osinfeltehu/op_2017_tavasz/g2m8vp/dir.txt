@@ -1,6 +1,0 @@
-total 4
-drwxr-xr-x 2 g2m8vp students   6 Sep 21  2014 bin
--rw-r--r-- 1 g2m8vp students   0 Feb 27 18:19 dir.txt
-drwxr-xr-x 2 g2m8vp students 158 Feb 27 17:38 gy0
--rw-r--r-- 1 g2m8vp students  24 Feb 27 18:18 out.txt
-drwxr-xr-x 2 g2m8vp students  24 Jun  1  2016 public_html

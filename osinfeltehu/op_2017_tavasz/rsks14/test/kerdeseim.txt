@@ -1,6 +1,0 @@
-0#Miert nem szereti a magyar focit?#3#Mert az angol jobb.#Mert a spanyol jobb.#Mert az olasz jobb.
-1#Miert nem nezi a magyar focit?#2#Mert OV is nézi.#Mert nem jó.
-2#Ki a kedvenc magyar csapata?#3#1912 Előre#Békéscsaba.#Viharsarki lilák.
-3#Miert szereti a magyar focit?#4#Kassai.#Szűcs Lajos.#Random Józsi.#Mert Messi nem itt játszik.
-4#Hány sárga lap egy piros lap?#2#Tizenkettő.#Kettő.
-5#Mennyi stadiont építenél??#4#Az összeseget.#Egy nagyot.#Két Kicsit.#Egyet sem.

@@ -1,9 +1,0 @@
-ps - //parancs linux ez listazza ki a futo processzeket
-ps -ef //ez pedig az osszes processt nem csak azt amit a user inditott
-top //ezzel is ki lehet listazni a processeket de meg ad plusz infot
-
-uj folyamatindítás
-hogyan lehet lock-olni /fcntl/
-system //ezzel is child processzt lehet indítani de igazából nem ágazik ketté mert megvárja a gyaerekeket???
-
-execv - nem indul új folyamat mert csak lecserélődnek a pid-ek

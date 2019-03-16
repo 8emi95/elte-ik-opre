@@ -1,5 +1,0 @@
-todo:
-1.) strings.c 	szöveges példához: string replace megírása
-2.) file.c 		binary structure read/write to file
-3.) fork.c		int* instead of int
-4.) fork.c 		2 children 

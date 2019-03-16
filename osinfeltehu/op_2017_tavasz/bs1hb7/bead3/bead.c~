@@ -1,9 +1,0 @@
-
-void menu(){
-  printf("Kerdes felvetel");
-  printf("Kerdes modositasa");
-  printf("Kerdes torlese");
-  printf("Kerdesek listazasa");
-  printf("Kedoiv veglegesitese");
-  printf("Veglegesitett kerdoiv megtekintese");
-h

@@ -1,4 +1,0 @@
-Ki a kedvenc jatekosod?;Ronaldo;Messi;Zidane;DATUM:May  6 2017	14:07:29
-Melyik a kedvenc varosod?;Budapest;Debrecen;DATUM:May  6 2017	14:07:29
-Ki a kedvenc birod?;Kassai;Alexander Talkovics;DATUM:May  6 2017	14:07:29
-Ki fogja a BL-t nyerni;Real;Bayern;Dortmund;Atletico Madrid;DATUM:May  6 2017	14:07:29Szar az opre?;Igen ;Nem ;Nem tudom;DATUM:May  8 2017	19:51:53

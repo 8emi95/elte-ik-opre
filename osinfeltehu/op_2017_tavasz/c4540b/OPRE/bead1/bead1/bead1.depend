@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1491743573 source:c:\users\boti\desktop\4.felev\operációs rendszerek\bead1\main.c
-	<stdio.h>
-	<time.h>
-	"string.h"
-	<string.h>
-	<stdlib.h>
-

@@ -1,3 +1,0 @@
-Mor,Mora,mm@gmail.com,123321
-Gor,Gora,gg@gmail.com,123321
-Zor,Zora,zz@gmail.com,123321

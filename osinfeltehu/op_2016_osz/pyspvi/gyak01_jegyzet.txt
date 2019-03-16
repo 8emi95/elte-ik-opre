@@ -1,9 +1,0 @@
-hf string hosszfv, 
-hányszor szerepel egy karakter, 
-indexof, 
-egy szó hányszor található meg a szövegben, 
-replace,
-open/fopen
-struktúra i/o szöveges, bináris fájl esetén
-exec megnézése
-forkban commonvalue pointerrel

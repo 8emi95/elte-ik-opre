@@ -1,9 +1,0 @@
-#ifndef INCLUDES_H_INCLUDED
-#define INCLUDES_H_INCLUDED
-
-
-#include "STANDARD_INCLUDE.h"
-#include "SELF_BUILD_INCLUDE.h"
-
-
-#endif // INCLUDES_H_INCLUDED

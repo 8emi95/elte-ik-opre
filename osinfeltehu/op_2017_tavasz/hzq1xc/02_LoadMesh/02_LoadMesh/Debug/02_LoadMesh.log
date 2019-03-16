@@ -1,8 +1,0 @@
-﻿  MyApp.cpp
-c:\users\xszerion\desktop\02_loadmesh\02_loadmesh\myapp.cpp(226): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\xszerion\desktop\02_loadmesh\02_loadmesh\myapp.cpp(265): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\xszerion\desktop\02_loadmesh\02_loadmesh\myapp.cpp(294): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\xszerion\desktop\02_loadmesh\02_loadmesh\myapp.cpp(321): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\xszerion\desktop\02_loadmesh\02_loadmesh\myapp.cpp(348): warning C4305: 'argument': truncation from 'double' to 'float'
-  02_LoadMesh.vcxproj -> C:\Users\xszerion\Desktop\02_LoadMesh\Debug\02_LoadMesh.exe
-  02_LoadMesh.vcxproj -> C:\Users\xszerion\Desktop\02_LoadMesh\Debug\02_LoadMesh.pdb (Full PDB)

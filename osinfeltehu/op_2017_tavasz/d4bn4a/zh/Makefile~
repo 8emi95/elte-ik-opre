@@ -1,4 +1,0 @@
-all: zh
-
-zh: main.c
-	gcc main.c -ozh

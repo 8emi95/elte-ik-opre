@@ -1,6 +1,0 @@
-azzhqp@os:~> cd gy2
-azzhqp@os:~/gy2> gcc sigaction_value.c -lrt
-azzhqp@os:~/gy2> ./a.out
-
-gcc main.c
-/a.out

@@ -1,5 +1,0 @@
-struct DataStruct{
-  char[50] name;
-  int grade;
-}
-DataStruct;

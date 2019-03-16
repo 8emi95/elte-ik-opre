@@ -1,8 +1,0 @@
-int main()
-{
-  string s;
-  unsigned z;
-  s = "alma";
-  z = s + s;
-  cout << length(z+s) / 3;
-}

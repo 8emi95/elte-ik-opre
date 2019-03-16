@@ -1,1 +1,0 @@
-egyik process küldje: 2 pont, másik process: kiszámolja a távolságát

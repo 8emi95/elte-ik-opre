@@ -1,4 +1,0 @@
-os.inf.elte.hu
-
-1) notacommon value int*al és maloccal
-2) 2 gyerekkel 

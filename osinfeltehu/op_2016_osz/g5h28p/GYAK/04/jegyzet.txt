@@ -1,7 +1,0 @@
-Kell-e ellenorizni a helyes inputot pl e-mail
-Idonel milyet kell hasznalni local vagy UTC
-Van-e megkotes hogy hogyan tarolom az adatokat
-
-signal - (pl kill parancs is egy signalt küld)
-kill -l a SIGKILL és SIGSTOP mindig ugyanugy fog mukodni mert az oprendszer biztosítja nezeket.
-SIGCHD is ilyen ott nem csinal semmit a progi. Ez a child küldi a gyereknek.

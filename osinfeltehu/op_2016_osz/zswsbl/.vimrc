@@ -1,2 +1,0 @@
-set cindent
-se nu

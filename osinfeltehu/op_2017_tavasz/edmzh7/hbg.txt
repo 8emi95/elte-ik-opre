@@ -1,2 +1,0 @@
- Question    = how
- ASnswer    = 32767

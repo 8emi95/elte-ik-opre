@@ -1,7 +1,0 @@
-kérdések min 2 max 4 válasz lehetoség
-új kérdések
-kérdés modosítása
-kérdés törlése
-listázás
-tároljuk a felvételi dátumát(év,hó,nap,óra,perc,másodperc). 
-kérdések véglegesítése

@@ -1,2 +1,0 @@
-egy	Szereted a Harry Pottert?	2	igen	nem	Mon Apr 10 12:13:01 2017
-ketto	Mi a nemed?	2	Nő	Férfi	Mon Apr 10 12:18:30 2017

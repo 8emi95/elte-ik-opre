@@ -1,5 +1,0 @@
-Question: hello
-
-*** 1 possible answer. ***
-Answer: 
-

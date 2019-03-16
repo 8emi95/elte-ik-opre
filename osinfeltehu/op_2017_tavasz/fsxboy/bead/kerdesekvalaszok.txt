@@ -1,2 +1,0 @@
-1 3 Hány csapatos a magyar bajnokság? 16 32 48
-2 2 Fradi vezeti e a tabellát? igen nem

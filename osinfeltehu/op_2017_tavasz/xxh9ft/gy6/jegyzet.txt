@@ -1,6 +1,0 @@
-osztot memória ellenõrzés:
-ipcs - vel az osztott memóriát is meg lehet nézni.
-
-osztott memória törlése:
-ipcrm -m és_a_kód
-

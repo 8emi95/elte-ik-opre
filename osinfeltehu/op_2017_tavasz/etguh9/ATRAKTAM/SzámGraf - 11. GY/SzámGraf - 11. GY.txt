@@ -1,3 +1,0 @@
-2 féleképpen lehet zárt alakzatként hengert létrehozni
-- a hengerpalást mellé felveszük a megfelelõ pontokat
-- létrehozunk két geometriát, az egyik a hengerpalást, a másik a körlap és a körlapot (2-szer!!) eltranszformáljuk a megfelelõ helyre (kódban ez van)

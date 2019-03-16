@@ -1,2 +1,0 @@
--lrt kapcsolo
-kell a local ido miatt

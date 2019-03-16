@@ -1,2 +1,0 @@
-false|Foo!|2017-4-10 16:53:30|Yes;No;
-true|Second|2017-4-10 16:53:47|Foo;Bar;Baz;

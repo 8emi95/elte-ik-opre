@@ -1,3 +1,0 @@
-esemeny1 111
-esemeny2 222
-esemeny3 333

@@ -1,4 +1,0 @@
-szövegben keresés, csere megvalósítása file-ból olvasás, file-ba írás
-
-egy darab gyerek folyamat helyett, 2 gyerek folyamatot csinálni. 
-

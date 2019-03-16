@@ -1,8 +1,0 @@
-int main()
-{
-  string s;
-  string z;
-  s = 0;
-  z = s + s;
-  cout << length(z+s) / 3;
-}

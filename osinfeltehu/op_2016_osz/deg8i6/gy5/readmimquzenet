@@ -1,1 +1,0 @@
-gcc -lrt mquzenet{.c|1.c}

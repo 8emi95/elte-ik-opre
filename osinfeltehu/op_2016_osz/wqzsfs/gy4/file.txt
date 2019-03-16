@@ -1,3 +1,0 @@
-Elnok - 
-	Szavazhatott es megjelent aranya: 50% 
-	Nem szavazhatott es megjelent aranya: 100%

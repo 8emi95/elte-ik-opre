@@ -1,3 +1,0 @@
-event_1;cim;oktober 12
-event_2;cim2;dec 4
-event_3;cim3;jan 10

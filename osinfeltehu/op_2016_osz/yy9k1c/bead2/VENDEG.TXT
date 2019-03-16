@@ -1,5 +1,0 @@
-1	Gipsz Jakab	vki@vmi.com
-2	Kave Geza	vki2@vmi.com
-3	Fustolt Sonka	vki3@vmi.hu
-4	Kis Troll	vki4@vmi.hu
-5	Nagy Mano	vki5@vmi.eu

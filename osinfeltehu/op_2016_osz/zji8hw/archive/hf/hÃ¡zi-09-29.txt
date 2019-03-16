@@ -1,5 +1,0 @@
-szöveghossz
-betű hányszor szerepel
-substr pozíció
-egy substr hányszor van a szövegben
-substr csere

@@ -1,6 +1,0 @@
-1. délghkdf
-	1) 1
-	2) 2
-	3) 3
-letrehozas datuma : 2017-04-03 08:49:58
-

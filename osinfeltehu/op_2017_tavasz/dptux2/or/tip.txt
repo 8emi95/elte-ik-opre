@@ -1,8 +1,0 @@
-Szemafornál -lptrhead
-
-ipcs
-ipcrm | grep "dptux2"
-
-int execv (const char *filename, char *const argv[])
-
-ps

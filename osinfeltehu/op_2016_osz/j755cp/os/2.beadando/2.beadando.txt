@@ -1,8 +1,0 @@
-A "King of Stands" rendezvény szervezõ társaság, amint a rendezvény ideje eljön, megbízza egy partnerét(gyermekét) az esemény lebonyolítására.
-A gyermekfolyamat indulása után csõvezetéken megkapja, hogy hol kerül a rendezvény lebonyolításra!
-A helyszínre utazik, majd visszajelzi (jelzést küld vissza) a központnak, hogy a megadott helyszinen van,
-várja a résztvevõket,kész a rendezvény lebonyolítására. Ezután a rendezvényszervezõ csõvezetéken elküldi a helyszínen tartózkodó partnernek,
-hogy kik a résztvevõk. Ezt a partner képernyõre írja, majd várja a vendégeket és levezényli a rendezvényt!
-A rendezvény végén jelentést küld vissza, amiben tájékoztatja a fõszervezõt, hogy mennyire sikeres volt a rendezvény (véletlenszám),
-illetve a jelentkezettek közül végül is ki nem érkezett meg! (Minden résztvevõ 10% valószínûséggel nem érkezik meg!)
-Miután egy esemény lebonyolításra került, "King of Stands" újra megvizsgálja, melyik rendezvény a következõ! 

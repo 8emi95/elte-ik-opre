@@ -1,9 +1,0 @@
-signal -> kill
-
-kill -l  	kilistazas
-ps 		process list
-kill 15 	sigterm
-kill 9 		sigkill
-kill 17		sigchild
-
-race condition = versenyhelyzet (program futása olyan tényezõktõl függ, ami nekünk nem jó. párhuzamosan nem szeretnénk hogy egymástól függjenek)

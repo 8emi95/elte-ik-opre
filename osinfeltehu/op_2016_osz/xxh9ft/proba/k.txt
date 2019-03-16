@@ -1,8 +1,0 @@
-allat talalkozo
-3
-Kutya J�nos
-kutya@erdo.hu 1
-Cica Mici
-cica@erdo.hu 1
-Sun Joci
-sun@erdo.hu 1

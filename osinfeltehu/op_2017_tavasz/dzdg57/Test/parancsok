@@ -1,9 +1,0 @@
-cat file1 file2 file3 | sort>/dev/lp
-Ebben a parancsban a cat három fájlt konkatenál, eredményét átküldi a sort 
-programnak, amely a sorokat alfabetikus sorrendbe rendezi. A sort kimenetét
-átirányítottuk a /dev/lp fájlba, amely szokásosan a nyomtatót jelenti
-Ha a parancs végére egy "&" jelet gépel a felhasználó, akkor a parancsértelmező
-nem vár a parancs végrehajtásának befejeztére, hanem azonnal újra promptot ad.
-(forrás: Tanenbaum - Operációs rendszerek - 40.o. )
-cat file1 file2 file3 | sort>cel
-így a cel nevű fájlba irányítottam

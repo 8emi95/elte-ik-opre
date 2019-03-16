@@ -1,8 +1,0 @@
-1;Balint;balnit@email.hu;event_1;1481501408
-2;Aladar;event_1;event_1;1481501433
-3;Brigi;brigi@email.hu;event_1;1481501453
-4;Eva;eva@mail.hu;event_1;1481501481
-5;Akos;akos@mail.hu;event_1;1481501497
-6;Jozsef;jozsi@mail.hu;event_3;1481501514
-7;Laszlo;laci@mail.hu;event_2;1481501531
-8;Andras;andris@mail.hu;event_3;1481501551

@@ -1,5 +1,0 @@
-Nev;	Ajandek;	Varos;	Cim;	Datum;
-David;	4;	Erd;	Fels 11;	2015;	11;	;3;	13;	16;
-Szabi;	2;	Bp;	Vmi;	2015;	11;	;3;	13;	16;
-Laci;	5;	Erd;	Also 3;	2015;	11;	;3;	13;	16;
-Mari;	4;	Bp;	Also 3;	2015;	11;	;3;	13;	16;

@@ -1,4 +1,0 @@
-Számítóközpont egyik folyamat 
-átküldeni neki két számot 
-mûveleti karaktert
-olvassa be és a mûveleti karakternek megfelelõ eredményt adja vissza a csõbe!

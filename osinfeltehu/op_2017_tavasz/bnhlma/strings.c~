@@ -1,9 +1,0 @@
-#include <stdio.h>
-#include <stdlib.h>
-int main(){
-str[0]='FO';
-str[1]='S';
-if(strcmp(str[0],str[1]))=0{
-printf("tt is equal");
-}
-}
